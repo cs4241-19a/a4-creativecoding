@@ -52,15 +52,22 @@
         // Box
         box = new Physijs.BoxMesh(
           new THREE.CubeGeometry( 5, 5, 5 ),
-          new THREE.MeshBasicMaterial({ color: 0x36caf7 }, 1, 100)
+          new THREE.MeshBasicMaterial({ color: 0x36caf7 }, 1, 10)
         );
         box.addEventListener( 'collision', function( objCollidedWith, linearVelOfCollision, angularVelOfCollision ) {
         });
         box.position.z = 10;
         box.position.x = 0;
         box.position.y = 50;
+        box.rotation.x = 10
         scene.add( box );
         scene.add( ground );
+        
+        let xSpeed = 0.0001;
+        let ySpeed = 0.0001;
+
+        document.addEventListener("keydown", onDocumentKeyDown, false);
+        
         requestAnimationFrame( render );
         
       };
