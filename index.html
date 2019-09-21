@@ -18,7 +18,7 @@
       'use strict';
       Physijs.scripts.worker = 'js/physijs_worker.js';
       Physijs.scripts.ammo = 'ammo.js';
-      var initScene, render, renderer, scene, camera, box, ground, ground_material, friction, controls;
+      let initScene, render, renderer, scene, camera, box, ground, ground_material, friction, controls;
 
       initScene = function() {
         renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -44,10 +44,10 @@
         // Ground
         ground = new Physijs.BoxMesh(new THREE.BoxGeometry(150, 1, 150),ground_material,0 // mass
         );
-        ground.receiveShadow = false;
+        ground.receiveShadow = true;
         
         
-        scene.add("https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2Ftree.obj?v=1569096411935")
+        //scene.add("https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2Ftree.obj?v=1569096411935")
 
         // Box
         box = new Physijs.BoxMesh(
@@ -56,17 +56,14 @@
         );
         box.addEventListener( 'collision', function( objCollidedWith, linearVelOfCollision, angularVelOfCollision ) {
         });
+        document.addEventListener("keydown", onDocumentKeyDown, false);
+        requestAnimationFrame( render );
         box.position.z = 10;
         box.position.x = 0;
         box.position.y = 50;
         box.rotation.x = 10
         scene.add( box );
         scene.add( ground );
-        
-       
-
-        document.addEventListener("keydown", onDocumentKeyDown, false);
-        requestAnimationFrame( render );
         
       };
        
@@ -92,12 +89,11 @@
                   box.position.set(0, 0, 0);
               }
           };
+       
 
       window.onload = function(){
         initScene();
         render();
-          
-        
       }
     
     </script>
