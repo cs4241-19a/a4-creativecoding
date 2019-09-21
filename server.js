@@ -18,8 +18,12 @@ app.get('/js/physi.js', function(request, response) {
   response.sendFile(__dirname + '/js/physi.js');
 });
 
-app.get('/', function(request, response) {
-  response.sendFile(__dirname + '/index.html');
+app.get('/js/physijs_worker.js', function(request, response) {
+  response.sendFile(__dirname + '/js/physijs_worker.js');
+});
+
+app.get('/js/ammo.js', function(request, response) {
+  response.sendFile(__dirname + '/js/ammo.js');
 });
 
 var listener = app.listen(process.env.PORT, function () {

@@ -13,13 +13,12 @@
     <script src="js/physi.js"></script>
   </head>
   <body>
-    	<div id="viewport"></div>
-
-   <script>
+     <script>
+     
       'use strict';
 
       Physijs.scripts.worker = 'js/physijs_worker.js';
-      Physijs.scripts.ammo = 'js/ammo.js';
+      Physijs.scripts.ammo = 'ammo.js';
 
       var initScene, render, renderer, scene, camera, box;
 
@@ -40,16 +39,27 @@
         camera.lookAt( scene.position );
         scene.add( camera );
 
+      
+        ground = new Physijs.BoxMesh(new THREE.BoxGeometry(150, 1, 150),0 // mass
+        );
+        ground.receiveShadow = true;
+
         // Box
         box = new Physijs.BoxMesh(
           new THREE.CubeGeometry( 5, 5, 5 ),
           new THREE.MeshBasicMaterial({ color: 0x888888 })
         );
+       
         scene.add( box );
+        scene.add( ground );
+        
 
         requestAnimationFrame( render );
       };
 
+       
+       
+       
       render = function() {
         scene.simulate(); // run physics
         renderer.render( scene, camera); // render the scene
@@ -59,8 +69,8 @@
       window.onload = function(){
         initScene();
       }
-      
-     
-	</script>
+    
+    </script>
+    	<div id="viewport"></div>
   </body>
 </html>
