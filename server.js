@@ -26,6 +26,10 @@ app.get('/js/ammo.js', function(request, response) {
   response.sendFile(__dirname + '/js/ammo.js');
 });
 
+app.get('/js/client.js', function(request, response) {
+  response.sendFile(__dirname + '/js/client.js');
+});
+
 var listener = app.listen(process.env.PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });
