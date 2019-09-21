@@ -8,17 +8,17 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="../style.css">
-    <script src="../physi.js"></script>
-    <script src="../three.js"></script>
+    <link rel="stylesheet" href="/public/style.css">
+    <script src="/js/Three.js"></script>
+    <script src="/js/physi.js"></script>
   </head>
   <body>
     <div id="viewport"></div>
    <script>
       'use strict';
 
-      Physijs.scripts.worker = '../physijs_worker.js';
-      Physijs.scripts.ammo = '../ammo.js';
+      Physijs.scripts.worker = '/js/physijs_worker.js';
+      Physijs.scripts.ammo = '/js/ammo.js';
 
       var initScene, render, renderer, scene, camera, box;
 
