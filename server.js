@@ -30,6 +30,10 @@ app.get('/js/client.js', function(request, response) {
   response.sendFile(__dirname + '/js/client.js');
 });
 
+app.get('/js/OrbitControls.js', function(request, response) {
+  response.sendFile(__dirname + '/js/OrbitControls.js');
+});
+
 var listener = app.listen(process.env.PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port);
 });

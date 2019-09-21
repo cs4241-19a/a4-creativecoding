@@ -11,16 +11,14 @@
     <link rel="stylesheet" href="public/style.css">
     <script src="js/three.js"></script>
     <script src="js/physi.js"></script>
+    <script src="js/OrbitControls.js"></script>
   </head>
   <body>
      <script>
-     
       'use strict';
-
       Physijs.scripts.worker = 'js/physijs_worker.js';
       Physijs.scripts.ammo = 'ammo.js';
-
-      var initScene, render, renderer, scene, camera, box, ground, ground_material, friction;
+      var initScene, render, renderer, scene, camera, box, ground, ground_material, friction, controls;
 
       initScene = function() {
         renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -28,7 +26,6 @@
         document.getElementById( 'viewport' ).appendChild( renderer.domElement );
 
         scene = new Physijs.Scene;
-
         camera = new THREE.PerspectiveCamera(
           35,
           window.innerWidth / window.innerHeight,
@@ -37,10 +34,10 @@
         );
         camera.position.set( 60, 50, 60 );
         camera.lookAt( scene.position );
-        controls = new THREE.TrackballControls( camera );
-        controls.target.set( 0, 0, 0 )
+        controls = new THREE.OrbitControls( camera , renderer.domElement);
         scene.add( camera );
 
+        
         ground_material = Physijs.createMaterial(
             new THREE.MeshBasicMaterial( { color: 0x42f595 } ),1, 1 // low restitution
         );
@@ -48,6 +45,9 @@
         ground = new Physijs.BoxMesh(new THREE.BoxGeometry(150, 1, 150),ground_material,0 // mass
         );
         ground.receiveShadow = false;
+        
+        
+        
 
         // Box
         box = new Physijs.BoxMesh(
