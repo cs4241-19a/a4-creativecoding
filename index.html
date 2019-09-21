@@ -68,28 +68,32 @@
               let ySpeed = 1;
               let keyCode = event.which;
               if (keyCode == 87) {
-                  box.position.y += ySpeed;
+                  box.translateY(1)
               } else if (keyCode == 83) {
-                  box.position.y -= ySpeed;
+                  box.translateY(-1)
               } else if (keyCode == 65) {
-                  box.position.x -= xSpeed;
+                  box.translateX(-1)
               } else if (keyCode == 68) {
-                  box.position.x += xSpeed;
+                  box.translateX(1)
               } else if (keyCode == 32) {
                  box.position.set(0, 0, 0);
               }
+            //e.preventDefault();
+           render();
           }
-        
-        
-        
-        
         scene.add( box );
         scene.add( ground );
         
       };
        
+      renderAndSim() = function{
+        scene.simulate();
+        renderer.render( scene, camera); // render the scene
+        requestAnimationFrame( render );
+      }
+       
       render = function() {
-        scene.simulate(); // run physics
+         // run physics
         renderer.render( scene, camera); // render the scene
         requestAnimationFrame( render );
       };
@@ -98,6 +102,8 @@
 
       window.onload = function(){
         initScene();
+                scene.simulate();
+
         render();
       }
     
