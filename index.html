@@ -39,8 +39,7 @@
 
         
         ground_material = Physijs.createMaterial(
-            new THREE.MeshBasicMaterial( { color: 0x42f595 } ),1, 100), // low restitution
-        1;
+            new THREE.MeshBasicMaterial( { color: 0x42f595 } ) ,.9, .1), // low restitution
         // Ground
         ground = new Physijs.BoxMesh(new THREE.BoxGeometry(150, 1, 150),ground_material,0 // mass
         );
@@ -50,10 +49,12 @@
         //scene.add("https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2Ftree.obj?v=1569096411935")
 
         // Box
+         let ball_material = Physijs.createMaterial(
+            new THREE.MeshBasicMaterial( { color: 0xff9ce8 } ) ,.9, .1), // low restitution
+        // Ground
         box = new Physijs.SphereMesh (
-          new THREE.SphereGeometry( 5, 5, 5 ),
-          new THREE.MeshBasicMaterial({ color: 0x36caf7 }, 1, 100)
-        );
+          new THREE.SphereGeometry(5),
+          ball_material, 1);
         box.addEventListener( 'collision', function( objCollidedWith, linearVelOfCollision, angularVelOfCollision ) {
         });
         requestAnimationFrame( render );
@@ -62,18 +63,18 @@
         box.position.y = 50;
         box.rotation.x = 10;
         document.addEventListener("keydown", onDocumentKeyDown, false); 
-        document.addEventListener("keyup", onDocumentKeyUp, false); 
+     //   document.addEventListener("keyup", onDocumentKeyUp, false); 
         
         function onDocumentKeyDown(event) {
               let keyCode = event.which;
               if (keyCode == 87) {
-                  box.applyCentralImpulse(new THREE.Vector3(0,0,-100));
+                  box.applyCentralImpulse(new THREE.Vector3(0,0,-1));
               } else if (keyCode == 83) {
-                   box.applyCentralImpulse(new THREE.Vector3(0,0,100));
+                   box.applyCentralImpulse(new THREE.Vector3(0,0,1));
               } else if (keyCode == 65) {
-                   box.applyCentralImpulse(new THREE.Vector3(-100,0,0));
+                   box.applyCentralImpulse(new THREE.Vector3(-1,0,0));
               } else if (keyCode == 68) {
-                  box.applyCentralImpulse(new THREE.Vector3(100,0,0));
+                  box.applyCentralImpulse(new THREE.Vector3(1,0,0));
               }
             //e.preventDefault();
            //render();
@@ -82,13 +83,13 @@
         function onDocumentKeyUp(event){
            let keyCode = event.which;
               if (keyCode == 87) {
-                  box.applyCentralImpulse(new THREE.Vector3(0,0,100));
+                  box.applyCentralImpulse(new THREE.Vector3(0,0,10000));
               } else if (keyCode == 83) {
-                   box.applyCentralImpulse(new THREE.Vector3(0,0,-100));
+                   box.applyCentralImpulse(new THREE.Vector3(0,0,-10000));
               } else if (keyCode == 65) {
-                   box.applyCentralImpulse(new THREE.Vector3(100,0,0));
+                   box.applyCentralImpulse(new THREE.Vector3(10000,0,0));
               } else if (keyCode == 68) {
-                  box.applyCentralImpulse(new THREE.Vector3(-100,0,0));
+                  box.applyCentralImpulse(new THREE.Vector3(-10000,0,0));
               }
         }
         scene.add( box );
