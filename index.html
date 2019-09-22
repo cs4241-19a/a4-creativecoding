@@ -39,7 +39,7 @@
 
         
         ground_material = Physijs.createMaterial(
-            new THREE.MeshBasicMaterial( { color: 0x42f595 } ) ,.9, .1), // low restitution
+            new THREE.MeshBasicMaterial( { color: 0x42f595 } ) ,.8, .8), // low restitution
         // Ground
         ground = new Physijs.BoxMesh(new THREE.BoxGeometry(150, 1, 150),ground_material,0 // mass
         );
@@ -62,34 +62,40 @@
         box.position.x = 0;
         box.position.y = 50;
         box.rotation.x = 10;
+        box.__dirtyPosition = true;
         document.addEventListener("keydown", onDocumentKeyDown, false); 
-     //   document.addEventListener("keyup", onDocumentKeyUp, false); 
+       // document.addEventListener("keyup", onDocumentKeyUp, false); 
         
         function onDocumentKeyDown(event) {
               let keyCode = event.which;
               if (keyCode == 87) {
-                  box.applyCentralImpulse(new THREE.Vector3(0,0,-1));
+                  box.applyCentralImpulse(new THREE.Vector3(0,0,-50));
               } else if (keyCode == 83) {
-                   box.applyCentralImpulse(new THREE.Vector3(0,0,1));
+                   box.applyCentralImpulse(new THREE.Vector3(0,0,50));
               } else if (keyCode == 65) {
-                   box.applyCentralImpulse(new THREE.Vector3(-1,0,0));
+                   box.applyCentralImpulse(new THREE.Vector3(-50,0,0));
               } else if (keyCode == 68) {
-                  box.applyCentralImpulse(new THREE.Vector3(1,0,0));
+                  box.applyCentralImpulse(new THREE.Vector3(50,0,0));
               }
+          
             //e.preventDefault();
            //render();
           }
         
         function onDocumentKeyUp(event){
            let keyCode = event.which;
-              if (keyCode == 87) {
-                  box.applyCentralImpulse(new THREE.Vector3(0,0,10000));
+           if (keyCode == 87) {
+                  box.setLinearVelocity(new THREE.Vector3(0, 0, 0));
+                    box.setAngularVelocity(new THREE.Vector3(0, 0, 0));
               } else if (keyCode == 83) {
-                   box.applyCentralImpulse(new THREE.Vector3(0,0,-10000));
+                   box.setLinearVelocity(new THREE.Vector3(0, 0, 0));
+                    box.setAngularVelocity(new THREE.Vector3(0, 0, 0));
               } else if (keyCode == 65) {
-                   box.applyCentralImpulse(new THREE.Vector3(10000,0,0));
+                   box.setLinearVelocity(new THREE.Vector3(0, 0, 0));
+                    box.setAngularVelocity(new THREE.Vector3(0, 0, 0));
               } else if (keyCode == 68) {
-                  box.applyCentralImpulse(new THREE.Vector3(-10000,0,0));
+                  box.setLinearVelocity(new THREE.Vector3(0, 0, 0));
+                    box.setAngularVelocity(new THREE.Vector3(0, 0, 0));
               }
         }
         scene.add( box );
@@ -100,11 +106,8 @@
  
        
       render = function() {
-         // run physics
-         // box.setLinearVelocity(new THREE.Vector3(0, 0, 0));
-        // box.__dirtyPosition = true;
-         scene.simulate();
-        renderer.render( scene, camera); // render the scene
+        scene.simulate();
+        renderer.render( scene, camera); // render the scen
         requestAnimationFrame( render );
       };
        
@@ -112,7 +115,6 @@
 
       window.onload = function(){
         initScene();
-       
         render();
 
       }
