@@ -76,15 +76,24 @@
         document.addEventListener("keydown", onDocumentKeyDown, false); 
        
         
-       // document.addEventListener("onClick", getCurrPos, false);
-        
+        document.getElementById('viewport').onclick = getCurrPos
+                //document.getElementById('viewport').ondragstart = drag
+
         function getCurrPos(event){
+           let img = new Image();
+           event.dataTransfer.setDragImage(img, 0, 0);
            xPos = event.clientX
            yPos = event.clientY
-           //document.getElementById('title').innerHTML = xPos
+           document.getElementById('title').innerHTML = xPos
         }
         
-        d//ocument.addEventListener()
+        function drag(event){
+          let img = new Image();
+          event.dataTransfer.setDragImage(img, 0, 0);
+          document.getElementById('title').innerHTML = "drag"
+        }
+        
+        //document.addEventListener()
         
         //document.addEventListener("keyup", onDocumentKeyUp, false); 
         /*
@@ -170,6 +179,6 @@
     <p id="title">
       BALANCE THE CUBE
     </p>
-    	<div id="viewport"></div>
+    	<div id="viewport" draggable = "true"></div>
   </body>
 </html>
