@@ -41,11 +41,15 @@
         ground_material = Physijs.createMaterial(
             new THREE.MeshBasicMaterial( { color: 0x42f595 } ) ,.9, .1), // low restitution
         // Ground
-        ground = new Physijs.BoxMesh(new THREE.BoxGeometry(150, 1, 150),ground_material,0 // mass
+        ground = new Physijs.BoxMesh(new THREE.BoxGeometry(150, 1, 150),ground_material,1 // mass
         );
         ground.receiveShadow = true;
         
-        
+        var constraint = new Physijs.PointConstraint(
+            ground,
+            new THREE.Vector3( 0, 0, 0 ) 
+        );
+
         //scene.add("https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2Ftree.obj?v=1569096411935")
 
         // Box
@@ -98,8 +102,10 @@
                     box.setAngularVelocity(new THREE.Vector3(0, 0, 0));
               }
         }
-        scene.add( box );
+      
         scene.add( ground );
+         scene.add( box );
+          scene.addConstraint( constraint );
       };
        
       
