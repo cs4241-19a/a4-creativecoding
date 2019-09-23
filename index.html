@@ -68,8 +68,8 @@
         box.rotation.x = 10;
         box.__dirtyPosition = true;
         document.addEventListener("keydown", onDocumentKeyDown, false); 
-       // document.addEventListener("keyup", onDocumentKeyUp, false); 
-        
+        //document.addEventListener("keyup", onDocumentKeyUp, false); 
+        /*
         function onDocumentKeyDown(event) {
               let keyCode = event.which;
               if (keyCode == 87) {
@@ -84,22 +84,44 @@
           
             //e.preventDefault();
            //render();
-          }
+          }d
+          */
+         let vel1 = .1
+          let vel2 = .1
+        function onDocumentKeyDown(event) {
+              let keyCode = event.which;
+              if (keyCode == 87) {
+                   ground.setAngularVelocity(new THREE.Vector3(vel1, 0, 0));
+                  vel1+= .01
+              } else if (keyCode == 83) {
+                    ground.setAngularVelocity(new THREE.Vector3(vel1, 0, 0));
+                  vel1-= .01
+              } else if (keyCode == 65) {
+                   ground.setAngularVelocity(new THREE.Vector3(0, -0, vel2));
+                  vel2-= .01
+              } else if (keyCode == 68) {
+                   ground.setAngularVelocity(new THREE.Vector3(0, 0, vel2));
+                  vel2+= .01
+              }
+        }
+          
+            //e.preventDefault();
+           //render();
         
         function onDocumentKeyUp(event){
            let keyCode = event.which;
            if (keyCode == 87) {
-                  box.setLinearVelocity(new THREE.Vector3(0, 0, 0));
-                    box.setAngularVelocity(new THREE.Vector3(0, 0, 0));
+                  ground.setLinearVelocity(new THREE.Vector3(0, 0, 0));
+                    ground.setAngularVelocity(new THREE.Vector3(0, 0, 0));
               } else if (keyCode == 83) {
-                   box.setLinearVelocity(new THREE.Vector3(0, 0, 0));
-                    box.setAngularVelocity(new THREE.Vector3(0, 0, 0));
+                   ground.setLinearVelocity(new THREE.Vector3(0, 0, 0));
+                    ground.setAngularVelocity(new THREE.Vector3(0, 0, 0));
               } else if (keyCode == 65) {
-                   box.setLinearVelocity(new THREE.Vector3(0, 0, 0));
-                    box.setAngularVelocity(new THREE.Vector3(0, 0, 0));
+                   ground.setLinearVelocity(new THREE.Vector3(0, 0, 0));
+                    ground.setAngularVelocity(new THREE.Vector3(0, 0, 0));
               } else if (keyCode == 68) {
-                  box.setLinearVelocity(new THREE.Vector3(0, 0, 0));
-                    box.setAngularVelocity(new THREE.Vector3(0, 0, 0));
+                  ground.setLinearVelocity(new THREE.Vector3(0, 0, 0));
+                    ground.setAngularVelocity(new THREE.Vector3(0, 0, 0));
               }
         }
       
