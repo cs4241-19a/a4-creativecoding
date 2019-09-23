@@ -63,7 +63,7 @@
 
         // Box
          let ball_material = Physijs.createMaterial(
-            new THREE.MeshBasicMaterial( { color: 0xFFFFFF } ) ,.9, .1), // low restitution
+            new THREE.MeshBasicMaterial( { color: 0xFFFFFF } ) ,.9, .5), // low restitution
         // Ground
         box = new Physijs.BoxMesh (
           new THREE.BoxGeometry(5,5,5),
@@ -103,21 +103,21 @@
                    ground.setAngularVelocity(new THREE.Vector3(vel1, 0, 0));
                    vel1+= .1
                   count++
-                  document.getElementById("title").style.color =  "black";
+                 
               } else if (keyCode == 83) {
                   ground.setAngularVelocity(new THREE.Vector3(vel1, 0, 0));
-                  document.getElementById("title").style.color = "white";
+                //  document.getElementById("title").style.color = "white";
                   vel1-= .1
                   count++
               } else if (keyCode == 65) {
                   ground.setAngularVelocity(new THREE.Vector3(0, -0, vel2));
-                  document.getElementById("title").style.color =  "white";
+                 // document.getElementById("title").style.color =  "white";
                   vel2-= .1
                   count++
               } else if (keyCode == 68) {
                    ground.setAngularVelocity(new THREE.Vector3(0, 0, vel2));
                   vel2+= .1
-                  document.getElementById("title").style.color =  "black";
+                  //document.getElementById("title").style.color =  "black";
                   count++
               }
         
@@ -154,6 +154,7 @@
         scene.simulate();
         renderer.render( scene, camera); // render the scen
         requestAnimationFrame( render );
+        
       };
        
        
@@ -161,13 +162,12 @@
       window.onload = function(){
         initScene();
         render();
-
       }
     
     </script>
-    	<div id="viewport"></div>
     <p id="title">
       BALANCE THE CUBE
     </p>
+    	<div id="viewport"></div>
   </body>
 </html>
