@@ -48,6 +48,7 @@
               ground = new Physijs.BoxMesh(new THREE.BoxGeometry(150, 1, 150),ground_material,1 // mass
               );
               ground.receiveShadow = true;
+             ground.__dirtyRotation = true;
 
               var constraint = new Physijs.PointConstraint(
                   ground,
@@ -76,8 +77,8 @@
         document.addEventListener("keydown", onDocumentKeyDown, false); 
        
         
-        document.getElementById('viewport').onclick = getCurrPos
-                //document.getElementById('viewport').ondragstart = drag
+        document.getElementById('viewport').ondrag = getCurrPos
+        document.getElementById('viewport').ondragstart = drag
 
         function getCurrPos(event){
            let img = new Image();
@@ -85,6 +86,9 @@
            xPos = event.clientX
            yPos = event.clientY
            document.getElementById('title').innerHTML = xPos
+           ground.__dirtyRotation = true;
+           ground.rotation.set(xPos/200, yPos/200, 0)
+          
         }
         
         function drag(event){
