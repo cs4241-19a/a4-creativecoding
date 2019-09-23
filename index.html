@@ -45,7 +45,7 @@
               ground_material = Physijs.createMaterial(
                   new THREE.MeshBasicMaterial({map: texture}) ,.8, .1), // low restitution
               // Ground
-              ground = new Physijs.BoxMesh(new THREE.BoxGeometry(150, 1, 150),ground_material,1 // mass
+              ground = new Physijs.BoxMesh(new THREE.BoxGeometry(150, 30, 150),ground_material,1 // mass
               );
               ground.receiveShadow = true;
              ground.__dirtyRotation = true;
@@ -61,10 +61,10 @@
 
         // Box
          let ball_material = Physijs.createMaterial(
-            new THREE.MeshBasicMaterial( { color: 0xFFFFFF } ) ,.9, .5), // low restitution
+            new THREE.MeshBasicMaterial( { color: 0xFFFFFF } ) ,.9, .9), // low restitution
         // Ground
         box = new Physijs.BoxMesh (
-          new THREE.BoxGeometry(5,5,5),
+          new THREE.BoxGeometry(10,10,10),
           ball_material, 1);
         box.addEventListener( 'collision', function( objCollidedWith, linearVelOfCollision, angularVelOfCollision ) {
         });
@@ -85,16 +85,16 @@
            event.dataTransfer.setDragImage(img, 0, 0);
            xPos = event.clientX
            yPos = event.clientY
-           document.getElementById('title').innerHTML = xPos
+          // document.getElementById('title').innerHTML = xPos
            ground.__dirtyRotation = true;
-           ground.rotation.set(xPos/200, yPos/200, 0)
+           ground.rotation.set(xPos/200, 0, yPos /100)
           
         }
         
         function drag(event){
           let img = new Image();
           event.dataTransfer.setDragImage(img, 0, 0);
-          document.getElementById('title').innerHTML = "drag"
+         // document.getElementById('title').innerHTML = "drag"
         }
         
         //document.addEventListener()
