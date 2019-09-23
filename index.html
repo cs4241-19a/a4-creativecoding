@@ -69,11 +69,12 @@
           new THREE.BoxGeometry(10,10,10),
           ball_material, 1);
         box.addEventListener( 'collision', function( objCollidedWith, linearVelOfCollision, angularVelOfCollision ) {
-          score++
+           score++
            document.getElementById('text').innerHTML = score
            on()
-           await sleep(100)
-           off()
+           setTimeout(function(){
+                off();
+            },500);
         });
         requestAnimationFrame( render );
         box.position.z = 10;
@@ -82,14 +83,11 @@
         box.rotation.x = 10;
         box.__dirtyPosition = true;
         document.addEventListener("keydown", onDocumentKeyDown, false); 
-       
-        
         document.getElementById('viewport').ondrag = getCurrPos
         document.getElementById('viewport').ondragstart = drag
+        document.getElementById('viewport').ondragend = reset
         
-        function sleep(ms) {
-          return new Promise(resolve => setTimeout(resolve, ms))
-        }
+        function donothing() {}
 
         function getCurrPos(event){
            let img = new Image();
@@ -114,6 +112,11 @@
           let img = new Image();
           event.dataTransfer.setDragImage(img, 0, 0);
          // document.getElementById('title').innerHTML = "drag"
+        }
+        
+        function reset(event){
+           ground.__dirtyRotation = true;
+           ground.rotation.set(0,0,0)
         }
         
         //document.addEventListener()
