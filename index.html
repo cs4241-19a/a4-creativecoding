@@ -117,7 +117,7 @@
         function reset(event){
            ground.__dirtyRotation = true;
            ground.rotation.set(0,0,0)
-          ground.
+           ground.setAngularVelocity(new THREE.Vector3(0, 0, 0));
         }
         
         //document.addEventListener()
@@ -213,6 +213,12 @@
     </script>
     <div id="overlay">
       <div id="text"></div>
+    </div>
+    <div id="overlayend">
+      <div id="textend"></div>
+    </div>
+     <div id="overlaystart">
+      <div id="textstart"></div>
     </div>
     <p id="title">
       BALANCE THE CUBE
