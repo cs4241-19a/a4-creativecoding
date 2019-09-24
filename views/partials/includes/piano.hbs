@@ -6,25 +6,25 @@
     <defs>
         <g id="piano">
             <!-- White keys -->
-            <rect id="C" class="key key-white" x="0" y="0" width="23" height="120"/>
-            <rect id="D" class="key key-white" x="23" y="0" width="23" height="120"/>
-            <rect id="E" class="key key-white" x="46" y="0" width="23" height="120"/>
-            <rect id="F" class="key key-white" x="69" y="0" width="23" height="120"/>
-            <rect id="G" class="key key-white" x="92" y="0" width="23" height="120"/>
-            <rect id="A" class="key key-white" x="115" y="0" width="23" height="120"/>
-            <rect id="B" class="key key-white" x="138" y="0" width="23" height="120"/>
+            <rect class="key key-white" data-note="C" x="0" y="0" width="23" height="120"/>
+            <rect class="key key-white" data-note="D" x="23" y="0" width="23" height="120"/>
+            <rect class="key key-white" data-note="E" x="46" y="0" width="23" height="120"/>
+            <rect class="key key-white" data-note="F" x="69" y="0" width="23" height="120"/>
+            <rect class="key key-white" data-note="G" x="92" y="0" width="23" height="120"/>
+            <rect class="key key-white" data-note="A" x="115" y="0" width="23" height="120"/>
+            <rect class="key key-white" data-note="B" x="138" y="0" width="23" height="120"/>
             <!-- Black keys (overlap with the white keys) -->
-            <rect id="C#" class="key key-black" x="14.33333" y="0" width="13" height="80"/>
-            <rect id="D#" class="key key-black" x="41.66666" y="0" width="13" height="80"/>
-            <rect id="F#" class="key key-black" x="82.25" y="0" width="13" height="80"/>
-            <rect id="G#" class="key key-black" x="108.25" y="0" width="13" height="80"/>
-            <rect id="A#" class="key key-black" x="134.75" y="0" width="13" height="80"/>
+            <rect class="key key-black" data-note="C#" x="14.33333" y="0" width="13" height="80"/>
+            <rect class="key key-black" data-note="D#" x="41.66666" y="0" width="13" height="80"/>
+            <rect class="key key-black" data-note="F#" x="82.25" y="0" width="13" height="80"/>
+            <rect class="key key-black" data-note="G#" x="108.25" y="0" width="13" height="80"/>
+            <rect class="key key-black" data-note="A#" x="134.75" y="0" width="13" height="80"/>
         </g>
     </defs>
     <svg viewBox="0 0 161 120" width="322px" height="240px" preserveAspectRatio="xMidYMid meet" x="0" y="0">
-        <use id="piano1" href="#piano"/>
+        <use id="piano1" data-octave="4" xlink:href="#piano"/>
     </svg>
     <svg viewBox="0 0 161 120" width="322px" height="240px" preserveAspectRatio="xMidYMid meet" x="322px">
-        <use id="piano2" href="#piano"/>
+        <use id="piano2" data-octave="5" xlink:href="#piano"/>
     </svg>
 </svg>
