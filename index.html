@@ -95,7 +95,8 @@
            xPos = event.clientX
            yPos = event.clientY
            ground.__dirtyRotation = true;
-           ground.rotation.set(xPos/200, 0, yPos /100)
+           ground.rotation.set((xPos-540)/200, 0, (yPos-384)/100)
+           document.getElementById("title").innerHTML(xPos + "  " + yPos)
         }
         
         function on() {
@@ -151,8 +152,8 @@
               break;
             case 68:
               //bounce off 
-            //  box.material._physijs.restitution = .1
-             // ground.material._physijs.restitution = .1
+              box.material._physijs.restitution = .1
+              ground.material._physijs.restitution = .1
               
           }
         }
@@ -179,9 +180,6 @@
           render();
         }
        
-       
-       
-      
         render = function(){
           scene.simulate();
           renderer.render( scene, camera); // render the scen
