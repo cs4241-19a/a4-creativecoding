@@ -127,30 +127,36 @@
         }
         let x = 1
         let z = 1
-        let colors = [0x000000, 0xFF0000, 0x00FF00, 0x0000FF, 0xF0F000, 0x00F0F0, 0x000F0F]
+        let colors = [0xFFFFFF, 0xFF0000, 0x00FF00, 0x0000FF, 0xF0F000, 0x00F0F0, 0x000F0F]
+        let colornames = ["white", "red", "green", "blue", "yellow", "cyan", "magenta"]
         let cindex = 0
         function changeDim(event){
           switch (event.keyCode) {
             case 87:
               document.getElementById("title").innerHTML = event.keyCode
-              x = x + .01
-              z = z - .01
+              x = x + .1
+              z = z - .1
               ground.scale.set(x,1,z)
               break;
             case 83:
-              x = x - .01
-              z = z + .01
+              x = x - .1
+              z = z + .11
               ground.scale.set(x,1,z)
               break;
             case 65:
-              box.material.color.setHex(colors[(cindex ++) % 7])
+              cindex++
+              cindex = cindex % 7
+              box.material.color.setHex(colors[cindex])
+              document.getElementById('title').style.color = colornames[cindex]
               break;
             case 68:
-              box.material.color.setHex(colors[(cindex--) % 7])
+              cindex++
+              cindex = cindex % 7
+              box.material.color.setHex(colors[cindex])
+               document.getElementById('title').style.color = colornames[cindex]
               break;
           }
         }
-        
         
        
         //document.addEventListener("keydown", onDocumentKeyDown, false);
@@ -166,7 +172,7 @@
               
         function start() {
           document.getElementById("overlaystart").style.display = "block";
-          document.getElementById("textstart").innerHTML = "Click and drag to move the wooden plank. Use the GUI on the side to change box properties because the assignment requires that I have that. Balance the cube. Click to start. Click to restart when you lose."
+          document.getElementById("textstart").innerHTML = "Click and drag to move the wooden plank. Press 'w' and 's' to shift the plank's dimentions. Press 'a' or 'd' to change the cube's color. This won't help you but the assignment requires that I have that. Balance the cube. Click to start. Click to restart when you lose."
         }
         function dismiss(){
           document.getElementById("overlaystart").style.display = "none";
