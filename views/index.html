@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>CS4241 Assignment 2</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type = "text/css" href="/views/style.css">
+    <meta name = "Description" content = "Dice Roller">
+    <meta name = "Keywords" content = "Dice, Roll, D&D">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div class = "heading">
+    <h1>
+        <div id = "title">
+            Dice Roller
+        </div>
+    </h1>
+</div>
+<div class = "heading">
+    <div class = "inputBox">
+        <div class = "labelInput">
+            <label for = "typeDice">Dice Type:</label>
+            <form action="">
+                <input type="text" id="typeDice" value="">
+            </form>
+        </div>
+        <div class = "labelInput">
+            <label for = "numDice">Number of Dice:</label>
+            <form action = "">
+                <input type = "number" id = "numDice" value = "Number of Dice">
+            </form>
+        </div>
+        <div class = "labelInput">
+            <form action = "">
+                <input type = "radio" id = "-" name = "add/sub">
+                <label for = "-">-</label>
+                <input type = "radio" id = "+" name = "add/sub">
+                <label for = "+">+</label>
+            </form>
+        </div>
+        <div class = "labelInput">
+            <label for = "flatDice">Flat Modifier:</label>
+            <form action = "">
+                <input type = "number" id = "flatDice" value = "Flat Number added to Result">
+            </form>
+        </div>
+        <div id = "errorBox">
+            <div id = "errorLabel">
+                <label>Error Label</label>
+            </div>
+        </div>
+        <div class = "labelInput">
+            <button id = "submitButton">
+                Roll Dice
+            </button>
+        </div>
+    </div>
+</div>
+<div class = "heading">
+    <div class = "inputBox">
+        <div id = "dice"></div>
+    </div>
+</div>
+<div class = "labelInput">
+    <label id = "resultLabel">Result: </label>
+</div>
+</body>
+<script src = "/public/client.js"></script>
+</html>
