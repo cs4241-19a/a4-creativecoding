@@ -40,6 +40,9 @@
        
       var bounceSound = new sound("https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2F404769__owlstorm__retro-video-game-sfx-bounce.wav?v=1569358326681");
       var music = new sound("https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2FUndertale%20OST%20042%20-%20Thundersnail.mp3?v=1569359250719​");
+      var mass = new sound("https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2F270341__littlerobotsoundfactory__pickup-04.wav?v=1569364678712");
+      var color = new sound("https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2F270332__littlerobotsoundfactory__hit-03.wav?v=1569364682744");
+      var stretch = new sound("https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2F401648__inspectorj__bodyboard-stretch-a.wav?v=1569364805642")
       let count = 0
       let score = 0
       Physijs.scripts.worker = 'js/physijs_worker.js';
@@ -164,22 +167,25 @@
               x = x + .1
               z = z - .1
               ground.scale.set(x,1,z)
+              stretch.play()
               break;
             case 83:
               x = x - .1
               z = z + .1
               ground.scale.set(x,1,z)
+              stretch.play()
               break;
             case 65:
               cindex++
               cindex = cindex % 7
               box.material.color.setHex(colors[cindex])
               document.getElementById('title').style.color = colornames[cindex]
+              color.play()
               break;
             case 68:
               //bounce off 
               if (flag == 0){
-                let newMaterial = Physijs.createMaterial(new THREE.MeshBasicMaterial( { color: "grey" } ) ,.9, .1);
+                let newMaterial = Physijs.createMaterial(new THREE.MeshBasicMaterial( { color: "magenta" } ) ,.9, .1);
                 box.material = newMaterial
                 box.mass = 10
                 flag = 1
@@ -190,6 +196,7 @@
                 box.mass = 1
                 flag = 0
               }
+              mass.play()
               break;
             case 88:
               music.stop()
@@ -211,7 +218,7 @@
               
         function start() {
           document.getElementById("overlaystart").style.display = "block";
-          document.getElementById("textstart").innerHTML = "Click and drag to move the wooden plank. Press 'w' and 's' to shift the plank's dimentions. Press 'a' to alter the cube's color. Press 'd' to increase mass. Press 'x' to disable music. These won't help you but the assignment requires that I have them. Balance the cube. Click to start. Click to restart when you lose."
+          document.getElementById("textstart").innerHTML = "Click, hold and drag the center of the wooden plank. Press 'w' and 's' to shift the plank's dimentions. Press 'a' to alter the cube's color. Press 'd' to disable bounce. Press 'x' to disable music. These won't help you but the assignment requires that I have them. Keypresses will not register while you're holding the plank. Balance the cube. Click to start. Click to restart when you lose. My high score is 31."
         }
         function dismiss(){
           document.getElementById("overlaystart").style.display = "none";
