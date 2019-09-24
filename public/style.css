@@ -1,23 +1,32 @@
 body {
     font-family: "Verdana", Verdana, sans-serif;
+    background-color: #151719 !important;
 }
 
 h1 {
     text-align: center;
+    color: aqua;
 }
 
-.node circle {
-    fill: #fff;
-    stroke: steelblue;
-    stroke-width: 3px;
+select {
+    background-color: #151719;
+    color: white;
 }
 
-.node text {
-    font: 12px sans-serif;
-}
-
-.link {
+.linage {
     fill: none;
-    stroke: #ccc;
-    stroke-width: 2px;
+    stroke: black;
+}
+.marriage {
+    fill: none;
+    stroke: green;
+}
+.node {
+    background-color: lightgray;
+    border-style: groove;
+    border-width: 1px;
+}
+.nodeText{
+    font: 10px sans-serif;
+    color: black
 }
