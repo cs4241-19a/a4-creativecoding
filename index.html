@@ -49,28 +49,30 @@
               ground.receiveShadow = true;
               ground.__dirtyRotation = true;
               var constraint = new Physijs.PointConstraint( ground, new THREE.Vector3( 0, 0, 0 ));
+               ground.addEventListener( 'collision', function( objCollidedWith, linearVelOfCollision, angularVelOfCollision ) {
+               score++
+               document.getElementById('text').innerHTML = score
+               on()
+               setTimeout(function(){
+                    off();
+                },500);
+              });
               scene.add( ground );
               scene.addConstraint( constraint );
           });
+       
         
-        let floor_mat = Physijs.createMaterial(new THREE.MeshBasicMaterial( { color: 0x0000FF } ) ,.9, .9);
-        let floor = new Physijs.BoxMesh (new THREE.BoxGeometry(1000,1,1000), floor_mat, 0);
+        let floor_mat = Physijs.createMaterial(new THREE.MeshBasicMaterial( { color: "black" } ) ,.9, .9);
+        let floor = new Physijs.BoxMesh (new THREE.BoxGeometry(10000,1,10000), floor_mat, 0);
         floor.addEventListener( 'collision', function( objCollidedWith, linearVelOfCollision, angularVelOfCollision ) {
-           document.getElementById('textend').innerHTML = score
+           document.getElementById('textend').innerHTML = "Bro you dropped the cube. " + score + " hits."
            end()
         });
         floor.position.y = -200;
         
         let ball_material = Physijs.createMaterial(new THREE.MeshBasicMaterial( { color: 0xFFFFFF } ) ,.9, .9);
         box = new Physijs.BoxMesh (new THREE.BoxGeometry(10,10,10), ball_material, 1);
-        box.addEventListener( 'collision', function( objCollidedWith, linearVelOfCollision, angularVelOfCollision ) {
-           score++
-           document.getElementById('text').innerHTML = score
-           on()
-           setTimeout(function(){
-                off();
-            },500);
-        });
+       
         
         requestAnimationFrame( render );
         box.position.z = 10;
@@ -109,6 +111,10 @@
         function dismiss(){
           document.getElementById("overlaystart").style.display = "none";
         }
+        function restart(){
+          document.getElementById("overlayend").style.display = "none";
+          location.reload()
+        }
         
         function drag(event){
           let img = new Image();
@@ -122,7 +128,8 @@
         }
        
         //document.addEventListener("keydown", onDocumentKeyDown, false);
-        document.addEventListener("onclick", dismiss,false);
+        document.getElementById('textend').onclick = restart
+        document.getElementById('textstart').onclick = dismiss
         document.getElementById('viewport').ondrag = getCurrPos
         document.getElementById('viewport').ondragstart = drag
         document.getElementById('viewport').ondragend = reset
