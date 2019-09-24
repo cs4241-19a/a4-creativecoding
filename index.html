@@ -39,7 +39,7 @@
       }
        
       var bounceSound = new sound("https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2F404769__owlstorm__retro-video-game-sfx-bounce.wav?v=1569358326681");
-      var music = new sound("https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2F200901__looppacks__8bit110bpm-02.wav?v=1569358335598");
+      var music = new sound("https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2FUndertale%20OST%20042%20-%20Thundersnail.mp3?v=1569359250719​");
       let count = 0
       let score = 0
       Physijs.scripts.worker = 'js/physijs_worker.js';
@@ -87,6 +87,7 @@
         let floor = new Physijs.BoxMesh (new THREE.BoxGeometry(10000,1,10000), floor_mat, 0);
         floor.addEventListener( 'collision', function( objCollidedWith, linearVelOfCollision, angularVelOfCollision ) {
            document.getElementById('textend').innerHTML = "You can't hang. " + score + " hits."
+          music.stop()
            end()
         });
         floor.position.y = -200;
@@ -95,6 +96,7 @@
         let celing = new Physijs.BoxMesh (new THREE.BoxGeometry(10000,1,10000), celing_mat, 0);
         celing.addEventListener( 'collision', function( objCollidedWith, linearVelOfCollision, angularVelOfCollision ) {
            document.getElementById('textend').innerHTML = "Cube way unbalanced, man. " + score + " hits."
+          music.stop()
            end()
         });
         celing.position.y = 200;
@@ -228,7 +230,7 @@
      <div id="overlaystart">
       <div id="textstart"></div>
     </div>
-    <p id="title">
+    <p class="blinking" id="title">
       BALANCE THE CUBE
     </p>
     <div id="viewport" draggable = "true"></div>
