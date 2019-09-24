@@ -127,6 +127,8 @@
         }
         let x = 1
         let z = 1
+        let colors = [0x000000, 0xFF0000, 0x00FF00, 0x0000FF, 0xF0F000, 0x00F0F0, 0x000F0F]
+        let cindex = 0
         function changeDim(event){
           switch (event.keyCode) {
             case 87:
@@ -134,10 +136,18 @@
               x = x + .01
               z = z - .01
               ground.scale.set(x,1,z)
+              break;
             case 83:
               x = x - .01
               z = z + .01
               ground.scale.set(x,1,z)
+              break;
+            case 65:
+              box.material.color.setHex(colors[(cindex ++) % 7])
+              break;
+            case 68:
+              box.material.color.setHex(colors[(cindex--) % 7])
+              break;
           }
         }
         
@@ -148,7 +158,7 @@
         document.getElementById('viewport').ondrag = getCurrPos
         document.getElementById('viewport').ondragstart = drag
         document.getElementById('viewport').ondragend = reset
-        document.addEventListener('onkeydown', changeDim, false)
+        document.addEventListener('keydown', changeDim, false)
                
 
         
