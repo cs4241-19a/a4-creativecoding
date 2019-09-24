@@ -70,3 +70,4 @@ Include a very brief summary of your project here. Images are encouraged, along 
 - **Design Achievement 1**: I ensured that my application would run on both desktops / mobile devices by changing X
 - **Design Achievement 2**: I followed best practices for accessibility, including providing alt attributes for images and using semantic HTML. There are no `<div>` or `<span>` elements in my document.
 - **Design Achievement 3**: We tested the application with n=X users, finding that...
+This is a test, for the initial commit :)
