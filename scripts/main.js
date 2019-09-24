@@ -1,4 +1,8 @@
-'use strict';
+const Physijs = require( './js/physi.js')
+const THREE = require( './js/three.js')
+
+
+       'use strict';
        
        function sound(src) {
         this.sound = document.createElement("audio");

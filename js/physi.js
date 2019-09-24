@@ -1,3 +1,4 @@
+const THREE = require( './js/three.js')
 
 window.Physijs = (function() {
 	'use strict';

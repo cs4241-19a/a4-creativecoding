@@ -31,8 +31,16 @@ app.get('/js/client.js', function(request, response) {
   response.sendFile(__dirname + '/js/client.js');
 });
 
-app.get('/js/OrbitControls.js', function(request, response) {
-  response.sendFile(__dirname + '/js/OrbitControls.js');
+app.get('/scripts/audio.js', function(request, response) {
+  response.sendFile(__dirname + '/scripts/audio.js');
+});
+
+app.get('/scripts/main.js', function(request, response) {
+  response.sendFile(__dirname + '/scripts/main.js');
+});
+
+app.get('/scipts/geometry.js', function(request, response) {
+  response.sendFile(__dirname + '/scripts/geometry.js');
 });
 
 var listener = app.listen(process.env.PORT, function () {
