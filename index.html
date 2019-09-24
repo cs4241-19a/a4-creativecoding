@@ -43,9 +43,8 @@
         scene.add( camera );
         
         var loader = new THREE.TextureLoader();
-        loader.load('https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2F8bb0cedfaea9e07b8c3aa6f8c41684bc.jpg?v=1569202443143',
-          function ( texture ) {
-              ground_material = Physijs.createMaterial( new THREE.MeshBasicMaterial({map: texture}) ,.8, .9),
+        loader.load('https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2F8bb0cedfaea9e07b8c3aa6f8c41684bc.jpg?v=1569202443143', function ( texture ) {
+              ground_material = Physijs.createMaterial(new THREE.MeshBasicMaterial({map: texture}) ,.8, .9);
               ground = new Physijs.BoxMesh(new THREE.BoxGeometry(150, 30, 150),ground_material,1);
               ground.receiveShadow = true;
               ground.__dirtyRotation = true;
@@ -54,16 +53,15 @@
               scene.addConstraint( constraint );
           });
         
-        let floor_mat = Physijs.createMaterial(new THREE.MeshBasicMaterial( { color: 0x0000FF } ) ,.9, .9), 
-        floor = new Physijs.BoxMesh (new THREE.BoxGeometry(1000,1,1000), floor_mat, 0);
+        let floor_mat = Physijs.createMaterial(new THREE.MeshBasicMaterial( { color: 0x0000FF } ) ,.9, .9);
+        let floor = new Physijs.BoxMesh (new THREE.BoxGeometry(1000,1,1000), floor_mat, 0);
         floor.addEventListener( 'collision', function( objCollidedWith, linearVelOfCollision, angularVelOfCollision ) {
            document.getElementById('textend').innerHTML = score
            end()
         });
-        floor.position.y = -30;
-
+        floor.position.y = -200;
         
-        let ball_material = Physijs.createMaterial(new THREE.MeshBasicMaterial( { color: 0xFFFFFF } ) ,.9, .9), 
+        let ball_material = Physijs.createMaterial(new THREE.MeshBasicMaterial( { color: 0xFFFFFF } ) ,.9, .9);
         box = new Physijs.BoxMesh (new THREE.BoxGeometry(10,10,10), ball_material, 1);
         box.addEventListener( 'collision', function( objCollidedWith, linearVelOfCollision, angularVelOfCollision ) {
            score++
@@ -80,6 +78,9 @@
         box.position.y = 50;
         box.rotation.x = 10;
         box.__dirtyPosition = true;
+        scene.add(box)
+        scene.add(floor)
+        
 
         function getCurrPos(event){
            let img = new Image();
@@ -112,7 +113,6 @@
         function drag(event){
           let img = new Image();
           event.dataTransfer.setDragImage(img, 0, 0);
-         // document.getElementById('title').innerHTML = "drag"
         }
         
         function reset(event){
@@ -121,29 +121,33 @@
            ground.setAngularVelocity(new THREE.Vector3(0, 0, 0));
         }
        
-      document.addEventListener("keydown", onDocumentKeyDown, false); 
-      document.getElementById('viewport').ondrag = getCurrPos
-      document.getElementById('viewport').ondragstart = drag
-      document.getElementById('viewport').ondragend = reset
-       
-      render = function() {
-        scene.simulate();
-        renderer.render( scene, camera); // render the scen
-        requestAnimationFrame( render );
-      };   
-
-      window.onload = function(){
-        initScene();
-        render();
-        /*
-        var gui = new dat.GUI()
-        gui.add(box, 'message');
-        gui.add(box, 'speed', -5, 5);
-        gui.add(box, 'displayOutline');
-        gui.add(box, 'explode');
-        */
+        //document.addEventListener("keydown", onDocumentKeyDown, false);
+        document.addEventListener("onclick", dismiss,false);
+        document.getElementById('viewport').ondrag = getCurrPos
+        document.getElementById('viewport').ondragstart = drag
+        document.getElementById('viewport').ondragend = reset
+        
+        
       }
-    
+
+        render = function(){
+          scene.simulate();
+          renderer.render( scene, camera); // render the scen
+          requestAnimationFrame( render );
+        };
+
+        window.onload = function(){
+          initScene();
+          render();
+          /*
+          var gui = new dat.GUI()
+          gui.add(box, 'message');
+          gui.add(box, 'speed', -5, 5);
+          gui.add(box, 'displayOutline');
+          gui.add(box, 'explode');
+          */
+        }
+      
     </script>
     
     <div id="overlay">
