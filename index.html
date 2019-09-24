@@ -133,14 +133,14 @@
         function changeDim(event){
           switch (event.keyCode) {
             case 87:
-              document.getElementById("title").innerHTML = event.keyCode
+              //document.getElementById("title").innerHTML = event.keyCode
               x = x + .1
               z = z - .1
               ground.scale.set(x,1,z)
               break;
             case 83:
               x = x - .1
-              z = z + .11
+              z = z + .1
               ground.scale.set(x,1,z)
               break;
             case 65:
@@ -150,11 +150,10 @@
               document.getElementById('title').style.color = colornames[cindex]
               break;
             case 68:
-              cindex++
-              cindex = cindex % 7
-              box.material.color.setHex(colors[cindex])
-               document.getElementById('title').style.color = colornames[cindex]
-              break;
+              //bounce off 
+              box._physijs.restitution = .1
+              ground._physijs.restitution = .1
+              
           }
         }
         
