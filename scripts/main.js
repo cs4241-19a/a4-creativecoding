@@ -1,6 +1,5 @@
-const Physijs = require( './js/physi.js')
-const THREE = require( './js/three.js')
-
+import * as Physijs from '../js/physi.js'
+import * as THREE from '../js/three.js'
 
        'use strict';
        
@@ -30,8 +29,8 @@ const THREE = require( './js/three.js')
       var stretch = new sound("https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2F401648__inspectorj__bodyboard-stretch-a.wav?v=1569364805642")
       let count = 0
       let score = 0
-      Physijs.scripts.worker = 'js/physijs_worker.js';
-      Physijs.scripts.ammo = 'ammo.js';
+      Physijs.scripts.worker = '../js/physijs_worker.js';
+      Physijs.scripts.ammo = '../js/ammo.js';
       let initScene, render, renderer, scene, camera, box, ground, ground_material, friction, controls;
       var xPos = 0
       var yPos = 0

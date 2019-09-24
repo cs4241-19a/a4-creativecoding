@@ -1,4 +1,3 @@
-const THREE = require( './js/three.js')
 
 window.Physijs = (function() {
 	'use strict';
@@ -1403,3 +1402,5 @@ window.Physijs = (function() {
 
 	return Physijs;
 })();
+
+export Physijs
