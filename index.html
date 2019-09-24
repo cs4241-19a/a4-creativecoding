@@ -125,31 +125,30 @@
            ground.rotation.set(0,0,0)
            ground.setAngularVelocity(new THREE.Vector3(0, 0, 0));
         }
-        
+        let x = 1
+        let z = 1
         function changeDim(event){
-          switch event.keyCode {
-            case 65:
-             ground.length = ground.length
+          switch (event.keyCode) {
             case 87:
-            case 68:
+              document.getElementById("title").innerHTML = event.keyCode
+              x = x + .01
+              z = z - .01
+              ground.scale.set(x,1,z)
             case 83:
+              x = x - .01
+              z = z + .01
+              ground.scale.set(x,1,z)
           }
         }
         
-        function retractDim(event){
-          switch event.keyCode {
-            case 65:
-            case 87:
-            case 68:
-            case 83:
-          }
-        }
+        
        
         //document.addEventListener("keydown", onDocumentKeyDown, false);
         document.getElementById('textend').onclick = restart
         document.getElementById('viewport').ondrag = getCurrPos
         document.getElementById('viewport').ondragstart = drag
         document.getElementById('viewport').ondragend = reset
+        document.addEventListener('onkeydown', changeDim, false)
                
 
         
