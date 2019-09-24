@@ -89,7 +89,7 @@
         let floor_mat = Physijs.createMaterial(new THREE.MeshBasicMaterial( { color: "black" } ) ,.9, .9);
         let floor = new Physijs.BoxMesh (new THREE.BoxGeometry(10000,1,10000), floor_mat, 0);
         floor.addEventListener( 'collision', function( objCollidedWith, linearVelOfCollision, angularVelOfCollision ) {
-           document.getElementById('textend').innerHTML = "You can't hang. " + score + " hits."
+           document.getElementById('textend').innerHTML = "Should've balanced the cube. " + score + " hits."
           music.stop()
            end()
         });
@@ -98,7 +98,7 @@
         let celing_mat = Physijs.createMaterial(new THREE.MeshBasicMaterial( { color: "black" } ) ,.9, .9);
         let celing = new Physijs.BoxMesh (new THREE.BoxGeometry(10000,1,10000), celing_mat, 0);
         celing.addEventListener( 'collision', function( objCollidedWith, linearVelOfCollision, angularVelOfCollision ) {
-           document.getElementById('textend').innerHTML = "Cube way unbalanced, man. " + score + " hits."
+           document.getElementById('textend').innerHTML = "Is the game called Drop the Cube? " + score + " hits."
           music.stop()
            end()
         });
