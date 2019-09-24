@@ -156,6 +156,7 @@
         let colors = [0xFFFFFF, 0xFF0000, 0x00FF00, 0x0000FF, 0xF0F000, 0x00F0F0, 0x000F0F]
         let colornames = ["white", "red", "green", "blue", "yellow", "cyan", "magenta"]
         let cindex = 0
+        let flag = 0
         function changeDim(event){
           switch (event.keyCode) {
             case 87:
@@ -177,8 +178,21 @@
               break;
             case 68:
               //bounce off 
-              box.material._physijs.restitution = .1
-              ground.material._physijs.restitution = .1
+              if (flag == 0){
+                let newMaterial = Physijs.createMaterial(new THREE.MeshBasicMaterial( { color: "grey" } ) ,.9, .1);
+                box.material = newMaterial
+                box.mass = 10
+                flag = 1
+              }
+              else{
+                let newMaterial = Physijs.createMaterial(new THREE.MeshBasicMaterial( { color: "white" } ) ,.9, .9);
+                box.material = newMaterial
+                box.mass = 1
+                flag = 0
+              }
+              break;
+            case 88:
+              music.stop()
               
           }
         }
@@ -197,7 +211,7 @@
               
         function start() {
           document.getElementById("overlaystart").style.display = "block";
-          document.getElementById("textstart").innerHTML = "Click and drag to move the wooden plank. Press 'w' and 's' to shift the plank's dimentions. Press 'a' to alter the cube's color. Press 'd' to disable bounce. This won't help you but the assignment requires that I have that. Balance the cube. Click to start. Click to restart when you lose."
+          document.getElementById("textstart").innerHTML = "Click and drag to move the wooden plank. Press 'w' and 's' to shift the plank's dimentions. Press 'a' to alter the cube's color. Press 'd' to increase mass. Press 'x' to disable music. These won't help you but the assignment requires that I have them. Balance the cube. Click to start. Click to restart when you lose."
         }
         function dismiss(){
           document.getElementById("overlaystart").style.display = "none";
