@@ -10,9 +10,11 @@
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.16.4",
     "amd-loader": "0.0.8",
-    "requirejs" : "2.3.6"
+    "dat.gui": "^0.7.6",
+    "express": "^4.16.4",
+    "requirejs": "2.3.6",
+    "window": "^4.2.6"
   },
   "engines": {
     "node": "8.x"

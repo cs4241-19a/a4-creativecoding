@@ -2,6 +2,7 @@
 const express = require('express');
 const app = express();
 app.use(express.static(__dirname + '/public'));
+//let dat = require('dat.gui')
 //app.use('/js', express.static('js'));
 
 

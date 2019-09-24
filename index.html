@@ -125,6 +125,25 @@
            ground.rotation.set(0,0,0)
            ground.setAngularVelocity(new THREE.Vector3(0, 0, 0));
         }
+        
+        function changeDim(event){
+          switch event.keyCode {
+            case 65:
+             ground.length = ground.length
+            case 87:
+            case 68:
+            case 83:
+          }
+        }
+        
+        function retractDim(event){
+          switch event.keyCode {
+            case 65:
+            case 87:
+            case 68:
+            case 83:
+          }
+        }
        
         //document.addEventListener("keydown", onDocumentKeyDown, false);
         document.getElementById('textend').onclick = restart
@@ -159,28 +178,8 @@
         window.onload = function(){
           document.getElementById('textstart').onclick = dismiss
           start();
-          const datGui  = new dat.GUI({ autoPlace: true });
-          datGui.domElement.id = 'gui' 
-          folder = datGui.addFolder(`Cube`)
-
-          folder.addColor(new ColorGUIHelper(material.cube,'color'),'value') //
-            .name('color')
-            
-          folder.add(cubeMesh.scale,'x',0.1,1.5) //
-            .name('scale x')
-          
-          class ColorGUIHelper {
-            constructor(object, prop) {
-              this.object = object;
-              this.prop = prop;
-            }
-            get value() {
-              return `#${this.object[this.prop].getHexString()}`;
-            }
-            set value(hexString) {
-              this.object[this.prop].set(hexString);
-            }
-          }
+          //const datGui  = new dat.GUI({ autoPlace: true });
+          //datGui.domElement.id = 'gui' 
         }
       
     </script>
