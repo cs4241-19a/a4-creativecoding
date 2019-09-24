@@ -17,7 +17,6 @@
   </head>
   <body>
      <script>
-      let start = 0
       'use strict';
       let count = 0
       let score = 0
@@ -82,7 +81,7 @@
         requestAnimationFrame( render );
         box.position.z = 10;
         box.position.x = 0;
-        box.position.y = 50;
+        box.position.y = 90;
         box.rotation.x = 10;
         box.__dirtyPosition = true;
         scene.add(box)
@@ -129,23 +128,25 @@
        
         //document.addEventListener("keydown", onDocumentKeyDown, false);
         document.getElementById('textend').onclick = restart
-        document.getElementById('textstart').onclick = dismiss
         document.getElementById('viewport').ondrag = getCurrPos
         document.getElementById('viewport').ondragstart = drag
         document.getElementById('viewport').ondragend = reset
+               
+
         
       }
-       
+              
         function start() {
           document.getElementById("overlaystart").style.display = "block";
-          document.getElementById("textstart").innerHTML = "Click and drag the wooden plank. Click to dismiss."
+          document.getElementById("textstart").innerHTML = "Click and drag to move the wooden plank. Use the GUI on the side to change box properties because the project requires it. Balance the cube. Click to start."
         }
         function dismiss(){
           document.getElementById("overlaystart").style.display = "none";
-          scene.simulate();
-          renderer.render( scene, camera); // render the scen
-          requestAnimationFrame( render );
+          initScene();
+          render();
         }
+       
+       
        
       
         render = function(){
@@ -155,9 +156,10 @@
         };
 
         window.onload = function(){
-          start
-          initScene();
-          render();
+          document.getElementById('textstart').onclick = dismiss
+          start();
+          
+          //render();
          
           /*
           var gui = new dat.GUI()
