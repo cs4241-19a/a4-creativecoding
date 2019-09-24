@@ -8,7 +8,7 @@ var FizzyText = function() {
     // Define render logic ...
 };
 
-window.onload = function() {
+const setup = function() {
     var text = new FizzyText();
     var gui = new dat.GUI();
     gui.add(text, 'message');
@@ -16,3 +16,5 @@ window.onload = function() {
     gui.add(text, 'displayOutline');
     gui.add(text, 'explode');
 };
+
+export {setup}
