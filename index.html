@@ -95,8 +95,8 @@
            xPos = event.clientX
            yPos = event.clientY
            ground.__dirtyRotation = true;
-           ground.rotation.set((xPos-540)/200, 0, (yPos-384)/100)
-           document.getElementById("title").innerHTML(xPos + "  " + yPos)
+           ground.rotation.set((xPos-(screen.width/2))/200, 0, (yPos-(screen.height/2))/100)
+           //document.getElementById("title").innerHTML = xPos + "  " + yPos
         }
         
         function on() {
@@ -172,7 +172,7 @@
               
         function start() {
           document.getElementById("overlaystart").style.display = "block";
-          document.getElementById("textstart").innerHTML = "Click and drag to move the wooden plank. Press 'w' and 's' to shift the plank's dimentions. Press 'a' or 'd' to change the cube's color. This won't help you but the assignment requires that I have that. Balance the cube. Click to start. Click to restart when you lose."
+          document.getElementById("textstart").innerHTML = "Click and drag to move the wooden plank. Press 'w' and 's' to shift the plank's dimentions. Press 'a' to alter the cube's color. Press 'd' to disable bounce. This won't help you but the assignment requires that I have that. Balance the cube. Click to start. Click to restart when you lose."
         }
         function dismiss(){
           document.getElementById("overlaystart").style.display = "none";
