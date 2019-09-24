@@ -7,32 +7,19 @@ const audioCtx = new AudioContext();
 
 const oscs = [];  // oscillators
 
-function setup() {
-    // oscillatorNode.connect(gainNode);
-    // audioCtx.resume();
-    // const lPiano = document.getElementById('piano1');
-    // const rPiano = document.getElementById('piano2');
-    // initKeys(lPiano);
-    // initKeys(rPiano);
-}
-
-function notePressed(event) {
-    const octave = event.target.parentElement.parentElement.dataset.octave;
+function startNote(event) {
+    const octave = event.target.parentElement.dataset.octave;
     const note = event.target.dataset.note;
     console.log("Start: ", octave, note);
     if (audioCtx.state === "suspended") {
-        audioCtx.resume().then(function () {
-            if (!oscs[note + octave]) {
-                oscs[note + octave] = playTone(getFrequency(Number(octave), note));
-            }
-        })
+        audioCtx.resume();
     }
     else if (!oscs[note + octave]) {
-        oscs[note + octave] = playTone(getFrequency(Number(octave), note));
+        oscs[note + octave] = playTone(getFrequency(note, Number(octave)));
     }
 }
-function noteReleased(event) {
-    const octave = event.target.parentElement.parentElement.dataset.octave;
+function endNote(event) {
+    const octave = event.target.parentElement.dataset.octave;
     const note = event.target.dataset.note;
     console.log("Stop: ", octave, note);
     if (note && oscs[note + octave]) {
@@ -83,4 +70,4 @@ function getHS(note) {
 }
 
 
-export default {setup, audioCtx, notePressed, noteReleased}
+export {startNote, endNote}
