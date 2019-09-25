@@ -15,7 +15,8 @@
     "express": "^4.16.4",
     "requirejs": "2.3.6",
     "window": "^4.2.6",
-    "three": "0.108.0"
+    "three": "0.108.0",
+    "eslint": "6.4.0"
   },
   "engines": {
     "node": "8.x"
