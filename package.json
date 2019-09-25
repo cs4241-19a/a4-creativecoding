@@ -2,8 +2,12 @@
   "name": "Assignment4",
   "version": "1.0.0",
   "dependencies": {
-    "express": "^4.17.1",
     "body-parser": "latest",
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
     "mime": "latest"
+  },
+  "devDependencies": {
+    "helmet": "^3.21.1"
   }
 }

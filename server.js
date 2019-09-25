@@ -7,11 +7,15 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mime = require( 'mime' );
 const path  = require('path');
+const helmet = require('helmet');
+const compression = require('compression');
 
 const app = express();
 
 
 app.use(bodyParser.json());
+app.use(helmet());
+app.use(compression());
 
 app.use(express.static(__dirname + '/'));
 

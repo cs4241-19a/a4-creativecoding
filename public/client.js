@@ -48,7 +48,8 @@ const submit = function( e ) {
             .then( function( response ) {
                 response.json().then((responseData) => {
                     document.getElementById('resultLabel').innerHTML = "Result: " + responseData.result;
-                    drawDice(responseData.rolls, responseData.diceNum)
+                    //drawDice(responseData.rolls, responseData.diceNum)
+                    roll3dDice.init();
                 });
 
                 console.log( response )
@@ -79,6 +80,64 @@ const drawDice = function(rollList, diceNum){
         }
     }
     document.getElementById('dice').innerHTML = html
+};
+
+const roll3dDice = {
+        init() {
+            this.scene = new THREE.Scene();
+
+            this.camera = new THREE.PerspectiveCamera();
+            this.camera.position.z = 50;
+
+            this.renderer = new THREE.WebGLRenderer();
+            this.renderer.setSize( window.innerWidth, window.innerHeight );
+
+            document.body.appendChild( this.renderer.domElement );
+
+            this.createLights();
+            //this.knot = this.createKnot();
+            this.d6 = this.createD6();
+
+            // ...the rare and elusive hard binding appears! but why?
+            this.render = this.render.bind( this );
+            this.render()
+            //document.body.removeChild( this.renderer.domElement);
+        },
+
+        createLights() {
+            const pointLight = new THREE.PointLight( 0xffffff );
+            pointLight.position.z = 100;
+
+            this.scene.add( pointLight )
+        },
+
+        createKnot() {
+            const knotgeo = new THREE.TorusKnotGeometry( 10, .1, 128, 16, 5, 21 );
+            const mat     = new THREE.MeshPhongMaterial({ color:0xff0000, shininess:2000 });
+            const knot    = new THREE.Mesh( knotgeo, mat );
+
+            this.scene.add( knot );
+            return knot
+        },
+
+        createD6(){
+            const geometry = new THREE.BoxGeometry(2, 2, 2);
+            const material = new THREE.MeshBasicMaterial({color: 0x00ff00});
+            const d6 = new THREE.Mesh(geometry, material);
+
+            this.scene.add(d6);
+            return d6;
+        },
+
+        render() {
+            //this.knot.rotation.x += .025;
+            this.d6.rotateX(0.25);
+            this.d6.rotateY(0.25);
+            this.d6.rotateZ(0.25);
+            this.d6.translateX(0.025);
+            this.renderer.render( this.scene, this.camera );
+            window.requestAnimationFrame( this.render );
+        }
 };
 
 
