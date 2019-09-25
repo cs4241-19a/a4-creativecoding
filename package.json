@@ -25,7 +25,8 @@
     "pouchdb-upsert": "^2.2.0",
     "prettier": "^1.18.2",
     "serve-favicon": "^2.5.0",
-    "vinyl-source-stream": "^2.0.0"
+    "vinyl-source-stream": "^2.0.0",
+    "Tone": "latest"
   },
   "engines": {
     "node": "10.x"
@@ -37,6 +38,7 @@
   ],
   "devDependencies": {
     "browserify": "^16.5.0",
-    "eslint": "^6.4.0"
+    "eslint": "^6.4.0",
+    "tone": "^13.8.27"
   }
 }

@@ -1,37 +1,42 @@
-let fft = new p5.FFT();
-let bass = fft.getEnergy( "bass" );
-let treble = fft.getEnergy( "treble" );
-let mid = fft.getEnergy( "mid" );
-let custom = fft.getEnergy( 100, 200 );
-
-
-function setup() { // Define in how many pieces you want to divide the circle
-    var pieces = 32;
-
-    // Circle's radius
-    var radius = 200;
-
-    // Move the origin to the center of the canvas
-    translate( width/2, height/2 );
-
-    // The centered circle
-    stroke( 0, 0, 255 );
-    ellipse( 0, 0, radius );
-
-    // For each piece draw a line
-    for( i = 0; i < pieces; i++ ) {
-
-        // Rotate the point of origin
-        rotate( TWO_PI / pieces );
-
-        // Draw the red lines
-        stroke( 255, 0, 0 );
-        line( 10, radius/2, 0, radius );
-
-        //Optionally also draw to the opposite direction
-        stroke( 0 );
-        line( -10, radius/2, 0, radius );
-    }
+let canvas = document.getElementById('board');
+let ctx;
+if (canvas.getContext) {
+    ctx = canvas.getContext('2d');
 }
 
-export {setup}
+const redGradient = ['#cc0000', '#ff6600', '#ff6699', '#ff66ff'];
+const rainbow = ['#FF0000', '#0033cc', '#ffff00', '#00ff00'];
+const blueGradient = ['#003399', '#6600cc', '#0099ff', '#9999ff'];
+const greyScale = ['#000000', '#595959', '#999999', '#d9d9d9'];
+
+function createCircles(ctx, x, y, fill) {
+    ctx.beginPath();
+    let radius = 3; // Arc radius
+    let startAngle = 0; // Starting point on circle
+    let endAngle = 2*Math.PI; // End point on circle
+    ctx.arc(x, y, radius, startAngle, endAngle, false);
+    ctx.fillStyle = fill;
+    ctx.fill();
+    ctx.stroke();
+}
+
+function pickColor(x, scale) {
+    let color;
+    switch(true) {
+        case (x < 400):
+            color = scale[0];
+            break;
+        case (x >= 400 && x < 800):
+            color = scale[1];
+            break;
+        case (x >= 800 && x < 1200):
+            color = scale[2];
+            break;
+        case (x >= 1200 && x <= 1600):
+            color = scale[3];
+            break;
+    }
+    return color;
+}
+
+export {createCircles, canvas, ctx, redGradient, rainbow, blueGradient, greyScale, pickColor}

@@ -1,20 +1,20 @@
 import * as dat from 'dat.gui';
+import {color} from "dat.gui";
 
-var FizzyText = function() {
-    this.message = 'dat.gui';
-    this.speed = 0.8;
-    this.displayOutline = false;
-    this.explode = function() {};
-    // Define render logic ...
+let gui;
+let colorController;
+let scaleController;
+
+let FizzyText = function() {
+    this.scale = 'Major';
+    this.colors = 'Red Gradient' ;
 };
 
 const setup = function() {
-    var text = new FizzyText();
-    var gui = new dat.GUI();
-    gui.add(text, 'message');
-    gui.add(text, 'speed', -5, 5);
-    gui.add(text, 'displayOutline');
-    gui.add(text, 'explode');
+    let text = new FizzyText();
+    gui = new dat.GUI();
+    scaleController = gui.add(text, 'scale', [ 'Major', 'Minor', 'Pentatonic', 'Diatonic' ] );
+    colorController = gui.add(text, 'colors', [ 'Red Gradient', 'Blue Gradient', 'Rainbow', 'Greyscale' ] );
 };
 
-export {setup}
+export {setup, gui, scaleController, colorController}

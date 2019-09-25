@@ -1,103 +1,116 @@
 import * as gui from './gui'
+import * as board from './sketch';
+import * as audio from './audio';
 
-var canvas, ctx, center_x, center_y, radius, bars,
-    x_end, y_end, bar_height, bar_width,
-    frequency_array;
-bars = 200;
-bar_width = 2;
+let help = document.getElementById('help');
+let canvas = document.getElementById('board');
+let color = board.redGradient;
+let scale = audio.major;
+let note = -1;
 
-canvas = document.getElementById("renderer");
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-ctx = canvas.getContext("2d");
+const getHelp = function(e) {
+    e.preventDefault();
+    window.alert('To start press anywhere on the screen. Where you click will change the music and color');
+};
 
-// find the center of the window
-center_x = canvas.width / 2;
-center_y = canvas.height / 2;
-radius = 150;
+const handleClick = function(e) {
+    e.preventDefault();
+    audio.setup();
+    const rect = canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    let fill = board.pickColor(x, color);
+    board.createCircles(board.ctx, x, y, fill);
+    note = findNote(x);
+    console.log(note);
+    audio.playNote(note, scale, '8n');
+};
 
-//draw a circle
-ctx.beginPath();
-ctx.arc(center_x,center_y,radius,0,2*Math.PI);
-ctx.stroke();
-
-for(var i = 0; i < bars; i++){
-
-    //divide a circle into equal parts
-    rads = Math.PI * 2 / bars;
-
-    bar_height = 100;
-    bar_width = 2;
-
-    x = center_x + Math.cos(rads * i) * (radius);
-    y = center_y + Math.sin(rads * i) * (radius);
-    x_end = center_x + Math.cos(rads * i)*(radius + bar_height);
-    y_end = center_y + Math.sin(rads * i)*(radius + bar_height);
-
-    //draw a bar
-    drawBar(x, y, x_end, y_end, bar_width);
-
-}
-
-function initPage(){
-    audio = new Audio();
-    context = new (window.AudioContext || window.webkitAudioContext)();
-    analyser = context.createAnalyser();
-    audio.src = ""; // the source path
-    source = context.createMediaElementSource(audio);
-    source.connect(analyser);
-    analyser.connect(context.destination);
-    frequency_array = new Uint8Array(analyser.frequencyBinCount);
-    audio.play();
-    animationLooper();
-}
-function animationLooper(){
-// set to the size of device
-    canvas = document.getElementById("renderer");
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    ctx = canvas.getContext("2d");
-// find the center of the window
-    center_x = canvas.width / 2;
-    center_y = canvas.height / 2;
-    radius = 150;
-// style the background
-    var gradient = ctx.createLinearGradient(0,0,0,canvas.height);
-    gradient.addColorStop(0,"rgba(35, 7, 77, 1)");
-    gradient.addColorStop(1,"rgba(204, 83, 51, 1)");
-    ctx.fillStyle = gradient;
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-//draw a circle
-    ctx.beginPath();
-    ctx.arc(center_x,center_y,radius,0,2*Math.PI);
-    ctx.stroke();
-    analyser.getByteFrequencyData(frequency_array);
-    for(var i = 0; i < bars; i++){
-//divide a circle into equal parts
-        rads = Math.PI * 2 / bars;
-        bar_height = frequency_array[i]*0.7;
-// set coordinates
-        x = center_x + Math.cos(rads * i) * (radius);
-        y = center_y + Math.sin(rads * i) * (radius);
-        x_end = center_x + Math.cos(rads * i)*(radius + bar_height);
-        y_end = center_y + Math.sin(rads * i)*(radius + bar_height);
-//draw a bar
-        drawBar(x, y, x_end, y_end, bar_width,frequency_array[i]);
+const changeColor = function(value) {
+    switch(value) {
+        case 'Red Gradient':
+            color = board.redGradient;
+            break;
+        case 'Blue Gradient':
+            color = board.blueGradient;
+            break;
+        case 'Rainbow':
+            color = board.rainbow;
+            break;
+        case 'Greyscale':
+            color = board.greyScale;
+            break;
     }
-    window.requestAnimationFrame(animationLooper);
-}
-// for drawing a bar
-function drawBar(x1, y1, x2, y2, width,frequency){
-    var lineColor = "rgb(" + frequency + ", " + frequency + ", " + 205 + ")";
-    ctx.strokeStyle = lineColor;
-    ctx.lineWidth = width;
-    ctx.beginPath();
-    ctx.moveTo(x1,y1);
-    ctx.lineTo(x2,y2);
-    ctx.stroke();
-}
+};
+
+const changeScale = function(value) {
+    switch(value) {
+        case 'Major':
+            scale = audio.major;
+            break;
+        case 'Minor':
+            scale = audio.minor;
+            break;
+        case 'Pentatonic':
+            scale = audio.pentatonic;
+            break;
+        case 'Diatonic':
+            scale = audio.diatonic;
+            break;
+    }
+};
+
+const findNote = function(x) {
+    let note;
+    if(scale != audio.pentatonic) {
+        switch(true) {
+            case (x < 265):
+                note = 0;
+                break;
+            case (x >= 265 && x < 530):
+                note = 1;
+                break;
+            case (x >= 530 && x < 795):
+                note = 2;
+                break;
+            case (x >= 795 && x < 1060):
+                note = 3;
+                break;
+            case (x >= 1060 && x < 1325):
+                note = 4;
+                break;
+            case (x >= 1325 && x <= 1600):
+                note = 5;
+                break;
+        }
+    } else {
+        switch(true) {
+            case (x < 400):
+                note = 0;
+                break;
+            case (x >= 400 && x < 800):
+                note = 1;
+                break;
+            case (x >= 800 && x < 1200):
+                note = 2;
+                break;
+            case (x >= 1200 && x <= 1600):
+                note = 3;
+                break;
+        }
+    }
+    return note;
+};
 
 window.onload = function() {
     gui.setup();
-    initPage();
+    window.alert('To start press anywhere on the screen. Where you click will change the music and color');
+    help.onclick = getHelp;
+    canvas.onclick = handleClick;
+    gui.colorController.onChange(function(value) {
+        changeColor(value);
+    });
+    gui.scaleController.onChange(function(value) {
+        changeScale(value);
+    });
 };
