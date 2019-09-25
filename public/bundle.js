@@ -2555,13 +2555,13 @@ Object.defineProperty(exports, "__esModule", {
 exports.playNote = playNote;
 exports.setup = setup;
 exports.diatonic = exports.pentatonic = exports.minor = exports.major = void 0;
-var major = ['c4', 'd4', 'e4', 'f4', 'g4', 'a4', 'b4'];
+var major = ['c', 'd', 'e', 'f', 'g', 'a', 'b'];
 exports.major = major;
-var minor = ['a4', 'b4', 'c4', 'd4', 'e4', 'f4', 'g4'];
+var minor = ['a', 'b', 'c', 'd', 'e', 'f', 'g'];
 exports.minor = minor;
-var pentatonic = ['c4', 'd4', 'e4', 'g4', 'a4'];
+var pentatonic = ['c', 'd', 'e', 'g', 'a'];
 exports.pentatonic = pentatonic;
-var diatonic = ['f4', 'c4', 'g4', 'd4', 'a4', 'e4', 'b4'];
+var diatonic = ['f', 'c', 'g', 'd', 'a', 'e', 'b'];
 exports.diatonic = diatonic;
 
 var Tone = require("Tone"); //create a synth and connect it to the master output (your speakers)
@@ -2569,9 +2569,9 @@ var Tone = require("Tone"); //create a synth and connect it to the master output
 
 var synth = new Tone.Synth().toMaster();
 
-function playNote(note, scale, length) {
-  console.log(scale[note]);
-  synth.triggerAttackRelease(scale[note], length);
+function playNote(note, scale, length, octave) {
+  var trueNote = scale[note] + octave;
+  synth.triggerAttackRelease(trueNote, length);
 }
 
 function setup() {
@@ -2631,6 +2631,7 @@ var canvas = document.getElementById('board');
 var color = board.redGradient;
 var scale = audio.major;
 var note = -1;
+var octave = -1;
 
 var getHelp = function getHelp(e) {
   e.preventDefault();
@@ -2646,8 +2647,8 @@ var handleClick = function handleClick(e) {
   var fill = board.pickColor(x, color);
   board.createCircles(board.ctx, x, y, fill);
   note = findNote(x);
-  console.log(note);
-  audio.playNote(note, scale, '8n');
+  octave = findOctave(y);
+  audio.playNote(note, scale, '8n', octave);
 };
 
 var changeColor = function changeColor(value) {
@@ -2695,51 +2696,101 @@ var findNote = function findNote(x) {
 
   if (scale != audio.pentatonic) {
     switch (true) {
-      case x < 265:
+      case x < 200:
         note = 0;
         break;
 
-      case x >= 265 && x < 530:
+      case x >= 200 && x < 400:
         note = 1;
         break;
 
-      case x >= 530 && x < 795:
+      case x >= 400 && x < 600:
         note = 2;
         break;
 
-      case x >= 795 && x < 1060:
+      case x >= 600 && x < 800:
         note = 3;
         break;
 
-      case x >= 1060 && x < 1325:
+      case x >= 800 && x < 1000:
         note = 4;
         break;
 
-      case x >= 1325 && x <= 1600:
+      case x >= 1000 && x < 1200:
         note = 5;
+        break;
+
+      case x >= 1200 && x <= 1400:
+        note = 6;
         break;
     }
   } else {
     switch (true) {
-      case x < 400:
+      case x < 240:
         note = 0;
         break;
 
-      case x >= 400 && x < 800:
+      case x >= 240 && x < 480:
         note = 1;
         break;
 
-      case x >= 800 && x < 1200:
+      case x >= 480 && x < 720:
         note = 2;
         break;
 
-      case x >= 1200 && x <= 1600:
+      case x >= 720 && x < 960:
         note = 3;
+        break;
+
+      case x >= 960 && x <= 1200:
+        note = 4;
         break;
     }
   }
 
   return note;
+};
+
+var findOctave = function findOctave(y) {
+  switch (true) {
+    case y < 44:
+      octave = 9;
+      break;
+
+    case y < 88:
+      octave = 8;
+      break;
+
+    case y < 132:
+      octave = 7;
+      break;
+
+    case y < 176:
+      octave = 6;
+      break;
+
+    case y < 220:
+      octave = 5;
+      break;
+
+    case y < 264:
+      octave = 4;
+      break;
+
+    case y < 308:
+      octave = 3;
+      break;
+
+    case y < 352:
+      octave = 2;
+      break;
+
+    case y <= 400:
+      octave = 1;
+      break;
+  }
+
+  return octave;
 };
 
 window.onload = function () {
