@@ -72,7 +72,7 @@ Physijs.scripts.ammo = "../js/ammo.js";
         // MAKE CUBE
         // =========================================================================================
         let ball_material = Physijs.createMaterial(new THREE.MeshBasicMaterial /
-            ({ color: 0xFFFFFF }) ,0.9, 0.9);
+            ({ color: "0xFFFFFF" }) ,0.9, 0.9);
         let box = new Physijs.BoxMesh (new THREE.BoxGeometry(10,10,10), ball_material, 1);
         box.position.z = 10;
         box.position.x = 0;
