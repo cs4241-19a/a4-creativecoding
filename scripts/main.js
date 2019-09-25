@@ -25,7 +25,7 @@ Physijs.scripts.ammo = '../js/ammo.js';
         camera.position.set( 300, 100, 60 );
         camera.lookAt(scene.position);
         scene.add(camera);
-        requestAnimationFrame(render);
+       
           
         // ===================================================================================================
         // MOUSE TRACKER
@@ -79,6 +79,7 @@ Physijs.scripts.ammo = '../js/ammo.js';
               if (flag == 0){
                 let newMaterial = Physijs.createMaterial(new THREE.MeshBasicMaterial( { color: "magenta" } ) ,.9, .1);
                 box.material = newMaterial
+               // ground.material = newMaterial
                 box.mass = 10
                 flag = 1
               }
