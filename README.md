@@ -1,7 +1,7 @@
 
 ## BALANCE THE CUBE
 
-your hosting link e.g. http://a4-jrbartone.glitch.me
+http://a4-jrbartone.glitch.me
 
 This game is all about balancing the cube. This game uses Three.js and Physi.js to create an interactive experience
 unlike any other. The user control parameters are as follows:
@@ -13,16 +13,19 @@ unlike any other. The user control parameters are as follows:
 - Press S and W to deform/ stretch your plank in the x/z direction
 - Press X to disable music
 
+Keypresses don't register when you're holding the plank.
+My high score is 31. The linter that I used was JSlint with webstorm. 
+Mostly just enforcing the use of "" over '' and a max line length of 100. 
+These linting changes are on Github but may not be showing up in the Glitch editor. 
 
-
+Cube up.
 
 ## Technical Achievements
-- **Tech Achievement 1**: Integrated the Physi.js engine to 
+- **Tech Achievement 1**: Integrated the Physi.js engine to power all movement
 - **Tech Achievement 2**: Added fun sounds and music to get the people 'goin
-- **Tech Achievement 3**: I optimized the efficiency of my reaction-diffusion algorithm by...
-- **Tech Achievement 4**: I visualized the dataset X using three different visualization technqiues provided by D3, andprovided
+- **Tech Achievement 3**: Added a wood texture for the plank
 
 ### Design/Evaluation Achievements
-- **Design Achievement 1**: I ensured that my application would run on both desktops / mobile devices by changing X
-- **Design Achievement 2**: I followed best practices for accessibility, including providing alt attributes for images and using semantic HTML. There are no `<div>` or `<span>` elements in my document.
-- **Design Achievement 3**: We tested the application with n=X users, finding that...
+- **Design Achievement 1**: Added score and game over transparent overlays
+- **Design Achievement 2**: Flashing animated "BALANCE THE CUBE" title to distract you
+- **Design Achievement 3**: We tested the application with n=10 users, finding that the all-time high score is 136
