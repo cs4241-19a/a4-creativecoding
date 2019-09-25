@@ -16,24 +16,34 @@ Physijs.scripts.worker = '../js/physijs_worker.js';
 Physijs.scripts.ammo = '../js/ammo.js';
       
     initScene = function() {
+      
+       
+        // ===================================================================================================
+        // CAMERA SETUP
+        // ===================================================================================================
         
-        renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setSize( window.innerWidth, window.innerHeight );
-        document.getElementById( 'viewport' ).appendChild( renderer.domElement );
+        renderer = new THREE.WebGLRenderer({antialias: true});
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.getElementById('viewport').appendChild(renderer.domElement);
         scene = new Physijs.Scene;
         camera = new THREE.PerspectiveCamera(35,window.innerWidth / window.innerHeight,1,1000);
         camera.position.set( 300, 100, 60 );
-        camera.lookAt( scene.position );
-        scene.add( camera );
+        camera.lookAt(scene.position);
+        scene.add(camera);
+      
+       
+        // ===================================================================================================
+        // MAKE PLANK
+        // ===================================================================================================
         
         var loader = new THREE.TextureLoader();
-        loader.load('https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2F8bb0cedfaea9e07b8c3aa6f8c41684bc.jpg?v=1569202443143', function ( texture ) {
+        loader.load('https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2F8bb0cedfaea9e07b8c3aa6f8c41684bc.jpg?v=1569202443143', function(texture) {
               ground_material = Physijs.createMaterial(new THREE.MeshBasicMaterial({map: texture}) ,.8, .9);
               ground = new Physijs.BoxMesh(new THREE.BoxGeometry(150, 30, 150),ground_material,1);
               ground.receiveShadow = true;
               ground.__dirtyRotation = true;
-              var constraint = new Physijs.PointConstraint( ground, new THREE.Vector3( 0, 0, 0 ));
-               ground.addEventListener( 'collision', function( objCollidedWith, linearVelOfCollision, angularVelOfCollision ) {
+              var constraint = new Physijs.PointConstraint( ground, new THREE.Vector3(0, 0, 0));
+               ground.addEventListener('collision', function( objCollidedWith, linearVelOfCollision, angularVelOfCollision) {
                score++
                play(bounceSound)
                document.getElementById('text').innerHTML = score
@@ -42,11 +52,15 @@ Physijs.scripts.ammo = '../js/ammo.js';
                     off();
                 },500);
               });
-              scene.add( ground );
-              scene.addConstraint( constraint );
+              scene.add(ground);
+              scene.addConstraint(constraint);
           });
+      
+        // ===================================================================================================
+        // MAKE FLOOR
+        // ===================================================================================================
        
-        let floor_mat = Physijs.createMaterial(new THREE.MeshBasicMaterial( { color: "black" } ) ,.9, .9);
+        let floor_mat = Physijs.createMaterial(new THREE.MeshBasicMaterial({color: "black"}) ,.9, .9);
         let floor = new Physijs.BoxMesh (new THREE.BoxGeometry(10000,1,10000), floor_mat, 0);
         floor.addEventListener( 'collision', function( objCollidedWith, linearVelOfCollision, angularVelOfCollision ) {
            document.getElementById('textend').innerHTML = "Should've balanced the cube. " + score + " hits."
@@ -54,27 +68,40 @@ Physijs.scripts.ammo = '../js/ammo.js';
            end()
         });
         floor.position.y = -200;
-        
-        let celing_mat = Physijs.createMaterial(new THREE.MeshBasicMaterial( { color: "black" } ) ,.9, .9);
+        scene.add(floor)
+            
+        // ===================================================================================================
+        // MAKE CELING
+        // ===================================================================================================
+      
+        let celing_mat = Physijs.createMaterial(new THREE.MeshBasicMaterial({ color: "black" }) ,.9, .9);
         let celing = new Physijs.BoxMesh (new THREE.BoxGeometry(10000,1,10000), celing_mat, 0);
-        celing.addEventListener( 'collision', function( objCollidedWith, linearVelOfCollision, angularVelOfCollision ) {
+        celing.addEventListener('collision', function( objCollidedWith, linearVelOfCollision, angularVelOfCollision) {
            document.getElementById('textend').innerHTML = "Is the game called Drop the Cube? " + score + " hits."
            stop(music);
            end()
         });
         celing.position.y = 200;
+        scene.add(celing);
+      
+        // ===================================================================================================
+        // MAKE CUBE
+        // ===================================================================================================
         
-        let ball_material = Physijs.createMaterial(new THREE.MeshBasicMaterial( { color: 0xFFFFFF } ) ,.9, .9);
+        let ball_material = Physijs.createMaterial(new THREE.MeshBasicMaterial({ color: 0xFFFFFF }) ,.9, .9);
         box = new Physijs.BoxMesh (new THREE.BoxGeometry(10,10,10), ball_material, 1);
         box.position.z = 10;
         box.position.x = 0;
         box.position.y = 90;
         box.rotation.x = 10;
         box.__dirtyPosition = true;
-        scene.add(box)
+        scene.add(box);
         
-        scene.add(celing)
-        requestAnimationFrame( render );
+        requestAnimationFrame(render);
+          
+        // ===================================================================================================
+        // MOUSE TRACKER
+        // ===================================================================================================
 
         function getCurrPos(event){
            let img = new Image();
@@ -85,37 +112,12 @@ Physijs.scripts.ammo = '../js/ammo.js';
            ground.rotation.set((xPos-(screen.width/2))/200, 0, (yPos-(screen.height/2))/100)
            //document.getElementById("title").innerHTML = xPos + "  " + yPos
         }
+      
         
-        function on() {
-          document.getElementById("overlay").style.display = "block";
-        }
+        // ===================================================================================================
+        // KEYBOARD CONTROLS
+        // ===================================================================================================
 
-        function off() {
-          document.getElementById("overlay").style.display = "none";
-        }
-        
-         function end() {
-          document.getElementById("overlayend").style.display = "block";
-        }
-
-        function restart(){
-          document.getElementById("overlayend").style.display = "none";
-          location.reload()
-        }
-        
-        function drag(event){
-          let img = new Image();
-          event.dataTransfer.setDragImage(img, 0, 0);
-        }
-        
-        function reset(event){
-           ground.__dirtyRotation = true;
-           ground.rotation.set(0,0,0)
-           ground.setAngularVelocity(new THREE.Vector3(0, 0, 0));
-        }
-        
-        
-        
         let x = 1
         let z = 1
         let colors = [0xFFFFFF, 0xFF0000, 0x00FF00, 0x0000FF, 0xF0F000, 0x00F0F0, 0x000F0F]
