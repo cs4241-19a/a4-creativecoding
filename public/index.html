@@ -3,9 +3,9 @@
 <head>
     <title>Assignment 4</title>
     <meta charset="utf-8">
-    <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
     <script src="https://d3js.org/d3.v4.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.15/lodash.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.js"></script>
@@ -18,28 +18,37 @@
 <body>
 <div class="container">
     <h1 class="mt-3">Interactive Family Tree</h1>
+    <ul class="nav nav-pills justify-content-center mt-3">
+        <li class="nav-item">
+            <a class="nav-link active" id="instructionsPage" href="#">Instructions</a>
+        </li>
+        <li class="nav-item">
+            <a href="#" id="examplePage" class="nav-link">Generate Example Family Tree</a>
+        </li>
+        <li class="nav-item">
+            <a href="#" id="customPage" class="nav-link">Custom Family Tree</a>
+        </li>
+    </ul>
     <div id="instructions" class="card mt-5">
         <div class="card-body">
             <h5 class="card-title">Instructions</h5>
             <h6 class="card-subtitle mb-2 text-muted">everything there is to know about using this application</h6>
-            <p class="card-text">Instructions go here...</p>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <br>
-            <a href="#" onclick="createTrumpTree()" class="card-link">Generate Example Family Tree</a>
-            <a href="#" onclick="createCustomTree()" class="card-link">Custom Family Tree</a>
+            <p class="card-text">
+                The application is separated in the three areas Instructions, an example family tree
+                and the custom family tree option. <br>
+                When you are working with a family tree you can zoom and move it around and use the controls gui to
+                change colors or the width and height of the tree nodes.<br>
+                In the custom tree form you first have to add the name of one starting person and can then add a spouse.
+                Only after a spouse was added it's possible to also add children. It's also possible to add a second
+                spouse and different children.<br>
+                Currently only one generation is supported in the custom family tree option.
+            </p>
         </div>
     </div>
     <div class="container mt-5 text-center" id="customForm">
     </div>
     <div id="graph" class="mt-5 row justify-content-center"></div>
 </div>
-<script src="main.js"></script>
+<script src="main.js" type="module"></script>
 </body>
 </html>

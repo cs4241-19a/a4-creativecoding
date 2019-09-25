@@ -12,10 +12,21 @@ select {
     background-color: #151719;
     color: white;
 }
-
+.nav-item > * {
+    color: lightgray;
+    text-decoration: none;
+}
+.active{
+    background-color: aqua !important;
+    color: black !important;
+}
+a{
+    color: black;
+    text-decoration: underline;
+}
 .linage {
     fill: none;
-    stroke: black;
+    stroke: #000000;
 }
 .marriage {
     fill: none;
@@ -25,6 +36,8 @@ select {
     background-color: lightgray;
     border-style: groove;
     border-width: 1px;
+    height: 100%;
+    width: 100%;
 }
 .nodeText{
     font: 10px sans-serif;
