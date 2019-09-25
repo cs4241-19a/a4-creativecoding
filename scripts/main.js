@@ -1,32 +1,14 @@
 import Physijs from '../js/physi.js'
 import * as THREE from '../js/three.js'
+import sound from './audio.js'
 
        'use strict';
        
-       function sound(src) {
-        this.sound = document.createElement("audio");
-        this.sound.src = src;
-        this.sound.setAttribute("preload", "auto");
-        this.sound.setAttribute("controls", "none");
-        this.sound.style.display = "none";
-        document.body.appendChild(this.sound);
-        this.play = function(){
-          this.sound.play();
-        }
-        this.stop = function(){
-          this.sound.pause();
-        }
-        this.loop = function(){
-          this.sound.loop = true;
-          this.sound.play();
-        }
-      }
-       
-      var bounceSound = new sound("https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2F404769__owlstorm__retro-video-game-sfx-bounce.wav?v=1569358326681");
-      var music = new sound("https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2FUndertale%20OST%20042%20-%20Thundersnail.mp3?v=1569359250719​");
-      var mass = new sound("https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2F270341__littlerobotsoundfactory__pickup-04.wav?v=1569364678712");
-      var color = new sound("https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2F270332__littlerobotsoundfactory__hit-03.wav?v=1569364682744");
-      var stretch = new sound("https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2F401648__inspectorj__bodyboard-stretch-a.wav?v=1569364805642")
+      var bounceSound = sound("https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2F404769__owlstorm__retro-video-game-sfx-bounce.wav?v=1569358326681");
+      var music = sound("https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2FUndertale%20OST%20042%20-%20Thundersnail.mp3?v=1569359250719​");
+      var mass = sound("https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2F270341__littlerobotsoundfactory__pickup-04.wav?v=1569364678712");
+      var color = sound("https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2F270332__littlerobotsoundfactory__hit-03.wav?v=1569364682744");
+      var stretch = sound("https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2F401648__inspectorj__bodyboard-stretch-a.wav?v=1569364805642")
       let count = 0
       let score = 0
       Physijs.scripts.worker = '../js/physijs_worker.js';
