@@ -1,4 +1,4 @@
-import * as Physijs from '../js/physi.js'
+import Physijs from '../js/physi.js'
 import * as THREE from '../js/three.js'
 
        'use strict';

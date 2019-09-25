@@ -1403,4 +1403,6 @@ window.Physijs = (function() {
 	return Physijs;
 })();
 
-export Physijs
+var Physijs = window.Physijs
+export default Physijs;
+
