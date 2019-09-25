@@ -3,6 +3,8 @@
 // express imports
 const express = require('express');
 const app = express();
+// body parser imports
+const bodyParser = require('body-parser');
 // compression imports
 const compression = require('compression');
 // helmet imports
@@ -16,6 +18,7 @@ const fs = require('fs');
 
 app.use(helmet());
 app.use(compression());
+app.use(bodyParser.urlencoded({extended: true})); // support encoded bodies
 const accessLogStream = fs.createWriteStream(
     path.join(__dirname, 'access.log'), {flags: 'a'});
 

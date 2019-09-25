@@ -62,7 +62,7 @@ Include a very brief summary of your project here. Images are encouraged, along 
 
 ## Technical Achievements
 - **Tech Achievement 1**: I evaluated multiple build tools and determined the best one for my use case
-- **Tech Achievement 2**: My audiovisualizer uses both FFT and amplitude analysis to drive visualization.
+- **Tech Achievement 2**: Created a singleton game manager instead of using a global
 - **Tech Achievement 3**: I optimized the efficiency of my reaction-diffusion algorithm by...
 - **Tech Achievement 4**: I visualized the dataset X using three different visualization technqiues provided by D3, andprovided
 
