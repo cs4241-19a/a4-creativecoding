@@ -1,0 +1,28 @@
+{
+  "name": "",
+  "version": "",
+  "description": "",
+  "author": "",
+  "scripts": {
+    "start": "node server.improved.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "chota": "^0.7.0",
+    "dat.gui": "^0.7.6",
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "mime": "^2.4.4",
+    "path": "^0.12.7",
+    "serve-favicon": "^2.5.0",
+    "serve-static": "^1.14.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.4.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1"
+  }
+}

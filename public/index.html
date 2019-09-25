@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>CS4241 Assignment 4</title>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/x-icon" href="favicon.ico?v="+ Math.trunc(Math.random()*999)>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    
+  </head>
+  <a id = "downloadIm" href="" download hidden></a>
+  <input hidden type="file" id="imageLoader" name="imageLoader"/>
+  <body>
+    <div id="canvasDiv">
+      <canvas width="100%" height="100%" id="drawArea"></canvas>
+    </div>
+
+    <div id="dialog" title="Welcome!!">
+      <p>Hello! Welcome to Brian's Paint Program.</p>
+      <p>With this program you can draw pictures using an array of colors and brush sizes.</p>
+      <p>To start drawing, simply hold down the left mouse button and move your mouse around the screen. This will make you draw with the currently selected color. Additionally, you can also select the eraser brush to erase parts of your drawing.</p>
+      <p>On the top right of the page you will find the options menu, with this you are able to choose your brush, your brush color, and your brush size, additianlly, you can all clear the current drawn.</p>
+      <p>From this menu you can also save your current drawing or load a picture to draw on.</p>
+    </div>
+    
+  </body>
+  
+  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
+  <script type="text/javascript" src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script type="text/javascript" src="dat.gui.min.js"></script>
+
+  <script>
+    let ctx = document.getElementById('drawArea').getContext("2d");
+    let color = "#ff0000";
+    let size = 10;
+    let currentBrush = "Pencil"
+    resize()
+
+    let imageLoader = document.getElementById('imageLoader');
+    imageLoader.addEventListener('change', handleImage, false);
+
+  function resize() {
+  ctx.canvas.width = window.innerWidth;
+  ctx.canvas.height = window.innerHeight;
+  }
+  
+  let mouse = {x: 0, y: 0};
+ 
+  ctx.canvas.addEventListener('mousemove', function(e) {
+    mouse.x = e.pageX - this.offsetLeft;
+    mouse.y = e.pageY - this.offsetTop;
+  }, false);
+ 
+  ctx.canvas.addEventListener('mousedown', function(e) {
+      ctx.beginPath();
+      ctx.moveTo(mouse.x, mouse.y);
+      if(currentBrush == "Eraser")
+        ctx.strokeStyle = "#ffffff";
+      else
+        ctx.strokeStyle = color
+      ctx.lineWidth = size;
+      ctx.lineJoin = 'round';
+      ctx.lineCap = 'round';
+      ctx.canvas.addEventListener('mousemove', paint, false);
+  }, false)
+  
+
+  ctx.canvas.addEventListener('mouseup', function() {
+      ctx.canvas.removeEventListener('mousemove', paint, false);
+  }, false);
+  
+  var paint = function() {
+      ctx.lineTo(mouse.x, mouse.y);
+      ctx.stroke();
+  };
+
+
+  var FizzyText = function() {
+  this.Color = "#ff0000";
+  this.Brush_Size = 5;
+  this.Brushes = "Pencil"
+  this.Clear = function(){
+    document.getElementById('drawArea').getContext("2d").fillStyle = 'white'
+    document.getElementById('drawArea').getContext("2d").fillRect(0, 0, document.getElementById('drawArea').width, document.getElementById('drawArea').height)
+    //document.getElementById('drawArea').getContext("2d").clearRect(0, 0, document.getElementById('drawArea').width, document.getElementById('drawArea').height)
+  }
+  this.Save_Image = function(){
+    let canvasImage = document.getElementById('drawArea').toDataURL('image/jpeg', 1.0)
+    $("#downloadIm").attr("href", canvasImage);
+    document.getElementById("downloadIm").click()
+  }
+  this.Load_File = function(){
+    imageLoader.click()
+  }
+  this.Welcome = function(){
+    helpPopup()
+  }
+
+};
+
+window.onload = function() {
+  document.getElementById('drawArea').getContext("2d").fillStyle = 'white'
+  document.getElementById('drawArea').getContext("2d").fillRect(0, 0, document.getElementById('drawArea').width, document.getElementById('drawArea').height)
+  let text = new FizzyText();
+  let gui = new dat.GUI();
+  let brushes = gui.add(text, "Brushes", ["Pencil" ,"Eraser"])
+  let getColor = gui.addColor(text, 'Color');
+  let brushSize = gui.add(text, 'Brush_Size', 1, 100)
+  let clear = gui.add(text, 'Clear')
+  let download = gui.add(text, 'Save_Image')
+  let load = gui.add(text, "Load_File")
+  let welcome = gui.add(text, "Welcome")
+
+  getColor.onFinishChange(function(){
+    color = getColor.object.Color
+    console.log(color)
+})
+  brushSize.onFinishChange(function() {
+    size = brushSize.object.Brush_Size
+  })
+
+  brushes.onFinishChange(function(){
+    currentBrush = brushes.object.Brushes
+  })
+
+  helpPopup()
+};
+
+
+function handleImage(e){
+    var reader = new FileReader();
+    reader.onload = function(event){
+        var img = new Image();
+        img.onload = function(){
+            document.getElementById('drawArea').getContext("2d").drawImage(img,0,0);
+        }
+        img.src = event.target.result;
+    }
+    reader.readAsDataURL(e.target.files[0]);     
+}
+
+function helpPopup(){
+  $( "#dialog" ).dialog();
+  //alert("\t Hello! Welcome to Brian's Paint Program. \t\n\t With this program you can draw pictures using an array of colors and brush sizes. \t\n\t On the top right of the page you will find the options menu, thi")
+}
+
+  </script>
+  
+</html>
