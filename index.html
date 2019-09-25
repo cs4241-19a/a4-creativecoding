@@ -154,18 +154,19 @@ alert( '文件已上传...')
       
       
       function add(number){
-         for (let i = 0; i < this.number; i++) {
-            let r = Math.floor(Math.random()*256);
-	    		  let g = Math.floor(Math.random()*256);
-			      let b = Math.floor(Math.random()*256);
-          let barGeometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
-          let material = new THREE.MeshBasicMaterial({color: rgb});
- 
-        this.bars[i] = new THREE.Mesh(barGeometry, material);
-        this.bars[i].position.set(i - this.number/2, 0, 0);
-          scene.add(this.bars[i]);
-            appdata.push(this.bars[i]);
-       // this.scene.add(this.bars[i]);
+         for (let i = 0; i < number; i++) {
+           let r = 256-i*5-80;
+	    		  let g = 50;
+			      let b = 50;
+			      let rgb = '#'+r.toString(16)+g.toString(16)+b.toString(16);
+            let geometry = new THREE.CubeGeometry(0.5, 0.5, 0.5);
+            let material = new THREE.MeshBasicMaterial({color: rgb});
+            let cube = new THREE.Mesh(geometry, material); 
+            cube.position.set(i - number/2, 0, 0);
+            scene.add(cube);
+            appdata.push(cube);
+            
+           
     }
         }
       add(20);
@@ -179,24 +180,11 @@ alert( '文件已上传...')
         camera.position.z = 15;
         function render() {
             requestAnimationFrame(render);
-          // while(i<5){
-          //   var cube3 = new THREE.Mesh(geometry, material); 
-          //   cube3.position.set(5*Math.random(),5*Math.random(),0);
-          //   scene.add(cube3);
-          //   i++;
-          // }
-          for(let j=0; j<appdata.length;j++){
-    appdata[j].rotation.x += 0.2*(Math.random());
-    appdata[j].rotation.y += -0.2*(Math.random());
-  
-  }
+
           
   
             renderer.render(scene, camera);
         }
-      setTimeout(function(){
-    location.reload();
-},2000);
 
       render();
   
