@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8"/>
   <title>可视化音乐播放器</title>
+  <script src="https://threejsfundamentals.org/threejs/resources/threejs/r105/three.min.js"></script>
+  <script src="https://cdn.bootcss.com/jquery/1.8.1/jquery.js"></script>
 </head>
 <body>
   
@@ -16,7 +18,7 @@
 
 <canvas id="cas" width="500" height="500"></canvas>
 </body>
-<script src="https://cdn.bootcss.com/jquery/1.8.1/jquery.js"></script>
+
 <script type="text/javascript">
 var canvas = document.getElementById("cas");
 var canvasCtx = canvas.getContext("2d");
@@ -89,8 +91,6 @@ var dropbox, musicFile;
     //开始解码，解码成功后执行回调函数
     
     
-
-    
     
     audioContext.decodeAudioData(e.target.result, function(buffer) {
       clearInterval(timer)
@@ -136,11 +136,70 @@ var dropbox, musicFile;
         }
       };
       draw();
-      /////////////////////////
     });
+    
+    
   }
 alert( '文件已上传...')
-	}
+  }
+  
+  const appdata = []
+      
+      
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera(75, window.innerWidth/window.innerHeight, 0.1, 1000);
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+      
+      
+      function add(number){
+         for (let i = 0; i < this.number; i++) {
+            let r = Math.floor(Math.random()*256);
+	    		  let g = Math.floor(Math.random()*256);
+			      let b = Math.floor(Math.random()*256);
+          let barGeometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
+          let material = new THREE.MeshBasicMaterial({color: rgb});
+ 
+        this.bars[i] = new THREE.Mesh(barGeometry, material);
+        this.bars[i].position.set(i - this.number/2, 0, 0);
+          scene.add(this.bars[i]);
+            appdata.push(this.bars[i]);
+       // this.scene.add(this.bars[i]);
+    }
+        }
+      add(20);
+//       loop(4);
+      
+//         var geometry2 = new THREE.CubeGeometry(2,2,2);
+//         var material2 = new THREE.MeshBasicMaterial({color: 0x00ff00});
+//         var cube2 = new THREE.Mesh(geometry2, material2); 
+//         //scene.add(cube2);
+        var i =0;
+        camera.position.z = 15;
+        function render() {
+            requestAnimationFrame(render);
+          // while(i<5){
+          //   var cube3 = new THREE.Mesh(geometry, material); 
+          //   cube3.position.set(5*Math.random(),5*Math.random(),0);
+          //   scene.add(cube3);
+          //   i++;
+          // }
+          for(let j=0; j<appdata.length;j++){
+    appdata[j].rotation.x += 0.2*(Math.random());
+    appdata[j].rotation.y += -0.2*(Math.random());
+  
+  }
+          
+  
+            renderer.render(scene, camera);
+        }
+      setTimeout(function(){
+    location.reload();
+},2000);
+
+      render();
+  
   
 
 </script>
