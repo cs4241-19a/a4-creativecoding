@@ -1,0 +1,24 @@
+{
+  "name": "a4-samtalpey",
+  "version": "0.0.1",
+  "description": "HW4 for CS4241",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.4",
+    "compression": "^1.7.4",
+    "helmet": "^3.21.1"
+  },
+  "engines": {
+    "node": "8.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/hello-express"
+  },
+  "keywords": [
+    "node",
+    "express"
+  ]
+}
