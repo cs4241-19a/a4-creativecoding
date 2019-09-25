@@ -31,6 +31,9 @@ const submit = function( e ) {
     }
     const input4 = document.querySelector('#flatDice');
 
+    document.getElementById('resultLabel').innerHTML = "Result: Calculating" ;
+    document.getElementById('dice').innerHTML = "";
+
     let errors = checkErrors(input1, input2, input3, input4);
     if(errors.error === true){
         document.getElementById('errorLabel').style.display = 'block';
@@ -47,9 +50,12 @@ const submit = function( e ) {
         })
             .then( function( response ) {
                 response.json().then((responseData) => {
-                    document.getElementById('resultLabel').innerHTML = "Result: " + responseData.result;
-                    //drawDice(responseData.rolls, responseData.diceNum)
-                    roll3dDice.init();
+                    setTimeout(function() {
+                        document.getElementById('resultLabel').innerHTML = "Result: " + responseData.result;
+                        drawDice(responseData.rolls, responseData.diceNum);
+                    }, 3500);
+                    roll3dDice.init(input2.value, "d6");
+                    //window.location = '/views/index.html#canvas';
                 });
 
                 console.log( response )
@@ -83,7 +89,11 @@ const drawDice = function(rollList, diceNum){
 };
 
 const roll3dDice = {
-        init() {
+        init(number, type) {
+            this.number = number;
+            this.type = type;
+            this.counter = 0;
+
             this.scene = new THREE.Scene();
 
             this.camera = new THREE.PerspectiveCamera();
@@ -96,7 +106,8 @@ const roll3dDice = {
 
             this.createLights();
             //this.knot = this.createKnot();
-            this.d6 = this.createD6();
+            this.diceList = this.createD4();
+            //this.diceList = this.createD6();
 
             // ...the rare and elusive hard binding appears! but why?
             this.render = this.render.bind( this );
@@ -120,23 +131,81 @@ const roll3dDice = {
             return knot
         },
 
-        createD6(){
-            const geometry = new THREE.BoxGeometry(2, 2, 2);
-            const material = new THREE.MeshBasicMaterial({color: 0x00ff00});
-            const d6 = new THREE.Mesh(geometry, material);
+        createD4(){
+            let diceList = [];
+            for(let i = 0; i < this.number; i++){
+                const geometry = new THREE.Geometry();
 
-            this.scene.add(d6);
-            return d6;
+                geometry.vertices = [
+                    new THREE.Vector3( 0, 0, 0 ),
+                    new THREE.Vector3( 0, 1, 0 ),
+                    new THREE.Vector3( 1, 1, 0 ),
+                    new THREE.Vector3( 1, 0, 0 ),
+                    new THREE.Vector3( 0.5, 0.5, 1 )
+                ];
+
+                geometry.faces = [
+                    new THREE.Face3( 0, 1, 2 ),
+                    new THREE.Face3( 0, 2, 3 ),
+                    new THREE.Face3( 1, 0, 4 ),
+                    new THREE.Face3( 2, 1, 4 ),
+                    new THREE.Face3( 3, 2, 4 ),
+                    new THREE.Face3( 0, 3, 4 )
+                ];
+                const transformation = new THREE.Matrix4().makeScale(1, 1, 1);
+                geometry.applyMatrix( transformation );
+                const material = new THREE.MeshBasicMaterial({color: 0xffff00});
+                const d4 = new THREE.Mesh(geometry, material);
+                diceList.push(d4);
+                //let v = new THREE.Vector3(this.randomPlacement(0, window.innerWidth), this.randomPlacement(0, window.innerHeight), this.randomPlacement(-100, 100));
+                console.log(diceList[i]);
+                //diceList[i].position.set(v);
+                this.scene.add(diceList[i]);
+            }
+
+            return diceList;
+        },
+
+        createD6(){
+            let diceList = [];
+            for(let i = 0; i < this.number; i++){
+                const geometry = new THREE.BoxGeometry(2, 2, 2);
+                const material = new THREE.MeshBasicMaterial({color: 0x00ff00});
+                const d6 = new THREE.Mesh(geometry, material);
+                diceList.push(d6);
+                //let v = new THREE.Vector3(this.randomPlacement(0, window.innerWidth), this.randomPlacement(0, window.innerHeight), this.randomPlacement(-100, 100));
+                console.log(diceList[i]);
+                //diceList[i].position.set(v);
+                this.scene.add(diceList[i]);
+            }
+
+            return diceList;
+        },
+
+        randomPlacement(start, end){
+            return Math.floor(Math.random() * (end - start)) + start;
         },
 
         render() {
             //this.knot.rotation.x += .025;
-            this.d6.rotateX(0.25);
-            this.d6.rotateY(0.25);
-            this.d6.rotateZ(0.25);
-            this.d6.translateX(0.025);
-            this.renderer.render( this.scene, this.camera );
-            window.requestAnimationFrame( this.render );
+
+            for(let i = 0; i < this.number; i++) {
+                this.diceList[i].rotateX(Math.random() * 0.25);
+                this.diceList[i].rotateY(Math.random() * 0.25);
+                this.diceList[i].rotateZ(Math.random() * 0.25);
+                this.diceList[i].translateX(Math.random() * 0.25);
+                this.diceList[i].translateY(Math.random() * 0.25);
+                this.diceList[i].translateZ(Math.random() * 0.25);
+            }
+            if(this.counter > 200){
+                document.body.removeChild( this.renderer.domElement);
+            }else {
+                this.renderer.render(this.scene, this.camera);
+                window.requestAnimationFrame(this.render);
+                this.counter++;
+            }
+            console.log(this.counter);
+
         }
 };
 
