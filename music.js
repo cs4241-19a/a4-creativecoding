@@ -1,3 +1,6 @@
+
+
+
 function AudioVisualizer(){
 	//渲染
 	this.scene;
