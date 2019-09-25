@@ -6,14 +6,14 @@ const express       = require( 'express' ),
      // session       = require( 'express-session' ),
       helmet        = require('helmet'),
       compression   = require('compression')
-      THREE         = require('three')
+      //THREE         = require('three')
 app.use(express.static('./'))
 app.use(helmet())
 app.use(compression())
 
 
 //for three.js
-app.use(express.static(THREE))
+//app.use(express.static('THREE'))
 //var scene = new THREE.Scene() -- i think i dont need to do this here 
 
 //this was after passport
