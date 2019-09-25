@@ -1,0 +1,117 @@
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0px;
+}
+body { margin: 0; padding:0 ; background-color:black;}
+canvas { width: 100%; height: 10% ; margin:0; background-color:black;}
+div{
+  color:black;
+  margin:0;
+  padding:0;
+  height: 50%;
+}
+p{
+  font-family: 'Open Sans', sans-serif;
+  background-color: black;
+  color: white;
+  text-align: center;
+  font-size:60px;
+   margin: 0;
+  padding: 0;
+  
+}
+
+#overlay {
+  position: fixed; /* Sit on top of the page content */
+  display: none; /* Hidden by default */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  cursor: pointer; /* Add a pointer on hover */
+}
+
+#overlayend {
+  position: fixed; /* Sit on top of the page content */
+  display: none; /* Hidden by default */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  cursor: pointer; /* Add a pointer on hover */
+}
+
+#overlaystart{
+  position: fixed; /* Sit on top of the page content */
+  display: none; /* Hidden by default */
+  width: 100%; /* Full width (cover the whole page) */
+  height: 100%; /* Full height (cover the whole page) */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.5); /* Black background with opacity */
+  z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
+  cursor: pointer; /* Add a pointer on hover */
+}
+
+#text{
+  position: absolute;
+  font-family: 'Open Sans', sans-serif;
+  top: 50%;
+  left: 50%;
+  font-size: 200px;
+  color: white;
+  transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+}
+
+#textend{
+  position: absolute;
+  font-family: 'Open Sans', sans-serif;
+  top: 50%;
+  left: 50%;
+  font-size: 100px;
+  color: red;
+  transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+}
+
+#textstart{
+  position: absolute;
+  font-family: 'Open Sans', sans-serif;
+  top: 50%;
+  left: 50%;
+  font-size: 20px;
+  color: white;
+  transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+}
+
+#gui { 
+   position: absolute; 
+   top: 124px; 
+   right: 0px 
+}
+
+.blinking{
+    animation:blinkingText 0.8s infinite;
+}
+@keyframes blinkingText{
+    0%{     color: white;    }
+    49%{    color: white; }
+    50%{    color: transparent; }
+    99%{    color: transparent; }
+    100%{   color: white;    }
+}
+
