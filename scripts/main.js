@@ -66,7 +66,7 @@ Physijs.scripts.ammo = "../js/ammo.js";
               break;
               case 68:
               if (flag == 0){
-                let newMaterial = Physijs.createMaterial(new THREE.MeshBasicMaterial /
+                let newMaterial = Physijs.createMaterial(new THREE.MeshBasicMaterial 
                     ( { color: "magenta" } ) ,0.9, 0.1);
                 box.material = newMaterial
                // ground.material = newMaterial
@@ -74,7 +74,7 @@ Physijs.scripts.ammo = "../js/ammo.js";
                 flag = 1
               }
               else{
-                let newMaterial = Physijs.createMaterial(new THREE.MeshBasicMaterial /
+                let newMaterial = Physijs.createMaterial(new THREE.MeshBasicMaterial 
                     ( { color: "white" } ) ,0.9, 0.9);
                 box.material = newMaterial
                 box.mass = 1

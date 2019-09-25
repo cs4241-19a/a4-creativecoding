@@ -43,7 +43,7 @@ Physijs.scripts.ammo = "../js/ammo.js";
         // =========================================================================================
         // MAKE FLOOR
         // =========================================================================================
-        let floor_mat = Physijs.createMaterial(new THREE.MeshBasicMaterial /
+        let floor_mat = Physijs.createMaterial(new THREE.MeshBasicMaterial 
             ({color: "black"}) ,0.9, 0.9);
         let floor = new Physijs.BoxMesh (new THREE.BoxGeometry(10000,1,10000), floor_mat, 0);
         floor.addEventListener( "collision", function( obj, lvel, avel ) {
@@ -57,7 +57,7 @@ Physijs.scripts.ammo = "../js/ammo.js";
         // =========================================================================================
         // MAKE CELING
         // =========================================================================================
-        let celing_mat = Physijs.createMaterial(new THREE.MeshBasicMaterial /
+        let celing_mat = Physijs.createMaterial(new THREE.MeshBasicMaterial 
             ({ color: "black" }) ,0.9, 0.9);
         let celing = new Physijs.BoxMesh (new THREE.BoxGeometry(10000,1,10000), celing_mat, 0);
         celing.addEventListener("collision", function( obj, lvel, avel) {
@@ -71,8 +71,8 @@ Physijs.scripts.ammo = "../js/ammo.js";
         // =========================================================================================
         // MAKE CUBE
         // =========================================================================================
-        let ball_material = Physijs.createMaterial(new THREE.MeshBasicMaterial /
-            ({ color: "0xFFFFFF" }) ,0.9, 0.9);
+        let ball_material = Physijs.createMaterial(new THREE.MeshBasicMaterial 
+            ({ color: "white" }) ,0.9, 0.9);
         let box = new Physijs.BoxMesh (new THREE.BoxGeometry(10,10,10), ball_material, 1);
         box.position.z = 10;
         box.position.x = 0;
