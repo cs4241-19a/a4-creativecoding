@@ -119,10 +119,11 @@ var dropbox, musicFile;
       console.log(bufferLength);
       var dataArray = new Uint8Array(bufferLength);
       console.log(dataArray)
-      alert(bufferLength); 
+      //alert(bufferLength); 
       function render() {
           requestAnimationFrame(render);
           for(let j = 0; j < bufferLength; j++) {
+            alert(dataArray[j]); 
              appdata[j].scale.z = dataArray[j];
           }
         renderer.render(scene, camera);
