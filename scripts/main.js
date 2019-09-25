@@ -1,6 +1,6 @@
 import Physijs from '../js/physi.js'
 import * as THREE from '../js/three.js'
-import sound from './audio.js'
+import {sound,play,stop,loop} from './audio.js'
 
        'use strict';
        
