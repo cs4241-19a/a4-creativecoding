@@ -1,3 +1,4 @@
+import * as THREE from '../js/three.js'
 
 window.Physijs = (function() {
 	'use strict';
