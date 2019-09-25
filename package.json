@@ -1,0 +1,15 @@
+{
+  "name": "Janette Fong",
+  "version": "1.0.0",
+  "description": "WPI CS4241 Webware Assignment 4",
+  "author": "jlfong",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "helmet": "^3.21.1",
+    "mime": "^2.4.4"
+  },
+  "devDependencies": {}
+}
