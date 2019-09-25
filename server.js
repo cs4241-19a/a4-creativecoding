@@ -17,6 +17,11 @@ app.get('/js/three.js', function(request, response) {
   response.sendFile(__dirname + '/js/three.js');
 });
 
+app.get('/js/three.min.js', function(request, response) {
+  response.sendFile(__dirname + '/js/three.min.js');
+});
+
+
 app.get('/js/physi.js', function(request, response) {
   response.sendFile(__dirname + '/js/physi.js');
 });

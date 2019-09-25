@@ -35,6 +35,7 @@ import * as THREE from '../js/three.js'
       var xPos = 0
       var yPos = 0
       initScene = function() {
+        
         renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setSize( window.innerWidth, window.innerHeight );
         document.getElementById( 'viewport' ).appendChild( renderer.domElement );
