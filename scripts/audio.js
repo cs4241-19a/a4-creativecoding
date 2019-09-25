@@ -1,4 +1,4 @@
- 
+
 let sound = function(src) {
         let s = document.createElement("audio");
         s.src = src;
@@ -6,7 +6,7 @@ let sound = function(src) {
         s.setAttribute("controls", "none");
         s.style.display = "none";
         document.body.appendChild(s);
-        return s
+        return s;
 }
 
 let play = function(n){
@@ -21,9 +21,4 @@ let loop = function(n){
     n.loop = true;
     n.play();
 }
-      
 export {play, stop, loop, sound}
-
-       
-
-       
