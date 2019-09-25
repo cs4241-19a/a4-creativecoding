@@ -1,5 +1,6 @@
 .key {
     stroke:black;
+    transition: all 500ms;
 }
 
 .key-white {

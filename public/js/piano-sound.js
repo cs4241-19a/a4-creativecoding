@@ -7,20 +7,20 @@ const audioCtx = new AudioContext();
 
 const oscs = [];  // oscillators
 
-function startNote(event) {
-    const octave = event.target.parentElement.dataset.octave;
-    const note = event.target.dataset.note;
+function startNote(key) {
+    const octave = key.parentElement.dataset.octave;
+    const note = key.dataset.note;
     console.log("Start: ", octave, note);
     if (audioCtx.state === "suspended") {
-        audioCtx.resume();
+        audioCtx.resume();  // let resume finish whenever. first note or more will not play but that's ok
     }
     else if (!oscs[note + octave]) {
         oscs[note + octave] = playTone(getFrequency(note, Number(octave)));
     }
 }
-function endNote(event) {
-    const octave = event.target.parentElement.dataset.octave;
-    const note = event.target.dataset.note;
+function endNote(key) {
+    const octave = key.parentElement.dataset.octave;
+    const note = key.dataset.note;
     console.log("Stop: ", octave, note);
     if (note && oscs[note + octave]) {
         oscs[note + octave].stop();
