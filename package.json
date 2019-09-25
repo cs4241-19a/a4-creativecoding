@@ -1,0 +1,20 @@
+{
+    "name": "a4-percyjiang",
+    "version": "",
+    "description": "",
+    "author": "",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "compressible": "^2.0.17",
+        "compression": "^1.7.4",
+        "express": "^4.17.1",
+        "helmet": "^3.21.1",
+        "standard": "^14.3.1",
+        "three": "^0.108.0"
+    },
+    "devDependencies": {
+        "@types/express": "^4.17.1"
+    }
+}

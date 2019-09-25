@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <!--  Bootstrap CSS  -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Dat GUI -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js"></script>
+
+    <!-- Sweet Alert -->
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
+    <!-- Three.js -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/108/three.min.js'></script>
+
+    <!--  font awesome css  -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+
+    <link href="main.css" rel="stylesheet">
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <a href="overview.html" class="navbar-brand">Control Pannel</a>
+        <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarMenu">
+            <ul class="navbar-nav mr-auto">
+                <button id="play" class="btn"><i class="fa fa-play"></i></button>
+                <button id="pause" class="btn"><i class="fa fa-pause"></i></button>
+                <button id="stop" class="btn"><i class="fa fa-stop"></i></button>
+                <button id="question" class="btn"><i class="fa fa-question-circle"></i></button>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Select Music</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <button id="setEnergy" class="dropdown-item">Energy (Default)</button>
+                        <div class="dropdown-divider"></div>
+                        <button id="setCool" class="dropdown-item">Cool</button>
+                        <button id="setSwag" class="dropdown-item">Swag</button>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <audio src="./music/energy.mp3" id="energy"></audio>
+    <audio src="./music/cool.mp3" id="cool"></audio>
+    <audio src="./music/swag.mp3" id="swag"></audio>
+    <div id="webGL-container"></div>
+</body>
+
+<!--  JavaScript Plugins  -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<script src="main.js" type="module"></script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="./build/OrbitControls.js"></script>
+<script src="./build/stats.min.js"></script>
+<script src="./build/ColladaLoaders.js"></script>
+<script src="./build/projector.js"></script>
+<script src="./build/CanvasRenderer.js"></script>
+
+</html>
