@@ -36,13 +36,12 @@ const svgHeight = 300,
   svgWidth = 1000,
   minYear = 2012.5,
   maxYear = 2019.5,
-  maxSales = 10,
-  minSales = 2,
+  maxSales = 20,
+  minSales = 0,
   circleSize = 8;
 
 // Takes in a value and returns a custom color based on the value
 const customColor = function(value) {
-  console.log(value);
   let r = Math.pow(value, 2) * 5;
   let g = 0;
   let b = Math.pow(value, 2) * 5;
@@ -59,6 +58,9 @@ const visualize = function() {
     .select("body")
     .append("div")
     .attr("class", "tooltip-donut")
+    .text( function() {
+      return "yo"
+    })
     .style("opacity", 0);
 
   // The scale converts the data from the input domain, to an output range
@@ -70,7 +72,7 @@ const visualize = function() {
 
   var yScale = d3
     .scaleLinear()
-    .domain([minSales, maxSales])
+    .domain([maxSales, minSales])
     .range([0, svgHeight]);
 
   var yAxisScale = d3 // custom axis for the scale so we can invert it
@@ -116,18 +118,23 @@ const visualize = function() {
       d3.select(this)
         .transition()
         .duration(50)
-        .attr("opacity", ".5");
+        .attr("opacity", .5);
 
+      
+        // Make the div appear with the game and value
       div
         .transition()
         .duration("50")
-        .attr("opacity", "1");
+        .style("opacity", 1);
+      
+        // Assign the div the game and value
+      div.html(d.Game + ": " + d.Europe);
     })
     .on("mouseout", function(d, i) {
       d3.select(this)
         .transition()
         .duration(50)
-        .attr("opacity", "1");
+        .attr("opacity", 1);
 
       div
         .transition()
