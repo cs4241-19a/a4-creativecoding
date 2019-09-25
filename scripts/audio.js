@@ -1,24 +1,25 @@
-let s = document.createElement("audio");
  
 let sound = function(src) {
+        let s = document.createElement("audio");
         s.src = src;
         s.setAttribute("preload", "auto");
         s.setAttribute("controls", "none");
         s.style.display = "none";
         document.body.appendChild(s);
+        return s
 }
 
-let play = function(){
-    s.play();
+let play = function(n){
+    n.play();
 }
 
-let stop = function(){
-    s.pause();
+let stop = function(n){
+    n.pause();
 }
 
-let loop = function(){
-    s.loop = true;
-    s.play();
+let loop = function(n){
+    n.loop = true;
+    n.play();
 }
       
 export {play, stop, loop, sound}
