@@ -46,7 +46,7 @@ app.get('/scripts/main.js', function(request, response) {
   response.sendFile(__dirname + '/scripts/main.js');
 });
 
-app.get('/scipts/geometry.js', function(request, response) {
+app.get('/scripts/geometry.js', function(request, response) {
   response.sendFile(__dirname + '/scripts/geometry.js');
 });
 

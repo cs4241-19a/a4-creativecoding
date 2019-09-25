@@ -1,15 +1,12 @@
 import Physijs from '../js/physi.js'
 import * as THREE from '../js/three.js'
 import {sound,play,stop,loop} from './audio.js'
+import {scene,ground,box,celing,floor,bounceSound,music,mass,color,on,off,end,restart,drag,reset,stretch} from './geometry.js'
+
 'use strict';
-let initScene, render, renderer, scene, camera, box, ground, ground_material, friction, controls;
+let initScene, render, renderer, camera, ground_material, friction, controls;
 var xPos = 0
 var yPos = 0
-var bounceSound = sound("https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2F404769__owlstorm__retro-video-game-sfx-bounce.wav?v=1569358326681");
-var music = sound("https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2FUndertale%20OST%20042%20-%20Thundersnail.mp3?v=1569359250719​");
-var mass = sound("https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2F270341__littlerobotsoundfactory__pickup-04.wav?v=1569364678712");
-var color = sound("https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2F270332__littlerobotsoundfactory__hit-03.wav?v=1569364682744");
-var stretch = sound("https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2F401648__inspectorj__bodyboard-stretch-a.wav?v=1569364805642")
 let count = 0
 let score = 0
 Physijs.scripts.worker = '../js/physijs_worker.js';
@@ -17,7 +14,6 @@ Physijs.scripts.ammo = '../js/ammo.js';
       
     initScene = function() {
       
-       
         // ===================================================================================================
         // CAMERA SETUP
         // ===================================================================================================
@@ -25,78 +21,10 @@ Physijs.scripts.ammo = '../js/ammo.js';
         renderer = new THREE.WebGLRenderer({antialias: true});
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.getElementById('viewport').appendChild(renderer.domElement);
-        scene = new Physijs.Scene;
         camera = new THREE.PerspectiveCamera(35,window.innerWidth / window.innerHeight,1,1000);
         camera.position.set( 300, 100, 60 );
         camera.lookAt(scene.position);
         scene.add(camera);
-      
-       
-        // ===================================================================================================
-        // MAKE PLANK
-        // ===================================================================================================
-        
-        var loader = new THREE.TextureLoader();
-        loader.load('https://cdn.glitch.com/c3c1ab32-34b4-400c-9040-faa6873ac320%2F8bb0cedfaea9e07b8c3aa6f8c41684bc.jpg?v=1569202443143', function(texture) {
-              ground_material = Physijs.createMaterial(new THREE.MeshBasicMaterial({map: texture}) ,.8, .9);
-              ground = new Physijs.BoxMesh(new THREE.BoxGeometry(150, 30, 150),ground_material,1);
-              ground.receiveShadow = true;
-              ground.__dirtyRotation = true;
-              var constraint = new Physijs.PointConstraint( ground, new THREE.Vector3(0, 0, 0));
-               ground.addEventListener('collision', function( objCollidedWith, linearVelOfCollision, angularVelOfCollision) {
-               score++
-               play(bounceSound)
-               document.getElementById('text').innerHTML = score
-               on()
-               setTimeout(function(){
-                    off();
-                },500);
-              });
-              scene.add(ground);
-              scene.addConstraint(constraint);
-          });
-      
-        // ===================================================================================================
-        // MAKE FLOOR
-        // ===================================================================================================
-       
-        let floor_mat = Physijs.createMaterial(new THREE.MeshBasicMaterial({color: "black"}) ,.9, .9);
-        let floor = new Physijs.BoxMesh (new THREE.BoxGeometry(10000,1,10000), floor_mat, 0);
-        floor.addEventListener( 'collision', function( objCollidedWith, linearVelOfCollision, angularVelOfCollision ) {
-           document.getElementById('textend').innerHTML = "Should've balanced the cube. " + score + " hits."
-           stop(music);
-           end()
-        });
-        floor.position.y = -200;
-        scene.add(floor)
-            
-        // ===================================================================================================
-        // MAKE CELING
-        // ===================================================================================================
-      
-        let celing_mat = Physijs.createMaterial(new THREE.MeshBasicMaterial({ color: "black" }) ,.9, .9);
-        let celing = new Physijs.BoxMesh (new THREE.BoxGeometry(10000,1,10000), celing_mat, 0);
-        celing.addEventListener('collision', function( objCollidedWith, linearVelOfCollision, angularVelOfCollision) {
-           document.getElementById('textend').innerHTML = "Is the game called Drop the Cube? " + score + " hits."
-           stop(music);
-           end()
-        });
-        celing.position.y = 200;
-        scene.add(celing);
-      
-        // ===================================================================================================
-        // MAKE CUBE
-        // ===================================================================================================
-        
-        let ball_material = Physijs.createMaterial(new THREE.MeshBasicMaterial({ color: 0xFFFFFF }) ,.9, .9);
-        box = new Physijs.BoxMesh (new THREE.BoxGeometry(10,10,10), ball_material, 1);
-        box.position.z = 10;
-        box.position.x = 0;
-        box.position.y = 90;
-        box.rotation.x = 10;
-        box.__dirtyPosition = true;
-        scene.add(box);
-        
         requestAnimationFrame(render);
           
         // ===================================================================================================
