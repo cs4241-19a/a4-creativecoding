@@ -15,7 +15,7 @@ const createInstructions = function () {
         '                In the custom tree form you first have to add the name of one starting person and can then add a spouse.\n' +
         "                Only after a spouse was added it's possible to also add children. It's also possible to add a second\n" +
         '                spouse and different children.<br>\n' +
-        '                Currently only one generation is supported in the custom family tree option.</p>\n' +
+        '                Currently only two generations are supported in the custom family tree option.</p>\n' +
         '        </div>')
 }
 const createGUI = function () {
