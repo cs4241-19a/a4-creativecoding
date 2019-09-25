@@ -119,23 +119,40 @@ var dropbox, musicFile;
       console.log(bufferLength);
       var dataArray = new Uint8Array(bufferLength);
       console.log(dataArray)
-      canvasCtx.clearRect(0, 0, 500, 500);
-      function draw() {
-        drawVisual = requestAnimationFrame(draw);
-        analyser.getByteFrequencyData(dataArray);
-        canvasCtx.fillStyle = 'rgb(0, 0, 0)';
-        canvasCtx.fillRect(0, 0, 500, 500);
-        var barWidth = (500 / bufferLength) * 2.5;
-        var barHeight;
-        var x = 0;
-        for(var i = 0; i < bufferLength; i++) {
-          barHeight = dataArray[i];
-          canvasCtx.fillStyle = 'rgb(' + (barHeight+100) + ',50,50)';
-          canvasCtx.fillRect(x,500-barHeight/2,barWidth,barHeight/2);
-          x += barWidth + 1;
+      var step = Math.round(dataArray.length / 20);
+      
+      function render() {
+            requestAnimationFrame(render);
+            renderer.render(scene, camera);
+          
+          for(let j = 0; j < 20; j++) {
+             var value = array[j * step] / 4;
+           appdata[j].scale.z = value;
+          }
+        
         }
-      };
-      draw();
+
+      render();
+      
+      //canvasCtx.clearRect(0, 0, 500, 500);
+      // function draw() {
+      //   drawVisual = requestAnimationFrame(draw);
+      //   analyser.getByteFrequencyData(dataArray);
+      //   canvasCtx.fillStyle = 'rgb(0, 0, 0)';
+      //   canvasCtx.fillRect(0, 0, 500, 500);
+      //   var barWidth = (500 / bufferLength) * 2.5;
+      //   var barHeight;
+      //   var x = 0;
+      //   for(var i = 0; i < bufferLength; i++) {
+      //     barHeight = dataArray[i];
+      //     canvasCtx.fillStyle = 'rgb(' + (barHeight+100) + ',50,50)';
+      //     canvasCtx.fillRect(x,500-barHeight/2,barWidth,barHeight/2);
+      //     x += barWidth + 1;
+      //   }
+      // };
+      // draw();
+      
+      
     });
     
     
@@ -178,16 +195,8 @@ alert( '文件已上传...')
 //         //scene.add(cube2);
         var i =0;
         camera.position.z = 15;
-        function render() {
-            requestAnimationFrame(render);
+        
 
-          
-  
-            renderer.render(scene, camera);
-        }
-
-      render();
-  
   
 
 </script>
