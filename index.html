@@ -5,7 +5,10 @@
   <title>可视化音乐播放器</title>
 </head>
 <body>
-  <label id="guide">Drag and drop a mp3 file</label>
+  		<div id="dropbox">
+			<input id="imgUpload" type="file" multiple>
+			<span>点击或将单个/多个图片拖放到此处</span>
+		</div>
 <input type="file" name="" value="" id="musicFile">
 <!-- <audio src="" controls="controls"></audio> -->
 <p id="tip"></p>
@@ -28,18 +31,55 @@ var audioContext = new AudioContext();//实例化
 // 2 读取音频文件，读取后，获得二进制类型的音频文件
 // 3 对读取后的二进制文件进行解码
   
-      document.body.addEventListener("drop", function (e) {
-        e.stopPropagation();
+var dropbox, imgUpload;
 
-        e.preventDefault();
+	dropbox = document.getElementById("dropbox");
+	dropbox.addEventListener("dragenter", dragenter, false);
+	dropbox.addEventListener("dragover", dragover, false);
+	dropbox.addEventListener("dragleave", dragleave, false);
+	dropbox.addEventListener("drop", drop, false);
 
-        //获取文件
-        var file = e.dataTransfer.files[0];
-        var fileName = file.name;
+	imgUpload = document.getElementById("imgUpload");
+	imgUpload.addEventListener("change", readFile, false)
 
-        $("#guide").text("Playing " + fileName);
+	// 目标进入drop区域
+	function dragenter(e) {
+		e.stopPropagation();
+		e.preventDefault();
+		dropbox.style.background = '#666'
+	}
+	// 目标位于drop区域上方
+	function dragover(e) {
+		e.stopPropagation();
+		e.preventDefault();
+	}
+	// 目标离开drop区域
+	function dragleave(e) {
+		e.stopPropagation();
+		e.preventDefault();
+		dropbox.style.background = '#fbfbfb';
+	}
+	// 目标在drop区域被释放/放置（松开鼠标）
+	function drop(e) {
+		e.stopPropagation();
+		e.preventDefault();
+		dropbox.style.background = '#fbfbfb';
 
-      }
+		var dt = e.dataTransfer;
+		var files = dt.files;
+
+		handleFiles(files);
+	}
+	// 点击上传文件后的方法
+	function readFile() {
+		handleFiles(this.files);
+	}
+
+	function handleFiles(files) {
+		// ... // 这里写上传文件的方法
+
+		alert( '文件已上传...')
+	}
   
 $('#musicFile').change(function(){
   if (this.files.length == 0) return;
