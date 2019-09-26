@@ -71,6 +71,7 @@ function createCustomTree () {
 
 function createTrumpTree () {
   $('.main').remove()
+  $('svg').remove()
   $('.form-row').remove()
   $('#graph').removeClass()
   $('#instructionsPage').removeClass('active')
