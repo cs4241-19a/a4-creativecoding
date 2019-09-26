@@ -72,7 +72,14 @@ const customColor = function(value) {
   return `rgb(${r}, ${g}, ${b})`;
 };
 
-
+var div = d3
+    .select("body")
+    .append("div")
+    .attr("class", "tooltip")
+    .text( function() {
+      return "yo"
+    })
+    .style("opacity", 0);
 
 var visualize = function() {
     this.svgHeight = 300;
@@ -88,15 +95,6 @@ var visualize = function() {
     .attr("width", this.svgWidth)
     .attr("height", this.svgHeight + 20);
 
-  var div = d3
-    .select("body")
-    .append("div")
-    .attr("class", "tooltip")
-    .text( function() {
-      return "yo"
-    })
-    .style("opacity", 0);
-
   // The scale converts the data from the input domain, to an output range
   // These functions map an input domain to an output range. https://www.dashingd3js.com/d3js-scales
   var xScale = d3
@@ -109,11 +107,6 @@ var visualize = function() {
     .domain([this.maxSales, this.minSales])
     .range([0, this.svgHeight]);
 
-  var yAxisScale = d3 // custom axis for the scale so we can invert it
-    .scaleLinear()
-    .domain([this.maxSales, this.minSales])
-    .range([0, this.svgHeight]);
-
   const xAxisTicks = xScale.ticks().filter(tick => Number.isInteger(tick));
 
   var xAxis = d3
@@ -121,7 +114,7 @@ var visualize = function() {
     .tickValues(xAxisTicks) // remove non-integer ticks
     .tickFormat(d3.format("d"));
 
-  var yAxis = d3.axisRight(yAxisScale);
+  var yAxis = d3.axisRight(yScale);
 
   svg
     .append("g")
@@ -175,6 +168,10 @@ var visualize = function() {
         .duration("50")
         .style("opacity", 0);
     });
+
+    this.update = function() {
+      barChart.attr('r', this.circleSize + 'px')
+    }
 };
 
 window.onload = function() {
@@ -185,8 +182,13 @@ window.onload = function() {
     .then(fetchXboxData)
     .then(function() {
       var visuals = new visualize();
+      console.log(visuals)
       var gui = new dat.GUI();
-      gui.add(visuals, "circleSize").min(0).max(30)
+      var circleSize = gui.add(visuals, "circleSize").min(0).max(30);
+      circleSize.onChange(function (value) {
+        visuals.update();
+      });
+
       gui.add(visuals, "minSales").min(0).max(18)
       gui.add(visuals, "maxSales").min(2).max(20)
     });
