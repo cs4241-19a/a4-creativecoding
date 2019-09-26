@@ -52,6 +52,7 @@ function createCustomTree () {
   $('#instructions').empty()
   $('svg').remove()
   $('.main').remove()
+  $('form').remove()
   const form = $('<form>\n' +
         '            <div class="form-row">\n' +
         "                <div class=\"form-group col-5\" id='nameContainer'>\n" +
