@@ -3,7 +3,6 @@
   <head>
     <title>CS4241 Assignment 4</title>
     <meta charset="utf-8">
-    <link rel="icon" type="image/x-icon" href="favicon.ico?v="+ Math.trunc(Math.random()*999)>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     
   </head>
@@ -18,7 +17,7 @@
       <p>Hello! Welcome to Brian's Paint Program.</p>
       <p>With this program you can draw pictures using an array of colors and brush sizes.</p>
       <p>To start drawing, simply hold down the left mouse button and move your mouse around the screen. This will make you draw with the currently selected color. Additionally, you can also select the eraser brush to erase parts of your drawing.</p>
-      <p>On the top right of the page you will find the options menu, with this you are able to choose your brush, your brush color, and your brush size, additianlly, you can all clear the current drawn.</p>
+      <p>On the top right of the page you will find the options menu, with this you are able to choose your brush, your brush color, and your brush size, additianlly, you can all clear the current drawning or change the background color.</p>
       <p>From this menu you can also save your current drawing or load a picture to draw on.</p>
     </div>
     
@@ -31,6 +30,7 @@
   <script>
     let ctx = document.getElementById('drawArea').getContext("2d");
     let color = "#ff0000";
+    let backgroundColor = '#ffffff'
     let size = 10;
     let currentBrush = "Pencil"
     resize()
@@ -54,7 +54,7 @@
       ctx.beginPath();
       ctx.moveTo(mouse.x, mouse.y);
       if(currentBrush == "Eraser")
-        ctx.strokeStyle = "#ffffff";
+        ctx.strokeStyle = backgroundColor;
       else
         ctx.strokeStyle = color
       ctx.lineWidth = size;
@@ -76,10 +76,11 @@
 
   var FizzyText = function() {
   this.Color = "#ff0000";
+  this.Background_Color = '#ffffff'
   this.Brush_Size = 5;
   this.Brushes = "Pencil"
   this.Clear = function(){
-    document.getElementById('drawArea').getContext("2d").fillStyle = 'white'
+    document.getElementById('drawArea').getContext("2d").fillStyle = backgroundColor
     document.getElementById('drawArea').getContext("2d").fillRect(0, 0, document.getElementById('drawArea').width, document.getElementById('drawArea').height)
     //document.getElementById('drawArea').getContext("2d").clearRect(0, 0, document.getElementById('drawArea').width, document.getElementById('drawArea').height)
   }
@@ -98,13 +99,14 @@
 };
 
 window.onload = function() {
-  document.getElementById('drawArea').getContext("2d").fillStyle = 'white'
+  document.getElementById('drawArea').getContext("2d").fillStyle = backgroundColor
   document.getElementById('drawArea').getContext("2d").fillRect(0, 0, document.getElementById('drawArea').width, document.getElementById('drawArea').height)
   let text = new FizzyText();
   let gui = new dat.GUI();
   let brushes = gui.add(text, "Brushes", ["Pencil" ,"Eraser"])
   let getColor = gui.addColor(text, 'Color');
   let brushSize = gui.add(text, 'Brush_Size', 1, 100)
+  let getBackColor = gui.addColor(text, 'Background_Color');
   let clear = gui.add(text, 'Clear')
   let download = gui.add(text, 'Save_Image')
   let load = gui.add(text, "Load_File")
@@ -121,7 +123,11 @@ window.onload = function() {
   brushes.onFinishChange(function(){
     currentBrush = brushes.object.Brushes
   })
-
+  getBackColor.onFinishChange(function(){
+    backgroundColor = getBackColor.object.Background_Color
+    document.getElementById('drawArea').getContext("2d").fillStyle = backgroundColor
+    document.getElementById('drawArea').getContext("2d").fillRect(0, 0, document.getElementById('drawArea').width, document.getElementById('drawArea').height)
+})
   helpPopup()
 };
 
