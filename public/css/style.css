@@ -1,0 +1,222 @@
+/*reset margin and padding*/
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/*text and centering*/
+section{
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+h2, p{
+  margin: 0px auto;
+  width: 800px;
+  font-family: helvetica;
+}
+
+h4{
+  font-family: helvetica
+}
+
+h2{
+  color: #9b4dca;
+}
+
+/*canvas styles*/
+canvas{
+  display: block;
+  border: 1px solid black;
+  margin: 10px auto 0px;
+}
+
+/*buttons*/
+button{
+  outline: 0;
+  border: 0;
+  color: #9b4dca;
+  font-family: impact;
+  background: silver;
+  width: 40px; 
+  height: 40px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#tools{
+  width: 800px;
+  height: 80px;
+  margin: 0px auto;
+  display: flex;
+}
+
+#clearWrapper, #fillAndClear{
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+}
+
+#fillAndClear{
+  margin-top: 19px;
+}
+
+#clearWrapper button, #fillAndClear button{
+  width: 80px;
+  height: 35px;
+  margin-bottom: 5px;
+}
+
+#brushType, #sizes{
+  display: flex;
+  width: 100px;
+  flex-wrap: wrap;
+}
+
+#brushType button{
+  margin-bottom: 5px;
+  margin-right: 5px;
+  height: 30px;
+  width: 42px;
+}
+
+#sizes button{
+  margin-bottom: 5px;
+  margin-right: 1px;
+  height: 30px;
+  width: 45px;
+}
+
+#colors{
+  height: 50px;
+  display: flex;
+  flex-direction: column;
+  margin-right: 10px;
+}
+
+#currentColor{
+  border: 1px solid silver;
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  background: black;
+  margin-top:20px;
+}
+
+#colors button{
+  width: 20px;
+  height: 20px;
+  margin-top: 5px;
+  border: 1px solid silver;
+}
+
+#colorSelect{
+  visibility: hidden;
+}
+
+#colors button:hover{
+  opacity: 0.5;
+}
+
+/*colors*/
+#red{
+  background: red;
+}
+
+#orange{
+  background: orange;
+}
+
+#yellow{
+  background: yellow;
+}
+
+#green{
+  background: green;
+}
+
+#blue{
+  background: blue;
+}
+#indigo{
+  background: indigo;
+}
+
+#violet{
+  background: violet;
+}
+
+#black{
+  background: black;
+}
+
+#grey{
+  background: grey;
+}
+
+#white{
+  background: white;
+}
+
+#maroon{
+  background: maroon;
+}
+#orangered{
+  background: orangered;
+}
+#gold{
+  background: gold;
+}
+#lime{
+  background: lime;
+}
+#lightblue{
+  background: lightblue;
+}
+#plum{
+  background: plum;
+}
+#lavender{
+  background: lavender;
+}
+#darkgrey{
+  background: darkgrey;
+}
+#lightgrey{
+  background: lightgrey;
+}
+#tan{
+  background: tan;
+}
+
+
+/*hide the file selector input*/
+#file {
+  visibility: hidden; 
+}
+
+/*make some columns*/
+.col-sm{
+  width:15%;
+  display:inline-block;
+  transform: scaleX(-1);
+  margin-left: 40px;
+}
+.col-big{
+  width:60%;
+  display: inline-block;
+}
+.flip{
+  transform: scaleX(1);
+  margin-left: 0;
+}
+
+/*Mobile resizing for things*/
+@media (max-width: 900px){
+  .col-sm{
+    display:none;
+  }
+  .col-big{
+    width:100%;
+  }
+}
