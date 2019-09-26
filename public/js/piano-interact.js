@@ -4,7 +4,6 @@ import * as dat from '/scripts/dat.gui.module.js';
 let lPiano;
 let rPiano;
 let keyPressedOptions;  // function called on key press
-let noteDuration = 250;
 let gui;
 let pianoGui;
 
@@ -14,10 +13,7 @@ let pianoGui;
 // DAT.GUI //
 
 let PianoGui = function() {
-    this.duration = 0.25;
     this.keyboardControl = true;
-    this.oscillator = "sine";
-    // todo on off for key controls
 
     this['C'] = '#FF0000';      // red
     this['C#'] = '#FFA500';     // orange
@@ -32,9 +28,13 @@ let PianoGui = function() {
     this['A#'] = '#FFB6C1';     // lightpink
     this['B'] = '#FF00FF';      // magenta
 
+    this.durationL = 0.25;
     this.octaveL = 4;
+    this.oscillatorL = "sine";
     this.playFormL = 'click';
+    this.durationR = 0.25;
     this.octaveR = 5;
+    this.oscillatorR = "sine";
     this.playFormR = 'click';
 
 };
@@ -42,9 +42,49 @@ let PianoGui = function() {
 function setupGui() {
     gui = new dat.GUI({hideable: false});
     pianoGui = new PianoGui();
-    gui.add(pianoGui, 'duration').min(0);
     gui.add(pianoGui, 'keyboardControl');
-    gui.add(pianoGui, 'oscillator', {'Sine': 'sine', 'Square': 'square', 'Sawtooth': 'sawtooth', 'Triangle': 'triangle'});
+
+    const lPianoFolder = gui.addFolder('Left');
+    lPianoFolder.add(pianoGui, 'durationL').min(0).listen();
+    lPianoFolder.add(pianoGui, 'oscillatorL', {'Sine': 'sine', 'Square': 'square', 'Sawtooth': 'sawtooth', 'Triangle': 'triangle'});
+    lPianoFolder.add(pianoGui, 'octaveL', 1, 7, 1)
+        .onFinishChange(function(value) {
+            lPiano.elm.dataset.octave = value;
+        });
+    // cant hold function so hold string for switch
+    lPianoFolder.add(pianoGui, 'playFormL', {'Click': 'click', 'Hover': 'hover', 'Click Hold': 'clickHold', 'Hover Hold': 'hoverHold'})
+        .onFinishChange(function(value) {
+            lPiano.bindKeyPress(chooseKeyPress(value));
+            if ((value === 'click' || value === 'hover')) {
+                if (Number(pianoGui.durationL) < 0.01) {
+                    pianoGui.durationL = 0.25;
+                }
+            } else {
+                pianoGui.durationL = 0;
+            }
+        });
+    lPianoFolder.open();
+
+    const rPianoFolder = gui.addFolder('Right');
+    rPianoFolder.add(pianoGui, 'durationR').min(0).listen();
+    rPianoFolder.add(pianoGui, 'oscillatorR', {'Sine': 'sine', 'Square': 'square', 'Sawtooth': 'sawtooth', 'Triangle': 'triangle'});
+    rPianoFolder.add(pianoGui, 'octaveR', 1, 7, 1)
+        .onFinishChange(function(value) {
+            rPiano.elm.dataset.octave = value;
+        });
+    // cant hold function so hold string for switch
+    rPianoFolder.add(pianoGui, 'playFormR', {'Click': 'click', 'Hover': 'hover', 'Click Hold': 'clickHold', 'Hover Hold': 'hoverHold'})
+        .onFinishChange(function(value) {
+            rPiano.bindKeyPress(chooseKeyPress(value));
+            if ((value === 'click' || value === 'hover')) {
+                if (Number(pianoGui.durationR) < 0.01) {
+                    pianoGui.durationR = 0.25;
+                }
+            } else {
+                pianoGui.durationR = 0;
+            }
+        });
+    rPianoFolder.open();
 
     const colors = gui.addFolder('Key Colors');
     colors.addColor(pianoGui, 'C');
@@ -59,23 +99,6 @@ function setupGui() {
     colors.addColor(pianoGui, 'A');
     colors.addColor(pianoGui, 'A#');
     colors.addColor(pianoGui, 'B');
-
-
-    const lPianoFolder = gui.addFolder('Left');
-    lPianoFolder.add(pianoGui, 'octaveL', 1, 7, 1);
-    // cant hold function so hold string for switch
-    lPianoFolder.add(pianoGui, 'playFormL', {'Click': 'click', 'Hover': 'hover', 'Click Hold': 'clickHold', 'Hover Hold': 'hoverHold'})
-        .onFinishChange(function(value) {
-            lPiano.bindKeyPress(chooseKeyPress(value));
-        });
-
-    const rPianoFolder = gui.addFolder('Right');
-    rPianoFolder.add(pianoGui, 'octaveR', 1, 7).step(1);
-    // cant hold function so hold string for switch
-    rPianoFolder.add(pianoGui, 'playFormR', {'Click': 'click', 'Hover': 'hover', 'Click Hold': 'clickHold', 'Hover Hold': 'hoverHold'})
-        .onFinishChange(function(value) {
-            rPiano.bindKeyPress(chooseKeyPress(value));
-        });
 
 
 }
@@ -136,24 +159,13 @@ function keyboardBindings(key) {
 }
 
 function keyPressedClosure() {
-    function clean(key) {
-        key.removeEventListener('click', singleTrigger);
-        key.removeEventListener('mouseenter', singleTrigger);
-        document.removeEventListener('keydown', singleTrigger);
-        key.removeEventListener('mousedown', downTrigger);
-        key.removeEventListener('mouseup', upTrigger);
-        key.removeEventListener('mouseenter', downTrigger);
-        key.removeEventListener('mouseleave', upTrigger);
-        document.removeEventListener('keydown', downTrigger);
-        document.removeEventListener('keyup', upTrigger);
-    }
     function createKeyPressedListeners(downType, downF, upType, upF) {
         return function(key) {
             const downFunc = () => downF(key);
             const upFunc = () => upF(key);
             const keyFunc = (f) => {
                 return (event) => {
-                    if (event.code === keyboardBindings(key)) {
+                    if (pianoGui.keyboardControl && event.code === keyboardBindings(key) && !event.repeat) {
                         event.preventDefault();
                         f(key);
                         return false;
@@ -173,6 +185,9 @@ function keyPressedClosure() {
             };
 
             let remove = function () {
+                if (upF) {
+                    upFunc();  // make sure the key is not pressed anymore otherwise its stuck playing
+                }
                 key.removeEventListener(downType, downFunc);
                 document.removeEventListener("keydown", downKeyFunc);
                 if (upType !== undefined && upF !== undefined) {
@@ -190,15 +205,26 @@ function keyPressedClosure() {
         upTrigger(key);
     }
     function downTrigger(key) {
-        console.log(pianoGui);
-        startNote(key);
+        startNote(key, (() => {
+            if (key.parentElement.id === "piano1") {
+                return pianoGui.oscillatorL;
+            } else if (key.parentElement.id === "piano2") {
+                return pianoGui.oscillatorR;
+            }
+        })());
         key.setAttribute("style", "fill: " + pianoGui[key.dataset.note])
     }
     function upTrigger(key) {
         setTimeout(() => {
             endNote(key);
             key.setAttribute("style", "");
-        }, noteDuration);
+            },  (() => {
+                if (key.parentElement.id === "piano1") {
+                    return pianoGui.durationL * 1000;
+                } else if (key.parentElement.id === "piano2") {
+                    return pianoGui.durationR * 1000;
+                }
+            })());
     }
     const click = createKeyPressedListeners('click', singleTrigger);
     const hover = createKeyPressedListeners('mouseenter', singleTrigger);
@@ -223,7 +249,7 @@ function pianoClosure(pianoId) {
         });
     };
 
-    return {bindKeyPress};
+    return {elm: piano, bindKeyPress};
 }
 
 export default {setup}

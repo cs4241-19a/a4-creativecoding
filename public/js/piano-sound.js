@@ -7,7 +7,7 @@ const audioCtx = new AudioContext();
 
 const oscs = [];  // oscillators
 
-function startNote(key) {
+function startNote(key, type) {
     const octave = key.parentElement.dataset.octave;
     const note = key.dataset.note;
     console.log("Start: ", octave, note);
@@ -15,7 +15,7 @@ function startNote(key) {
         audioCtx.resume();  // let resume finish whenever. first note or more will not play but that's ok
     }
     else if (!oscs[note + octave]) {
-        oscs[note + octave] = playTone(getFrequency(note, Number(octave)));
+        oscs[note + octave] = playTone(getFrequency(note, Number(octave)), type);
     }
 }
 function endNote(key) {
@@ -28,11 +28,11 @@ function endNote(key) {
     }
 }
 
-function playTone(freq) {
+function playTone(freq, type) {
     // let type = wavePicker.options[wavePicker.selectedIndex].value;
     // osc.type = type;
     const oscillator = audioCtx.createOscillator();
-    oscillator.type = "sine";
+    oscillator.type = type;
     oscillator.frequency.value = freq;
     oscillator.connect(audioCtx.destination);
     oscillator.start();
