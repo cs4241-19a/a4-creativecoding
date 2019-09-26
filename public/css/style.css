@@ -1,7 +1,7 @@
 /*Style your own assignment! This is fun! */
 :root{
   --textMain:#153147;
-  --bgMain:#0C6AE8;
+  --bgMain:rgb(67,118,111);
   --txtNav:32px;
 }
 
@@ -13,23 +13,23 @@ body{
 nav{
   color: var(--textMain);
 }
-.snapCont {
+/* .snapCont {
   scroll-snap-type: y mandatory;
 }
 .snapChil {
   scroll-snap-align: start;
-}
+} */
 
 .contentBox{
-  border-width: 1px;
-  border-style: solid;
   border-color: var(--textMain);
   border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
 }
 
 .imgFrame{
-  padding: 0;
   overflow: hidden;
+  padding: 0;
 }
 
 .centerBox{
@@ -38,36 +38,35 @@ nav{
 
 .navbar{
   border-bottom: 1px solid var(--textMain);
-  padding-bottom: 0px;
-  margin-bottom: 15px;
   color: var(--textMain);
+  margin-bottom: 15px;
+  padding-bottom: 0;
 }
 
 .navbar-brand{
-  padding-bottom: 0px;
-  margin-bottom: 0px;
-  /* color: var(--textMain); */
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .navbar-brand span{
-  padding-bottom: 0px;
-  margin-bottom: 0px;
-  font-size: var(--txtNav);
   color: var(--textMain);
+  font-size: var(--txtNav);
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .nav-item.nav-link.active{
-  padding-bottom: 0px;
-  margin-bottom: 0px;
-  font-size: var(--txtNav);
   color: var(--textMain);
+  font-size: var(--txtNav);
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .nav-item.nav-link.active:hover{
-  padding-bottom: 0px;
-  margin-bottom: 0px;
-  font-size: var(--txtNav);
   color: white;
+  font-size: var(--txtNav);
+  margin-bottom: 0;
+  padding-bottom: 0;
 }
 
 .navbar-toggle {
@@ -96,5 +95,5 @@ nav{
 }
 
 .pull-away-sides{
-  width: 96%!important;
+  width: 96%/*!important */;
 }
