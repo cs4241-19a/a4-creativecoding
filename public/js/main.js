@@ -1,17 +1,5 @@
-
-
 var ps4data = [];
 var xboxdata = [];
-
-/* let vars = {
-  svgHeight: 300,
-  svgWidth: 1000,
-  minYear: 2012.5,
-  maxYear: 2019.5,
-  maxSales: 20,
-  minSales: 0,
-  circleSize: 8
-}; */
 
 const closeHelper = function () {
   var helperText = document.getElementById("helper-text")
@@ -96,7 +84,8 @@ var visualize = function () {
   var svg = d3
     .select(".sales")
     .attr("width", this.svgWidth)
-    .attr("height", this.svgHeight + 20);
+    .attr("height", this.svgHeight + 20)
+    .attr('style', "background-color: " + this.fill + '; border: 2px solid' + this.border)
 
   // The scale converts the data from the input domain, to an output range
   // These functions map an input domain to an output range. https://www.dashingd3js.com/d3js-scales
@@ -250,11 +239,13 @@ var visualize = function () {
   }
 
   this.updateColor = function(value) {
-    svg.attr("style", "background-color: " + value)
+    vm.fill = value
+    svg.attr("style", "background-color: " + vm.fill + "; border: 2px solid " + vm.border)
   } 
 
   this.updateBorder = function(value) {
-    svg.attr("style", "border: 5px solid " + value)
+    vm.border = value
+    svg.attr("style", "border: 1px solid " + vm.border + "; background-color: " + vm.fill)
   }
 };
 
