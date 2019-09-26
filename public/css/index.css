@@ -1,0 +1,121 @@
+#nav {
+    height: 60px;
+    width: 109.8%;
+    margin-top: 20px;
+    margin-left: -75px;
+    text-align: center;
+    background: rgb(255,0,0);
+    background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(0,0,255,1) 50%, rgba(0,255,31,1) 100%);
+    position: absolute;
+    z-index: 800;
+    overflow: hidden;
+    background-color: transparent;
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+    left: 0;
+    box-shadow: 0 1px 10px #999;
+}
+
+body {
+    background-color: black ;
+}
+
+h1 {
+    color: white;
+    font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter";
+    margin-top: 6px;
+    font-size: 3em;
+    font-weight: 600;
+}
+
+#container {
+    height: 1000px;
+    width: 1532px;
+    padding-left: 75px;
+    padding-right: 75px;
+    text-align: center;
+    background-color: black;
+    margin-top: -30px;
+    margin-left: -10px;
+    margin-right: -10px;
+    margin-bottom: -10px;
+}
+
+#canvas {
+    height: 800px;
+    width: 100%;
+}
+
+#btnContainer {
+    padding-bottom: 20px;
+    padding-top: 20px;
+    height: 60px;
+    width: 100%;
+}
+
+.btn {
+    width: 200px;
+    height: 40px;
+    margin-left: 5px;
+    margin-right: 5px;
+    border-radius: 20px;
+    font-family: 'Source Code Pro', 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+    background-color: gray;
+    text-decoration: none;
+    color: white;
+    font-size: 1em;
+    font-weight: 500;
+    text-transform: uppercase;
+    display: inline-block;
+    box-shadow: 0 1px 10px black;
+    border: none;
+    transition: 0.9s;
+}
+
+#mello:hover {
+    background-color: dodgerblue;
+    box-shadow: 0 1px 10px darkslategray;
+    cursor: pointer;
+}
+
+#rammstein:hover {
+    background-color: red;
+    box-shadow: 0 1px 10px darkslategray;
+    cursor: pointer;
+}
+
+#electro:hover {
+    background-color: hotpink;
+    box-shadow: 0 1px 10px darkslategray;
+    cursor: pointer;
+}
+
+#instru:hover {
+    background-color: red;
+    box-shadow: 0 1px 10px darkslategray;
+    cursor: pointer;
+}
+
+#dubstep:hover {
+    background-color: green;
+    box-shadow: 0 1px 10px darkslategray;
+    cursor: pointer;
+}
+
+#beats:hover {
+    background-color: dodgerblue;
+    box-shadow: 0 1px 10px darkslategray;
+    cursor: pointer;
+}
+
+#acdc:hover {
+    background-color: green;
+    box-shadow: 0 1px 10px darkslategray;
+    cursor: pointer;
+}
+
+
+
+
+
