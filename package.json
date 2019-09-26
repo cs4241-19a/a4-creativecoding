@@ -1,0 +1,31 @@
+{
+  "//1": "describes your app and its dependencies",
+  "//2": "https://docs.npmjs.com/files/package.json",
+  "//3": "updating this file will download and update your packages",
+  "name": "James Scherick's John Conway's Game of Life",
+  "version": "1.0.0",
+  "description": "James Scherick's John Conway's Game of Life",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "mime": "^2.4.4",
+    "path": "^0.12.7",
+    "standard": "^14.3.1"
+  },
+  "engines": {
+    "node": "8.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/hello-express"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express"
+  ]
+}

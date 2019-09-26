@@ -1,0 +1,28 @@
+<html>
+    <p>This is a website made to simulate John Conways Game of Life</p>
+    <p>To start select options for node size, board width, board height, and how many frames it takes to update the board. Then press apply to generate a new board with your choosen arguments</p>
+    <p>you will notice that some of the squares are colored in red and others are colored white. The red ones are alive and the white ones are dead</p>
+    <p>at the bottom of the grid there are button to start the simulation, stop the simulation, clear the board, or randomize the board. if you wish you edit the board maunally click on a square to toggle it on or off</p>
+    <p>there is also a ? button that will return you to this page</p>
+    <br>
+    <form method="get" action="/main">
+        <button type="submit">click here to go to the website</button>
+    </form>
+
+
+</html>
+
+<script>
+  const changePage = function(){
+    const json = { },
+          body = JSON.stringify( json )
+
+    fetch( '/main', {
+      method:'GET',
+      body 
+    })
+    .then( function( response ) {
+    })
+    return false
+  }
+</script>

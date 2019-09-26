@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>James Scherick's John Conway's Game of Life</title>
+    <script src='../draw.js' type='module'> </script>
+    <script src='../nextValue.js' type='module'> </script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+  <style>
+    #params {
+      border-collapse: collapse;
+    }
+    #params, th, td {
+      border: 1px solid black;
+    }
+  </style>
+  <body>
+    <table id="params">
+      <tr>
+        <th>node size</th>
+        <th>width</th>
+        <th>height</th>
+        <th>frames</th>
+      </tr>
+      <tr>
+        <td><input type="number" id="size"/></td>
+        <td><input type="number" id="width"/></td>
+        <td><input type="number" id="height"/></td>
+        <td><input type="number" id="frames"/></td>
+      </tr>
+    </table>
+    <button id="apply">apply</button>
+    <br>
+    <canvas id="myCanvas" width="200" height="100" style="border:1px solid #000000;"></canvas>
+    <br>
+    <button id="start">start</button><button id="stop">stop</button><button id="clear">clear</button><button id="randomize">randomize</button>
+    <form method="get" action="/">
+      <button type="submit">?</button>
+  </form>  
+  <input id="name" placeholder="save name"/><button id="save">save</button><select id="loadValue"></select><button id="load">load</button>
+  </body>
+</html>
+<script type="module">
+import drawAll from '../draw.js'
+import nextValue from '../nextValue.js'
+let size = 10
+let w = 20
+let h = 10
+let grid = new Array(w)
+const canvas = document.getElementById('myCanvas')
+const canvasLeft = canvas.offsetLeft
+const canvasTop = canvas.offsetTop
+let frameCap = 0
+let frame = 0
+let on = false
+for (var i = 0; i < grid.length; i++) {
+  grid[i] = new Array(h)
+  for (var j = 0; j < grid[i].length; j++) {
+    grid[i][j] = false
+  }
+}
+const applyCanvas = function () {
+  const canvas = document.getElementById('myCanvas')
+  size = document.getElementById('size').value
+  w = document.getElementById('width').value
+  h = document.getElementById('height').value
+  frameCap = document.getElementById('frames').value
+  frame = 0
+  grid = new Array(w)
+  for (var i = 0; i < w; i++) {
+    grid[i] = new Array(h)
+    for (var j = 0; j < h; j++) {
+      grid[i][j] = false
+    }
+  }
+  canvas.width = size * w
+  canvas.height = size * h
+  drawAll(grid, w, h, size)
+}
+const start = function () {
+  on = true
+}
+const stop = function () {
+  on = false
+}
+const clean = function () {
+  for (var i = 0; i < w; i++) {
+    for (var j = 0; j < h; j++) {
+      grid[i][j] = false
+    }
+  }
+  drawAll(grid, w, h, size)
+}
+const randomize = function () {
+  for (var i = 0; i < w; i++) {
+    for (var j = 0; j < h; j++) {
+      grid[i][j] = Boolean(Math.round(Math.random()))
+    }
+  }
+  drawAll(grid, w, h, size)
+}
+canvas.addEventListener('click', function (event) {
+  var x = event.pageX - canvasLeft
+  var y = event.pageY - canvasTop
+  var gridX = Math.floor(x / size)
+  var gridY = Math.floor(y / size)
+  grid[gridX][gridY] = !grid[gridX][gridY]
+  drawAll(grid, w, h, size)
+})
+const animate = function () {
+  window.requestAnimationFrame(animate)
+  if (on) {
+    if (frame >= frameCap) {
+      const oldGrid = JSON.parse(JSON.stringify(grid))
+      for (var i = 0; i < w; i++) {
+        for (var j = 0; j < h; j++) {
+          grid[i][j] = nextValue(i, j, w, h, oldGrid)
+        }
+      }
+      drawAll(grid, w, h, size)
+      frame = 0
+    } else {
+      frame++
+    }
+  }
+}
+window.requestAnimationFrame(animate)
+
+const save = function () {
+  const name = document.getElementById('name').value
+  if (name === '') {
+    alert('please give the save a name')
+    return false
+  }
+  const json = { name: name, size: size, width: w, height: h, grid: grid }
+  const body = JSON.stringify(json)
+  fetch('/save', {
+    method: 'POST',
+    body
+  })
+    .then(function (response) { // do something with the reponse
+      getDropdown()
+    })
+  return false
+}
+const load = function () {
+  var xhttp = new XMLHttpRequest()
+  xhttp.onreadystatechange = function () {
+    if (this.readyState === 4 && this.status === 200) {
+      const values = JSON.parse(this.responseText)
+
+      const canvas = document.getElementById('myCanvas')
+      size = values.size
+      w = values.width
+      h = values.height
+      frame = 0
+      grid = values.grid
+      canvas.width = size * w
+      canvas.height = size * h
+      drawAll(grid, w, h, size)
+    }
+  }
+  xhttp.open('GET', '/load?name=' + document.getElementById('loadValue').value + '', true)
+  xhttp.send()
+}
+const getDropdown = function () {
+  var xhttp = new XMLHttpRequest()
+  xhttp.onreadystatechange = function () {
+    if (this.readyState === 4 && this.status === 200) {
+      document.getElementById('loadValue').innerHTML = this.responseText
+    }
+  }
+  xhttp.open('GET', '/getDropdown', true)
+  xhttp.send()
+}
+getDropdown()
+window.onload = function () {
+  const startButton = document.getElementById('start')
+  startButton.onclick = start
+  const stopButton = document.getElementById('stop')
+  stopButton.onclick = stop
+  const clearButton = document.getElementById('clear')
+  clearButton.onclick = clean
+  const randomizeButton = document.getElementById('randomize')
+  randomizeButton.onclick = randomize
+  const applyButton = document.getElementById('apply')
+  applyButton.onclick = applyCanvas
+  const saveButton = document.getElementById('save')
+  saveButton.onclick = save
+  const loadButton = document.getElementById('load')
+  loadButton.onclick = load
+}
+
+drawAll(grid, w, h, size)
+
+
+</script>
