@@ -22,23 +22,54 @@ app.use( express.static('public'))
 app.use( bodyParser.json())
 app.use(favicon(path.join('public','res','favicon.ico')))
 app.use( session({ secret:'fromage', name:'a3-cookie', resave:false, saveUninitialized:true }) )
-// app.use( passport.initialize() )
-// app.use( passport.session() )
-// passport.use(new GoogleStrategy({
-//     clientID: '443479129403-kgnq88arlnldecfi9qp87queha2fhl7r.apps.googleusercontent.com',
-//     clientSecret: 'RIPOr3cA2Vwyd00UiMNoxNfK',
-//     callbackURL: "https://a3-hcaouette.glitch.me/auth/google/callback"
-//   },
-//   function(accessToken, refreshToken, profile, done) {
-//    return done(null, profile);
-//   }
-// ));
-// passport.initialize()
+// app.use(babel)
 
-
-//redirects
 app.get(('/' || '/index.html'), (req, res) => res.sendFile(public/index.html))
 
+
+export function activate() {
+  // Fill something here, optional
+}
+
+export function deactivate() {
+  // Fill something here, optional
+}
+
+export function provideLinter() {
+  return {
+    name: 'Example',
+    scope: 'file', // or 'project'
+    lintsOnChange: false, // or true
+    grammarScopes: ['source.js'],
+    lint(textEditor) {
+      const editorPath = textEditor.getPath()
+
+      // Do something sync
+      return [{
+        severity: 'info',
+        location: {
+          file: editorPath,
+          position: [[0, 0], [0, 1]],
+        },
+        excerpt: `A random value is ${Math.random()}`,
+        description: `### What is this?\nThis is a randomly generated value`
+      }]
+
+      // Do something async
+      return new Promise(function(resolve) {
+        resolve([{
+          severity: 'info',
+          location: {
+            file: editorPath,
+            position: [[0, 0], [0, 1]],
+          },
+          excerpt: `A random value is ${Math.random()}`,
+          description: `### What is this?\nThis is a randomly generated value`
+        }])
+      })
+    }
+  }
+}
 
 
 app.listen(port, () => console.log(`a3-hcaouette listening on port ${port}!`))
