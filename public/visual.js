@@ -57,10 +57,11 @@ function newBar(low, high) {
 
 
 function newCircle(low, high, radius) {
-    let circle = {
+    return {
+        rads: Math.PI * 2 / (this.high - this.low),
+        center_x: canvas.width / 2,
+        center_y: canvas.height / 2,
         draw: function () {
-            // requestAnimationFrame(this.draw.bind(this));
-            // analyser.getByteFrequencyData(frequencyData);
             let gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
             gradient.addColorStop(0, "rgba(35, 7, 77, 1)");
             gradient.addColorStop(1, "rgba(204, 83, 51, 1)");
@@ -68,24 +69,24 @@ function newCircle(low, high, radius) {
             // ctx.fillRect(0,0,canvas.width,canvas.height);
 
             ctx.beginPath();
-            ctx.arc(this.center_x, this.center_y, this.radius, 0, 2 * Math.PI);
+            ctx.arc(this.center_x, this.center_y, radius, 0, 2 * Math.PI);
             ctx.stroke();
 
             analyser.getByteFrequencyData(frequencyData);
-            for (let i = this.low; i < this.high; i++) {
+            for (let i = low; i < high; i++) {
                 this.drawBar(i);
             }
-        }
+        },
 
         drawBar: function (i) {
             let frequency = frequencyData[i];
             let bar_height = frequencyData[i] * 0.7;
             const cos = Math.cos(this.rads * i);
             const sin = Math.sin(this.rads * i);
-            let x = this.center_x + cos * this.radius;
-            let y = this.center_y + sin * this.radius;
-            let x_end = this.center_x + cos * (this.radius + bar_height);
-            let y_end = this.center_y + sin * (this.radius + bar_height);
+            let x = this.center_x + cos * radius;
+            let y = this.center_y + sin * radius;
+            let x_end = this.center_x + cos * (radius + bar_height);
+            let y_end = this.center_y + sin * (radius + bar_height);
 
             ctx.strokeStyle = "rgb(" + frequency + ", " + frequency + ", " + 205 + ")";
             ctx.lineWidth = circleBarWidth;
@@ -95,15 +96,6 @@ function newCircle(low, high, radius) {
             ctx.stroke();
         }
     };
-
-    circle.low = low;
-    circle.high = high;
-    circle.rads = Math.PI * 2 / (this.high - this.low);
-    circle.center_x = canvas.width / 2;
-    circle.center_y = canvas.height / 2;
-    circle.radius = radius;
-    circle.draw();
-    return circle;
 }
 
 let circle1 = newCircle(0, bufferLength * .625, 75);
