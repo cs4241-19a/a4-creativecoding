@@ -16,6 +16,8 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
 
 app.use(express.static('public'));
+app.use('/scripts', express.static(__dirname + '/node_modules/dat.gui/build'));  // serve dat.gui.min.js
+
 
 app.get('/', function(req, res) {
     res.render('index');

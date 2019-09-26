@@ -1,44 +1,96 @@
 import {startNote, endNote} from "./piano-sound.js";
+import * as dat from '/scripts/dat.gui.module.js';
 
 let lPiano;
 let rPiano;
-
-let noteDuration = 250;
 let keyPressedOptions;  // function called on key press
-let keyColors = {
-    'C': 'red',
-    'C#': 'orange',
-    'D': 'yellow',
-    'D#': 'greenyellow',
-    'E': 'green',
-    'F': 'cyan',
-    'F#': 'lightskyblue',
-    'G': 'blue',
-    'G#': 'blueviolet',
-    'A': 'purple',
-    'A#': 'lightpink',
-    'B': 'magenta',
+let noteDuration = 250;
+let gui;
+let pianoGui;
+
+
+
+
+// DAT.GUI //
+
+let PianoGui = function() {
+    this.duration = 0.25;
+    this.keyboardControl = true;
+    this.oscillator = "sine";
+    // todo on off for key controls
+
+    this['C'] = '#FF0000';      // red
+    this['C#'] = '#FFA500';     // orange
+    this['D'] = '#FFFF00';      // yellow
+    this['D#'] = '#ADFF2F';     // greenyellow
+    this['E'] = '#008000';      // green
+    this['F'] = '#00FFFF';      // cyan
+    this['F#'] = '#87CEFA';     // lightskyblue
+    this['G'] = '#0000FF';      // blue
+    this['G#'] = '#8A2BE2';     // blueviolet
+    this['A'] = '#800080';      // purple
+    this['A#'] = '#FFB6C1';     // lightpink
+    this['B'] = '#FF00FF';      // magenta
+
+    this.octaveL = 4;
+    this.playFormL = keyPressedOptions.click;
+    this.octaveR = 5;
+    this.playFormR = keyPressedOptions.click;
+
 };
 
-function changeKeyPressing(type) {
-    let keyPressed;
-    switch (type) {
-        case "click":
-            keyPressed = keyPressedOptions.click;
-            break;
-        case "hover":
-            keyPressed = keyPressedOptions.hover;
-            break;
-        case "clickHold":
-            keyPressed = keyPressedOptions.clickHold;
-            break;
-        case "hoverHold":
-            keyPressed = keyPressedOptions.hoverHold;
-            break;
-    }
-    lPiano.bindKeyPress(keyPressed);
-    rPiano.bindKeyPress(keyPressed);
+function setupGui() {
+    gui = new dat.GUI();
+    pianoGui = new PianoGui();
+    gui.add(pianoGui, 'duration').min(0);
+    gui.add(pianoGui, 'keyboardControl');
+    gui.add(pianoGui, 'oscillator', {'Sine': 'sine', 'Square': 'square', 'Sawtooth': 'sawtooth', 'Triangle': 'triangle'});
+
+    const colors = gui.addFolder('Key Colors');
+    colors.addColor(pianoGui, 'C');
+    colors.addColor(pianoGui, 'C#');
+    colors.addColor(pianoGui, 'D');
+    colors.addColor(pianoGui, 'D#');
+    colors.addColor(pianoGui, 'E');
+    colors.addColor(pianoGui, 'F');
+    colors.addColor(pianoGui, 'F#');
+    colors.addColor(pianoGui, 'G');
+    colors.addColor(pianoGui, 'G#');
+    colors.addColor(pianoGui, 'A');
+    colors.addColor(pianoGui, 'A#');
+    colors.addColor(pianoGui, 'B');
+
+
+    const lPianoFolder = gui.addFolder('Left');
+    lPianoFolder.add(pianoGui, 'octaveL', 1, 7).step(1);
+    lPianoFolder.add(pianoGui, 'playFormL', {
+        'Click': keyPressedOptions.click,
+        'Hover': keyPressedOptions.hover,
+        'Click Hold': keyPressedOptions.clickHold,
+        'Hover Hold': keyPressedOptions.hoverHold,
+    })
+        .onFinishChange(function(value) {
+            lPiano.bindKeyPress(eval(value));
+        });
+
+    const rPianoFolder = gui.addFolder('Right');
+    rPianoFolder.add(pianoGui, 'octaveR', 1, 7).step(1);
+    rPianoFolder.add(pianoGui, 'playFormR', {
+        'Click': keyPressedOptions.click,
+        'Hover': keyPressedOptions.hover,
+        'Click Hold': keyPressedOptions.clickHold,
+        'Hover Hold': keyPressedOptions.hoverHold,
+    })
+        .onFinishChange(function(value) {
+            rPiano.bindKeyPress(eval(value));
+        });
+
+
 }
+
+
+
+
 
 function setup() {
     lPiano = pianoClosure("piano1");
@@ -46,9 +98,7 @@ function setup() {
     keyPressedOptions = keyPressedClosure();
     lPiano.bindKeyPress(keyPressedOptions.click);
     rPiano.bindKeyPress(keyPressedOptions.click);
-    lPiano.bindKeyColor(keyColors);
-    rPiano.bindKeyColor(keyColors);
-
+    setupGui();
 }
 
 function keyboardBindings(key) {
@@ -122,8 +172,9 @@ function keyPressedClosure() {
         upTrigger(key);
     }
     function downTrigger(key) {
+        console.log(pianoGui);
         startNote(key);
-        key.setAttribute("style", "fill: " + key.dataset.onColor);
+        key.setAttribute("style", "fill: " + pianoGui[key.dataset.note])
     }
     function upTrigger(key) {
         setTimeout(() => {
@@ -146,13 +197,7 @@ function pianoClosure(pianoId) {
         piano.querySelectorAll("rect").forEach(f);
     };
 
-    const bindKeyColor = function (keyColors) {
-        piano.querySelectorAll("rect").forEach((key) => {
-            key.setAttribute('data-on-color', keyColors[key.dataset.note]);
-        });
-    };
-
-    return {bindKeyPress, bindKeyColor};
+    return {bindKeyPress};
 }
 
 export default {setup}
