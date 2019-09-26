@@ -1,23 +1,29 @@
 //based on an example found here: https://codepen.io/programking/pen/MyOQpO
 const THREE = require('three');
 const dat = require('dat.gui');
+const OrbitControls = require('three-orbitcontrols');
+const GLTFLoader = require('three-gltf-loader');
 
 //need to declare these variables globally 
 //creating a scene 
-var scene, camera, renderer;
+var scene, camera, renderer, controls;
 //the cube
 var geometry, material;
 //gui stuff 
 var options, gui;
 //things on menu
 var cam, velocity, box;
-
+//color
+var API = {
+    color: 0xffffff,
+    exposure: 1.0
+};
 
 window.onload  = function(){
     //Creating a Scene 
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(
-        75, window.innerWidth / window.innerHeight, 
+        4, window.innerWidth / window.innerHeight, 
         0.1, 1000);
     camera.position.z = 75;
     camera.position.x = 50;
@@ -29,7 +35,12 @@ window.onload  = function(){
     renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
     document.body.appendChild(renderer.domElement);
-
+    
+    //controls 
+    controls = new OrbitControls(camera, renderer.domElement);
+    controls.addEventListener('change', render);
+    controls.enableZoom = false;
+    
     //the cube 
     geometry = new THREE.BoxGeometry(5,5,5,5,5,5);
     material = new THREE.MeshBasicMaterial(
@@ -37,7 +48,7 @@ window.onload  = function(){
         blending: THREE.NormalBlending,
         depthTest: true});
     
-        cube = new THREE.Mesh(geometry, material);
+    cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
         
     //options for menu
@@ -88,6 +99,14 @@ window.onload  = function(){
     gui.add(options, 'stop');
     gui.add(options, 'reset');
 
+    gui.addColor(API, 'color')
+        .listen()
+        .onChange(function() {
+            cube.material.color.set(API.color);
+            render();
+        });
+    
+    //gui
     //animation 
     render();
 }
@@ -109,3 +128,5 @@ var render = function() {
     renderer.render(scene, camera);
   
   };
+
+  
