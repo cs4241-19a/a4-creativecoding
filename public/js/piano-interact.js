@@ -1,13 +1,12 @@
 import {startNote, endNote} from "./piano-sound.js";
 import * as dat from '/scripts/dat.gui.module.js';
 
+
 let lPiano;
 let rPiano;
 let keyPressedOptions;  // function called on key press
 let gui;
 let pianoGui;
-
-
 
 
 // DAT.GUI //
@@ -112,9 +111,6 @@ function chooseKeyPress(type) {
     }
 }
 
-
-
-
 function setup() {
     lPiano = pianoClosure("piano1");
     rPiano = pianoClosure("piano2");
@@ -183,7 +179,6 @@ function keyPressedClosure() {
                     document.addEventListener("keyup", upKeyFunc);
                 }
             };
-
             let remove = function () {
                 if (upF) {
                     upFunc();  // make sure the key is not pressed anymore otherwise its stuck playing
@@ -195,7 +190,6 @@ function keyPressedClosure() {
                     document.removeEventListener("keyup", upKeyFunc);
                 }
             };
-
             add();
             return {remove};
         };

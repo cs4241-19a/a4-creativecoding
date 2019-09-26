@@ -1,13 +1,11 @@
 import interact from "./piano-interact.js";
 
-
 window.onload = function () {
     interact.setup();
 };
 
 
 // Modal
-
 const modal = document.getElementById("helpModal");
 const btn = document.getElementById("help");
 const span = document.getElementsByClassName("close")[0];

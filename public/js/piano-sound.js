@@ -1,10 +1,5 @@
 const AudioContext = window.AudioContext || window.webkitAudioContext;
 const audioCtx = new AudioContext();
-
-// const oscillatorNode = audioCtx.createOscillator();
-// const gainNode = audioCtx.createGain();
-// const finish = audioCtx.destination;
-
 const oscs = [];  // oscillators
 
 function startNote(key, type) {
@@ -68,6 +63,5 @@ function getHS(note) {
         case 'B': return 11;
     }
 }
-
 
 export {startNote, endNote}
