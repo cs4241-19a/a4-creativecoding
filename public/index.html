@@ -2,9 +2,32 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>IA Audio Visualizer</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
 </head>
 <body>
-    <h1>Test</h1>
+    <div class="bg-hero-image"></div>
+    <button class="collapsible">Info (Click to Expand)</button>
+    <div class="content">
+        <p>IA is a VOCALOID, a humanoid persona voiced by a singing synthesizer application developed by 1st Place Co., Ltd., headquartered in Meguro, Tokyo, Japan.</p>
+        <p>People can use IA's voice bank to create their own songs.  The songs provided were created by Soundcloud user, Kita-Kei, and are being shared through a Creative Commons License.</p>
+    </div>
+    <div class="song-dropdown">
+        <select>
+            <option value="0">Select Song:</option>
+            <option value="1">Azure Lines</option>
+            <option value="2">Azure Sky</option>
+            <option value="3">Planisphere</option>
+            <option value="4">Travelers</option>
+            <option value="5">Waypoints</option>
+        </select>
+    </div>
+    <button id="testButton">Play Song</button>
+    <button id="testButton2">Play Song2</button>
+    <canvas id="studio-canvas" width="1024" height="600"></canvas>
+    <!--<audio controls id="audio"></audio>-->
+    <audio id="audio" src="../audio/AzureLines.mp3"></audio>
+    <audio id="azureSky" src="../audio/AzureSky.mp3"></audio>
+    <script src="js/main.js"></script>
 </body>
 </html>
