@@ -19,6 +19,8 @@ app.use(compression());
 
 app.use(express.static(__dirname + '/'));
 
+app.use('/scripts', express.static(__dirname + '/node_modules/dat.gui/build'))
+
 app.get('/', function (request, response) {
     response.sendFile(__dirname + '/views/index.html');
 });

@@ -1,3 +1,20 @@
+import * as dat from '/scripts/dat.gui.module.js';
+
+const gui = new dat.GUI();
+
+
+let guiSetup;
+guiSetup = function(){
+    this.DiceType = "d6";
+    this.DiceSize = 1;
+    this.DiceSpeed = 0.25;
+    this.DiceColor = "#ffae23";
+    this.Wireframe = false;
+    this.ClickForHelp = function() {
+
+    };
+};
+
 const checkErrors = function(input1, input2, input3, input4){
     const inputs = ["d1", "d4", "d6", "d8", "d10", "d12", "d20", "d100"]
     if(!inputs.includes(input1.value)){
@@ -13,7 +30,7 @@ const checkErrors = function(input1, input2, input3, input4){
         return {error: true, message: "Flat modifier must be greater than or equal to 0"}
     }
     return {error: false, message: ""}
-}
+};
 
 const submit = function( e ) {
     // prevent default form action from being carried out
@@ -35,6 +52,9 @@ const submit = function( e ) {
     document.getElementById('dice').innerHTML = "";
 
     let errors = checkErrors(input1, input2, input3, input4);
+
+    //console.log(guiSetup.text);
+
     if(errors.error === true){
         document.getElementById('errorLabel').style.display = 'block';
         document.getElementById('errorLabel').innerHTML = errors.message;
@@ -108,10 +128,10 @@ const roll3dDice = {
             this.createLights();
             //this.knot = this.createKnot();
             //this.diceList = this.createD4();
-            //this.diceList = this.createD6();
+            this.diceList = this.createD6();
             //this.diceList = this.createD8();
             //this.diceList = this.createD10();
-            this.diceList = this.createD12();
+            //this.diceList = this.createD12();
 
             // ...the rare and elusive hard binding appears! but why?
             this.render = this.render.bind( this );
@@ -362,5 +382,12 @@ const roll3dDice = {
 window.onload = function() {
     document.getElementById('errorLabel').style.display = "none";
     const button1 = document.querySelector( '#submitButton' );
-    button1.onclick = submit
+    button1.onclick = submit;
+    guiSetup = new guiSetup();
+    gui.add(guiSetup, "DiceType", [ 'd1', 'd4', 'd6', 'd8']);
+    gui.add(guiSetup, "DiceSize", 0, 5);
+    gui.add(guiSetup, "DiceSpeed", 0, 1);
+    gui.addColor(guiSetup, "DiceColor");
+    gui.add(guiSetup, "Wireframe");
+    gui.add(guiSetup, "ClickForHelp");
 };
