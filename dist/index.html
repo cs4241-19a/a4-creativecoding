@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Empty project</title>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/two.js/0.7.0-beta.3/two.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+</head>
+
+<body>
+    <div class="modal is-active" id="help">
+        <div class="modal-background"></div>
+        <div class="modal-content">
+            <div class="box">
+                <article class="media">
+                    <div class="media-content">
+                        <div class="content">
+                            <p>
+                                <strong>TypeWars</strong> <small><a
+                                        href="https://twitter.com/jpinzer">@jpinzer</a></small> <small><a
+                                        href="http://jpinzer.me">jpinzer.me</a></small>
+                                <br>
+                                Welcome to TypeWars!<br>
+                                Settings available in Controls GUI (Top Right of page, higher the value, the more
+                                difficult):<br>
+                                <ul>
+                                    <li>Word Difficulty</li>
+                                    <li>Time Difficulty</li>
+                                    <li>Speed Difficulty</li>
+                                    <li>Rotation Enabled</li>
+                                    <li>Rotation Difficulty</li>
+                                    <li>Text Color</li>
+                                    <li>Text Font</li>
+                                    <li>Font Size</li>
+                                </ul>
+                                Displayed up there is also the score and remaining lives. You only get 3! Refresh the page to start again.<br>
+                                Hit enter to submit what you've typed. <br>
+                                Hit space bar to pause! <br>
+                                <b>Hit the ? key (will work even if shift isn't pressed and it's a `/` instead) to bring
+                                    this dialog back!</b>
+                            </p>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+        <button class="modal-close is-large" aria-label="close"></button>
+    </div>
+    <div class="container" id="app"></div>
+    <div class="container" id="paused">
+        <div class="notification">
+            <h1 class="title is-centered" id="title">PAUSED</h1>
+        </div>
+    </div>
+    <script src="bundle.js"></script>
+</body>
+<footer class="footer">
+    <div class="content has-text-centered">
+        <input id="input" class="input" type="text" placeholder="Text input" autofocus>
+    </div>
+</footer>
+
+</html>
+<style>
+    footer {
+        width: 100%;
+        height: 150px;
+        position: fixed;
+        bottom: 0px;
+        left: 0px;
+    }
+</style>
