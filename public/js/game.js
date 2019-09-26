@@ -1,24 +1,44 @@
+import {app} from './main.js';
+
 // Creates an array with specified number of rows
 // TODO make it variable
 function createArray() {
   var arr = [];
-  for(var i = 0; i < 100; i++) {
+  for(var i = 0; i < 800; i++) {
     arr[i] = [];
   }
   return arr;
 }
 
-// Returns a randomly populated grid
-function randomGrid() {
-  var newGrid = createArray();
-
-  for(var j = 0; j < 100; j++) {
-    for(var k = 0; k < 100; k++) {
+// Returns a totall randomly populated grid
+// Warning: Experimental. Causes lots of lag
+function randomLarge() {
+  for(var j = 0; j < 800; j++) {
+    for(var k = 0; k < 600; k++) {
       let rand = Math.round(Math.random());
-      newGrid[j][k] = rand;
+      app.gameGrid[j][k] = rand;
+      app.visited.push({j: j, k: k});
     }
   }
-  return newGrid;
+}
+
+// Populates a 200 by 150 size grid
+function randomSmall() {
+  // Initializing all to zero
+  for(var j = 0; j < 800; j++) {
+    for(var k = 0; k < 600; k++) {
+      app.gameGrid[j][k] = 0;
+    }
+  }
+
+  // Filling in smaller area randomly
+  for(var j = 299; j < 500; j++) {
+    for(var k = 199; k < 400; k++) {
+      let rand = Math.round(Math.random());
+      app.gameGrid[j][k] = rand;
+      app.visited.push({j: j, k: k});
+    }
+  }
 }
 
 // Returns the next generation of a grid
@@ -27,24 +47,25 @@ function nextGen() {
   var newGrid = createArray();
 
   // Checking all cells in grid
-  for(var j = 0; j < 100; j++) {
-    for(var k = 0; k < 100; k++) {
+  for(var j = 1; j < 800 - 1; j++) {
+    for(var k = 1; k < 600 - 1; k++) {
+      //console.log('j:', j, 'k:', k);
       let neighbors = 0;
 
       // Calculating number of neighbors for cell
-      neighbors += gameGrid[j - 1][k - 1];
-      neighbors += gameGrid[j - 1][k];
-      neighbors += gameGrid[j - 1][k + 1];
+      neighbors += app.gameGrid[j - 1][k - 1];
+      neighbors += app.gameGrid[j - 1][k];
+      neighbors += app.gameGrid[j - 1][k + 1];
 
-      neighbors += gameGrid[j][k - 1];
-      neighbors += gameGrid[j][k + 1];
+      neighbors += app.gameGrid[j][k - 1];
+      neighbors += app.gameGrid[j][k + 1];
 
-      neighbors += gameGrid[j + 1][k - 1];
-      neighbors += gameGrid[j + 1][k];
-      neighbors += gameGrid[j + 1][k + 1];
+      neighbors += app.gameGrid[j + 1][k - 1];
+      neighbors += app.gameGrid[j + 1][k];
+      neighbors += app.gameGrid[j + 1][k + 1];
 
       // Handling live cells
-      if(gameGrid[j][k] === 1) {
+      if(app.gameGrid[j][k] === 1) {
         // Survival
         if(neighbors === 2 || neighbors === 3) {
           newGrid[j][k] = 1;
@@ -57,11 +78,21 @@ function nextGen() {
         // Birth
         if(neighbors === 3) {
           newGrid[j][k] = 1;
+          app.visited.push({j: j, k: k});
         }
         // No birth
         else newGrid[j][k] = 0;
       }
     }
   }
-  return newGrid;
+
+  // Assigning new grid cells to game grid
+  for(var j = 0; j < 800; j++) {
+    for(var k = 0; k < 600; k++) {
+      app.gameGrid[j][k] = newGrid[j][k];
+    }
+  }
+  app.gen++;
 }
+
+export {createArray, randomLarge, randomSmall, nextGen};

@@ -1,17 +1,29 @@
+import {app} from './main.js';
+
 // Draws the contents of a game grid onto the canvas
 function displayGrid() {
   let canvas = document.getElementById('canvas');
   let ctx = canvas.getContext('2d');
 
-  // Clearing canvas before redraw
-  ctx.clearRect(0, 0, 690, 420);
-  ctx.fillStyle = '#FF0000'
+  if(app.smooth) {
+    // Filling with a white layer for trail effects
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+    ctx.fillRect(0, 0, 800, 600);
+  }
+  else {ctx.clearRect(0, 0, 800, 600);}
 
-  for(var j = 0; j < 100; j++) {
-    for(var k = 0; k < 100; k++) {
-      if(gameGrid[j][k] === 1) {
-        ctx.fillRect(j, k, 1, 1);
-      }
+  // Drawing current game grid
+  ctx.fillStyle = app.cellColor;
+  for(var j = 1; j < 800; j++) {
+  for(var k = 1; k < 600; k++) {
+    if(app.gameGrid[j][k] === 1) {
+      ctx.fillRect(j * app.zoom, k * app.zoom, app.zoom, app.zoom);
     }
   }
+  }
+
+  // Updating gen count
+  document.getElementById('genCount').innerHTML = 'Current generation: ' + app.gen;
 }
+
+export {displayGrid};
