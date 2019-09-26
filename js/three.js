@@ -27,6 +27,7 @@ window.onload  = function(){
     document.body.appendChild(renderer.domElement);
 
     //the cube 
+    /*
     geometry = new THREE.BoxGeometry(1,1,1);
     material = new THREE.MeshBasicMaterial(
         {color: 0x00ff00});
@@ -34,7 +35,8 @@ window.onload  = function(){
     scene.add(cube);
 
     camera.position.z = 5;
-	
+    */
+    
 	//gui 
 	text = new FizzyText();
 	gui = new dat.GUI();
@@ -44,7 +46,7 @@ window.onload  = function(){
 	//gui.add(text, 'explode');
 
     //animation
-    animate();
+    //animate();
 }
 
 //render/animation loop 
