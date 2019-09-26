@@ -1,5 +1,3 @@
-
-
 /**
  * The class that owns the canvas and draws gameobjects to it
  */
@@ -35,17 +33,62 @@ class GameManager {
   }
 
   /**
-   * update the characters and draw the scene
+   * returns the first instance of an object with the given name
+   * @param {String} name
+   * @return {GameObject}
+   */
+  getObject(name) {
+    const matches = this._gameObjectList.filter(
+        (elt)=>{
+          return elt.name === name;
+        }
+    );
+    if (matches.length > 0) {
+      return matches[0];
+    }
+    return null;
+  }
+  /**
+   * remove all items with given name
+   * @param {String} name
+   */
+  removeAll(name) {
+    this._gameObjectList = this._gameObjectList.
+        filter((elt)=>{
+          return !(elt.name === name);
+        });
+  }
+  /**
+   * Removes a game object passed in
+   * @param {GameObject} g
+   */
+  removeGameObject(g) {
+    this._gameObjectList = this._gameObjectList.filter((elt)=> !(elt === g));
+  }
+  /**
+   * update the entities and draw the scene
    */
   draw() {
     // clear the screen, then draw all of the assets again
-    this._context.clearRect(0, 0, 600, 300); // clear canvas
+    this._context.clearRect(0, 0,
+        this._canvas.width, this._canvas.height); // clear canvas
+    this._context.fillStyle = '#fff8e1';
+    this._context.fillRect(0, 0, this._canvas.width, this._canvas.height);
     this._gameObjectList.forEach((g)=>{
       g.update();
-      this._context.drawImage(g.texture, g.x, g.y, g.width, g.height);
+      // only draw if the element has a texture
+      if (g.texture) {
+        this._context.drawImage(g.texture, g.x, g.y, g.width, g.height);
+      }
     });
   }
 
+  /**
+   * @return {HTMLCanvasElement}
+   */
+  get canvas() {
+    return this._canvas;
+  }
   /**
    * @return {CanvasRenderingContext2D}
    */

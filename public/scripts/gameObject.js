@@ -7,6 +7,7 @@ class GameObject {
     _height;
     _width;
     _texture;
+    _name;
 
     /**
      *
@@ -15,13 +16,15 @@ class GameObject {
      * @param {number} height
      * @param {number} width
      * @param {HTMLImageElement} texture the actual image
+     * @param {String} name the name of the object
      */
-    constructor(x, y, height, width, texture) {
+    constructor(x, y, height, width, texture, name) {
       this._x=x;
       this._y=y;
       this._height = height;
       this._width = width;
-      this._texture=texture;
+      this._texture = texture;
+      this._name = name;
     }
 
     /**
@@ -57,6 +60,27 @@ class GameObject {
    */
     get texture() {
       return this._texture;
+    }
+
+    /**
+   *
+   * @return {String}
+   */
+    get name() {
+      return this._name;
+    }
+
+    /**
+   * Checks for a collision between 2 game objects
+   * @param {GameObject} g1
+   * @param {GameObject} g2
+     * @return {boolean}
+   */
+    static detectCollision(g1, g2) {
+      return g1.x < g2.x + g2.width &&
+          g1.x + g1.width > g2.x &&
+          g1.y < g2.y + g2.height &&
+          g1.y + g1.height > g2.y;
     }
 
     /**

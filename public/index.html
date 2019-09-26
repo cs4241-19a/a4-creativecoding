@@ -1,11 +1,50 @@
 <!doctype html>
-<html lang='en'>
-<meta charset='utf-8'>
+<html lang="en">
 <head>
-    <style> body { margin:0 } </style>
-
+  <title>CS4241 Assignment 2</title>
+  <meta charset="utf-8">
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize_dep.css-->
+  <link href="materialize/css/materialize.css" rel="stylesheet"/>
 </head>
-<canvas id="canvas" width="600" height="300"></canvas>
+<body>
+<nav>
+  <div class="nav-wrapper light-green lighten-2">
+    <a href="#" class="brand-logo center black-text">Medieval Battle Simulator Online</a>
+  </div>
+</nav>
+<p></p>
+<canvas id="canvas" width="600" height="600"></canvas>
+<p></p>
+<a class="waves-effect waves-light btn light-green" id="add"><i class="material-icons center">mode_edit</i></a>
+<a class="waves-effect waves-light btn grey" id="delete"><i class="material-icons center">delete</i></a>
+<a class='dropdown-trigger btn' data-target='teams' id='team'>Blue</a>
+<a class="waves-effect waves-light btn" id='pause'><i class="material-icons center" id='pause_icon'>pause</i></a>
+<a class="waves-effect waves-light btn" id='clear'><i class="material-icons center">clear</i></a>
+<!-- Dropdown Trigger -->
+
+<!-- Dropdown Structure -->
+<ul id='teams' class='dropdown-content'>
+  <li><a>red</a></li>
+  <li><a>blue</a></li>
+</ul>
+
+<form class="col s12">
+  <div class="row">
+    <div class="input-field col s1">
+      <input id="first_name" type="text" class="validate">
+      <label for="first_name">Strength</label>
+    </div>
+    <div class="input-field col s1">
+      <input id="last_name" type="text" class="validate">
+      <label for="last_name">Health</label>
+    </div>
+  </div>
+</form>
+
 <script src='./bundle.js' type='module'></script>
+<script src="materialize/js/materialize.js"></script>
+</body>
 <!--<img class="sealImage" alt="Image of Seal" src="../img/j3evn.jpg">-->
 </html>

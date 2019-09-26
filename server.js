@@ -19,6 +19,7 @@ const fs = require('fs');
 app.use(helmet());
 app.use(compression());
 app.use(bodyParser.urlencoded({extended: true})); // support encoded bodies
+
 const accessLogStream = fs.createWriteStream(
     path.join(__dirname, 'access.log'), {flags: 'a'});
 
@@ -27,8 +28,8 @@ app.use(morgan('combined', {stream: accessLogStream}));
 // provide favicon
 app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 // Provide files from node_modules
-// app.use('/materialize', express.static(__dirname +
-// '/node_modules/materialize-css/dist'));
+app.use('/materialize', express.static(__dirname +
+    '/node_modules/materialize-css/dist'));
 
 app.use(express.static(__dirname + '/public'));
 // app.use(bodyParser.json({type: 'application/json'}));

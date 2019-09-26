@@ -1,5 +1,17 @@
+import GameObject from '../public/scripts/gameObject';
 import GameManager from '../public/scripts/gameManager';
-import Knight from '../public/scripts/characters/knight';
+
+/**
+ * Dummy object class
+ */
+class DummyObject extends GameObject {
+  /**
+   * construct a dummy object
+   */
+  constructor() {
+    super(0, 0, 0, 0, null, 'dummy');
+  }
+}
 
 describe('The GameManager getInstance', () =>{
   beforeEach(()=> {
@@ -9,6 +21,14 @@ describe('The GameManager getInstance', () =>{
       GameManager._instance._context = {
         drawImage: function() {
         },
+        clearRect: function(x, y, w, h) {
+        },
+        fillRect: function(x, y, w, h) {
+        },
+      };
+      GameManager._instance._canvas = {
+        width: null,
+        height: null,
       };
     });
   });
@@ -27,7 +47,7 @@ describe('The GameManager getInstance', () =>{
 
   it('should add a character with insert, and call its start function', ()=>{
     const gameManager = GameManager.getInstance();
-    const knight = new Knight(0, 0, null);
+    const knight = new DummyObject();
     // don't actually call start
     spyOn(knight, 'start');
     gameManager.insertGameObject(knight);
@@ -36,10 +56,10 @@ describe('The GameManager getInstance', () =>{
     expect(knight.start).toHaveBeenCalled();
   });
 
-  it('should call update on all characters when draw is called', ()=>{
+  it('should call update on all entities when draw is called', ()=>{
     const gameManager = GameManager.getInstance();
-    const knight1 = new Knight(0, 0, null);
-    const knight2 = new Knight(0, 0, null);
+    const knight1 = new DummyObject();
+    const knight2 = new DummyObject();
     spyOn(knight1, 'start');
     spyOn(knight2, 'start');
     spyOn(knight1, 'update');
@@ -53,5 +73,22 @@ describe('The GameManager getInstance', () =>{
     expect(knight1.update).toHaveBeenCalled();
     expect(knight2.update).toHaveBeenCalled();
   });
+
+  it('should remove a specific game object when passed to removeGameObject',
+      ()=>{
+        const gameManager = GameManager.getInstance();
+        const knight1 = new DummyObject();
+        const knight2 = new DummyObject();
+        spyOn(knight1, 'start');
+        spyOn(knight2, 'start');
+        spyOn(knight1, 'update');
+        spyOn(knight2, 'update');
+        gameManager.insertGameObject(knight1);
+        gameManager.insertGameObject(knight2);
+        gameManager.removeGameObject(knight1);
+
+        expect(gameManager.gameObjects.length).toBe(1);
+        expect(gameManager.gameObjects[0]).toBe(knight2);
+      });
 });
 
