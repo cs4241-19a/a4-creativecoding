@@ -5,6 +5,8 @@ Assignment 4 - Creative Coding: Interactive Multimedia Experiences
 
 See the site at http://a4-kdoje.glitch.me
 
+**NOTE:** Due to the canvas, the site must be viewed in a separate window.
+
 For my project I wanted to create a battle simulator that used the emergent behavior of the different entities to simulate a battle. In this simulator, the red an blue knights will patrol (walk left and right), until they see a knight of the other color. They will run toward the nearest enemy and attack them, reducing their health. Once a knight's health is 0 they're removed from the simulator. To user is able to pause the simulator to remove and add knights as they wish. The screen can be cleared with the X button, and additional information can be shown/hidden with the question button. The strength (damage the knight does) and health (amount of damage it can take before being removed) can be set the text boxes.
 
 - Challenges
