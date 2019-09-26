@@ -13,18 +13,18 @@ var xboxdata = [];
   circleSize: 8
 }; */
 
-const closeHelper = function() {
+const closeHelper = function () {
   var helperText = document.getElementById("helper-text")
-  if(helperText.style.opacity == 0.0) {
+  if (helperText.style.opacity == 0.0) {
     helperText.style.opacity = 1
   } else {
     helperText.style.opacity = 0
   }
 }
 
-const fetchPS4Data = function() {
+const fetchPS4Data = function () {
   return new Promise(
-    function(resolve, reject) {
+    function (resolve, reject) {
       fetch("/ps4data", {
         credentials: "include"
       })
@@ -39,12 +39,12 @@ const fetchPS4Data = function() {
         });
     }
   )
-  
+
 };
 
-const fetchXboxData = function() {
+const fetchXboxData = function () {
   return new Promise(
-    function(resolve, reject) {
+    function (resolve, reject) {
       fetch("/xboxdata", {
         method: "GET",
         credentials: "include"
@@ -65,30 +65,33 @@ const fetchXboxData = function() {
 
 
 // Takes in a value and returns a custom color based on the value
-const customColor = function(value) {
-  let r = Math.pow(value, 2) * 5;
+const customColor = function (value) {
+  let r = Math.min(Math.pow(Math.round(value), 2) * 15, 255);
   let g = 0;
-  let b = Math.pow(value, 2) * 5;
+  let b = 0;
   return `rgb(${r}, ${g}, ${b})`;
 };
 
 var div = d3
-    .select("body")
-    .append("div")
-    .attr("class", "tooltip")
-    .text( function() {
-      return "yo"
-    })
-    .style("opacity", 0);
+  .select("body")
+  .append("div")
+  .attr("class", "tooltip")
+  .text(function () {
+    return "yo"
+  })
+  .style("opacity", 0);
 
-var visualize = function() {
-    this.svgHeight = 300;
-    this.svgWidth = 1000;
-    this.minYear = 2012.5;
-    this.maxYear = 2019.5;
-    this.minSales = 0;
-    this.maxSales = 20;
-    this.circleSize = 8;
+var visualize = function () {
+  this.svgHeight = 300;
+  this.svgWidth = 1000;
+  this.minYear = 2012.5;
+  this.maxYear = 2019.5;
+  this.minSales = 0;
+  this.maxSales = 20;
+  this.circleSize = 8;
+  this.fill = "white";
+  this.border = "white"
+  this.yValue = "Europe";
 
   var svg = d3
     .select(".sales")
@@ -126,38 +129,40 @@ var visualize = function() {
     .attr("transform", `translate(0, 0)`)
     .call(yAxis);
 
+  var vm = this
+
   var barChart = svg
     .selectAll("circle")
     .data(ps4data)
     .enter()
     .append("circle")
-    .attr("cx", function(d) {
+    .attr("cx", function (d) {
       return xScale(d.Year);
     })
-    .attr("cy", function(d) {
-      return yScale(d.Europe);
+    .attr("cy", function (d) {
+      return yScale(d[vm.yValue]);
     })
     .attr("r", this.circleSize + "px")
-    .attr("fill", function(d) {
-      return customColor(d.Europe);
+    .attr("fill", function (d) {
+      return customColor(d[vm.yValue]);
     })
-    .on("mouseover", function(d, i) {
+    .on("mouseover", function (d, i) {
       d3.select(this)
         .transition()
         .duration(50)
         .attr("opacity", .5);
 
-      
-        // Make the div appear with the game and value
+
+      // Make the div appear with the game and value
       div
         .transition()
         .duration("50")
         .style("opacity", 1);
-      
-        // Assign the div the game and value
-      div.html(d.Game + ": " + d.Europe);
+
+      // Assign the div the game and value
+      div.html(d.Game + ": " + d[vm.yValue]);
     })
-    .on("mouseout", function(d, i) {
+    .on("mouseout", function (d, i) {
       d3.select(this)
         .transition()
         .duration(50)
@@ -169,28 +174,121 @@ var visualize = function() {
         .style("opacity", 0);
     });
 
-    this.update = function() {
-      barChart.attr('r', this.circleSize + 'px')
-    }
+  this.updateCircleSize = function () {
+    barChart.attr('r', this.circleSize + 'px')
+  }
+
+  this.updateYValue = function (value) {
+    var country = document.getElementById('country')
+    if (value === "Japan")
+      vm.yValue = "Japan"
+    if (value === "Europe")
+      vm.yValue = "Europe"
+    if (value === "North America")
+      vm.yValue = "North America"
+    if (value === "Rest of World")
+      vm.yValue = "Rest of World"
+    if (value === "Global")
+      vm.yValue = "Global"
+    
+    country.innerHTML = value
+    barChart.attr("cy", function (d) {
+      return yScale(d[vm.yValue]);
+    })
+  }
+
+  this.updateMaxSales = function (value) {
+    vm.maxSales = value
+    yScale = d3
+      .scaleLinear()
+      .domain([vm.maxSales, vm.minSales])
+      .range([0, vm.svgHeight]);
+
+    barChart
+      .attr("cy", function (d) {
+        return yScale(d[vm.yValue]);
+      })
+
+    yAxis = d3.axisRight(yScale);
+
+    svg.selectAll('g').remove()
+
+    svg.append('g')
+      .attr("transform", 'translate(0, 0)')
+      .call(yAxis);
+
+    svg
+      .append("g")
+      .attr("transform", `translate(0, ${this.svgHeight})`) // use backtick for template literals, very cool :D
+      .call(xAxis);
+  }
+
+  this.updateMinSales = function (value) {
+    vm.minSales = value
+    yScale = d3
+      .scaleLinear()
+      .domain([vm.maxSales, vm.minSales])
+      .range([0, vm.svgHeight]);
+
+    barChart
+      .attr("cy", function (d) {
+        return yScale(d[vm.yValue]);
+      })
+
+    yAxis = d3.axisRight(yScale);
+
+    svg.selectAll('g').remove()
+
+    svg.append('g')
+      .attr("transform", 'translate(0, 0)')
+      .call(yAxis);
+
+    svg
+      .append("g")
+      .attr("transform", `translate(0, ${this.svgHeight})`) // use backtick for template literals, very cool :D
+      .call(xAxis);
+  }
+
+  this.updateColor = function(value) {
+    svg.attr("style", "background-color: " + value)
+  } 
+
+  this.updateBorder = function(value) {
+    svg.attr("style", "border: 5px solid " + value)
+  }
 };
 
-window.onload = function() {
+window.onload = function () {
 
   var helper = document.getElementById("helper").onclick = closeHelper
 
   fetchPS4Data()
     .then(fetchXboxData)
-    .then(function() {
+    .then(function () {
       var visuals = new visualize();
-      console.log(visuals)
       var gui = new dat.GUI();
+
       var circleSize = gui.add(visuals, "circleSize").min(0).max(30);
       circleSize.onChange(function (value) {
-        visuals.update();
+        visuals.updateCircleSize();
       });
 
-      gui.add(visuals, "minSales").min(0).max(18)
-      gui.add(visuals, "maxSales").min(2).max(20)
+      gui.add(visuals, "minSales").min(0).max(18).onChange(function (value) {
+        visuals.updateMinSales(value)
+      })
+      gui.add(visuals, "maxSales").min(2).max(20).onChange(function (value) {
+        visuals.updateMaxSales(value)
+      })
+      gui.add(visuals, "fill", ["white", "orange", "violet", "pink", "red", "black", "blue"]).onChange(function (value) {
+        visuals.updateColor(value)
+      })
+      gui.add(visuals, "border", ["white", "orange", "violet", "pink", "red", "black", "blue"]).onChange(function (value) {
+        visuals.updateBorder(value)
+      })
+      var yValue = gui.add(visuals, "yValue", ["Europe", "Japan", "North America", "Rest of World", "Global"]);
+      yValue.onChange(function (value) {
+        visuals.updateYValue(value);
+      })
     });
 };
 
