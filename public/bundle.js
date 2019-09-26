@@ -45,9 +45,11 @@ function (_GameObject) {
    * @param {number} x
    * @param {number} y
    * @param {HTMLImageElement}img
+   * @param {number} health the health of this unit
+   * @param {number} strength the strength of this unit
    * @param {String} name
    */
-  function Knight(x, y, img, name) {
+  function Knight(x, y, img, health, strength, name) {
     var _this;
 
     _classCallCheck(this, Knight);
@@ -60,7 +62,13 @@ function (_GameObject) {
 
     _defineProperty(_assertThisInitialized(_this), "_stateManager", void 0);
 
+    _defineProperty(_assertThisInitialized(_this), "_health", void 0);
+
+    _defineProperty(_assertThisInitialized(_this), "_strength", void 0);
+
     _this._gameManager = _gameManager["default"].getInstance();
+    _this._health = health;
+    _this._strength = strength;
     return _this;
   }
   /**
@@ -97,6 +105,12 @@ function (_GameObject) {
           this._y += 5 * Math.sin(angle);
 
           this._adjustForBoundary();
+
+          this._attackEnemy(angle);
+
+          if (this._health <= 0) {
+            this._gameManager.removeGameObject(this);
+          }
         } else {
           if (this._x + this._width > 600) {
             this._multiplier = -1;
@@ -117,6 +131,33 @@ function (_GameObject) {
       }
     }
     /**
+     * attacks a single collided enemy, reduces its health
+     * and pushes the knight back
+     * @param {number} bounceAngle the angle it pushes off the enemy at
+     * @private
+     */
+
+  }, {
+    key: "_attackEnemy",
+    value: function _attackEnemy(bounceAngle) {
+      var _this3 = this;
+
+      var bounceStrength = 10;
+      var toAttack = null;
+
+      this._gameManager.gameObjects.forEach(function (e) {
+        if (e.name !== _this3._name && _gameObject["default"].detectCollision(_this3, e)) {
+          toAttack = e;
+        }
+      });
+
+      if (toAttack) {
+        toAttack.health = toAttack.health - this._strength;
+        this._x += -bounceStrength * Math.cos(bounceAngle);
+        this._y += -bounceStrength * Math.sin(bounceAngle);
+      }
+    }
+    /**
      * don't let the object go off screen
      * @private
      */
@@ -124,20 +165,22 @@ function (_GameObject) {
   }, {
     key: "_adjustForBoundary",
     value: function _adjustForBoundary() {
+      var adjustment = 10;
+
       if (this._x <= 0) {
-        this._x += 5;
+        this._x += adjustment;
       }
 
       if (this._y <= 0) {
-        this._y += 5;
+        this._y += adjustment;
       }
 
       if (this._x + this._width > this._gameManager.canvas.width) {
-        this._x -= 5;
+        this._x -= adjustment;
       }
 
       if (this._y + this._height > this._gameManager.canvas.height) {
-        this._y -= 5;
+        this._y -= adjustment;
       }
     }
     /**
@@ -148,11 +191,11 @@ function (_GameObject) {
   }, {
     key: "_getNearestEnemy",
     value: function _getNearestEnemy() {
-      var _this3 = this;
+      var _this4 = this;
 
       var enemies = this._gameManager.gameObjects.filter(function (e) {
         //  don't track the state Manager as an enemy
-        return e.name !== _this3.name && e.name !== _this3._stateManager.name;
+        return e.name !== _this4.name && e.name !== _this4._stateManager.name;
       });
 
       if (enemies.length < 1) {
@@ -163,7 +206,7 @@ function (_GameObject) {
       var nearestRadius = Math.pow(enemies[0].x - this._x, 2) + Math.pow(enemies[0].y - this._y, 2);
       var nearestEnemy = enemies[0];
       enemies.forEach(function (enemy) {
-        var curRadius = Math.pow(enemy.x - _this3._x, 2) + Math.pow(enemy.y - _this3._y, 2);
+        var curRadius = Math.pow(enemy.x - _this4._x, 2) + Math.pow(enemy.y - _this4._y, 2);
 
         if (curRadius < nearestRadius) {
           nearestRadius = curRadius;
@@ -171,6 +214,24 @@ function (_GameObject) {
         }
       });
       return nearestEnemy;
+    }
+    /**
+     * gets the health
+     * @return {number}
+     */
+
+  }, {
+    key: "health",
+    get: function get() {
+      return this._health;
+    }
+    /**
+     * sets the health of the knight
+     * @param {number} health
+     */
+    ,
+    set: function set(health) {
+      this._health = health;
     }
   }]);
 
@@ -227,6 +288,8 @@ var inputEnum = {
   TEAM_SELECTIONS: 'teams',
   CLEAR: 'clear',
   PAUSE: 'pause',
+  HEALTH: 'health',
+  STRENGTH: 'strength',
   SELECTED: 'waves-effect waves-light btn light-green',
   DESELECTED: 'waves-effect waves-light btn grey'
 };
@@ -272,17 +335,60 @@ function (_GameObject) {
     return _this;
   }
   /**
-   * determines input routing based on state
-   * @param {Event} event
-   * @param {StateManager} that
+   * makes sure the input is a number
+   * @param {String} input
+   * @return {boolean}
    * @private
    */
 
 
   _createClass(StateManager, [{
+    key: "_isNumber",
+    value: function _isNumber(input) {
+      return !isNaN(parseFloat(input)) && isFinite(input);
+    }
+    /**
+     * Gets the text from the inputs and makes sure the value type-checks
+     * @private
+     * @return {Object}
+     */
+
+  }, {
+    key: "_getTextInput",
+    value: function _getTextInput() {
+      var healthInput = document.getElementById(inputEnum.HEALTH).value;
+      var strengthInput = document.getElementById(inputEnum.STRENGTH).value;
+
+      if (!this._isNumber(healthInput) || !this._isNumber(strengthInput)) {
+        M.toast({
+          html: 'Invalid input, only numbers are allowed'
+        });
+        document.getElementById(inputEnum.HEALTH).value = 15;
+        document.getElementById(inputEnum.STRENGTH).value = 15;
+        return {
+          health: 15,
+          strength: 15
+        };
+      }
+
+      var health = parseInt(healthInput);
+      var strength = parseInt(strengthInput);
+      console.log("health is ".concat(health, ", strength is ").concat(strength));
+      return {
+        health: health,
+        strength: strength
+      };
+    }
+    /**
+     * determines input routing based on state
+     * @param {Event} event
+     * @param {StateManager} that
+     * @private
+     */
+
+  }, {
     key: "_handleClick",
     value: function _handleClick(event, that) {
-      // TODO make this pass health and strenght to the knight class
       var canvas = that._gameManager.canvas;
       var x = event.pageX - canvas.offsetLeft;
       var y = event.pageY - canvas.offsetTop;
@@ -293,9 +399,12 @@ function (_GameObject) {
 
         if (that._teamToAdd === teamEnum.RED) {
           image = that._redKnight;
-        }
+        } // get the input then create the knight
 
-        this._gameManager.insertGameObject(new _knight["default"](x, y, image, that._teamToAdd));
+
+        var textInput = this._getTextInput();
+
+        this._gameManager.insertGameObject(new _knight["default"](x, y, image, textInput.health, textInput.strength, that._teamToAdd));
       } else if (that._inputState === inputEnum.DELETE) {
         var collider = new _gameObject["default"](x, y, 5, 5, null, 'collider');
 

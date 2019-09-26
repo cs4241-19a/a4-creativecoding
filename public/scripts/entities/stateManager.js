@@ -17,6 +17,8 @@ const inputEnum = {
   TEAM_SELECTIONS: 'teams',
   CLEAR: 'clear',
   PAUSE: 'pause',
+  HEALTH: 'health',
+  STRENGTH: 'strength',
   SELECTED: 'waves-effect waves-light btn light-green',
   DESELECTED: 'waves-effect waves-light btn grey',
 };
@@ -47,13 +49,41 @@ class StateManager extends GameObject {
   }
 
   /**
+   * makes sure the input is a number
+   * @param {String} input
+   * @return {boolean}
+   * @private
+   */
+  _isNumber(input) {
+    return !isNaN(parseFloat(input)) && isFinite(input);
+  }
+  /**
+   * Gets the text from the inputs and makes sure the value type-checks
+   * @private
+   * @return {Object}
+   */
+  _getTextInput() {
+    const healthInput = document.getElementById(inputEnum.HEALTH).value;
+    const strengthInput = document.getElementById(inputEnum.STRENGTH).value;
+    if (!this._isNumber(healthInput) || !this._isNumber(strengthInput)) {
+      M.toast({html: 'Invalid input, only numbers are allowed'});
+      document.getElementById(inputEnum.HEALTH).value = 15;
+      document.getElementById(inputEnum.STRENGTH).value = 15;
+      return {health: 15, strength: 15};
+    }
+    const health = parseInt(healthInput);
+    const strength = parseInt(strengthInput);
+
+    console.log(`health is ${health}, strength is ${strength}`);
+    return {health: health, strength: strength};
+  }
+  /**
    * determines input routing based on state
    * @param {Event} event
    * @param {StateManager} that
    * @private
    */
   _handleClick(event, that) {
-    // TODO make this pass health and strenght to the knight class
     const canvas = that._gameManager.canvas;
     const x = event.pageX - canvas.offsetLeft;
     const y = event.pageY - canvas.offsetTop;
@@ -64,8 +94,11 @@ class StateManager extends GameObject {
       if (that._teamToAdd === teamEnum.RED) {
         image = that._redKnight;
       }
+      // get the input then create the knight
+      const textInput = this._getTextInput();
       this._gameManager.
-          insertGameObject(new Knight(x, y, image, that._teamToAdd));
+          insertGameObject(new Knight(x, y, image,
+              textInput.health, textInput.strength, that._teamToAdd));
     } else if (that._inputState === inputEnum.DELETE) {
       const collider = new GameObject(x, y, 5, 5, null, 'collider');
       that._gameManager.gameObjects.forEach((e)=>{
