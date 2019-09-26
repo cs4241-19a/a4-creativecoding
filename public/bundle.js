@@ -81,7 +81,6 @@ function (_GameObject) {
     value: function start() {
       this._multiplier = 1;
       this._stateManager = this._gameManager.getObject('stateManager');
-      console.log('knight started');
     }
     /**
      * runs on frame update
@@ -90,9 +89,6 @@ function (_GameObject) {
   }, {
     key: "update",
     value: function update() {
-      var _this2 = this;
-
-      // TODO have this look for the nearest enemy and move toward them
       if (!this._stateManager.paused) {
         // this will grab all enemies
         var nearest = this._getNearestEnemy();
@@ -121,12 +117,6 @@ function (_GameObject) {
           }
 
           this._x += 5 * this._multiplier;
-
-          this._gameManager.gameObjects.forEach(function (e) {
-            if (e !== _this2 && _gameObject["default"].detectCollision(_this2, e)) {
-              console.log('collided with ');
-            }
-          });
         }
       }
     }
@@ -140,13 +130,13 @@ function (_GameObject) {
   }, {
     key: "_attackEnemy",
     value: function _attackEnemy(bounceAngle) {
-      var _this3 = this;
+      var _this2 = this;
 
       var bounceStrength = 10;
       var toAttack = null;
 
       this._gameManager.gameObjects.forEach(function (e) {
-        if (e.name !== _this3._name && _gameObject["default"].detectCollision(_this3, e)) {
+        if (e.name !== _this2._name && _gameObject["default"].detectCollision(_this2, e)) {
           toAttack = e;
         }
       });
@@ -191,22 +181,21 @@ function (_GameObject) {
   }, {
     key: "_getNearestEnemy",
     value: function _getNearestEnemy() {
-      var _this4 = this;
+      var _this3 = this;
 
       var enemies = this._gameManager.gameObjects.filter(function (e) {
         //  don't track the state Manager as an enemy
-        return e.name !== _this4.name && e.name !== _this4._stateManager.name;
+        return e.name !== _this3.name && e.name !== _this3._stateManager.name;
       });
 
       if (enemies.length < 1) {
-        console.log('no enemy found');
         return null;
       }
 
       var nearestRadius = Math.pow(enemies[0].x - this._x, 2) + Math.pow(enemies[0].y - this._y, 2);
       var nearestEnemy = enemies[0];
       enemies.forEach(function (enemy) {
-        var curRadius = Math.pow(enemy.x - _this4._x, 2) + Math.pow(enemy.y - _this4._y, 2);
+        var curRadius = Math.pow(enemy.x - _this3._x, 2) + Math.pow(enemy.y - _this3._y, 2);
 
         if (curRadius < nearestRadius) {
           nearestRadius = curRadius;
@@ -287,6 +276,9 @@ var inputEnum = {
   TEAM: 'team',
   TEAM_SELECTIONS: 'teams',
   CLEAR: 'clear',
+  HELP: 'help',
+  HELP_TEXT: 'help_text',
+  EMPTY_TEXT: 'empty_text',
   PAUSE: 'pause',
   HEALTH: 'health',
   STRENGTH: 'strength',
@@ -373,7 +365,6 @@ function (_GameObject) {
 
       var health = parseInt(healthInput);
       var strength = parseInt(strengthInput);
-      console.log("health is ".concat(health, ", strength is ").concat(strength));
       return {
         health: health,
         strength: strength
@@ -392,7 +383,6 @@ function (_GameObject) {
       var canvas = that._gameManager.canvas;
       var x = event.pageX - canvas.offsetLeft;
       var y = event.pageY - canvas.offsetTop;
-      console.log("click at ".concat(x, ", ").concat(y));
 
       if (that._inputState === inputEnum.ADD) {
         var image = that._blueKnight; // replace with the red knight if that's what we're inputting
@@ -429,6 +419,7 @@ function (_GameObject) {
       var teamDropDown = document.getElementById(inputEnum.TEAM_SELECTIONS);
       var pauseButton = document.getElementById(inputEnum.PAUSE);
       var clearButton = document.getElementById(inputEnum.CLEAR);
+      var helpButton = document.getElementById(inputEnum.HELP);
       var that = this;
       canvas.addEventListener('click', function (event) {
         that._handleClick(event, that);
@@ -457,11 +448,20 @@ function (_GameObject) {
         }
       }, false);
       clearButton.addEventListener('click', function (event) {
-        console.log('removing knights');
-
         that._gameManager.removeAll(teamEnum.RED);
 
         that._gameManager.removeAll(teamEnum.BLUE);
+      }, false);
+      helpButton.addEventListener('click', function (event) {
+        var helpDisplayed = document.getElementById(inputEnum.HELP_TEXT).style.display;
+
+        if (helpDisplayed === 'none') {
+          document.getElementById(inputEnum.HELP_TEXT).style.display = 'block';
+          document.getElementById(inputEnum.EMPTY_TEXT).style.display = 'none';
+        } else {
+          document.getElementById(inputEnum.HELP_TEXT).style.display = 'none';
+          document.getElementById(inputEnum.EMPTY_TEXT).style.display = 'block';
+        }
       }, false);
     }
     /**

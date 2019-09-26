@@ -14,7 +14,11 @@
     <a href="#" class="brand-logo center black-text">Medieval Battle Simulator Online</a>
   </div>
 </nav>
-<p></p>
+<p id = 'empty_text'></p>
+<p id = 'help_text'>To use this simulator, press the pencil button to create fighters<br />
+Press the eraser to remove a fighter, use the dropdown that says blue or red to pick <br/>
+which type to add. the pause/play will stop and start the sim, and the x will clear it.<br />
+Click on the canvas to start and press the ? button to hide/show this message</p>
 <canvas id="canvas" width="600" height="600"></canvas>
 <p></p>
 <a class="waves-effect waves-light btn light-green" id="add"><i class="material-icons center">mode_edit</i></a>
@@ -22,6 +26,7 @@
 <a class='dropdown-trigger btn' data-target='teams' id='team'>Blue</a>
 <a class="waves-effect waves-light btn" id='pause'><i class="material-icons center" id='pause_icon'>pause</i></a>
 <a class="waves-effect waves-light btn" id='clear'><i class="material-icons center">clear</i></a>
+<a class="waves-effect waves-light btn" id='help'><i class="material-icons center">help_outline</i></a>
 <!-- Dropdown Trigger -->
 
 <!-- Dropdown Structure -->
@@ -33,11 +38,11 @@
 <form class="col s12">
   <div class="row">
     <div class="input-field col s1">
-      <input id="strength" type="text" class="validate">
+      <input id="strength" type="text" class="validate" value="15">
       <label for="strength">Strength</label>
     </div>
     <div class="input-field col s1">
-      <input id="health" type="text" class="validate">
+      <input id="health" type="text" class="validate" value="15">
       <label for="health">Health</label>
     </div>
   </div>

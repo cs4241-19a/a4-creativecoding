@@ -32,14 +32,12 @@ class Knight extends GameObject {
   start() {
     this._multiplier = 1;
     this._stateManager = this._gameManager.getObject('stateManager');
-    console.log('knight started');
   }
 
   /**
    * runs on frame update
    */
   update() {
-    // TODO have this look for the nearest enemy and move toward them
     if (!this._stateManager.paused) {
       // this will grab all enemies
       const nearest = this._getNearestEnemy();
@@ -62,12 +60,6 @@ class Knight extends GameObject {
           this._multiplier = 1;
         }
         this._x += (5 * this._multiplier);
-
-        this._gameManager.gameObjects.forEach((e) => {
-          if (e !== this && GameObject.detectCollision(this, e)) {
-            console.log('collided with ');
-          }
-        });
       }
     }
   }
@@ -122,7 +114,6 @@ class Knight extends GameObject {
       return (e.name !== this.name && e.name !== this._stateManager.name);
     });
     if (enemies.length < 1) {
-      console.log('no enemy found');
       return null;
     }
     let nearestRadius = Math.pow(enemies[0].x-this._x, 2) +

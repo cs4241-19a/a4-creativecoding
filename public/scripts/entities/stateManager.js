@@ -5,6 +5,7 @@ import GameObject from '../gameObject';
 import GameManager from '../gameManager';
 import Knight from './knight';
 
+
 const teamEnum = {
   RED: 'red',
   BLUE: 'blue',
@@ -16,6 +17,9 @@ const inputEnum = {
   TEAM: 'team',
   TEAM_SELECTIONS: 'teams',
   CLEAR: 'clear',
+  HELP: 'help',
+  HELP_TEXT: 'help_text',
+  EMPTY_TEXT: 'empty_text',
   PAUSE: 'pause',
   HEALTH: 'health',
   STRENGTH: 'strength',
@@ -74,7 +78,6 @@ class StateManager extends GameObject {
     const health = parseInt(healthInput);
     const strength = parseInt(strengthInput);
 
-    console.log(`health is ${health}, strength is ${strength}`);
     return {health: health, strength: strength};
   }
   /**
@@ -87,7 +90,7 @@ class StateManager extends GameObject {
     const canvas = that._gameManager.canvas;
     const x = event.pageX - canvas.offsetLeft;
     const y = event.pageY - canvas.offsetTop;
-    console.log(`click at ${x}, ${y}`);
+
     if (that._inputState === inputEnum.ADD) {
       let image = that._blueKnight;
       // replace with the red knight if that's what we're inputting
@@ -118,6 +121,7 @@ class StateManager extends GameObject {
     const teamDropDown = document.getElementById(inputEnum.TEAM_SELECTIONS);
     const pauseButton = document.getElementById(inputEnum.PAUSE);
     const clearButton = document.getElementById(inputEnum.CLEAR);
+    const helpButton = document.getElementById(inputEnum.HELP);
     const that = this;
 
     canvas.addEventListener('click', function(event) {
@@ -151,9 +155,20 @@ class StateManager extends GameObject {
     }, false);
 
     clearButton.addEventListener('click', function(event) {
-      console.log('removing knights');
       that._gameManager.removeAll(teamEnum.RED);
       that._gameManager.removeAll(teamEnum.BLUE);
+    }, false);
+
+    helpButton.addEventListener('click', function(event) {
+      const helpDisplayed = document.getElementById(inputEnum.HELP_TEXT).
+          style.display;
+      if (helpDisplayed === 'none') {
+        document.getElementById(inputEnum.HELP_TEXT).style.display = 'block';
+        document.getElementById(inputEnum.EMPTY_TEXT).style.display = 'none';
+      } else {
+        document.getElementById(inputEnum.HELP_TEXT).style.display = 'none';
+        document.getElementById(inputEnum.EMPTY_TEXT).style.display = 'block';
+      }
     }, false);
   }
 
