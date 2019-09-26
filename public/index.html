@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>CS4241 Assignment 4</title>
+  <meta charset="utf-8">
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <!--Import materialize_dep.css-->
+  <link href="materialize/css/materialize.css" rel="stylesheet"/>
+</head>
+<body>
+<nav>
+  <div class="nav-wrapper light-green lighten-2">
+    <a href="#" class="brand-logo center black-text">Medieval Battle Simulator Online</a>
+  </div>
+</nav>
+<p id = 'empty_text'></p>
+<p id = 'help_text'>To use this simulator, press the pencil button to create fighters<br />
+Press the trash can and click to remove a fighter, use the dropdown that says blue or red to pick <br/>
+which type to add. the pause/play will stop and start the sim, and the x will clear it.<br />
+You can change the strength and health of the knights in the textboxes below the buttons.<br />
+Click on the canvas to start and press the ? button to hide/show this message. <br />
+NOTE: if the canvas does not appear, please refresh the page until it does, it is a light brow square beneath this message.</p>
+<canvas id="canvas" width="600" height="600"></canvas>
+<p></p>
+<a class="waves-effect waves-light btn light-green" id="add"><i class="material-icons center">mode_edit</i></a>
+<a class="waves-effect waves-light btn grey" id="delete"><i class="material-icons center">delete</i></a>
+<a class='dropdown-trigger btn' data-target='teams' id='team'>Blue</a>
+<a class="waves-effect waves-light btn" id='pause'><i class="material-icons center" id='pause_icon'>pause</i></a>
+<a class="waves-effect waves-light btn" id='clear'><i class="material-icons center">clear</i></a>
+<a class="waves-effect waves-light btn" id='help'><i class="material-icons center">help_outline</i></a>
+<!-- Dropdown Trigger -->
+
+<!-- Dropdown Structure -->
+<ul id='teams' class='dropdown-content'>
+  <li><a>red</a></li>
+  <li><a>blue</a></li>
+</ul>
+
+<form class="col s12">
+  <div class="row">
+    <div class="input-field col s1">
+      <input id="strength" type="text" class="validate" value="15">
+      <label for="strength">Strength</label>
+    </div>
+    <div class="input-field col s1">
+      <input id="health" type="text" class="validate" value="15">
+      <label for="health">Health</label>
+    </div>
+  </div>
+</form>
+
+<script src='./bundle.js' type='module'></script>
+<script src="materialize/js/materialize.js"></script>
+</body>
+<!--<img class="sealImage" alt="Image of Seal" src="../img/j3evn.jpg">-->
+</html>

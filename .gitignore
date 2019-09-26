@@ -1,0 +1,5 @@
+.idea
+node_modules
+access.log
+package-lock.json
+public/bundle.js.tmp-browserify*
