@@ -7,7 +7,9 @@ const express = require("express"),
   bodyParser = require("body-parser"),
   low = require('lowdb'),
   FileSync = require('lowdb/adapters/FileSync'),
-  session = require("express-session");
+  session = require("express-session"),
+  compression = require('compression'),
+  helmet = require('helmet');
 
 const ps4Adapter = new FileSync('./public/data/PS4Sales.json')
 const ps4db = low(ps4Adapter)
@@ -29,6 +31,8 @@ passport.serializeUser((user, done) => {
 
 // Uses the css and javascript files
 app.use(express.static(__dirname + '/public'))
+app.use(compression())
+app.use(helmet())
 
 // "name" below refers to whatever piece of info is serialized in seralizeUser,
 // in this example we're using the username

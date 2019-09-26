@@ -10,3 +10,35 @@
     align-content: center;
     justify-content: center;
 }
+
+.tooltip {
+    display: flex;
+    align-self: center;
+}
+
+.helper {
+    float:left;
+    position: fixed;
+    top: 100px;
+    left: 50px;
+    display: flex;
+    background-color: beige;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.helper-button {
+    position: fixed;
+    top: 60px;
+    left: 20px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: cadetblue;
+    border: 2px solid black;
+}
+
+.question {
+    font-weight: bold;
+    color:white;
+}

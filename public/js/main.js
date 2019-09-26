@@ -1,44 +1,68 @@
+
+
 var ps4data = [];
 var xboxdata = [];
 
+/* let vars = {
+  svgHeight: 300,
+  svgWidth: 1000,
+  minYear: 2012.5,
+  maxYear: 2019.5,
+  maxSales: 20,
+  minSales: 0,
+  circleSize: 8
+}; */
+
+const closeHelper = function() {
+  var helperText = document.getElementById("helper-text")
+  if(helperText.style.opacity == 0.0) {
+    helperText.style.opacity = 1
+  } else {
+    helperText.style.opacity = 0
+  }
+}
+
 const fetchPS4Data = function() {
-  fetch("/ps4data", {
-    credentials: "include"
-  })
-    .then(response => response.json())
-    .then(data => {
-      ps4data = data;
-      console.log(ps4data);
-    })
-    .catch(err => {
-      console.log(err);
-    });
+  return new Promise(
+    function(resolve, reject) {
+      fetch("/ps4data", {
+        credentials: "include"
+      })
+        .then(response => response.json())
+        .then(data => {
+          ps4data = data
+          resolve("done")
+        })
+        .catch(err => {
+          reject("error")
+          console.log(err);
+        });
+    }
+  )
+  
 };
 
 const fetchXboxData = function() {
-  fetch("/xboxdata", {
-    method: "GET",
-    credentials: "include"
-  })
-    .then(response => response.json())
-    .then(data => {
-      xboxdata = data;
-    })
-    .then(function() {
-      visualize();
-    })
-    .catch(err => {
-      console.log(err);
-    });
+  return new Promise(
+    function(resolve, reject) {
+      fetch("/xboxdata", {
+        method: "GET",
+        credentials: "include"
+      })
+        .then(response => response.json())
+        .then(data => {
+          xboxdata = data;
+          resolve("done")
+        })
+        .catch(err => {
+          reject("error")
+          console.log(err);
+        });
+    }
+  )
 };
 
-const svgHeight = 300,
-  svgWidth = 1000,
-  minYear = 2012.5,
-  maxYear = 2019.5,
-  maxSales = 20,
-  minSales = 0,
-  circleSize = 8;
+
 
 // Takes in a value and returns a custom color based on the value
 const customColor = function(value) {
@@ -48,16 +72,26 @@ const customColor = function(value) {
   return `rgb(${r}, ${g}, ${b})`;
 };
 
-const visualize = function() {
+
+
+var visualize = function() {
+    this.svgHeight = 300;
+    this.svgWidth = 1000;
+    this.minYear = 2012.5;
+    this.maxYear = 2019.5;
+    this.minSales = 0;
+    this.maxSales = 20;
+    this.circleSize = 8;
+
   var svg = d3
     .select(".sales")
-    .attr("width", svgWidth)
-    .attr("height", svgHeight + 20);
+    .attr("width", this.svgWidth)
+    .attr("height", this.svgHeight + 20);
 
   var div = d3
     .select("body")
     .append("div")
-    .attr("class", "tooltip-donut")
+    .attr("class", "tooltip")
     .text( function() {
       return "yo"
     })
@@ -67,18 +101,18 @@ const visualize = function() {
   // These functions map an input domain to an output range. https://www.dashingd3js.com/d3js-scales
   var xScale = d3
     .scaleLinear()
-    .domain([minYear, maxYear])
-    .range([0, svgWidth]);
+    .domain([this.minYear, this.maxYear])
+    .range([0, this.svgWidth]);
 
   var yScale = d3
     .scaleLinear()
-    .domain([maxSales, minSales])
-    .range([0, svgHeight]);
+    .domain([this.maxSales, this.minSales])
+    .range([0, this.svgHeight]);
 
   var yAxisScale = d3 // custom axis for the scale so we can invert it
     .scaleLinear()
-    .domain([maxSales, minSales])
-    .range([0, svgHeight]);
+    .domain([this.maxSales, this.minSales])
+    .range([0, this.svgHeight]);
 
   const xAxisTicks = xScale.ticks().filter(tick => Number.isInteger(tick));
 
@@ -91,7 +125,7 @@ const visualize = function() {
 
   svg
     .append("g")
-    .attr("transform", `translate(0, ${svgHeight})`) // use backtick for template literals, very cool :D
+    .attr("transform", `translate(0, ${this.svgHeight})`) // use backtick for template literals, very cool :D
     .call(xAxis);
 
   svg
@@ -110,7 +144,7 @@ const visualize = function() {
     .attr("cy", function(d) {
       return yScale(d.Europe);
     })
-    .attr("r", circleSize + "px")
+    .attr("r", this.circleSize + "px")
     .attr("fill", function(d) {
       return customColor(d.Europe);
     })
@@ -144,6 +178,17 @@ const visualize = function() {
 };
 
 window.onload = function() {
-  fetchPS4Data();
-  fetchXboxData();
+
+  var helper = document.getElementById("helper").onclick = closeHelper
+
+  fetchPS4Data()
+    .then(fetchXboxData)
+    .then(function() {
+      var visuals = new visualize();
+      var gui = new dat.GUI();
+      gui.add(visuals, "circleSize").min(0).max(30)
+      gui.add(visuals, "minSales").min(0).max(18)
+      gui.add(visuals, "maxSales").min(2).max(20)
+    });
 };
+
