@@ -1,0 +1,17 @@
+{
+  "name": "a4-jameskajon",
+  "version": "0.0.0",
+  "description": "A piano app",
+  "author": "James Kajon",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "compression": "^1.7.4",
+    "dat.gui": "^0.7.6",
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "helmet": "^3.21.1",
+    "morgan": "^1.9.1"
+  }
+}

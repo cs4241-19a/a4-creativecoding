@@ -1,0 +1,12 @@
+.key {
+    stroke:black;
+    transition: all 500ms;
+}
+
+.key-white {
+    fill:white;
+}
+
+.key-black {
+    fill:black;
+}
