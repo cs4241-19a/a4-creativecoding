@@ -1,15 +1,10 @@
-import { audioInit, audioGraph } from './module.js'
+import { getCanvas, audioInit, audioGraph } from './setUpModule.js'
 
 const startMello = function () {
+  const canvas = getCanvas()
 
-  document.getElementById('canvas').innerHTML = ''
-  const canvas = document.createElement('canvas')
-  document.getElementById('canvas').appendChild(canvas)
-  canvas.width = 1500
-  canvas.height = 800
-
-  let jsonAudioInit = audioInit(canvas)
-  let jsonAudioGraph = audioGraph(canvas, jsonAudioInit)
+  const jsonAudioInit = audioInit(canvas)
+  const jsonAudioGraph = audioGraph(canvas, jsonAudioInit)
 
   jsonAudioInit.audioElement.src = '../media/mello.mp3'
   jsonAudioInit.audioElement.play()
@@ -17,7 +12,7 @@ const startMello = function () {
   const results = new Uint8Array(jsonAudioGraph.analyser.frequencyBinCount)
 
   const draw = function () {
-    window.requestAnimationFrame( draw )
+    window.requestAnimationFrame(draw)
     jsonAudioGraph.analyser.getByteFrequencyData(results)
 
     let x = 0
@@ -33,24 +28,19 @@ const startMello = function () {
       var b = 50
 
       jsonAudioInit.ctx.fillStyle = 'rgb(' + b + ',' + g + ',' + r + ')'
-      jsonAudioInit.ctx.fillRect(x, canvas.height - barHeight, (canvas.width /jsonAudioGraph. analyser.frequencyBinCount) * 2.5, barHeight)
+      jsonAudioInit.ctx.fillRect(x, canvas.height - barHeight, (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * 2.5, barHeight)
 
       x += (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * 2.5 + 1
     }
   }
   draw()
-
 }
 
 const startAC = function () {
-  document.getElementById('canvas').innerHTML = ''
-  const canvas = document.createElement('canvas')
-  document.getElementById('canvas').appendChild(canvas)
-  canvas.width = 1500
-  canvas.height = 800
+  const canvas = getCanvas()
 
-  let jsonAudioInit = audioInit(canvas)
-  let jsonAudioGraph = audioGraph(canvas, jsonAudioInit)
+  const jsonAudioInit = audioInit(canvas)
+  const jsonAudioGraph = audioGraph(canvas, jsonAudioInit)
 
   jsonAudioInit.audioElement.src = '../media/acdc.mp3'
   jsonAudioInit.audioElement.play()
@@ -58,7 +48,7 @@ const startAC = function () {
   const results = new Uint8Array(jsonAudioGraph.analyser.frequencyBinCount)
 
   const draw = function () {
-    window.requestAnimationFrame( draw )
+    window.requestAnimationFrame(draw)
     jsonAudioGraph.analyser.getByteFrequencyData(results)
 
     let x = 0
@@ -74,7 +64,7 @@ const startAC = function () {
       var b = 50
 
       jsonAudioInit.ctx.fillStyle = 'rgb(' + g + ',' + r + ',' + b + ')'
-      jsonAudioInit.ctx.fillRect(x, canvas.height - barHeight, (canvas.width /jsonAudioGraph. analyser.frequencyBinCount) * 2.5, barHeight)
+      jsonAudioInit.ctx.fillRect(x, canvas.height - barHeight, (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * 2.5, barHeight)
 
       x += (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * 2.5 + 1
     }
@@ -83,14 +73,10 @@ const startAC = function () {
 }
 
 const startElectro = function () {
-  document.getElementById('canvas').innerHTML = ''
-  const canvas = document.createElement('canvas')
-  document.getElementById('canvas').appendChild(canvas)
-  canvas.width = 1500
-  canvas.height = 800
+  const canvas = getCanvas()
 
-  let jsonAudioInit = audioInit(canvas)
-  let jsonAudioGraph = audioGraph(canvas, jsonAudioInit)
+  const jsonAudioInit = audioInit(canvas)
+  const jsonAudioGraph = audioGraph(canvas, jsonAudioInit)
 
   jsonAudioInit.audioElement.src = '../media/shelter.mp3'
   jsonAudioInit.audioElement.play()
@@ -98,7 +84,7 @@ const startElectro = function () {
   const results = new Uint8Array(jsonAudioGraph.analyser.frequencyBinCount)
 
   const draw = function () {
-    window.requestAnimationFrame( draw )
+    window.requestAnimationFrame(draw)
     jsonAudioGraph.analyser.getByteFrequencyData(results)
 
     let x = 0
@@ -111,10 +97,9 @@ const startElectro = function () {
 
       var r = barHeight + (25 * (i / jsonAudioGraph.analyser.frequencyBinCount))
       var g = 250 * (i / jsonAudioGraph.analyser.frequencyBinCount)
-      var b = 50
 
       jsonAudioInit.ctx.fillStyle = 'rgb(' + r + ',' + g + ',' + r + ')'
-      jsonAudioInit.ctx.fillRect(x, canvas.height - barHeight, (canvas.width /jsonAudioGraph. analyser.frequencyBinCount) * 2.5, barHeight)
+      jsonAudioInit.ctx.fillRect(x, canvas.height - barHeight, (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * 2.5, barHeight)
 
       x += (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * 2.5 + 1
     }
@@ -123,14 +108,10 @@ const startElectro = function () {
 }
 
 const startRamm = function () {
-  document.getElementById('canvas').innerHTML = ''
-  const canvas = document.createElement('canvas')
-  document.getElementById('canvas').appendChild(canvas)
-  canvas.width = 1500
-  canvas.height = 800
+  const canvas = getCanvas()
 
-  let jsonAudioInit = audioInit(canvas)
-  let jsonAudioGraph = audioGraph(canvas, jsonAudioInit)
+  const jsonAudioInit = audioInit(canvas)
+  const jsonAudioGraph = audioGraph(canvas, jsonAudioInit)
 
   jsonAudioInit.audioElement.src = '../media/deutschland.mp3'
   jsonAudioInit.audioElement.play()
@@ -138,7 +119,7 @@ const startRamm = function () {
   const results = new Uint8Array(jsonAudioGraph.analyser.frequencyBinCount)
 
   const draw = function () {
-    window.requestAnimationFrame( draw )
+    window.requestAnimationFrame(draw)
     jsonAudioGraph.analyser.getByteFrequencyData(results)
 
     let x = 0
@@ -154,7 +135,7 @@ const startRamm = function () {
       var b = 50
 
       jsonAudioInit.ctx.fillStyle = 'rgb(' + r + ',' + g + ',' + b + ')'
-      jsonAudioInit.ctx.fillRect(x, canvas.height - barHeight, (canvas.width /jsonAudioGraph. analyser.frequencyBinCount) * 2.5, barHeight)
+      jsonAudioInit.ctx.fillRect(x, canvas.height - barHeight, (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * 2.5, barHeight)
 
       x += (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * 2.5 + 1
     }
@@ -163,14 +144,10 @@ const startRamm = function () {
 }
 
 const startInst = function () {
-  document.getElementById('canvas').innerHTML = ''
-  const canvas = document.createElement('canvas')
-  document.getElementById('canvas').appendChild(canvas)
-  canvas.width = 1500
-  canvas.height = 800
+  const canvas = getCanvas()
 
-  let jsonAudioInit = audioInit(canvas)
-  let jsonAudioGraph = audioGraph(canvas, jsonAudioInit)
+  const jsonAudioInit = audioInit(canvas)
+  const jsonAudioGraph = audioGraph(canvas, jsonAudioInit)
 
   jsonAudioInit.audioElement.src = '../media/inst.mp3'
   jsonAudioInit.audioElement.play()
@@ -178,7 +155,7 @@ const startInst = function () {
   const results = new Uint8Array(jsonAudioGraph.analyser.frequencyBinCount)
 
   const draw = function () {
-    window.requestAnimationFrame( draw )
+    window.requestAnimationFrame(draw)
     jsonAudioGraph.analyser.getByteFrequencyData(results)
 
     let x = 0
@@ -194,7 +171,7 @@ const startInst = function () {
       var b = 50
 
       jsonAudioInit.ctx.fillStyle = 'rgb(' + r + ',' + b + ',' + g + ')'
-      jsonAudioInit.ctx.fillRect(x, canvas.height - barHeight, (canvas.width /jsonAudioGraph. analyser.frequencyBinCount) * 2.5, barHeight)
+      jsonAudioInit.ctx.fillRect(x, canvas.height - barHeight, (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * 2.5, barHeight)
 
       x += (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * 2.5 + 1
     }
@@ -203,14 +180,10 @@ const startInst = function () {
 }
 
 const startBeat = function () {
-  document.getElementById('canvas').innerHTML = ''
-  const canvas = document.createElement('canvas')
-  document.getElementById('canvas').appendChild(canvas)
-  canvas.width = 1500
-  canvas.height = 800
+  const canvas = getCanvas()
 
-  let jsonAudioInit = audioInit(canvas)
-  let jsonAudioGraph = audioGraph(canvas, jsonAudioInit)
+  const jsonAudioInit = audioInit(canvas)
+  const jsonAudioGraph = audioGraph(canvas, jsonAudioInit)
 
   jsonAudioInit.audioElement.src = '../media/exploder.mp3'
   jsonAudioInit.audioElement.play()
@@ -218,7 +191,7 @@ const startBeat = function () {
   const results = new Uint8Array(jsonAudioGraph.analyser.frequencyBinCount)
 
   const draw = function () {
-    window.requestAnimationFrame( draw )
+    window.requestAnimationFrame(draw)
     jsonAudioGraph.analyser.getByteFrequencyData(results)
 
     let x = 0
@@ -234,7 +207,7 @@ const startBeat = function () {
       var b = 50
 
       jsonAudioInit.ctx.fillStyle = 'rgb(' + g + ',' + b + ',' + r + ')'
-      jsonAudioInit.ctx.fillRect(x, canvas.height - barHeight, (canvas.width /jsonAudioGraph. analyser.frequencyBinCount) * 2.5, barHeight)
+      jsonAudioInit.ctx.fillRect(x, canvas.height - barHeight, (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * 2.5, barHeight)
 
       x += (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * 2.5 + 1
     }
@@ -243,14 +216,10 @@ const startBeat = function () {
 }
 
 const startDub = function () {
-  document.getElementById('canvas').innerHTML = ''
-  const canvas = document.createElement('canvas')
-  document.getElementById('canvas').appendChild(canvas)
-  canvas.width = 1500
-  canvas.height = 800
+  const canvas = getCanvas()
 
-  let jsonAudioInit = audioInit(canvas)
-  let jsonAudioGraph = audioGraph(canvas, jsonAudioInit)
+  const jsonAudioInit = audioInit(canvas)
+  const jsonAudioGraph = audioGraph(canvas, jsonAudioInit)
 
   jsonAudioInit.audioElement.src = '../media/dubstep.mp3'
   jsonAudioInit.audioElement.play()
@@ -258,7 +227,7 @@ const startDub = function () {
   const results = new Uint8Array(jsonAudioGraph.analyser.frequencyBinCount)
 
   const draw = function () {
-    window.requestAnimationFrame( draw )
+    window.requestAnimationFrame(draw)
     jsonAudioGraph.analyser.getByteFrequencyData(results)
 
     let x = 0
@@ -274,7 +243,7 @@ const startDub = function () {
       var b = 50
 
       jsonAudioInit.ctx.fillStyle = 'rgb(' + b + ',' + r + ',' + g + ')'
-      jsonAudioInit.ctx.fillRect(x, canvas.height - barHeight, (canvas.width /jsonAudioGraph. analyser.frequencyBinCount) * 2.5, barHeight)
+      jsonAudioInit.ctx.fillRect(x, canvas.height - barHeight, (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * 2.5, barHeight)
 
       x += (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * 2.5 + 1
     }
