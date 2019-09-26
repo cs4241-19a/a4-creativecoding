@@ -1,6 +1,7 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 //based on this js example: https://threejs.org/docs/index.html#manual/en/introduction/Creating-a-scene
 const THREE = require('three')
+const dat = require('dat.gui')
 
 //need to declare these variables globally 
 //creating a scene 
@@ -11,6 +12,9 @@ var renderer;
 var geometry;
 var material;
 var cube;
+//dat.gui
+var text;
+var gui;
 
 window.onload  = function(){
     //Creating a Scene 
@@ -31,6 +35,14 @@ window.onload  = function(){
     scene.add(cube);
 
     camera.position.z = 5;
+	
+	//gui 
+	text = new FizzyText();
+	gui = new dat.GUI();
+	gui.add(text,'message');
+	gui.add(text, 'speed', -5,5);
+	gui.add(text, 'displayOutline');
+	//gui.add(text, 'explode');
 
     //animation
     animate();
@@ -45,6 +57,13 @@ function animate(){
     renderer.render(scene, camera);
 }
 
+//dat.gui example 
+var FizzyText = function(){
+	this.message = 'dat.gui';
+	this.speed = 0.8;
+	this.displayOutline = false;
+	//this.explode = function();
+}
 
 
 
