@@ -40,7 +40,7 @@ scene.add(cube);
 
 // Options to be added to the GUI
 
-var options = {
+options = {
   velx: 0,
   vely: 0,
   camera: {

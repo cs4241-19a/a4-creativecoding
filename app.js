@@ -25,6 +25,10 @@ app.use(express.static('public'));
 
 app.use(helmet())
 
+//app.get('/', function(req, res, next) {
+//  res.render('index', { title: 'Express' });
+//});
+
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
