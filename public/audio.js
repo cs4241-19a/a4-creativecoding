@@ -37,30 +37,36 @@ let frequencyData = new Uint8Array(bufferLength);
 
 let WIDTH = canvas.width;
 let HEIGHT = canvas.height;
-let circleBars = 400;
-let circleBarWidth = 2;
+// let circleBars = 400;
+// let circleBarWidth = 2;
 let barWidth = (WIDTH / bufferLength) * 2.5;
 let barHeight;
 let x = 0;
 
+class bar {
+    constructor(low, high){
+        this.low = low;
+        this.high = high;
+    }
 
-function bar() {
-    x = 0;
-    analyser.getByteFrequencyData(frequencyData);
-    ctx.fillStyle = "#000";
-    ctx.fillRect(0, 0, WIDTH, HEIGHT);
+    draw() {
+        x = 0;
+        analyser.getByteFrequencyData(frequencyData);
+        ctx.fillStyle = "#000";
+        ctx.fillRect(0, 0, WIDTH, HEIGHT);
 
-    for (var i = 0; i < bufferLength; i++) {
-        barHeight = frequencyData[i];
+        for (let i = this.low; i < this.high; i++) {
+            barHeight = frequencyData[i];
 
-        var r = barHeight + (25 * (i / bufferLength));
-        var g = 250 * (i / bufferLength);
-        var b = 50;
+            let r = barHeight + (25 * (i / bufferLength));
+            let g = 250 * (i / bufferLength);
+            let b = 50;
 
-        ctx.fillStyle = "rgb(" + b + "," + r + "," + b + ")";
-        ctx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
+            ctx.fillStyle = "rgb(" + b + "," + r + "," + b + ")";
+            ctx.fillRect(x, HEIGHT - barHeight, barWidth, barHeight);
 
-        x += barWidth + 1;
+            x += barWidth + 1;
+        }
     }
 }
 
@@ -132,10 +138,10 @@ class circle {
 
 
 let circle1 = new circle(bufferLength * .50, bufferLength * .75);
-
+let bar1 = new bar(0, bufferLength);
 function renderFrame() {
     requestAnimationFrame(renderFrame);
-    bar();
+    bar1.draw();
     circle1.draw();
 }
 renderFrame();
