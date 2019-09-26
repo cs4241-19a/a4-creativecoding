@@ -84,23 +84,93 @@ function (_GameObject) {
     value: function update() {
       var _this2 = this;
 
+      // TODO have this look for the nearest enemy and move toward them
       if (!this._stateManager.paused) {
-        if (this._x + this._width > 600) {
-          this._multiplier = -1;
-        }
+        // this will grab all enemies
+        var nearest = this._getNearestEnemy();
 
-        if (this._x < 0) {
-          this._multiplier = 1;
-        }
+        if (nearest) {
+          var xOffset = nearest.x - this._x;
+          var yOffset = nearest.y - this._y;
+          var angle = Math.atan2(yOffset, xOffset);
+          this._x += 5 * Math.cos(angle);
+          this._y += 5 * Math.sin(angle);
 
-        this._x += 5 * this._multiplier;
-
-        this._gameManager.gameObjects.forEach(function (e) {
-          if (e !== _this2 && _gameObject["default"].detectCollision(_this2, e)) {
-            console.log('collided with ');
+          this._adjustForBoundary();
+        } else {
+          if (this._x + this._width > 600) {
+            this._multiplier = -1;
           }
-        });
+
+          if (this._x < 0) {
+            this._multiplier = 1;
+          }
+
+          this._x += 5 * this._multiplier;
+
+          this._gameManager.gameObjects.forEach(function (e) {
+            if (e !== _this2 && _gameObject["default"].detectCollision(_this2, e)) {
+              console.log('collided with ');
+            }
+          });
+        }
       }
+    }
+    /**
+     * don't let the object go off screen
+     * @private
+     */
+
+  }, {
+    key: "_adjustForBoundary",
+    value: function _adjustForBoundary() {
+      if (this._x <= 0) {
+        this._x += 5;
+      }
+
+      if (this._y <= 0) {
+        this._y += 5;
+      }
+
+      if (this._x + this._width > this._gameManager.canvas.width) {
+        this._x -= 5;
+      }
+
+      if (this._y + this._height > this._gameManager.canvas.height) {
+        this._y -= 5;
+      }
+    }
+    /**
+     * Gets the closest enemy
+     * @return {Knight}
+     */
+
+  }, {
+    key: "_getNearestEnemy",
+    value: function _getNearestEnemy() {
+      var _this3 = this;
+
+      var enemies = this._gameManager.gameObjects.filter(function (e) {
+        //  don't track the state Manager as an enemy
+        return e.name !== _this3.name && e.name !== _this3._stateManager.name;
+      });
+
+      if (enemies.length < 1) {
+        console.log('no enemy found');
+        return null;
+      }
+
+      var nearestRadius = Math.pow(enemies[0].x - this._x, 2) + Math.pow(enemies[0].y - this._y, 2);
+      var nearestEnemy = enemies[0];
+      enemies.forEach(function (enemy) {
+        var curRadius = Math.pow(enemy.x - _this3._x, 2) + Math.pow(enemy.y - _this3._y, 2);
+
+        if (curRadius < nearestRadius) {
+          nearestRadius = curRadius;
+          nearestEnemy = enemy;
+        }
+      });
+      return nearestEnemy;
     }
   }]);
 
@@ -212,6 +282,7 @@ function (_GameObject) {
   _createClass(StateManager, [{
     key: "_handleClick",
     value: function _handleClick(event, that) {
+      // TODO make this pass health and strenght to the knight class
       var canvas = that._gameManager.canvas;
       var x = event.pageX - canvas.offsetLeft;
       var y = event.pageY - canvas.offsetTop;
