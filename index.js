@@ -1,6 +1,6 @@
 const express   = require( 'express' ),
       app       = express(),
-      // morgan    = require( 'morgan' )
+      morgan    = require( 'morgan' )
       session   = require( 'express-session' ),           //1
       // passport  = require( 'passport' ),                  //2
       // GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
