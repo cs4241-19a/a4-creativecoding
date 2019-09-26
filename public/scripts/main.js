@@ -5,7 +5,7 @@ import StateManager from './entities/stateManager';
 const blueKnightImage = new Image();
 const redKnightImage = new Image();
 
-const gameManager = GameManager.getInstance();
+let gameManager = null;
 
 document.addEventListener('DOMContentLoaded', function() {
   const ddelems = document.querySelectorAll('.dropdown-trigger');
@@ -29,6 +29,7 @@ const imageLoadPromise = new Promise( (resolve) => {
 // create the game manager once the content is ready
 
 imageLoadPromise.then(()=>{
+  gameManager = GameManager.getInstance();
   // add the state manager to the gameManager
   gameManager
       .insertGameObject(new StateManager(blueKnightImage, redKnightImage));

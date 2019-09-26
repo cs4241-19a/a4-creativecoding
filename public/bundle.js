@@ -828,9 +828,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "d
 // init stuff
 var blueKnightImage = new Image();
 var redKnightImage = new Image();
-
-var gameManager = _gameManager["default"].getInstance();
-
+var gameManager = null;
 document.addEventListener('DOMContentLoaded', function () {
   var ddelems = document.querySelectorAll('.dropdown-trigger');
   M.Dropdown.init(ddelems);
@@ -853,7 +851,8 @@ var imageLoadPromise = new Promise(function (resolve) {
 }); // create the game manager once the content is ready
 
 imageLoadPromise.then(function () {
-  // add the state manager to the gameManager
+  gameManager = _gameManager["default"].getInstance(); // add the state manager to the gameManager
+
   gameManager.insertGameObject(new _stateManager["default"](blueKnightImage, redKnightImage));
   console.log(gameManager.gameObjects.length);
   window.requestAnimationFrame(draw);

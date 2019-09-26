@@ -40,6 +40,9 @@
     "eslint": "^6.4.0",
     "eslint-config-google": "^0.14.0"
   },
+  "engines": {
+    "node": "12.x"
+  },
   "babel": {
     "plugins": [
       "@babel/plugin-proposal-class-properties"

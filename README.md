@@ -1,72 +1,23 @@
 Assignment 4 - Creative Coding: Interactive Multimedia Experiences
 ===
 
-Due: September 27th, by 11:59 PM.
+## Medieval Battle Simulator Online
 
-For this assignment we will focus on client-side development using popular audio/graphics/visualization technologies; the server requirements are minimal. The goal of this assignment is to refine our JavaScript knowledge while exploring the multimedia capabilities of the browser.
+See the site at http://a4-kdoje.glitch.me
 
-Baseline Requirements
----
+For my project I wanted to create a battle simulator that used the emergent behavior of the different entities to simulate a battle. In this simulator, the red an blue knights will patrol (walk left and right), until they see a knight of the other color. They will run toward the nearest enemy and attack them, reducing their health. Once a knight's health is 0 they're removed from the simulator. To user is able to pause the simulator to remove and add knights as they wish. The screen can be cleared with the X button, and additional information can be shown/hidden with the question button. The strength (damage the knight does) and health (amount of damage it can take before being removed) can be set the text boxes.
 
-Your application is required to implement the following functionalities:
-
-- A server created using Express (you can also use an alternative server framework such as Koa) for basic file delivery and middleware. Your middleware stack should include the `compression` and `helmet` [middlewares]((https://expressjs.com/en/resources/middleware.html)) by default. You are not required to use Glitch for this assignment (but using Glitch is fine!); [Heroku](https://www.heroku.com) is another excellent option to explore. The course staff can't be resposible for helping with all other hosting options outside of Glitch, but some of us do have experience with other systems. It also never hurts to ask on Slack, as there's 99 other classmates who might have the experience you're looking for!
-- A client-side interactive experience using at least one of the web technologies frameworks we discussed in class over the past week.
-  - [Three.js](https://threejs.org/): A library for 3D graphics / VR experiences
-  - [D3.js](https://d3js.org): A library that is primarily used for interactive data visualizations
-  - [Canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API): A 2D raster drawing API included in all modern browsers
-  - [SVG](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API): A 2D vector drawing framework that enables shapes to be defined via XML.
-  - [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API): An API for audio synthesis, analysis, processing, and file playback.
-- A user interface for interaction with your project, which must expose at least six parameters for user control. [dat.gui](https://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage) is highly recommended for this. You might also explore interaction by tracking mouse movement via the `window.onmousemove` event handler in tandem with the `event.clientX` and `event.clientY` properties. Consider using the [Pointer Events API](https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events) to ensure that that mouse and touch events will both be supported in your app.
-- Your application should display basic documentation for the user interface when the application first loads. This documentation should be dismissable, however, users should be able to redisplay it via either a help buton (this could, for example, be inside a dat.gui interface) or via a keyboard shortcut (commonly the question mark).
-- Your application should feature at least two different ES6 modules that you write ([read about ES6 modules](https://www.sitepoint.com/understanding-es6-modules/)) and include into a main JavaScript file. This means that you will need to author *at least three JavaScript files* (a `main.js` or `renderer.js` file and two modules). We'll discuss modules in class on Monday 9/23; for this assignment modules should contain at least two functions.
-- You are required to use a linter for your JavaScript. There are plugins for most IDEs, however it will be difficult to run the linter directly in Glitch. If you haven't moved to developing on your personal laptop and then uploading to Glitch when your project is completed, this is the assignment to do so!
-- Your HTML and CSS should validate. There are options/plugins for most IDEs to check validation.
-
-The interactive experience should possess a reasonable level of complexity. Some examples:
-### Three.js
-- A generative algorithm creates simple agents that move through a virtual world. Your interface controls the behavior / appearance of these agents.
-- A simple 3D game
-- An 3D audio visualization of a song of your choosing. User interaction should control aspects of the visualization. 
-### Canvas
-- Implement a generative algorithm such as [Conway's Game of Life](https://bitstorm.org/gameoflife/) (or 1D cellular automata) and provide interactive controls. Note that the Game of Life has been created by 100s of people using <canvas>; we'll be checking to ensure that your implementation is not a copy of these.
-- Design a 2D audio visualizer of a song of your choosing. User interaction should control visual aspects of the experience. 
-### Web Audio API
-- Create a screen-based musical instrument using the Web Audio API. You can use projects such as [Interface.js](http://charlie-roberts.com/interface/) or [Nexus UI](https://nexus-js.github.io/ui/api/#Piano) to provide common musical interface elements, or use dat.GUI in combination with mouse/touch events (use the Pointer Events API). Your GUI should enable users to control aspects of sound synthesis.
-### D3.js
-- Create visualizations using the datasets found at [Awesome JSON Datasets](https://github.com/jdorfman/Awesome-JSON-Datasets). Experiment with providing different visualizations of the same data set, and providing users interactive control over visualization parameters and/or data filtering. Alternatively, create a single visualization with using one of the more complicated techniques shown at [d3js.org](d3js.org) and provide meaningful points of interaction for users.
-
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-yourname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. *NOTE: If you don't use Glitch for hosting (where we can see the files) then you must include all project files that you author in your repo for this assignment*.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-gitname-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here. Images are encouraged, along with concise, high-level text. Be sure to include:
-
-- the goal of the application
-- challenges you faced in realizing the application
-- a brief description of the JS linter you used and what rules it follows (we'll be looking at your JS files for consistency)
+- Challenges
+    * The main challenge I faced was creating a way for the entities to move around and interact with each other. For instance they need to be able to share, access and modify states of other objects on the canvas. To overcome this I created a gameManager singleton that holds all object data
+    * The second challenge was creating a way to manage input from the user. I accomplished this by adding a game object to the game manager that attached listeners on startup and broadcasted its state to other game objects in the manager.
+    * The last challenge was glitch's strange behavior with the canvas. In certain cases it wouldn't display the canvas, and showed no errors. To fix this, I ensured the page was loaded before initializing the gameManager.
 
 ## Technical Achievements
-- **Tech Achievement 1**: I evaluated multiple build tools and determined the best one for my use case
-- **Tech Achievement 2**: Created a singleton game manager instead of using a global
-- **Tech Achievement 3**: I optimized the efficiency of my reaction-diffusion algorithm by...
-- **Tech Achievement 4**: I visualized the dataset X using three different visualization technqiues provided by D3, andprovided
+- **Build tool choice**: I evaluated multiple build tools and determined the best one for my use case. I used npm scripts, browserify, babelify and nodemon for the build system.
+- **Singleton gameManager**: Created a singleton gameManager instead of using a global. This makes testing and expandablity easier
+- **Front-end testing**: I created tests for the front-end of the application by using jasmine and spies. This allowed me to confirm the operation of the gameManager without needing real DOM objects.
+- **Engine Expandability**: I created an engine using the gameManager and stateManager that can be easily expanded for future projects
 
 ### Design/Evaluation Achievements
-- **Design Achievement 1**: I ensured that my application would run on both desktops / mobile devices by changing X
-- **Design Achievement 2**: I followed best practices for accessibility, including providing alt attributes for images and using semantic HTML. There are no `<div>` or `<span>` elements in my document.
-- **Design Achievement 3**: We tested the application with n=X users, finding that...
+- **Materialize**: I continued to use materialize.css to maintain a clean and uniform look
+- **Input confirmation**: I ensured that all successful user interactions are confirmed with a visual (ripple or toast). This ensures the user knows how their input is used by the system.
