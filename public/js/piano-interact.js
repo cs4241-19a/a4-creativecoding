@@ -33,14 +33,14 @@ let PianoGui = function() {
     this['B'] = '#FF00FF';      // magenta
 
     this.octaveL = 4;
-    this.playFormL = keyPressedOptions.click;
+    this.playFormL = 'click';
     this.octaveR = 5;
-    this.playFormR = keyPressedOptions.click;
+    this.playFormR = 'click';
 
 };
 
 function setupGui() {
-    gui = new dat.GUI();
+    gui = new dat.GUI({hideable: false});
     pianoGui = new PianoGui();
     gui.add(pianoGui, 'duration').min(0);
     gui.add(pianoGui, 'keyboardControl');
@@ -62,32 +62,32 @@ function setupGui() {
 
 
     const lPianoFolder = gui.addFolder('Left');
-    lPianoFolder.add(pianoGui, 'octaveL', 1, 7).step(1);
-    lPianoFolder.add(pianoGui, 'playFormL', {
-        'Click': keyPressedOptions.click,
-        'Hover': keyPressedOptions.hover,
-        'Click Hold': keyPressedOptions.clickHold,
-        'Hover Hold': keyPressedOptions.hoverHold,
-    })
+    lPianoFolder.add(pianoGui, 'octaveL', 1, 7, 1);
+    // cant hold function so hold string for switch
+    lPianoFolder.add(pianoGui, 'playFormL', {'Click': 'click', 'Hover': 'hover', 'Click Hold': 'clickHold', 'Hover Hold': 'hoverHold'})
         .onFinishChange(function(value) {
-            lPiano.bindKeyPress(eval(value));
+            lPiano.bindKeyPress(chooseKeyPress(value));
         });
 
     const rPianoFolder = gui.addFolder('Right');
     rPianoFolder.add(pianoGui, 'octaveR', 1, 7).step(1);
-    rPianoFolder.add(pianoGui, 'playFormR', {
-        'Click': keyPressedOptions.click,
-        'Hover': keyPressedOptions.hover,
-        'Click Hold': keyPressedOptions.clickHold,
-        'Hover Hold': keyPressedOptions.hoverHold,
-    })
+    // cant hold function so hold string for switch
+    rPianoFolder.add(pianoGui, 'playFormR', {'Click': 'click', 'Hover': 'hover', 'Click Hold': 'clickHold', 'Hover Hold': 'hoverHold'})
         .onFinishChange(function(value) {
-            rPiano.bindKeyPress(eval(value));
+            rPiano.bindKeyPress(chooseKeyPress(value));
         });
 
 
 }
 
+function chooseKeyPress(type) {
+    switch (type) {
+        case "click": return keyPressedOptions.click;
+        case "hover": return keyPressedOptions.hover;
+        case "clickHold": return keyPressedOptions.clickHold;
+        case "hoverHold": return keyPressedOptions.hoverHold;
+    }
+}
 
 
 
@@ -137,35 +137,53 @@ function keyboardBindings(key) {
 
 function keyPressedClosure() {
     function clean(key) {
-        const keyClone = key.cloneNode(true);
-        key.parentNode.replaceChild(keyClone, key);
-        return keyClone;
+        key.removeEventListener('click', singleTrigger);
+        key.removeEventListener('mouseenter', singleTrigger);
+        document.removeEventListener('keydown', singleTrigger);
+        key.removeEventListener('mousedown', downTrigger);
+        key.removeEventListener('mouseup', upTrigger);
+        key.removeEventListener('mouseenter', downTrigger);
+        key.removeEventListener('mouseleave', upTrigger);
+        document.removeEventListener('keydown', downTrigger);
+        document.removeEventListener('keyup', upTrigger);
     }
-    function createKeyPressed(downType, downF, upType, upF) {
-        return function (key) {
-            key = clean(key);
-            key.addEventListener(downType, () => downF(key));
-            document.addEventListener("keydown", event => {
-                if (event.code === keyboardBindings(key) && !event.repeat) {
-                    event.preventDefault();
-                    console.log("hi", key);
-                    downF(key);
-                    event.preventDefault();
-                    return false;
-                }
-            });
-            if (upType !== undefined && upF !== undefined) {
-                key.addEventListener(upType, () => upF(key));
-                document.addEventListener("keyup", event => {
+    function createKeyPressedListeners(downType, downF, upType, upF) {
+        return function(key) {
+            const downFunc = () => downF(key);
+            const upFunc = () => upF(key);
+            const keyFunc = (f) => {
+                return (event) => {
                     if (event.code === keyboardBindings(key)) {
                         event.preventDefault();
-                        console.log("hi");
-                        upF(key);
+                        f(key);
                         return false;
                     }
-                });
-            }
-        }
+                };
+            };
+            const downKeyFunc = keyFunc(downFunc);
+            const upKeyFunc = keyFunc(upFunc);
+
+            let add = function () {
+                key.addEventListener(downType, downFunc);
+                document.addEventListener("keydown", downKeyFunc);
+                if (upType !== undefined && upF !== undefined) {
+                    key.addEventListener(upType, upFunc);
+                    document.addEventListener("keyup", upKeyFunc);
+                }
+            };
+
+            let remove = function () {
+                key.removeEventListener(downType, downFunc);
+                document.removeEventListener("keydown", downKeyFunc);
+                if (upType !== undefined && upF !== undefined) {
+                    key.removeEventListener(upType, upFunc);
+                    document.removeEventListener("keyup", upKeyFunc);
+                }
+            };
+
+            add();
+            return {remove};
+        };
     }
     function singleTrigger(key) {
         downTrigger(key);
@@ -182,19 +200,27 @@ function keyPressedClosure() {
             key.setAttribute("style", "");
         }, noteDuration);
     }
-    const click = createKeyPressed('click', singleTrigger);
-    const hover = createKeyPressed('mouseenter', singleTrigger);
-    const clickHold = createKeyPressed('mousedown', downTrigger, 'mouseup', upTrigger);
-    const hoverHold = createKeyPressed('mouseenter', downTrigger, 'mouseleave', upTrigger);
+    const click = createKeyPressedListeners('click', singleTrigger);
+    const hover = createKeyPressedListeners('mouseenter', singleTrigger);
+    const clickHold = createKeyPressedListeners('mousedown', downTrigger, 'mouseup', upTrigger);
+    const hoverHold = createKeyPressedListeners('mouseenter', downTrigger, 'mouseleave', upTrigger);
 
     return {click, hover, clickHold, hoverHold};
 }
 
 function pianoClosure(pianoId) {
     const piano = document.getElementById(pianoId);
+    let listeners = [];
 
     const bindKeyPress = function (f) {
-        piano.querySelectorAll("rect").forEach(f);
+        // remove old listeners
+        listeners.forEach((l) => {
+            l.remove();
+        });
+        // add new listeners
+        piano.querySelectorAll("rect").forEach((key) => {
+            listeners.push(f(key));
+        });
     };
 
     return {bindKeyPress};
