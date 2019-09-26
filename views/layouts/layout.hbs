@@ -22,8 +22,27 @@
 
 </head>
 <body>
+<nav class="top-nav">
+    <a class="active" href="/">Piano</a>
+    <a id="help">Help</a>
+</nav>
 
-{{{ body }}}
+<section class="container">
+    {{{ body }}}
+</section>
+
+<article id="helpModal" class="modal">
+    <section class="modal-content">
+        <span class="close">&times;</span>
+        <h2 style="margin:0">Instructions</h2>
+        <p>This page has two octaves worth of a piano. You can change which octave and also the sound from the oscillator. You can also change the length of the note adn the color shown</p>
+        <p>To play the piano, you can simply click on a key. You can change the play form to hover or to hold the note while clicking or hovering. There are also keyboard bindings to each key. You can disable these bindings as well.</p>
+        <p>Below are the bindings to play the notes with your keyboard.</p>
+        {{> includes/piano-bind-chart }}
+        <p>For example, you could us this sequence of buttons to play Twinkle Twinkle Little Star:
+            bb..//.,,mmnnb ..,,mmn ..,,mmn bb..//.,,mmnnb</p>
+    </section>
+</article>
 
 </body>
 </html>

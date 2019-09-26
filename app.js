@@ -1,13 +1,19 @@
 const express = require('express'),
     hbs = require('express-handlebars'),
     path = require('path'),
-    morgan = require('morgan');
+    morgan = require('morgan'),
+    compression = require('compression'),
+    helmet = require('helmet');
 
 const app = express();
 const port = 3000;
 
 // morgan logger
 app.use(morgan('dev'));
+
+app.use(compression());
+
+app.use(helmet());
 
 // template engine setup (handlebars)
 //app.engine('hbs', hbs({helpers: require("./public/js/helpers.js").helpers, extname: 'hbs', defaultLayout: 'layout', layoutsDir: __dirname + '/views/layouts/'}));
