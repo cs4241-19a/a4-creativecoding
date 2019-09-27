@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+      <title>Express</title>
+      <link rel="stylesheet" href="/stylesheets/style.css">
+  </head>
+
+  <body>
+  <label>
+      Pan
+      <input id="pan" type="range" min="-1" max="1" step=".01" value="0" oninput="changePan(this.value)">
+  </label>
+  <label>
+      <select id="reverb" onchange="changeReverb()">
+          <option value="blockinside">Block Inside</option>
+          <option value="bottlehall">Bottle Hall</option>
+          <option value="cementblocks1">Cement Blocks 1</option>
+          <option value="cementblocks2">Cement Blocks 2</option>
+          <option value="chateaudelogne,outside">Chateau de Logne, Outside</option>
+          <option value="coniclongechohall">Conic Long Echo Hall</option>
+          <option value="deepspace">Deep Space</option>
+          <option value="derlonsanctuary">Derlon Sanctuary</option>
+          <option value="directcabinetn1">Direct Cabinet N1</option>
+          <option value="directcabinetn2">Direct Cabinet N2</option>
+          <option value="directcabinetn3">Direct Cabinet N3</option>
+          <option value="directcabinetn4">Direct Cabinet N4</option>
+          <option value="fivecolumnslong">Five Columns Long</option>
+          <option value="fivecolumns">Five Columns</option>
+          <option value="french18thcenturysalon">French 18th Century Salon</option>
+          <option value="goinghome">Going Home</option>
+          <option value="greek7echohall">Greek 7 Echo Hall</option>
+          <option value="highlydampedlargeroom">Highly Damped Large Room</option>
+          <option value="inthesilorevised">In The Silo Revised</option>
+          <option value="inthesilo">In The Silo</option>
+          <option value="largebottlehall">Large Bottle Hall</option>
+          <option value="largelongechohall">Large Long Echo Hall</option>
+          <option value="largewideechohall">Large Wide Echo Hall</option>
+          <option value="masoniclodge">Masonic Lodge</option>
+          <option value="Musikvereinsaal">Musikvereinsaal</option>
+          <option value="narrowbumpyspace">Narrow Bumpy Space</option>
+          <option value="nicedrumroom">Nice Drum Room</option>
+          <option value="onastar">On a Star</option>
+          <option value="parkinggarage">Parking Garage</option>
+          <option value="rays">Rays</option>
+          <option value="rightglasstriangle">Right Glass Triangle</option>
+          <option value="rubyroom">Ruby Room</option>
+          <option value="scalamilanoperahall">Scala Milan Opera Hall</option>
+          <option value="smalldrumroom">Small Drum Room</option>
+          <option value="smallprehistoriccave">Small Prehistoric Cave</option>
+          <option value="stnicolaeschurch">St Nicolaes Church</option>
+          <option value="trigroom">Trig Room</option>
+          <option value="vocalduo">Vocal Duo</option>
+      </select>
+  </label>
+  <h1 id="freq"></h1>
+
+  <canvas id="scope"></canvas>
+  <script src="/javascripts/script.js" type="application/javascript"></script>
+  </body>
+
+</html>
