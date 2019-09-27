@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>IA Audio Visualizer</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura-vader.css" type="text/css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.js"></script>
 </head>
 <body>
@@ -11,15 +12,28 @@
         <div class="bg-hero-image"></div>
         <canvas id="studio-canvas" width="1024" height="350"></canvas>
         <div class="dvInsideTL">
-            <div class="vertical-container">
-                <div class="card">
-                    <h3>About IA</h3>
-                    <p>IA is a VOCALOID, a humanoid persona voiced by a singing synthesizer application developed by 1st Place Co., Ltd., headquartered in Meguro, Tokyo, Japan.</p>
-                    <p>People can use IA's voice bank to create their own songs.  The songs provided were created by Soundcloud user, Kita-Kei, and are being shared through a Creative Commons License.</p>
+            <div class="container">
+                <div class="vertical-container">
+                    <div class="card">
+                        <h3>About IA</h3>
+                        <p>IA is a VOCALOID, a humanoid persona voiced by a singing synthesizer application developed by 1st Place Co., Ltd.  People can use IA's voice bank to create their own songs.  </p>
+                        <p>The songs provided were created by Soundcloud user, Kita-Kei, and are being shared through a Creative Commons License.</p>
+                        <button id="helpButton" style="display: none">Help</button>
+                    </div>
+                    <div class="container">
+                        <button id="playButton" class="funcButton">Play Song</button>
+                        <button id="pauseResumeButton" class="funcButton">Pause/Resume</button>
+                    </div>
                 </div>
-                <button id="playButton" class="funcButton">Play Song</button>
-                <button id="pauseResumeButton" class="funcButton">Pause/Resume</button>
+                <div class="modal" id="modal">
+                    <div class="card">
+                        <h3>Welcome</h3>
+                        <p>Hello! To customize the music settings, please refer to the top right.  You can select the song, how the music sounds, and how the stereo bars look. You can play, pause, and resume from the buttons on the left side.  If you change the song, you will need to replay.</p>
+                        <button id="closeButton">Close</button>
+                    </div>
+                </div>
             </div>
+
         </div>
     </div>
 

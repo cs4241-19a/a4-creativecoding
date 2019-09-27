@@ -1,4 +1,4 @@
-let barColor = '#df22eb';
+let barColor = '#d03c87';
 let speedRate = 1;
 let volumeStrength = 1;
 let songSelected = "Azure Lines";
@@ -11,6 +11,17 @@ function initializeCanvas() {
     canvas.style.height = window.innerHeight + "px";
     context = canvas.getContext("2d");
 }
+
+function displayInstructions() {
+    document.getElementById("modal").style.display = "";
+    document.getElementById("helpButton").style.display = "none";
+}
+
+function closeInstructions() {
+    document.getElementById("modal").style.display = "none";
+    document.getElementById("helpButton").style.display = "";
+}
+
 
 function createGui() {
     const adjustableValues = {
@@ -46,4 +57,4 @@ function createGui() {
     });
 };
 
-export {canvas, context, barColor, speedRate, volumeStrength, songSelected, initializeCanvas, createGui};
+export {canvas, context, barColor, speedRate, volumeStrength, songSelected, initializeCanvas, createGui, displayInstructions, closeInstructions};

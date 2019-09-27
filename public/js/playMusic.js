@@ -3,8 +3,8 @@ import {context, barColor, speedRate, volumeStrength, songSelected} from "./cont
 let audio = document.getElementById("audio");
 const width = 1024;
 const height = 350;
-const interval = 128;
-let audioctx, analyzer, oscillator, source, freqArr, barHeight;
+const interval = 256;
+let audioctx, analyzer, oscillator, source, frequency, barHeight;
 let opacity = 1.0;
 let glow = false;
 let stereoCreated = false;
@@ -20,7 +20,7 @@ function play() {
         source = audioctx.createMediaElementSource(audio);
         source.connect(analyzer);
         source.connect(audioctx.destination);
-        freqArr = new Uint8Array(analyzer.frequencyBinCount);
+        frequency = new Uint8Array(analyzer.frequencyBinCount);
         barHeight = height;
         stereoCreated = true;
     }
@@ -57,7 +57,6 @@ function playSelectedSong() {
             break;
         default:
             console.log("error");
-            break;
     }
     audio.playbackRate = speedRate;
     audio.volume = volumeStrength;
@@ -68,21 +67,15 @@ function playSelectedSong() {
 
 function draw(color) {
     if(!audio.paused) {
-        let bigBars = 0;
+        let i;
         let x = 0;
+        let barLength = width / interval;
         context.clearRect(0, 0, width, height);
         context.fillStyle = color;
-        analyzer.getByteFrequencyData(freqArr);
-        for(let i = 0; i < interval; i++) {
-            if(barHeight >= 240) {
-                bigBars++;
-            }
-            //max = 900; //default placeholder
+        analyzer.getByteFrequencyData(frequency);
+        for(i = 0; i < interval; i = i + 1) {
             let num = i;
-            barHeight = ((freqArr[num] - 128) * 2) + 2;
-            if(barHeight <= 1){
-                barHeight = 2;
-            }
+            barHeight = ((frequency[num] - 128) * 2);
             context.globalAlpha = opacity;
             if(glow === true) {
                 context.shadowBlur = 20;
@@ -91,8 +84,8 @@ function draw(color) {
             else {
                 context.shadowBlur = 0;
             }
-            context.fillRect(x, height - barHeight, (width/interval) - 1, barHeight);
-            x += width/interval;
+            context.fillRect(x, height - barHeight, barLength - 1, barHeight);
+            x = x + barLength;
         }
     }
     window.requestAnimationFrame(draw);
