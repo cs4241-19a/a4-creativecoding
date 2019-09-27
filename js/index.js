@@ -54,6 +54,7 @@ window.onload  = function(){
     controls.addEventListener('change', render);
     controls.enableZoom = false;
     
+    
     //light
      light = new THREE.PointLight(0xffffff, 1, 100);
      light.position.set(50,50,50);
@@ -61,7 +62,7 @@ window.onload  = function(){
      scene.add(light);
 
      lightAmb = new THREE.AmbientLight(0x777777);
-     scene.add(lightAmb)
+     scene.add(lightAmb);
     //the cube 
     /*
     geometry = new THREE.BoxGeometry(5,5,5,5,5,5);
@@ -77,13 +78,13 @@ window.onload  = function(){
     manager = new THREE.LoadingManager(render);
     loader = new GLTFLoader();
   
-    loader.load('/3dModel/scene.gltf', (gltf) => {
+    loader.load('/3dModel/Garza_Mesh.glb', (gltf) => {
         mesh = gltf.scene;
         scene.add(gltf.scene);
         console.log("should be loaded");
         gltf.scene.scale.set(2,2,2);
 
-        
+        //gltf.scene.mesh.material
         //options for menu
     options = {
         velx: 0,
@@ -113,10 +114,11 @@ window.onload  = function(){
     gui = new dat.GUI();
 
     //setting up menu
-    // cam = gui.addFolder('Camera');
-    // cam.add(options.camera, 'speed', 0, 0.0010).listen();
-    // cam.add(camera.position, 'y', 0, 100).listen();
-    // cam.open();
+     cam = gui.addFolder('Camera');
+     cam.add(options.camera, 'speed', 0, 0.0010).listen();
+     cam.add(camera.position, 'y', 0, 100).listen();
+     cam.open();
+
 
     velocity = gui.addFolder('Velocity');
     velocity.add(options, 'velx', -0.2, 0.2).name('X').listen();
@@ -137,10 +139,12 @@ window.onload  = function(){
    .listen()
    .onChange(function() {
        //mesh.material.color.set(API.color);
-       gltf.set.color(API.color);
-       render(camera);
+       //gltf.set.color(API.color);
+      // gltf.mesh.Color.set(API.color);   
+      // set(API.color);
+       render();
    });
-   render(camera);
+   render();
    
     })
    
@@ -174,13 +178,15 @@ var render = function() {
     
     requestAnimationFrame(render);
     
-    
+    //controls.update();
     // var timer = Date.now() * options.camera.speed;
     // camera.position.x = Math.cos(timer) * 100;
     // camera.position.z = Math.sin(timer) * 100;
     // camera.lookAt(scene.position); 
     // camera.updateMatrixWorld();
-  
+    
+    //gltf.scene.mesh.x += options.velx;
+    //gltf.scene.mesh.y += options.vely;
     //cube.rotation.x += options.velx;
     //cube.rotation.y += options.vely;
     //requestAnimationFrame(render);
