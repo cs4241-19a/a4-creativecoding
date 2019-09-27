@@ -8,25 +8,19 @@
 </head>
 <body>
     <div class="bg-hero-image"></div>
-    <button class="collapsible">Info (Click to Expand)</button>
-    <div class="content">
-        <p>IA is a VOCALOID, a humanoid persona voiced by a singing synthesizer application developed by 1st Place Co., Ltd., headquartered in Meguro, Tokyo, Japan.</p>
-        <p>People can use IA's voice bank to create their own songs.  The songs provided were created by Soundcloud user, Kita-Kei, and are being shared through a Creative Commons License.</p>
+    <div class="container">
+        <div class="vertical-container">
+            <div class="card">
+                <h3>About IA</h3>
+                <p>IA is a VOCALOID, a humanoid persona voiced by a singing synthesizer application developed by 1st Place Co., Ltd., headquartered in Meguro, Tokyo, Japan.</p>
+                <p>People can use IA's voice bank to create their own songs.  The songs provided were created by Soundcloud user, Kita-Kei, and are being shared through a Creative Commons License.</p>
+            </div>
+            <button id="playButton" class="funcButton">Play Song</button>
+            <button id="pauseResumeButton" class="funcButton">Pause/Resume</button>
+        </div>
+        <canvas id="studio-canvas" width="1024" height="600"></canvas>
     </div>
-    <div class="song-dropdown">
-        <form action="">
-            <select id="songList">
-                <option value="azureLinesOption">Azure Lines</option>
-                <option value="azureSkyOption">Azure Sky</option>
-                <option value="planisphereOption">Planisphere</option>
-                <option value="travelersOption">Travelers</option>
-                <option value="waypointsOption">Waypoints</option>
-            </select>
-        </form>
-    </div>
-    <button id="testButton">Play Song</button>
-    <canvas id="studio-canvas" width="1024" height="600"></canvas>
-    <audio controls id="audio"></audio>
+    <audio controls id="audio" style="display: none"></audio>
     <audio id="azureLines" src="../audio/AzureLines.mp3"></audio>
     <audio id="azureSky" src="../audio/AzureSky.mp3"></audio>
     <audio id="planisphere" src="../audio/Planisphere.mp3"></audio>

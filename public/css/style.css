@@ -12,6 +12,28 @@
     right: 0;
 }
 
+.container {
+    display: flex;
+}
+
+.vertical-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    padding: 16px;
+    text-align: center;
+    background-color: #f1f1f1;
+    height: 50%;
+    width: 50%;
+}
+
+.funcButton {
+    width: 50%;
+}
+
 .collapsible {
     background-color: #777;
     color: white;

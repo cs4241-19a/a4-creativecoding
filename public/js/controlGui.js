@@ -1,24 +1,13 @@
-let barColor = '#ffffff';
+let barColor = '#df22eb';
 let speedRate = 1;
 let volumeStrength = 1;
-import {draw, adjustVolume, adjustSpeed, adjustOpacity} from "./playMusic.js";
+let songSelected = "Azure Lines";
+let canvas, context;
+import {draw, adjustVolume, adjustSpeed, adjustOpacity, adjustGlow} from "./playMusic.js";
 
-function displayInfo() {
-    let coll = document.getElementsByClassName("collapsible");
-    let i;
-
-    for (i = 0; i < coll.length; i++) {
-        coll[i].addEventListener("click", function() {
-            this.classList.toggle("active");
-            let content = this.nextElementSibling;
-            if (content.style.maxHeight){
-                content.style.maxHeight = null;
-            } else {
-                content.style.maxHeight = content.scrollHeight + "px";
-            }
-        });
-    }
-
+function initializeCanvas() {
+    canvas = document.getElementById("studio-canvas");
+    context = canvas.getContext("2d");
 }
 
 function createGui() {
@@ -27,6 +16,8 @@ function createGui() {
         opacity: 1.0,
         speed: speedRate,
         volume: volumeStrength,
+        song: "Azure Lines",
+        glow: false
     };
     const gui = new dat.GUI();
     const stereoBars = gui.addFolder('Stereo Bars')
@@ -37,6 +28,9 @@ function createGui() {
     stereoBars.add(adjustableValues, 'opacity', 0, 1).onChange(function (newValue) {
         adjustOpacity(newValue);
     })
+    stereoBars.add(adjustableValues, 'glow').onChange(function (newValue) {
+        adjustGlow(newValue);
+    });
     gui.add(adjustableValues, 'speed', 0, 2).onChange(function (newValue) {
         speedRate = newValue;
         adjustSpeed(newValue);
@@ -45,6 +39,9 @@ function createGui() {
         volumeStrength = newValue;
         adjustVolume(newValue);
     });
+    gui.add(adjustableValues, 'song', ["Azure Lines", "Azure Sky", "Planisphere", "Travelers", "Waypoints"]).onChange(function (newValue) {
+        songSelected = newValue;
+    });
 };
 
-export {barColor, speedRate, volumeStrength, displayInfo, createGui};
+export {canvas, context, barColor, speedRate, volumeStrength, songSelected, initializeCanvas, createGui};

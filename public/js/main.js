@@ -1,21 +1,25 @@
-import {displayInfo, createGui} from "./controlGui.js";
-import {initializeStereo, playSelectedSong, draw} from "./playMusic.js";
+import {initializeCanvas, createGui} from "./controlGui.js";
+import {play, pauseResume} from "./playMusic.js";
 
 const initialize = function() {
-    const buttonTest = document.getElementById("testButton");
-    buttonTest.onclick = playSong;
-    displayInfo();
-    initializeStereo();
+    const buttonPlay = document.getElementById("playButton");
+    buttonPlay.onclick = playSong;
+    const buttonPauseResume = document.getElementById("pauseResumeButton");
+    buttonPauseResume.onclick = resumePause;
+    initializeCanvas();
     createGui();
 };
 
 const playSong = function(e) {
     e.preventDefault();
-    playSelectedSong();
+    play();
 };
+
+const resumePause = function(e) {
+    e.preventDefault();
+    pauseResume();
+}
 
 window.onload = function() {
     initialize();
 };
-
-export {draw};

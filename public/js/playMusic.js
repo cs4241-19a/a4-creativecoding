@@ -1,43 +1,58 @@
-import {barColor, speedRate, volumeStrength} from "./controlGui.js";
+import {canvas, context, barColor, speedRate, volumeStrength, songSelected} from "./controlGui.js";
 
 let audio = document.getElementById("audio");
 const width = 1024;
 const height = 600;
 const interval = 128;
-let canvas, context, audioctx, analyzer, oscillator, source, freqArr, barHeight;
+let audioctx, analyzer, oscillator, source, freqArr, barHeight;
 let opacity = 1.0;
+let glow = false;
+let stereoCreated = false;
+let musicPlaying = false;
 
-function initializeStereo() {
-    canvas = document.getElementById("studio-canvas");
-    context = canvas.getContext("2d");
-    audioctx = new AudioContext();
-    analyzer = audioctx.createAnalyser();
-    analyzer.fftSize = 2048;
-    oscillator = audioctx.createOscillator();
-    oscillator.connect(audioctx.destination);
-    source = audioctx.createMediaElementSource(audio);
-    source.connect(analyzer);
-    source.connect(audioctx.destination);
-    freqArr = new Uint8Array(analyzer.frequencyBinCount);
-    barHeight = height;
+function play() {
+    if(stereoCreated === false) {
+        audioctx = new AudioContext();
+        analyzer = audioctx.createAnalyser();
+        analyzer.fftSize = 2048;
+        oscillator = audioctx.createOscillator();
+        oscillator.connect(audioctx.destination);
+        source = audioctx.createMediaElementSource(audio);
+        source.connect(analyzer);
+        source.connect(audioctx.destination);
+        freqArr = new Uint8Array(analyzer.frequencyBinCount);
+        barHeight = height;
+        stereoCreated = true;
+    }
+    playSelectedSong();
+}
+
+function pauseResume() {
+    if(musicPlaying === true) {
+        audio.pause();
+        musicPlaying = false;
+    }
+    else {
+        audio.play();
+        musicPlaying = true;
+    }
 }
 
 function playSelectedSong() {
-    const selectedOption = document.getElementById("songList").value;
-    switch(selectedOption) {
-        case("azureLinesOption"):
+    switch(songSelected) {
+        case("Azure Lines"):
             audio.src = document.getElementById("azureLines").src;
             break;
-        case("azureSkyOption"):
+        case("Azure Sky"):
             audio.src = document.getElementById("azureSky").src;
             break;
-        case("planisphereOption"):
+        case("Planisphere"):
             audio.src = document.getElementById("planisphere").src;
             break;
-        case("travelersOption"):
+        case("Travelers"):
             audio.src = document.getElementById("travelers").src;
             break;
-        case("waypointsOption"):
+        case("Waypoints"):
             audio.src = document.getElementById("waypoints").src;
             break;
         default:
@@ -47,6 +62,7 @@ function playSelectedSong() {
     audio.playbackRate = speedRate;
     audio.volume = volumeStrength;
     audio.play();
+    musicPlaying = true;
     draw(barColor);
 }
 
@@ -68,6 +84,13 @@ function draw(color) {
                 barHeight = 2;
             }
             context.globalAlpha = opacity;
+            if(glow === true) {
+                context.shadowBlur = 20;
+                context.shadowColor = color;
+            }
+            else {
+                context.shadowBlur = 0;
+            }
             context.fillRect(x, height - barHeight, (width/interval) - 1, barHeight);
             x += width/interval;
         }
@@ -87,4 +110,8 @@ function adjustOpacity(op) {
     opacity = op;
 }
 
-export {initializeStereo, playSelectedSong, draw, adjustVolume, adjustSpeed, adjustOpacity};
+function adjustGlow(mode) {
+    glow = mode;
+}
+
+export {playSelectedSong, draw, adjustVolume, adjustSpeed, adjustOpacity, adjustGlow, play, pauseResume};
