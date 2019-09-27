@@ -5,6 +5,7 @@
 		}
 	],
 	"settings": {
-		"eslint.alwaysShowStatus": true
+		"eslint.alwaysShowStatus": true,
+		"git.ignoreLimitWarning": true
 	}
 }
