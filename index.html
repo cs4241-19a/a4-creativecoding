@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en-US">
+    <head>
+        <title>A4 - Michael Bosik</title>
+        <meta charset="UTF-8">
+        <link type="text/css" rel="stylesheet" href="style.css">
+        <link href="https://fonts.googleapis.com/css?family=Rubik&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lobster&display=swap" rel="stylesheet">
+        <script src="bundle.js"></script>
+        <script>
+            const app = require('app');
+            function toggleInfo(){
+                document.getElementById('info').style.display = "block";
+            }
+            window.onclick = function(event) {
+                if (event.target == document.getElementById('info')) {
+                    document.getElementById('info').style.display = "none";
+                }
+            }
+        </script>
+    </head>
+    <body onload="app.init()">
+        <div class="modal character-design">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1>Design your character</h1>
+                </div>
+                <div class="modal-body" id="character-creation">
+                    <div class="info" id="info">
+                        <div class="infoContent">
+                            <h1>Info:</h1>
+                            <h3>Use the sliders and color pickers to adjust the attributes of the character model.</h3>
+                            <p>This project uses three.js to render an animated 3D mesh to the screen. Click off this card to hide.</p>
+                        </div>
+                    </div>
+                    <div id="infoToggle" onclick="toggleInfo()">
+                        i
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="inputItem">
+                        <p>Adjust Height</p>
+                        <input id="slider-height" class="slider" type="range" min="20" max="70" value="40" onchange="app.handleChange(this)">
+                    </div>
+                    <div class="inputItem">
+                        <p>Adjust Width</p>
+                        <input id="slider-width" class="slider" type="range" min="5" max="50" value="20" onchange="app.handleChange(this)">
+                    </div>
+                    <div class="inputItem">
+                        <p>Head Type</p>
+                        <input id="slider-head" class="slider" type="range" min="0" max="6" value="2" onchange="app.handleChange(this)">
+                    </div>
+                    <div class="inputItem">
+                        <p>Head Color</p>
+                        <input id="picker-headColor" class="slider" type="color" value="#828282" onchange="app.handleChange(this)">
+                    </div>
+                    <div class="inputItem">
+                        <p>Body Color</p>
+                        <input id="picker-bodyColor" class="slider" type="color" value="#828282" onchange="app.handleChange(this)">
+                    </div>
+                    <div class="inputItem">
+                        <p>Arm Color</p>
+                        <input id="picker-armColor" class="slider" type="color" value="#828282" onchange="app.handleChange(this)">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal game">
+
+        </div>
+    </body>
+</html>
