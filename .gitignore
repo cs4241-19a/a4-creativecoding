@@ -5,3 +5,4 @@ package-lock.json
 .glitch-assets
 shrinkwrap.yaml
 db.json
+public/bundle.js

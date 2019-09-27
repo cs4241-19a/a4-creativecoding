@@ -10,8 +10,10 @@
     "start": "node server.js"
   },
   "dependencies": {
+    "compression": "^1.7.4",
     "express": "^4.16.4",
-    "helmet": "^3.21.1"
+    "helmet": "^3.21.1",
+    "three": "^0.108.0"
   },
   "engines": {
     "node": "8.x"
