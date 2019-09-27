@@ -50,15 +50,23 @@ Do the following to complete this assignment:
 Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
 ---
 
-## Your Web Application Title
+## Exoplanet Visualizer
 
-your hosting link e.g. http://a4-charlieroberts.glitch.me
+https://a4-samgoldman.glitch.me/
 
-Include a very brief summary of your project here. Images are encouraged, along with concise, high-level text. Be sure to include:
+This website uses a local copy of data from the [NASA Exoplanet Archive](https://exoplanetarchive.ipac.caltech.edu/) to display each of the 4,055 currently confirmed exoplanets. It displays the exoplanets grouped by their star system, with the option to display each roughly to scale to each other. For the sake of screen real-estate, stars are never to scale, nor are the displayed orbits. However, the orbital periods depicted are to scale (values are randomized for any unknown period, about 100 planets).
 
-- the goal of the application
-- challenges you faced in realizing the application
-- a brief description of the JS linter you used and what rules it follows (we'll be looking at your JS files for consistency)
+Some challenges I faced:
+- Working with nested data was not easy at first
+- Everything related to the animation of the planets, particularly getting the pause/timeScale controls to work properly
+
+Linter:
+- I used the built linter built into WebStorm
+- Major rules that it enforced:
+  - Semicolons on all but the last statement in a scope (I chose to self enforce semicolons on all lines)
+  - Unused parameters and variables are not allowed
+  - 'var' is not allowed
+  - Notably, it did not enforce line length, so I have a few excessively long lines
 
 ## Technical Achievements
 - **Tech Achievement 1**: I wrote my own custom GLSL shaders to use as a material for my Three.js objects.
