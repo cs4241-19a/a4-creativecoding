@@ -8,7 +8,7 @@ Janette Fong http://a4-charlieroberts.glitch.me
 The website allows the user to play music from IA, a VOCALOID.  The user can also control specify what song they want to hear, volume, speed, and also customize the stereo bars (color, opacity, glow).
 
 The main goal of this project is to display an audio visualization of the songs using Canvas.  Some challenges I've faced in this assignment included finding certain dat.gui documentation to suit 
-what kind of user interaction settings I wanted to display.
+what kind of user interaction settings I wanted to display, as well as initially deploying to Glitch since I was not aware that the Glitch project size was 128 MB.
 
 I used a JSLinter from Webstorm.  It tolerates for loops, multiple variable declarations, single quote strings, and whitespace mess.  The maximum number of characters is 100.
 
