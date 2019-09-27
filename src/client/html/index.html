@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>TinyTanks.io</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="shortcut icon" href="/assets/icon64.png">
+  <meta property="description" content="A complete example multiplayer .io web game implemented from scratch. Built with Javascript and Node.js. Open source on Github.">
+  <meta property="og:title" content="An example .io game">
+  <meta property="og:description" content="A complete example multiplayer .io web game implemented from scratch. Built with Javascript and Node.js. Open source on Github.">
+  <meta property="og:image" content="/assets/icon1200.png">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-58664433-3"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-58664433-3');
+	 
+		function instructions(){
+			document.getElementById("instructions").style.display = 'block'
+			document.getElementById("instructions").innerHTML = 
+			'<div>How to Start:</div><ul>\
+			<li>Select a color for your tank</li>\
+			<li>Type in a username</li></ul\
+			<div>User Interface:</div><ul>\
+			<li>Use the left and right arrow keys to turn</li>\
+			<li>Use the up and down arrow keys to move forwared or backwards</li>\
+			<li>Use the spacebar to shoot bullets</li></ul>\
+			<div> Type "q" to bring up this prompt"</div>\
+			<button onclick="close_instructions()" style="font-size:1em;">Close Prompt</button>'
+		};
+
+		function close_instructions(){
+			document.getElementById("instructions").style.display = 'none'
+		}
+  </script>
+</head>
+<body>
+  <div id="instructions"></div>
+  <script>instructions()</script>
+  <canvas id="game-canvas"></canvas>
+  <div id="play-menu" class="hidden">
+    <h1>Tiny Tanks .io</h1>
+    <p>
+      Stay alive and shoot other players.
+      <br />
+      Use the arrow keys to move
+    </p>
+    <hr />
+    <p>
+      <!-- <br /> -->
+      How to Play: <button onclick="instructions()" style="font-size: .95em; padding:5px 5px 5px 5px;">Click Here</button>.
+      <br />
+      See the source code on <a href="https://github.com/mjadiletta/a3-mjadiletta-matthew-adiletta" target="_blank">Github</a>.
+      <br />
+      Created by <a href="https://a1-mjadiletta.glitch.me">Matt Adiletta</a>.
+    </p>
+    <hr />
+	 
+	 <div id="tank_color"> Select Tank Color: 
+		 <select id="selected_color">
+		  <option>red</option>
+		  <option>green</option>
+		  <option>blue</option>
+		  <option>purple</option>
+		 </select> 
+    </div>
+	 
+    <input type="text" id="username-input" placeholder="Username" />
+    <button id="play-button">PLAY</button>
+  </div>
+  <div id="leaderboard" class="hidden">
+    <table>
+      <tr>
+        <th>Username</th>
+        <th>Score</th>
+      </tr>
+      <tr><td></td><td></td></tr>
+      <tr><td></td><td></td></tr>
+      <tr><td></td><td></td></tr>
+      <tr><td></td><td></td></tr>
+      <tr><td></td><td></td></tr>
+    </table>
+  </div>
+  
+	<div id="health" class="hidden">
+		<div id="health_header" value=""><strong>User Health</strong></div>
+		<div id="health_number"></div>
+	</div>
+  
+  <div id="disconnect-modal" class="hidden">
+    <div>
+      <h2>Disconnected from Server </h2>
+      <hr />
+      <button id="reconnect-button">RECONNECT</button>
+    </div>
+  </div>	
+</body>
+</html>
