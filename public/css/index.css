@@ -48,8 +48,15 @@ h1 {
 }
 
 #btnContainer {
-    padding-bottom: 20px;
+    padding-bottom: 2px;
     padding-top: 20px;
+    height: 60px;
+    width: 100%;
+}
+
+#btnContainer2 {
+    padding-bottom: 20px;
+    padding-top: 2px;
     height: 60px;
     width: 100%;
 }
@@ -114,6 +121,32 @@ h1 {
     box-shadow: 0 1px 10px darkslategray;
     cursor: pointer;
 }
+
+#blue:hover {
+    background-color: dodgerblue;
+    box-shadow: 0 1px 10px darkslategray;
+    cursor: pointer;
+}
+
+#red:hover {
+    background-color: red;
+    box-shadow: 0 1px 10px darkslategray;
+    cursor: pointer;
+}
+
+#pink:hover {
+    background-color: hotpink;
+    box-shadow: 0 1px 10px darkslategray;
+    cursor: pointer;
+}
+
+#green:hover {
+    background-color: green;
+    box-shadow: 0 1px 10px darkslategray;
+    cursor: pointer;
+}
+
+
 
 
 

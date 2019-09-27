@@ -1,4 +1,25 @@
 import { getCanvas, audioInit, audioGraph } from './setUpModule.js'
+import {visualizer} from "./visualizerModule";
+
+let currColor = 0
+
+
+const blue = function () {
+  currColor = 0
+}
+
+const green = function () {
+  currColor = 1
+}
+
+const pink = function () {
+  currColor = 2
+}
+
+const red = function () {
+  currColor = 3
+}
+
 
 const startMello = function () {
   const canvas = getCanvas()
@@ -13,25 +34,7 @@ const startMello = function () {
 
   const draw = function () {
     window.requestAnimationFrame(draw)
-    jsonAudioGraph.analyser.getByteFrequencyData(results)
-
-    let x = 0
-
-    jsonAudioInit.ctx.fillStyle = 'black'
-    jsonAudioInit.ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-    for (let i = 0; i < jsonAudioGraph.analyser.frequencyBinCount; i++) {
-      const barHeight = results[i] * 2 + 60
-
-      var r = barHeight + (25 * (i / jsonAudioGraph.analyser.frequencyBinCount))
-      var g = 250 * (i / jsonAudioGraph.analyser.frequencyBinCount)
-      var b = 50
-
-      jsonAudioInit.ctx.fillStyle = 'rgb(' + b + ',' + g + ',' + r + ')'
-      jsonAudioInit.ctx.fillRect(x, canvas.height - barHeight, (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * 2.5, barHeight)
-
-      x += (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * 2.5 + 1
-    }
+    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor)
   }
   draw()
 }
@@ -49,25 +52,7 @@ const startAC = function () {
 
   const draw = function () {
     window.requestAnimationFrame(draw)
-    jsonAudioGraph.analyser.getByteFrequencyData(results)
-
-    let x = 0
-
-    jsonAudioInit.ctx.fillStyle = 'black'
-    jsonAudioInit.ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-    for (let i = 0; i < jsonAudioGraph.analyser.frequencyBinCount; i++) {
-      const barHeight = results[i] * 2 + 60
-
-      var r = barHeight + (25 * (i / jsonAudioGraph.analyser.frequencyBinCount))
-      var g = 250 * (i / jsonAudioGraph.analyser.frequencyBinCount)
-      var b = 50
-
-      jsonAudioInit.ctx.fillStyle = 'rgb(' + g + ',' + r + ',' + b + ')'
-      jsonAudioInit.ctx.fillRect(x, canvas.height - barHeight, (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * 2.5, barHeight)
-
-      x += (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * 2.5 + 1
-    }
+    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor)
   }
   draw()
 }
@@ -85,24 +70,7 @@ const startElectro = function () {
 
   const draw = function () {
     window.requestAnimationFrame(draw)
-    jsonAudioGraph.analyser.getByteFrequencyData(results)
-
-    let x = 0
-
-    jsonAudioInit.ctx.fillStyle = 'black'
-    jsonAudioInit.ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-    for (let i = 0; i < jsonAudioGraph.analyser.frequencyBinCount; i++) {
-      const barHeight = results[i] * 2 + 60
-
-      var r = barHeight + (25 * (i / jsonAudioGraph.analyser.frequencyBinCount))
-      var g = 250 * (i / jsonAudioGraph.analyser.frequencyBinCount)
-
-      jsonAudioInit.ctx.fillStyle = 'rgb(' + r + ',' + g + ',' + r + ')'
-      jsonAudioInit.ctx.fillRect(x, canvas.height - barHeight, (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * 2.5, barHeight)
-
-      x += (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * 2.5 + 1
-    }
+    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor)
   }
   draw()
 }
@@ -120,25 +88,7 @@ const startRamm = function () {
 
   const draw = function () {
     window.requestAnimationFrame(draw)
-    jsonAudioGraph.analyser.getByteFrequencyData(results)
-
-    let x = 0
-
-    jsonAudioInit.ctx.fillStyle = 'black'
-    jsonAudioInit.ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-    for (let i = 0; i < jsonAudioGraph.analyser.frequencyBinCount; i++) {
-      const barHeight = results[i] * 2 + 60
-
-      var r = barHeight + (25 * (i / jsonAudioGraph.analyser.frequencyBinCount))
-      var g = 250 * (i / jsonAudioGraph.analyser.frequencyBinCount)
-      var b = 50
-
-      jsonAudioInit.ctx.fillStyle = 'rgb(' + r + ',' + g + ',' + b + ')'
-      jsonAudioInit.ctx.fillRect(x, canvas.height - barHeight, (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * 2.5, barHeight)
-
-      x += (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * 2.5 + 1
-    }
+    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor)
   }
   draw()
 }
@@ -156,25 +106,7 @@ const startInst = function () {
 
   const draw = function () {
     window.requestAnimationFrame(draw)
-    jsonAudioGraph.analyser.getByteFrequencyData(results)
-
-    let x = 0
-
-    jsonAudioInit.ctx.fillStyle = 'black'
-    jsonAudioInit.ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-    for (let i = 0; i < jsonAudioGraph.analyser.frequencyBinCount; i++) {
-      const barHeight = results[i] * 2 + 60
-
-      var r = barHeight + (25 * (i / jsonAudioGraph.analyser.frequencyBinCount))
-      var g = 250 * (i / jsonAudioGraph.analyser.frequencyBinCount)
-      var b = 50
-
-      jsonAudioInit.ctx.fillStyle = 'rgb(' + r + ',' + b + ',' + g + ')'
-      jsonAudioInit.ctx.fillRect(x, canvas.height - barHeight, (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * 2.5, barHeight)
-
-      x += (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * 2.5 + 1
-    }
+    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor)
   }
   draw()
 }
@@ -192,25 +124,7 @@ const startBeat = function () {
 
   const draw = function () {
     window.requestAnimationFrame(draw)
-    jsonAudioGraph.analyser.getByteFrequencyData(results)
-
-    let x = 0
-
-    jsonAudioInit.ctx.fillStyle = 'black'
-    jsonAudioInit.ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-    for (let i = 0; i < jsonAudioGraph.analyser.frequencyBinCount; i++) {
-      const barHeight = results[i] * 2 + 60
-
-      var r = barHeight + (25 * (i / jsonAudioGraph.analyser.frequencyBinCount))
-      var g = 250 * (i / jsonAudioGraph.analyser.frequencyBinCount)
-      var b = 50
-
-      jsonAudioInit.ctx.fillStyle = 'rgb(' + g + ',' + b + ',' + r + ')'
-      jsonAudioInit.ctx.fillRect(x, canvas.height - barHeight, (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * 2.5, barHeight)
-
-      x += (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * 2.5 + 1
-    }
+    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor)
   }
   draw()
 }
@@ -228,25 +142,7 @@ const startDub = function () {
 
   const draw = function () {
     window.requestAnimationFrame(draw)
-    jsonAudioGraph.analyser.getByteFrequencyData(results)
-
-    let x = 0
-
-    jsonAudioInit.ctx.fillStyle = 'black'
-    jsonAudioInit.ctx.fillRect(0, 0, canvas.width, canvas.height)
-
-    for (let i = 0; i < jsonAudioGraph.analyser.frequencyBinCount; i++) {
-      const barHeight = results[i] * 2 + 60
-
-      var r = barHeight + (25 * (i / jsonAudioGraph.analyser.frequencyBinCount))
-      var g = 250 * (i / jsonAudioGraph.analyser.frequencyBinCount)
-      var b = 50
-
-      jsonAudioInit.ctx.fillStyle = 'rgb(' + b + ',' + r + ',' + g + ')'
-      jsonAudioInit.ctx.fillRect(x, canvas.height - barHeight, (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * 2.5, barHeight)
-
-      x += (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * 2.5 + 1
-    }
+    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor)
   }
   draw()
 }
@@ -259,4 +155,11 @@ window.onload = function () {
   document.getElementById('beats').onclick = startBeat
   document.getElementById('dubstep').onclick = startDub
   document.getElementById('acdc').onclick = startAC
+  document.getElementById('blue').onclick = blue
+  document.getElementById('green').onclick = green
+  document.getElementById('pink').onclick = pink
+  document.getElementById('red').onclick = red
+
+
+
 }
