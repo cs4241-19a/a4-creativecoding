@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+    <title>Audio Visualizer</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            overflow: hidden;
+        }
+    </style>
+    <script src="dat.gui.min.js"></script>
+    <script type="module"> import mix from "./main.js"; $("#renderer").mousemove(function() { mix(); }); </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+</head>
+
+<body onload="initPage()">
+    <div>
+        <canvas id="renderer"></canvas>
+    </div>
+    <script>
+        $(document).ready(function() {
+            toastr.options = {
+                'closeButton': true,
+                'debug': false,
+                'newestOnTop': false,
+                'progressBar': false,
+                'positionClass': 'toast-top-left',
+                'preventDuplicates': false,
+                'showDuration': '1000',
+                'hideDuration': '1000',
+                'timeOut': '5000',
+                'extendedTimeOut': '1000',
+                'showEasing': 'swing',
+                'hideEasing': 'linear',
+                'showMethod': 'fadeIn',
+                'hideMethod': 'fadeOut',
+            }
+        });
+        $(window).ready(function(event) {
+            info();
+        });
+        var one, two, three;
+        var gradient;
+        var link = ["/sampleAudio", "/sampleAudioTwo", "/sampleAudioThree"];
+        var linkChoice;
+        var gh = "rgba(255,255,255,1)";
+        var gh1 = "rgba(255,255,255,1)";
+        var gh2 = "rgba(255,255,255,1)";
+        var rate;
+        var flag = 0;
+        var FizzyText = function() {
+            this.information = function() { info(); }
+            this.speed = 1;
+            rate = this.speed;
+            this.explode = function() { if (!flag) { start(); flag = 1; } else { starts(rate) } };
+            this.implode = function() { audio.pause() }
+            var test = this.color0 = [0, 128, 255]
+            this.color1 = [0, 128, 255]
+            this.color2 = [0, 128, 255]
+            this.set = function() { var send = this.color0; var send2 = this.color1; var send3 = this.color2; var idk = []; idk.push(send); idk.push(send2); idk.push(send3); console.log(idk); animationLoopers(idk) }
+        };
+        var text = new FizzyText();
+        var gui = new dat.GUI();
+        var message = gui.add(text, 'information');
+        var speed = gui.add(text, 'speed', 0, 5).onChange(function(val) { rate = val; });
+        var explode = gui.add(text, 'explode');
+        var implode = gui.add(text, 'implode');
+        var first = gui.addColor(text, 'color0')
+        var second = gui.addColor(text, 'color1')
+        var third = gui.addColor(text, 'color2')
+        var implode = gui.add(text, 'set');
+        canvas = document.getElementById("renderer");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        ctx = canvas.getContext("2d");
+        centerX = canvas.width / 2;
+        centerY = canvas.height / 2;
+        radius = 150;
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+        ctx.stroke();
+
+        function randNum() {
+            var num = Math.floor(Math.random() * 3);
+            linkChoice = link[num]
+        }
+
+        for (var i = 0; i < bars; i++) {
+            rads = Math.PI * 2 / bars;
+            barHeight = 100;
+            barWidth = 2;
+            x = centerX + Math.cos(rads * i) * (radius);
+            y = centerY + Math.sin(rads * i) * (radius);
+            xEnd = centerX + Math.cos(rads * i) * (radius + barHeight);
+            yEnd = centerY + Math.sin(rads * i) * (radius + barHeight);
+            drawBar(x, y, xEnd, yEnd, barWidth);
+        }
+        var canvas, ctx, centerX, centerY, radius, bars,
+            xEnd, yEnd, barHeight, barWidth,
+            freqArr;
+        bars = 200;
+        barWidth = 2;
+
+        function initPage() {
+            context = new (window.AudioContext || window.webkitAudioContext)();
+            analyser = context.createAnalyser();
+            freqArr = new Uint8Array(analyser.frequencyBinCount);
+            animationLooper();
+        }
+
+        function start() {
+            audio = new Audio();
+            context = new (window.AudioContext || window.webkitAudioContext)();
+            analyser = context.createAnalyser();
+            randNum();
+            audio.src = linkChoice;
+            source = context.createMediaElementSource(audio);
+            source.connect(analyser);
+            analyser.connect(context.destination);
+            audio.play();
+        }
+
+        function starts(input) {
+            audio = new Audio();
+            context = new (window.AudioContext || window.webkitAudioContext)();
+            analyser = context.createAnalyser();
+            randNum();
+            audio.src = linkChoice;
+            console.log(linkChoice)
+            source = context.createMediaElementSource(audio);
+            source.connect(analyser);
+            analyser.connect(context.destination);
+            audio.play();
+            audio.playbackRate = input;
+        }
+
+        function animationLooper() {
+            canvas = document.getElementById("renderer");
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            ctx = canvas.getContext("2d");
+            centerX = canvas.width / 2;
+            centerY = canvas.height / 2;
+            radius = 150;
+            gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            gradient.addColorStop(0, "rgba(35, 7, 77, 1)");
+            gradient.addColorStop(.5, "#ffa500");
+            gradient.addColorStop(1, "#008000");
+            ctx.fillStyle = gradient;
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+            ctx.stroke();
+
+            analyser.getByteFrequencyData(freqArr);
+            for (var i = 0; i < bars; i++) {
+                rads = Math.PI * 2 / bars;
+                barHeight = freqArr[i] * 0.7;
+                x = centerX + Math.cos(rads * i) * (radius);
+                y = centerY + Math.sin(rads * i) * (radius);
+                xEnd = centerX + Math.cos(rads * i) * (radius + barHeight);
+                yEnd = centerY + Math.sin(rads * i) * (radius + barHeight);
+                drawBar(x, y, xEnd, yEnd, barWidth, freqArr[i]);
+            }
+            window.requestAnimationFrame(animationLooper);
+        }
+
+        function animationLoopers(input) {
+            if (Array.isArray(input)) {
+                console.log(input[0][0])
+                var build = 'rgba(' + input[0][0] + ',' + input[0][1] + ',' + input[0][2] + ',1)';
+                var build2 = 'rgba(' + input[1][0] + ',' + input[1][1] + ',' + input[1][2] + ',1)';
+                var build3 = 'rgba(' + input[2][0] + ',' + input[2][1] + ',' + input[2][2] + ',1)';
+                console.log(build)
+                canvas = document.getElementById("renderer");
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                ctx = canvas.getContext("2d");
+
+                centerX = canvas.width / 2;
+                centerY = canvas.height / 2;
+                radius = 150;
+
+                gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+                gradient.addColorStop(0, build);
+                gradient.addColorStop(.5, build2);
+                gradient.addColorStop(1, build3);
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+                ctx.stroke();
+
+                analyser.getByteFrequencyData(freqArr);
+                for (var i = 0; i < bars; i++) {
+                    rads = Math.PI * 2 / bars;
+                    barHeight = freqArr[i] * 0.7;
+                    x = centerX + Math.cos(rads * i) * (radius);
+                    y = centerY + Math.sin(rads * i) * (radius);
+                    xEnd = centerX + Math.cos(rads * i) * (radius + barHeight);
+                    yEnd = centerY + Math.sin(rads * i) * (radius + barHeight);
+                    drawBar(x, y, xEnd, yEnd, barWidth, freqArr[i]);
+                }
+                window.requestAnimationFrame(animationLoopers);
+                gh = build;
+                gh1 = build2
+                gh2 = build3;
+            }
+            else {
+                canvas = document.getElementById("renderer");
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+                ctx = canvas.getContext("2d");
+
+                centerX = canvas.width / 2;
+                centerY = canvas.height / 2;
+                radius = 150;
+
+                gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+                gradient.addColorStop(0, gh);
+                gradient.addColorStop(.5, gh1);
+                gradient.addColorStop(1, gh2);
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+                ctx.beginPath();
+                ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI);
+                ctx.stroke();
+
+                analyser.getByteFrequencyData(freqArr);
+                for (var i = 0; i < bars; i++) {
+                    rads = Math.PI * 2 / bars;
+                    barHeight = freqArr[i] * 0.7;
+
+                    x = centerX + Math.cos(rads * i) * (radius);
+                    y = centerY + Math.sin(rads * i) * (radius);
+                    xEnd = centerX + Math.cos(rads * i) * (radius + barHeight);
+                    yEnd = centerY + Math.sin(rads * i) * (radius + barHeight);
+
+                    drawBar(x, y, xEnd, yEnd, barWidth, freqArr[i]);
+
+                }
+                window.requestAnimationFrame(animationLoopers);
+            }
+        }
+
+        function drawBar(x1, y1, x2, y2, width, frequency) {
+
+            var lineColor = "rgb(" + frequency + ", " + frequency + ", " + 255 + ")";
+
+            ctx.strokeStyle = lineColor;
+            ctx.lineWidth = width;
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(x2, y2);
+            ctx.stroke();
+        }
+
+        function info() {
+            toastr.info('Welcome to my audio visualizer. Please press "explode" to start.  If you wish to stop, hit the "implode" button.');
+            toastr.info('You can select different background colors at any time and hit "set" to complete your changes.');
+            toastr.info('The first playback will always be a normal rate.');
+            toastr.info('You can select a different speed at any time by modifying the slider and then restarting the audio.');
+            toastr.info('Press "info" at any time to repeat this information');
+        }
+    </script>
+</body>
+
+</html>
