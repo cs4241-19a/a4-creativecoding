@@ -121,10 +121,11 @@ for(let j=0; j<appdata.length;j++){
      var value = dataArray[j * step]*controls.scale/5;
             if(value <1)
               value = 1;
-	    		   let r = controls.colorR;
-	    		   let g = controls.colorG;
-	    		   let b = controls.colorB;
-	    		   let rgb = '#'+r.toString(16)+g.toString(16)+b.toString(16);
+	    		   let r = controls.colorR-j*5; 
+	    		   let g = controls.colorG-j*5;
+	    		   let b = controls.colorB-j*5;
+	    		   let rgb = '#'+rgbToHex(r)+rgbToHex(g)+rgbToHex(b);
+           
             appdata[j].material.color.set(rgb);
             appdata[j].scale.y = value;
 
@@ -132,43 +133,8 @@ for(let j=0; j<appdata.length;j++){
   }
         renderer.render(scene, camera);
         }
-// function render() {
-//             requestAnimationFrame(render);
-//           // while(i<5){
-//           //   var cube3 = new THREE.Mesh(geometry, material); 
-//           //   cube3.position.set(5*Math.random(),5*Math.random(),0);
-//           //   scene.add(cube3);
-//           //   i++;
-//           // }
-//           for(let j=0; j<appdata.length;j++){
-//     appdata[j].rotation.x += 0.2*(Math.random());
-//     appdata[j].rotation.y += -0.2*(Math.random());
-  
-//   }
-          
-  
-//             renderer.render(scene, camera);
-//         }
-      render();
-      
-      //canvasCtx.clearRect(0, 0, 500, 500);
-      // function draw() {
-      //   drawVisual = requestAnimationFrame(draw);
-      //   analyser.getByteFrequencyData(dataArray);
-      //   canvasCtx.fillStyle = 'rgb(0, 0, 0)';
-      //   canvasCtx.fillRect(0, 0, 500, 500);
-      //   var barWidth = (500 / bufferLength) * 2.5;
-      //   var barHeight;
-      //   var x = 0;
-      //   for(var i = 0; i < bufferLength; i++) {
-      //     barHeight = dataArray[i];
-      //     canvasCtx.fillStyle = 'rgb(' + (barHeight+100) + ',50,50)';
-      //     canvasCtx.fillRect(x,500-barHeight/2,barWidth,barHeight/2);
-      //     x += barWidth + 1;
-      //   }
-      // };
-      // draw();
-      
+
+      render();   
       
     });
     
@@ -177,7 +143,13 @@ for(let j=0; j<appdata.length;j++){
 alert( 'Uploaded  (＾▽＾) ')
   } 
   
-  
+  var rgbToHex = function (rgb) { 
+  var hex = Number(rgb).toString(16);
+  if (hex.length < 2) {
+       hex = "0" + hex;
+  }
+  return hex;
+};
   
   
   const appdata = []
