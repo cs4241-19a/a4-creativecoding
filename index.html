@@ -31,7 +31,7 @@ var dropbox, musicFile;
  
  var gui = new dat.GUI();
   gui.add(controls,'scale',0.5,3);
-   gui.add(controls,'scale',0.5,3);
+   gui.add(controls,'colorG',0,255);
   
 	dropbox = document.getElementById("dropbox");
 	dropbox.addEventListener("dragenter", dragenter, false);
@@ -115,12 +115,6 @@ var dropbox, musicFile;
 
 for(let j=0; j<appdata.length;j++){
      var value = dataArray[j * step]*controls.scale/5;
-       let r = 256-80-i*5;
-	    		  let g = 50;
-			      let b = 50;
-			      let rgb = '#'+r.toString(16)+g.toString(16)+b.toString(16);           
-            let material = new THREE.MeshBasicMaterial({color: rgb});
-  appdata[j].material = material;
             if(value <1)
               value = 1;
             appdata[j].scale.y = value;
