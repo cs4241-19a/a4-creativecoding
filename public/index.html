@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">        
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <link type="text/css" rel="stylesheet" href="style/flash.min.css">
+        <link type="text/css" rel="stylesheet" href="style/style.css">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark" id="navbar">
+              <div class="navbar-header">
+                <a class="navbar-brand" href="#navbar">3D Audio Visualization ThreeJS</a>
+              </div>
+              <div class="collapse navbar-collapse" id="navbarMenu">
+                <ul class="nav navbar-nav mr-auto">
+                  <img src="../materials/info.png" id="info" style="width:28px;height:28px;border:1px;">
+                  <a href="https://github.com/zonglinpeng/a4-creativecoding">
+                    <img src="../materials/git.png" id="git" style="width:28px;height:28px;border:1px;">
+                  </a>
+                  <button id="play1" class="btn-outline-success">Play Chill</button>
+                  <button id="play2" class="btn-outline-success">Play Bass</button>
+                  <button id="play3" class="btn-outline-success">Play Hardcore</button>
+
+                  <button id="pause" class="btn-outline-secondary">Pause</button>
+                  <button id="stop" class="btn-outline-danger">Stop</button>
+                  <input type="file" class="form-control-file" id="upload">
+
+                </ul>
+              </div>
+          </nav>
+        <div id="container">
+            <div id="stats"></div>
+            <div id="logger"></div> <!-- TODO: Move to bottom -->
+            <div id="action"></div>
+            <div id="visualizer_container"></div>
+        </div>
+        
+        <script type="module" src="js/app.js"></script>
+        <script type="text/javascript" src="js/three.min.js"></script>
+        <script type="text/javascript" src="js/OrbitControls.js"></script>
+        <script type="text/javascript" src="js/dat.gui.min.js"></script>
+        <script type="text/javascript" src="js/pace.min.js"></script>
+        <script type="text/javascript" src="js/stats.min.js"></script>
+        <script>
+          const infoAlert = function(){
+            swal("How To Use", 
+            ">Play Sample: Select green buttons to play music.\n"+
+            ">Play Uploaded: Select upload buttons to upload music.\n"+
+            ">Pause/Resume: Select grey button to change pause or resume status.\n"+
+            ">Stop: Select red button to close the soundtrack.")
+          }
+          const infoIcon = document.getElementById('info');                    
+          infoIcon.onclick = infoAlert;
+        </script>
+    </body>
+</html>
