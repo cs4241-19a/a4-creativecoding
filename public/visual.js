@@ -1,111 +1,119 @@
-const audio = document.querySelector('audio');
-const audioContext = new AudioContext();
-const source = audioContext.createMediaElementSource(audio);
-const analyser = audioContext.createAnalyser();
-analyser.fftSize = 8192;
-
-source.connect(analyser);
-source.connect(audioContext.destination);
+import {frequencyData, bufferLength, getFrequencyData, Range} from "./media/audio.js";
 
 const canvas = document.getElementById("canvas");
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
+let pulseFactor = 0.5;
+const canvasCtx = canvas.getContext("2d");
+let colors = {
+    1: [0, 0, 0],
+    2: [0, 0, 0],
+    3: [0, 0, 0]
+};
 
-const ctx = canvas.getContext("2d");
-
-let bufferLength = analyser.frequencyBinCount;
-console.log(bufferLength);
-
-let frequencyData = new Uint8Array(bufferLength);
-
-
-let WIDTH = canvas.width;
-let HEIGHT = canvas.height;
-// let circleBars = 400;
-let circleBarWidth = 2;
-let barHeight;
-
-function newBar(low, high) {
-    let bar = {
-        draw() {
-            // requestAnimationFrame(this.draw.bind(this));
-            // analyser.getByteFrequencyData(frequencyData);
-            let x = 0;
-            ctx.fillStyle = "#000";
-            ctx.fillRect(0, 0, WIDTH, HEIGHT);
-
-            for (let i = this.low; i < this.high; i++) {
-                barHeight = frequencyData[i];
-
-                let r = barHeight + (25 * (i / bufferLength));
-                let g = 250 * (i / bufferLength);
-                let b = 50;
-
-                ctx.fillStyle = "rgb(" + r + "," + b + "," + g + ")";
-                ctx.fillRect(x, HEIGHT - barHeight, this.barWidth, barHeight);
-
-                x += this.barWidth + 1;
-            }
-        }
-    };
-    bar.low = low;
-    bar.high = high;
-    bar.barWidth = (WIDTH / (high - low)) * 2.5;
-
-    return bar;
+export function setColor(id, color) {
+    colors[id] = color;
 }
 
+export function setPulse(value) {
+    pulseFactor = value;
+}
 
-function newCircle(low, high, radius) {
-    return {
-        rads: Math.PI * 2 / (this.high - this.low),
-        center_x: canvas.width / 2,
-        center_y: canvas.height / 2,
-        draw: function () {
-            let gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-            gradient.addColorStop(0, "rgba(35, 7, 77, 1)");
-            gradient.addColorStop(1, "rgba(204, 83, 51, 1)");
+export function Background() {
+    let background = {
+        draw() {
+            requestAnimationFrame(this.draw.bind(this));
+            canvasCtx.fillStyle = "#000";
+            canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
+            // let gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
+            // gradient.addColorStop(0, "rgba(35, 7, 77, 1)");
+            // gradient.addColorStop(1, "rgba(204, 83, 51, 1)");
             // ctx.fillStyle = gradient;
             // ctx.fillRect(0,0,canvas.width,canvas.height);
-
-            ctx.beginPath();
-            ctx.arc(this.center_x, this.center_y, radius, 0, 2 * Math.PI);
-            ctx.stroke();
-
-            analyser.getByteFrequencyData(frequencyData);
-            for (let i = low; i < high; i++) {
-                this.drawBar(i);
-            }
-        },
-
-        drawBar: function (i) {
-            let frequency = frequencyData[i];
-            let bar_height = frequencyData[i] * 0.7;
-            const cos = Math.cos(this.rads * i);
-            const sin = Math.sin(this.rads * i);
-            let x = this.center_x + cos * radius;
-            let y = this.center_y + sin * radius;
-            let x_end = this.center_x + cos * (radius + bar_height);
-            let y_end = this.center_y + sin * (radius + bar_height);
-
-            ctx.strokeStyle = "rgb(" + frequency + ", " + frequency + ", " + 205 + ")";
-            ctx.lineWidth = circleBarWidth;
-            ctx.beginPath();
-            ctx.moveTo(x, y);
-            ctx.lineTo(x_end, y_end);
-            ctx.stroke();
         }
     };
+    background.draw()
 }
 
-let circle1 = newCircle(0, bufferLength * .625, 75);
-let bar1 = newBar(0, bufferLength * 0.5);
+export function Bar(range, color) {
+    let bar = {
+        draw() {
+            requestAnimationFrame(this.draw.bind(this));
+            getFrequencyData();
+            let barWidth = (canvas.width / (range.high - range.low));
 
-function renderFrame() {
-    requestAnimationFrame(renderFrame);
-    analyser.getByteFrequencyData(frequencyData);
-    bar1.draw();
-    circle1.draw();
+            let x = 0;
+
+            for (let i = range.low; i < range.high; i++) {
+                let amplitude = frequencyData[i];
+                let percent = amplitude / 255;
+                let r = percent * colors[color][0];
+                let g = percent * colors[color][1];
+                let b = 50;
+
+                canvasCtx.fillStyle = "rgb(" + r + "," + g + "," + b + ")";
+                canvasCtx.fillRect(x, canvas.height - amplitude, barWidth, amplitude);
+                x += barWidth + 1;
+            }
+        }
+    };
+    bar.draw();
 }
 
-renderFrame();
+
+function Circle(range, baseRadius, coords, color) {
+    let circle = {
+        rads: Math.PI * 2 / range.size,
+        circumference: 0,
+        radius: 0,
+        draw() {
+            requestAnimationFrame(this.draw.bind(this));
+            getFrequencyData();
+            canvasCtx.lineWidth = 2;
+            canvasCtx.strokeStyle = "rgb(146,180,214)";
+            canvasCtx.beginPath();
+            let ampSum = 0;
+            for (let i = range.low; i < range.high; i++) ampSum += frequencyData[i];
+            let radiusPercent = ampSum / range.size / 255;
+            this.radius = (baseRadius * (1 - pulseFactor)) + (baseRadius * pulseFactor) * radiusPercent;
+            this.circumference = Math.PI * 2 * this.radius;
+            // console.log("Radius: " + this.radius);
+            canvasCtx.arc(coords.x, coords.y, this.radius, 0, 2 * Math.PI);
+            canvasCtx.stroke();
+            for (let i = range.low; i < range.high; i++) this.drawRay(i)
+        },
+        drawRay: function (i) {
+            let volume = frequencyData[i];
+            let bar_height = frequencyData[i] * .8;
+            const cos = Math.cos(this.rads * i);
+            const sin = Math.sin(this.rads * i);
+            let bar_x = coords.x + cos * this.radius;
+            let bar_y = coords.y + sin * this.radius;
+            let bar_x2 = coords.x + cos * (this.radius + bar_height);
+            let bar_y2 = coords.y + sin * (this.radius + bar_height);
+            let percent = volume / 255;
+            canvasCtx.strokeStyle = "rgb(" + percent * colors[color][0] + ", " + percent * colors[color][1] + ", " + colors[color][2] + ")";
+            canvasCtx.lineWidth = this.circumference / range.size;
+            canvasCtx.beginPath();
+            canvasCtx.moveTo(bar_x, bar_y);
+            canvasCtx.lineTo(bar_x2, bar_y2);
+            canvasCtx.stroke();
+        }
+    };
+    circle.draw();
+}
+
+function Coords(x_part, y_part) {
+    this.x = canvas.width * x_part;
+    this.y = canvas.height * y_part;
+}
+
+export function circleRow(count, radius, height, frequencyRange, color) {
+    let spacing = (canvas.width - (count * radius * 2)) / (count + 1);
+    for (let i = 1; i <= count; i++) {
+        let x = ((i * spacing) + ((i - 1) * radius * 2 + radius)) / canvas.width;
+        let coords = new Coords(x, height);
+        Circle(frequencyRange, radius, coords, color);
+    }
+}
+
