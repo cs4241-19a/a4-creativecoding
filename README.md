@@ -8,6 +8,11 @@ But that's not all! You can use the dat gui in the top right to play with the ma
 
 I used ES Linter with the standard rules for indentation, spacing, and single quote strings. 
 
+Dataset was taken from earthquakes.gov
+
+*** Issue *** 
+For some reason when on glitch, the points on the map don't reload upon refresh. I couldn't figure out why, but restarting the glitch server would do the trick. 
+
 
 ## Technical Achievements
 - **Tech Achievement 1**: I used geoAlbertUSA to render a functional map of the US
