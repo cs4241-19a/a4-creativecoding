@@ -5,7 +5,7 @@ const express = require('express'),
       app = express(),
       low = require('lowdb'),
       FileSync = require('lowdb/adapters/FileSync'),
-      adapter = new FileSync('data/fossil-fuel-co2-emissions-by-nation_json.json'),
+      adapter = new FileSync('data/fossil-fuel-co2-emissions-by-nation_json.summarized.json'),
       carbondb = low(adapter)
 
 // http://expressjs.com/en/starter/static-files.html
@@ -38,7 +38,8 @@ app.post('/submit',
 
 app.get('/emissions_data',
   function(request, response){
-    data = carbondb.get("emissions").value()
+    let yr = request.query.year
+    data = findRecord(yr)
     response.json(data)
   })
 
@@ -47,3 +48,19 @@ app.get('/emissions_data',
 const listener = app.listen(3000, function() {
   console.log('Your app is listening on port ' + listener.address().port);
 });
+
+
+const findRecord = function(yr){
+  record = carbondb.get("emissions").filter((em => em.Year == yr)).value()
+  c_ids = carbondb.get("country")
+  compiled_record = []
+
+  record.forEach(record => {
+    let id = c_ids.find({name: record.Country}).value().id
+    if(id != 0){  
+      compiled_record.push({id: id, total: record.Total, perCapita: record["Per Capita"]})
+    }
+  });
+  
+  return compiled_record
+}

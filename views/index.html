@@ -4,8 +4,16 @@
     <title>Global Co2 Emissions</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="css/style.css">
-    <script src="js/d3/d3.min.js"></script>
+    
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://d3js.org/topojson.v1.min.js"></script>
+    
+    <script src="https://d3js.org/d3-queue.v3.min.js"></script>
+    <script type="text/javascript" src="/js/dat.gui.js"></script>
   </head>
   <body>
     <section class="hero is-dark is-small is-bold">
@@ -20,12 +28,40 @@
           </div>
         </div>
     </section>
+    <nav class="level">
+      <div class="level-item has-text-centered">
+        <div>
+          <p class="heading">Rotation</p>
+          <div class="field has-addons">
+            <div class="select">
+              <select id="rotationOption">
+                <option value="Free">Free Rotation</option>
+                <option value="Slow">Fixed</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="level-item has-text-centered">
+        <div>
+          <p class="heading">Choose year to display data (2001-2014)</p>
+          <input class="input is-rounded" id="yearInput" value="2001" type="number">
+        </div>
+      </div>
+      <div class="level-item has-text-centered">
+        <div>
+          <p class="heading">Followers</p>
+          <p class="title">456K</p>
+        </div>
+      </div>
+      <div class="level-item has-text-centered">
+        <div>
+          <p class="heading">Likes</p>
+          <p class="title">789</p>
+        </div>
+      </div>
+    </nav>
     <svg width="960" height="600"></svg>
   </body>
   <script src="js/main.js"></script>
-  <script src="js/dataLoader.js"></script>
-  <script src="js/dataVis.js"></script>
-  <script src="https://d3js.org/topojson.v2.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
-  <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
 </html>
