@@ -1,8 +1,8 @@
-import {canvas, context, barColor, speedRate, volumeStrength, songSelected} from "./controlGui.js";
+import {context, barColor, speedRate, volumeStrength, songSelected} from "./controlGui.js";
 
 let audio = document.getElementById("audio");
 const width = 1024;
-const height = 600;
+const height = 350;
 const interval = 128;
 let audioctx, analyzer, oscillator, source, freqArr, barHeight;
 let opacity = 1.0;

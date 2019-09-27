@@ -6,7 +6,6 @@
       <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/controlGui.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/controlGui.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/main.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/playMusic.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/playMusic.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -61,7 +60,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1569372933289</updated>
-      <workItem from="1569372934580" duration="51382000" />
+      <workItem from="1569372934580" duration="57835000" />
     </task>
     <servers />
   </component>

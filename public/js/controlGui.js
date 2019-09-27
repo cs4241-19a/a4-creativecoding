@@ -7,6 +7,8 @@ import {draw, adjustVolume, adjustSpeed, adjustOpacity, adjustGlow} from "./play
 
 function initializeCanvas() {
     canvas = document.getElementById("studio-canvas");
+    canvas.style.width = window.innerWidth + "px";
+    canvas.style.height = window.innerHeight + "px";
     context = canvas.getContext("2d");
 }
 
