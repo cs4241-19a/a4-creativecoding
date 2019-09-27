@@ -28,6 +28,8 @@ Baseline requirements met:
 - **Tech Achievement 4**: I visualized the dataset X using three different visualization technqiues provided by D3, andprovided
 
 ### Design/Evaluation Achievements
+- **Color of sliders**: The sliders from the dat.gui will change color as the user selects a color for stereo bars
+- **Testing**: Tested the application with n = 10 users, finding that the stereo bars will appear and music will play for all users
 - **Design Achievement 1**: I ensured that my application would run on both desktops / mobile devices by changing X
 - **Design Achievement 2**: I followed best practices for accessibility, including providing alt attributes for images and using semantic HTML. There are no `<div>` or `<span>` elements in my document.
 - **Design Achievement 3**: We tested the application with n=X users, finding that...
