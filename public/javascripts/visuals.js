@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 /* eslint-disable no-redeclare */
 /* eslint-disable no-undef */
 function graphicsFunction() {
@@ -12,6 +13,7 @@ function graphicsFunction() {
         stepCounter: 0,
         shine: 100,
         animationSpeed: 2,
+        enabled: false,
     };
 
     const app = {
@@ -27,23 +29,6 @@ function graphicsFunction() {
             this.camera.lookAt(0, 0, 0);
             //this.camera = new THREE.OrthographicCamera();
             this.scene.add(this.camera);
-
-
-            var listener = new THREE.AudioListener();
-            var audioLoader = new THREE.AudioLoader();
-            var sound = new THREE.Audio(listener);
-
-
-
-            audioLoader.load("../images/rainbowRoad.mp3", function(buffer) {
-                sound.setBuffer(buffer);
-                sound.setLoop(true);
-                sound.setVolume(0.5);
-            });
-
-
-            this.camera.add(listener);
-
 
 
             //CREATE THE RENDERER
@@ -178,50 +163,68 @@ function graphicsFunction() {
         },
 
         playMusic() {
-            this.sound.play();
+            if (!options.enabled) {
+                var listener = new THREE.AudioListener();
+                var audioLoader = new THREE.AudioLoader();
+                var sound = new THREE.Audio(listener);
+
+
+
+                audioLoader.load("../images/rainbowRoad.mp3", function(buffer) {
+                    sound.setBuffer(buffer);
+                    sound.setLoop(true);
+                    sound.setVolume(0.5);
+                    sound.play();
+                });
+
+
+                this.camera.add(listener);
+                options.enabled = true;
+            }
+
+
         }
-    }
 
 
-};
+    };
 
-const gui = {
-    reset() {
-        options.rotateX = Math.PI / 180;
-        options.rotateY = Math.PI / 180;
-        options.rotateZ = Math.PI / 180;
-    },
-    stop() {
-        options.rotateX = 0;
-        options.rotateY = 0;
-        options.rotateZ = 0;
-    },
+    const gui = {
+        reset() {
+            options.rotateX = Math.PI / 180;
+            options.rotateY = Math.PI / 180;
+            options.rotateZ = Math.PI / 180;
+        },
+        stop() {
+            options.rotateX = 0;
+            options.rotateY = 0;
+            options.rotateZ = 0;
+        },
 
-    createGUI() {
-        var gui = new dat.GUI({ autoPlace: false });
-        document.getElementById("threeConfig").appendChild(gui.domElement);
-        var anim = gui.addFolder("Rotation Controls");
-        anim.add(options, "rotateX", 0, Math.PI / 45).listen();
-        anim.add(options, "rotateY", 0, Math.PI / 45).listen();
-        anim.add(options, "rotateZ", 0, Math.PI / 45).listen();
-        anim.open();
+        createGUI() {
+            var gui = new dat.GUI({ autoPlace: false });
+            document.getElementById("threeConfig").appendChild(gui.domElement);
+            var anim = gui.addFolder("Rotation Controls");
+            anim.add(options, "rotateX", 0, Math.PI / 45).listen();
+            anim.add(options, "rotateY", 0, Math.PI / 45).listen();
+            anim.add(options, "rotateZ", 0, Math.PI / 45).listen();
+            anim.open();
 
-        var features = gui.addFolder("Scale Controls");
-        features.add(options, "scaleX", .5, 5).listen();
-        features.add(options, "scaleY", .5, 5).listen();
-        features.add(options, "scaleZ", .5, 5).listen();
-        features.open();
+            var features = gui.addFolder("Scale Controls");
+            features.add(options, "scaleX", .5, 5).listen();
+            features.add(options, "scaleY", .5, 5).listen();
+            features.add(options, "scaleZ", .5, 5).listen();
+            features.open();
 
-        var onTime = gui.addFolder("Color Controls");
-        onTime.add(options, "animationSpeed", .25, 10).listen();
-        onTime.open();
-    }
+            var onTime = gui.addFolder("Color Controls");
+            onTime.add(options, "animationSpeed", .25, 10).listen();
+            onTime.open();
+        }
 
-};
-//window.addEventListener("resize", app.onWindowResize());
-window.onload = () => app.init();
-window.onresize = () => app.updateRender();
-window.onclick = () => app.playMusic();
+    };
+    //window.addEventListener("resize", app.onWindowResize());
+    window.onload = () => app.init();
+    window.onresize = () => app.updateRender();
+    window.onclick = () => app.playMusic();
 }
 
 export default graphicsFunction;

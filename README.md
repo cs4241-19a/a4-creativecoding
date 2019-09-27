@@ -1,22 +1,18 @@
 Assignment 4 - Creative Coding: Interactive Multimedia Experiences
 ===
-## Your Web Application Title
+## Rainbow Cube Viewer
 
 your hosting link e.g. http://a4-nbloniarz.glitch.me
 
-Include a very brief summary of your project here. Images are encouraged, along with concise, high-level text. Be sure to include:
+This website displays a editable cube that flashes rainbow colors and plays rainbow road on loop.
 
-- the goal of the application
-- challenges you faced in realizing the application
-- a brief description of the JS linter you used and what rules it follows (we'll be looking at your JS files for consistency)
+- A challenge I faced in the application was getting the audio to play after the first interaction. Based on the loading speed of the page initially the audio would play with no interaction needed, but this was then later blocked by Chrome. Another challenge was that my auto format would conflict with the linter, and therefore there are overrides regarding some formatting aspects.
+- The linter I used was eslint. A minor problem I had wne using it was I overrode the default formatter so there are quite a few ignore spacing comments at the top of my files. I mainly used the linter to enforce semicolons and that all variables declared are used. Once again this was overridden in the visuals.js file to supress the warning about THREE not being defined.
 
 ## Technical Achievements
-- **Tech Achievement 1**: I wrote my own custom GLSL shaders to use as a material for my Three.js objects.
-- **Tech Achievement 2**: My audiovisualizer uses both FFT and amplitude analysis to drive visualization.
-- **Tech Achievement 3**: I optimized the efficiency of my reaction-diffusion algorithm by...
-- **Tech Achievement 4**: I visualized the dataset X using three different visualization technqiues provided by D3, andprovided
+- **Used PUG for the Page Generator**: The index and layout files use pug to dynamically insert data. Used to insert title of page and put that in a paragraph on the webpage
+- **Audio Integration Using Three.JS**: My page uses Three.JS to load an audio file and play the audio on loop.
 
 ### Design/Evaluation Achievements
-- **Design Achievement 1**: I ensured that my application would run on both desktops / mobile devices by changing X
-- **Design Achievement 2**: I followed best practices for accessibility, including providing alt attributes for images and using semantic HTML. There are no `<div>` or `<span>` elements in my document.
-- **Design Achievement 3**: We tested the application with n=X users, finding that...
+- **Dynamic Layout**: I ensured that the dat.gui interface would always be locked next to the Three.JS scene to make sure the controls were clear.
+- **Cube Animation**: The cube in the Three.JS scene rotates at and editable pace and the rate of color change can be edited as well.
