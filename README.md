@@ -1,20 +1,18 @@
 ## Audio Visualizer
 
-your hosting link e.g. http://a4-charlieroberts.glitch.me
+https://evanbg-wpi-a4-creativecoding.glitch.me
 
-This application visualizes the frequencies in a piece of music. The volume of any given frequency is represented by a bar on one of the visualizer items.
-
-- the goal of the application
-- challenges you faced in realizing the application
-- a brief description of the JS linter you used and what rules it follows (we'll be looking at your JS files for consistency)
+This application visualizes the frequencies in a piece of music. 
+The volume of any given frequency is represented by a bar on one of the visualizer items. 
+The main challenge of this app was learning how to work with the Web Audio API to extract the frequency data from the audio.
+For this project I used JetBrains' WebStorm and its built-in linting.
 
 ## Technical Achievements
-- **Tech Achievement 1**: I wrote my own custom GLSL shaders to use as a material for my Three.js objects.
-- **Tech Achievement 2**: My audiovisualizer uses both FFT and amplitude analysis to drive visualization.
-- **Tech Achievement 3**: I optimized the efficiency of my reaction-diffusion algorithm by...
-- **Tech Achievement 4**: I visualized the dataset X using three different visualization technqiues provided by D3, andprovided
+- **Tech Achievement 1**: My audio visualizer uses an FFT analyzer for frequency analysis.
+- **Tech Achievement 2**: I broke the frequencies out into three groups to better visualize an overall piece of music.
+- **Tech Achievement 3**: I added calculations to change the color and size of the visuals based on amplitude and average amplitude across frequency ranges
 
 ### Design/Evaluation Achievements
-- **Design Achievement 1**: I ensured that my application would run on both desktops / mobile devices by changing X
-- **Design Achievement 2**: I followed best practices for accessibility, including providing alt attributes for images and using semantic HTML. There are no `<div>` or `<span>` elements in my document.
-- **Design Achievement 3**: We tested the application with n=X users, finding that...
+- **Design Achievement 1**: I created a simple but effective menu using dat.gui
+- **Design Achievement 2**: I used circles and bars for my visualizer objects, creating a more artistic representation.
+- **Design Achievement 3**: I determined the best frequency ranges to use by testing my analyzer on different types of music.

@@ -1,4 +1,4 @@
-import {frequencyData, bufferLength, getFrequencyData, Range} from "./media/audio.js";
+import {frequencyData, getFrequencyData} from "./media/audio.js";
 
 const canvas = document.getElementById("canvas");
 canvas.width = window.innerWidth;
@@ -25,11 +25,6 @@ export function Background() {
             requestAnimationFrame(this.draw.bind(this));
             canvasCtx.fillStyle = "#000";
             canvasCtx.fillRect(0, 0, canvas.width, canvas.height);
-            // let gradient = ctx.createLinearGradient(0, 0, 0, canvas.height);
-            // gradient.addColorStop(0, "rgba(35, 7, 77, 1)");
-            // gradient.addColorStop(1, "rgba(204, 83, 51, 1)");
-            // ctx.fillStyle = gradient;
-            // ctx.fillRect(0,0,canvas.width,canvas.height);
         }
     };
     background.draw()
