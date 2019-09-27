@@ -10,11 +10,11 @@ var tutorialBtn = document.getElementById('tutorialBtn')
 var closeBtn = document.getElementById('closeBtn')
 
 const gameCanvas = document.getElementById('gameCanvas')
-const ctx = gameCanvas.getContext('2d')
+// const ctx = gameCanvas.getContext('2d')
 
 // ctx style test
-ctx.fillStyle = 'green'
-ctx.fillRect(10, 10, 150, 100)
+// ctx.fillStyle = 'green'
+// ctx.fillRect(10, 10, 150, 100)
 
 window.onload = function () {
   const startBtn = document.querySelector('#startBtn')
@@ -36,7 +36,7 @@ const startgame = function (e) {
   tutorialBtn.style.display = 'block'
 
   gameCanvas.style.display = 'block'
-  // start game
+  mod1.start()
 }
 
 const showDocumentation = function (e) {
@@ -66,8 +66,5 @@ const hideDocumentation = function (e) {
   gameCanvas.style.display = 'block'
   // unpause game
 }
-
-mod1.hello()
-mod2.hello()
 
 console.log('main.js')

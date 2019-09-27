@@ -6,10 +6,10 @@ function start () {
 
 // Canvas
 var arena = {
-  canvas: document.createElement('canvas'),
+  canvas: document.getElementById('gameCanvas'),
   start: function () {
-    this.canvas.width = 480
-    this.canvas.height = 270
+    this.canvas.width = screen.width
+    this.canvas.height = screen.height
     this.context = this.canvas.getContext('2d')
     document.body.insertBefore(this.canvas, document.body.childNodes[0])
     this.interval = setInterval(updateArena, 20)
@@ -20,9 +20,9 @@ var arena = {
 }
 
 function updateArena () {
-  arena.clear()
-  arena.newPos()
-  arena.update()
+  //arena.clear()
+  // arena.newPos()
+  //arena.update()
 }
 
 function hello () {
