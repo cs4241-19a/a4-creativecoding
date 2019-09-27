@@ -2,7 +2,7 @@ body {
     background-color: azure;
 }
 
-h1{
+#head1{
     font-family: Helvetica;
     Display: flex;
     justify-content: center;
@@ -10,7 +10,7 @@ h1{
     background-image: url("/resources/dice-25637__340.png");
     width: 544px;
     height: 340px;
-    margin: 50px
+    margin: 50px;
 }
 
 #title{
@@ -19,7 +19,8 @@ h1{
     background-image: linear-gradient(to left, violet, indigo, blue, green, yellow, orange, red);
     -webkit-background-clip: text;
     color: transparent;
-    font-size: 100px
+    font-size: 100px;
+    font-weight: bold;
 }
 
 .heading{
