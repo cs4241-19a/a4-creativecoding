@@ -1,0 +1,938 @@
+    <!DOCTYPE HTML>
+    <html lang="en">
+    <head>
+      <title>Assignment 4</title>
+      <link href="style.css" rel="stylesheet" />
+    </head>
+      
+      <head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+<div id="overlay" class="overlay">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeHelp()">&times;</a>
+  <div class="overlay-content">
+    <h1>
+      Play Ball!
+    </h1>
+    <h2>
+      Welcome to my simulation baseball game!
+    </h2>
+    <h3>
+      Need help? It's pretty simple!
+    </h3>
+    <p>
+      You're the red team! You're away, so you're batting first!
+    </p>
+    <p>
+      Just hit the button that says "Hit" to simulate your at bat. (This button will change to "Pitch" when you're in the field!)
+    </p>
+    <p>
+      Don't feel like going one batter at a time? Simulate a whole inning by hitting the "Simulate Inning" button!
+    </p>
+    <p>
+      Team not doing too well? Restart by hitting "Start New Game"!
+    </p>
+    <p>
+      Want to make it easier to hit the ball? Put in a number into the hit probability field! If you don't put in a number, it defaults to 3, which is a 1/3 chance of getting a hit!
+    </p>
+    <p>
+      Want to see who's playing well? Hit the "Stats" button and scroll to the bottom to see a table of each player's batting stats!
+    </p>
+    <p>
+      Want to restart the game, but make sure those stats count? Be sure to hit the "Send Stats" button before hitting "Start New Game"!
+    </p>
+    <p>
+      Want to feel like you're at the game? Make sure to hit play on the audio player to hear the organist play "Take Me Out to the Ballgame"!
+    </p>
+    <p>
+      In game sounds a little bit too much for you? Just click the "Mute Audio" button to shut them off!
+    </p>
+    <p>
+      To reopen this menu, just hit the "Help" button!
+    </p>
+    <h1>
+      Have fun!
+    </h1>
+  </div>
+</div>
+  
+</body>
+    <body>
+      <center>
+        <h1>Play Ball!</h1>
+      </center>
+      <center>
+        <table id="scoreboard">
+          <tr>
+            <th>team</th>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+            <th>6</th>
+            <th>7</th>
+            <th>8</th>
+            <th>9</th>
+            <th>runs</th>
+            <th>hits</th>
+            <th>errors</th>
+          </tr>
+          <tr>
+            <td id="away_team">away</td>
+            <td id="away_1"></td>
+            <td id="away_2"></td>
+            <td id="away_3"></td>
+            <td id="away_4"></td>
+            <td id="away_5"></td>
+            <td id="away_6"></td>
+            <td id="away_7"></td>
+            <td id="away_8"></td>
+            <td id="away_9"></td>
+            <td id="away_runs">0</td>
+            <td id="away_hits">0</td>
+            <td id="away_errors">0</td>
+          </tr>
+          <tr>
+            <td id="home_team">home</td>
+            <td id="home_1"></td>
+            <td id="home_2"></td>
+            <td id="home_3"></td>
+            <td id="home_4"></td>
+            <td id="home_5"></td>
+            <td id="home_6"></td>
+            <td id="home_7"></td>
+            <td id="home_8"></td>
+            <td id="home_9"></td>
+            <td id="home_runs">0</td>
+            <td id="home_hits">0</td>
+            <td id="home_errors">0</td>
+          </tr>
+        </table>
+      </center>
+      <center>
+<!--         <h3 id="outs_this_inning">outs: 0</h3> -->
+<!--         <h3 id="current_inning">current inning: 1</h3> -->
+      </center>
+      <center><canvas id="canvas"></canvas></center>
+      <center>
+        <button id="main_action" onclick="simAB()">Hit</button>
+        <button id="sim_game" onclick="simInning()">Simulate Inning</button>
+        <button id="new_game" onclick="restartGame()">Start New Game</button>
+        <br>
+        <p>Hit Probability: (1 = hit every time, 3 = 1/3 chance of a hit, etc.)</p><input type="text" placeholder="defaults to 3" id="hit_probability">
+      </center>
+      <center>
+        <br>
+        <button id="view_stats" href="/stats">Stats</button>
+        <button id="update_stats" href="/updateStats">Send Stats</button>
+        <br>
+        <br>
+        <audio controls>
+          <source src="https://cdn.glitch.com/9b1d9dda-0a36-4216-92a3-3a855c9b321d%2FHelen%20Dell%2C%20Dodger%20Stadium%20Organist%20-%20Take%20Me%20out%20to%20the%20Ballgame.mp3?v=1569457163669">
+        </audio>
+        <br>
+        <br>
+        <button id="mute" onclick="muteAudio()">Mute Audio</button>
+        <button id="help" onclick="openHelp()">Help</button>
+        <br>
+        <br>
+      </center>
+      <center>
+        <table id="player_stats">
+          <th>team</th><th>name</th><th>hits</th><th>at bats</th><th>batting average</th>
+        </table>
+      </center>
+    </body>
+      
+    <script type="text/javascript" src="dat.gui.js"></script>
+    <script>
+//
+// player images
+//
+const redBatter = "https://cdn.glitch.com/9b1d9dda-0a36-4216-92a3-3a855c9b321d%2Fred_batter.png?v=1569437536048";
+const redRunner = "https://cdn.glitch.com/9b1d9dda-0a36-4216-92a3-3a855c9b321d%2Fred_runner.png?v=1569440733527";
+const redFielder1 = "https://cdn.glitch.com/9b1d9dda-0a36-4216-92a3-3a855c9b321d%2Fred_fielder1.png?v=1569437541778";
+const redFielder2 = "https://cdn.glitch.com/9b1d9dda-0a36-4216-92a3-3a855c9b321d%2Fred_fielder2.png?v=1569437541823";
+const redFielder3 = "https://cdn.glitch.com/9b1d9dda-0a36-4216-92a3-3a855c9b321d%2Fred_fielder3.png?v=1569437541876";
+
+const blueBatter = "https://cdn.glitch.com/9b1d9dda-0a36-4216-92a3-3a855c9b321d%2Fblue_batter.png?v=1569437519337";
+const blueRunner = "https://cdn.glitch.com/9b1d9dda-0a36-4216-92a3-3a855c9b321d%2Fblue_runner.png?v=1569440813837";
+const blueFielder1 = "https://cdn.glitch.com/9b1d9dda-0a36-4216-92a3-3a855c9b321d%2Fblue_fielder1.png?v=1569437526091";
+const blueFielder2 = "https://cdn.glitch.com/9b1d9dda-0a36-4216-92a3-3a855c9b321d%2Fblue_fielder3.png?v=1569437526115";
+const blueFielder3 = "https://cdn.glitch.com/9b1d9dda-0a36-4216-92a3-3a855c9b321d%2Fblue_fielder2.png?v=1569437526054";
+
+//
+// create canvas
+//
+var canvas = document.getElementById("canvas");
+var ctx = canvas.getContext("2d");
+canvas.width = 1000;
+canvas.height = 1000;
+
+//
+// help overlay
+//
+function openHelp() {
+    document.getElementById("overlay").style.height = "100%";
+}
+
+function closeHelp() {
+    document.getElementById("overlay").style.height = "0%";
+}
+
+//
+// creating stats table
+//
+var submitted = "false";
+function createTableFromJSON(someJson) {
+    if(submitted == "false") {
+
+        for(var i=0; i < someJson.length; i++) {
+            var row = document.createElement("tr");
+            for(var j=0; j < 9; j++) {
+                let x = i;
+                let y = j;
+
+                var teamName = someJson[x].name;
+                var player = someJson[x].players[y];
+                var ba = player.hits / player.abs;
+
+                var node = document.getElementById("player_stats");
+                var newNode = document.createElement("td");
+                newNode.appendChild(document.createTextNode(teamName));
+                node.appendChild(newNode);
+
+                var node = document.getElementById("player_stats");
+                var newNode = document.createElement("td");
+                newNode.appendChild(document.createTextNode(player.name));
+                node.appendChild(newNode);
+
+                var node = document.getElementById("player_stats");
+                var newNode = document.createElement("td");
+                newNode.appendChild(document.createTextNode(player.hits));
+                node.appendChild(newNode);
+
+                var node = document.getElementById("player_stats");
+                var newNode = document.createElement("td");
+                newNode.appendChild(document.createTextNode(player.abs));
+                node.appendChild(newNode);
+
+                var node = document.getElementById("player_stats");
+                var newNode = document.createElement("td");
+                newNode.appendChild(document.createTextNode(ba.toFixed(3)));
+                node.appendChild(newNode);
+
+                var node = document.getElementById("player_stats");
+                var newNode = document.createElement("tr");
+                node.appendChild(newNode);
+            }
+        }
+    }
+    submitted = "true"
+}
+
+//
+// HTTP Request Functions
+//
+// import {httpGet, httpPost} from "/js/httpRequests";
+function httpGet(theUrl) {
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false ); // false for synchronous request
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
+
+function httpPost(theUrl, someJson) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "/updateStats", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.onload = function () {
+        // do something to response
+        console.log(this.responseText);
+    };
+    xhr.send(someJson);
+}
+
+const getStats = function( e ) {
+    // prevent default form action from being carried out
+    e.preventDefault();
+
+    var json = "";
+    var body = "";
+
+    json = {action: "getStats"},
+        body = JSON.stringify( json );
+
+    data = httpGet("/stats");
+    // window.alert(data)
+
+    var json = JSON.parse(data);
+    // window.alert(json[0].players[0].name)
+
+    createTableFromJSON(json);
+
+    return false
+};
+
+const postStats = function(e) {
+    // window.alert("hit button")
+
+    e.preventDefault();
+
+    var json = "";
+    var body = "";
+
+    json = {homeHits: homePlayerHits, homeABs: homePlayerABs, awayHits: awayPlayerHits, awayABs: awayPlayerABs},
+        body = JSON.stringify(json);
+
+    // window.alert(body)
+
+    data = httpPost("/updateStats", body)
+
+    // var json = JSON.parse(data)
+
+    // window.alert(json.status)
+    // window.alert(data)
+};
+
+function updateStats() {
+    var json = "";
+    var body = "";
+
+    json = {homeHits: homePlayerHits, homeABs: homePlayerABs, awayHits: awayPlayerHits, awayABs: awayPlayerABs},
+        body = JSON.stringify(json);
+
+    // window.alert(body)
+
+    data = httpPost("/updateStats", body)
+}
+
+window.onload = function() {
+    openHelp();
+    const button = document.querySelector( "#view_stats" );
+    button.onclick = getStats;
+    const button2 = document.querySelector( "#update_stats" );
+    button2.onclick = postStats
+};
+
+//
+// make field
+//
+function makeGrass() {
+    ctx.fillStyle = "#4CA64C";
+    ctx.fillRect(0, 0, 1000, 1000);
+}
+
+function makeDirt() {
+    ctx.rotate(45 * Math.PI / 180);
+    ctx.fillStyle = "#b78654";
+    ctx.fillRect(550, -175, 500, 500);
+}
+
+function makeInfieldGrass() {
+    // ctx.rotate(45 * Math.PI / 180);
+    ctx.fillStyle = "#4CA64C";
+    ctx.fillRect(645, -80, 300, 300);
+}
+
+function makeBases() {
+    // ctx.rotate(-45 * Math.PI / 180);
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillRect(765, 590, 50, 50);
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillRect(215, 590, 50, 50);
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillRect(487, 310, 50, 50);
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillRect(487, 895, 50, 30);
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fillRect(487, 610, 50, 15);
+
+    ctx.beginPath();
+    // ctx.moveTo(100, 100);
+    // ctx.lineTo(150, 100);
+    // ctx.lineTo(125, 125);
+    ctx.moveTo(487, 925);
+    ctx.lineTo(537, 925);
+    ctx.lineTo(512, 950);
+    ctx.closePath();
+    ctx.fillStyle = "#FFFFFF";
+    ctx.fill();
+}
+
+function makeMound() {
+    ctx.rotate(-45 * Math.PI / 180);
+    ctx.beginPath();
+    ctx.arc(512, 615, 70, 0, 2 * Math.PI, false);
+    ctx.fillStyle = "#b78654";
+    ctx.fill();
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = "green";
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(515, 920, 100, 0, 2 * Math.PI, false);
+    ctx.fillStyle = "#b78654";
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(790, 620, 80, 0, 2 * Math.PI, false);
+    ctx.fillStyle = "#b78654";
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(240, 620, 80, 0, 2 * Math.PI, false);
+    ctx.fillStyle = "#b78654";
+    ctx.fill();
+
+    ctx.beginPath();
+    ctx.arc(515, 340, 80, 0, 2 * Math.PI, false);
+    ctx.fillStyle = "#b78654";
+    ctx.fill();
+}
+
+function makeOuts() {
+    ctx.beginPath();
+    ctx.arc(840, 950, 15, 0, 2 * Math.PI, false);
+    ctx.fillStyle = "#ffffff";
+    ctx.fill();
+    ctx.lineWidth = 1;
+    ctx.strokeStyle = "black";
+    ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(880, 950, 15, 0, 2 * Math.PI, false);
+    ctx.fillStyle = "#ffffff";
+    ctx.fill();
+    ctx.lineWidth = 2;
+    ctx.strokeStyle = "black";
+    ctx.stroke();
+
+    var text = "outs:";
+    ctx.font = "25px Arial";
+    ctx.fillStyle = "0,0,0";
+    ctx.fillText(text, 750, 956);
+}
+
+function fillOut(num) {
+    if(num == 1) {
+        ctx.beginPath();
+        ctx.arc(840, 950, 15, 0, 2 * Math.PI, false);
+        ctx.fillStyle = "#ff0000";
+        ctx.fill();
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = "black";
+        ctx.stroke();
+    }
+
+    if(num == 2) {
+        ctx.beginPath();
+        ctx.arc(880, 950, 15, 0, 2 * Math.PI, false);
+        ctx.fillStyle = "#ff0000";
+        ctx.fill();
+        ctx.lineWidth = 1;
+        ctx.strokeStyle = "black";
+        ctx.stroke();
+    }
+}
+
+function setFielders(team) {
+
+    showInning();
+
+    if(team == "blue") {
+        batter = new Image();
+        batter.src = redBatter;
+        batter.onload = function() {
+            ctx.drawImage(batter, 360, 775);
+        };
+
+        firstBase = new Image();
+        firstBase.src = blueFielder3;
+        firstBase.onload = function() {
+            ctx.drawImage(firstBase, 650, 400);
+        };
+
+        secondBase = new Image();
+        secondBase.src = blueFielder2;
+        secondBase.onload = function() {
+            ctx.drawImage(secondBase, 500, 250);
+        };
+
+        shortStop = new Image();
+        shortStop.src = blueFielder1;
+        shortStop.onload = function() {
+            ctx.drawImage(shortStop, 325, 250);
+        };
+
+        thirdBase = new Image();
+        thirdBase.src = blueFielder3;
+        thirdBase.onload = function() {
+            ctx.drawImage(thirdBase, 200, 400);
+        };
+
+        leftField = new Image();
+        leftField.src = blueFielder2;
+        leftField.onload = function() {
+            ctx.drawImage(leftField, 100, 100);
+        };
+
+        centerField = new Image();
+        centerField.src = blueFielder1;
+        centerField.onload = function() {
+            ctx.drawImage(centerField, 417, 25);
+        };
+
+        rightField = new Image();
+        rightField.src = blueFielder3;
+        rightField.onload = function() {
+            ctx.drawImage(rightField, 700, 100);
+        };
+
+        pitcher = new Image();
+        pitcher.src = blueFielder2;
+        pitcher.onload = function() {
+            ctx.drawImage(pitcher, 417, 450);
+        }
+    }
+    else {
+        batter = new Image();
+        batter.src = blueBatter;
+        batter.onload = function() {
+            ctx.drawImage(batter, 360, 775);
+        };
+
+        firstBase = new Image();
+        firstBase.src = redFielder2;
+        firstBase.onload = function() {
+            ctx.drawImage(firstBase, 650, 400);
+        };
+
+        secondBase = new Image();
+        secondBase.src = redFielder3;
+        secondBase.onload = function() {
+            ctx.drawImage(secondBase, 500, 250);
+        };
+
+        shortStop = new Image();
+        shortStop.src = redFielder1;
+        shortStop.onload = function() {
+            ctx.drawImage(shortStop, 325, 250);
+        };
+
+        thirdBase = new Image();
+        thirdBase.src = redFielder2;
+        thirdBase.onload = function() {
+            ctx.drawImage(thirdBase, 200, 400);
+        };
+
+        leftField = new Image();
+        leftField.src = redFielder3;
+        leftField.onload = function() {
+            ctx.drawImage(leftField, 100, 100);
+        };
+
+        centerField = new Image();
+        centerField.src = redFielder1;
+        centerField.onload = function() {
+            ctx.drawImage(centerField, 417, 25);
+        };
+
+        rightField = new Image();
+        rightField.src = redFielder2;
+        rightField.onload = function() {
+            ctx.drawImage(rightField, 700, 100);
+        };
+
+        pitcher = new Image();
+        pitcher.src = redFielder3;
+        pitcher.onload = function() {
+            ctx.drawImage(pitcher, 417, 450);
+        }
+    }
+}
+
+function runnerToBase(team, base) {
+    if(team == "blue") {
+        if(base == 1) {
+            runner = new Image();
+            runner.src = blueRunner;
+            runner.onload = function() {
+                ctx.drawImage(runner, 695, 460);
+            }
+        }
+        else if(base == 2) {
+            runner = new Image();
+            runner.src = blueRunner;
+            runner.onload = function() {
+                ctx.drawImage(runner, 417, 175);
+            }
+        }
+        else if(base == 3) {
+            runner = new Image();
+            runner.src = blueRunner;
+            runner.onload = function() {
+                ctx.drawImage(runner, 145, 460);
+            }
+        }
+        else {
+
+        }
+    }
+    else if(team == "red") {
+        if(base == 1) {
+            runner = new Image();
+            runner.src = redRunner;
+            runner.onload = function() {
+                ctx.drawImage(runner, 695, 460);
+            }
+        }
+        else if(base == 2) {
+            runner = new Image();
+            runner.src = redRunner;
+            runner.onload = function() {
+                ctx.drawImage(runner, 417, 175);
+            }
+        }
+        else if(base == 3) {
+            runner = new Image();
+            runner.src = redRunner;
+            runner.onload = function() {
+                ctx.drawImage(runner, 145, 460);
+            }
+        }
+    }
+}
+
+function showInning() {
+    var text = "inning:   " + curInning;
+    if(topOfInning) {
+        ctx.moveTo(812, 913);
+        ctx.lineTo(820, 913);
+        ctx.lineTo(816, 900);
+        ctx.closePath();
+        ctx.fillStyle = "#FFFFFF";
+        ctx.fill();
+    }
+    else {
+        ctx.moveTo(812, 913);
+        ctx.lineTo(820, 913);
+        ctx.lineTo(816, 926);
+        ctx.closePath();
+        ctx.fillStyle = "#FFFFFF";
+        ctx.fill();
+    }
+    ctx.font = "25px Arial";
+    ctx.fillStyle = "0,0,0";
+    ctx.fillText(text, 731, 920);
+}
+
+function showScore() {
+    var awayScore_board = "away: " + awayScore;
+    ctx.font = "25px Arial";
+    ctx.fillStyle = "0,0,0";
+    ctx.fillText(awayScore_board, 104, 920);
+
+    var homeScore_board = "home: " + homeScore;
+    ctx.font = "25px Arial";
+    ctx.fillStyle = "0,0,0";
+    ctx.fillText(homeScore_board, 100, 950);
+}
+
+function makeField(team) {
+    makeGrass();
+    makeDirt();
+    makeInfieldGrass();
+    makeMound();
+    makeBases();
+    makeOuts();
+    // showInning();
+    showScore();
+    setFielders(team);
+    // runnerToBase("red", 1)
+    // runnerToBase("red", 2)
+    // runnerToBase("red", 3)
+}
+
+function restartGame() {
+    // updateStats()
+    location.reload()
+}
+
+//
+// game logic
+//
+var homeScore = 0;
+var homeHits = 0;
+var homeErrors = 0;
+
+var awayScore = 0;
+var awayHits = 0;
+var awayErrors = 0;
+
+var curInning = 1;
+var outs = 0;
+var runsThisInning = 0;
+
+var onFirst = false;
+var onSecond = false;
+var onThird = false;
+
+var atBat = "red";
+
+var awayBatted = false;
+
+var isMuted = false;
+
+var topOfInning = true;
+
+var isFirstInning = true;
+
+var gameOver = false;
+
+var extras = false;
+
+var hitNoise = new Audio("https://cdn.glitch.com/9b1d9dda-0a36-4216-92a3-3a855c9b321d%2FbatNoise.mp3?v=1569458235885");
+var strikeOut = new Audio("https://cdn.glitch.com/9b1d9dda-0a36-4216-92a3-3a855c9b321d%2Fstrike3.mp3?v=1569458235989");
+var calledOut = new Audio("https://cdn.glitch.com/9b1d9dda-0a36-4216-92a3-3a855c9b321d%2FBaseball%20Umpire%20Calls%20\"You\"re%20Out\".mp3?v=1569458236037");
+
+var muteButton = document.getElementById("mute");
+
+function muteAudio() {
+    if(!isMuted) {
+        isMuted = true;
+        muteButton.innerHTML = "Unmute Audio"
+    }
+    else {
+        isMuted = false;
+        muteButton.innerHTML = "Mute Audio"
+    }
+}
+
+function simInning() {
+    for(let i = 0; i < 100; i++) {
+        simAB()
+    }
+}
+
+var homePlayerHits = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+var homePlayerABs = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+var homeBatterNum = 0;
+
+var awayPlayerHits = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+var awayPlayerABs = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+var awayBatterNum = 0;
+
+function simAB() {
+    // getRoll()
+
+    var thisInningHome = document.getElementById("home_" + curInning);
+    var homeRuns = document.getElementById("home_runs");
+    var homeHits_elem = document.getElementById("home_hits");
+
+    var thisInningAway = document.getElementById("away_" + curInning);
+    var awayRuns = document.getElementById("away_runs");
+    var awayHits_elem = document.getElementById("away_hits");
+
+    var seed = document.getElementById("hit_probability").value;
+
+    if(seed == "" || isNaN(seed)) {
+        seed = 3
+    }
+
+    var rand=Math.floor(Math.random()*seed);
+
+    if(rand == 0) {
+
+        if(!isMuted) {
+            hitNoise.play();
+        }
+
+        if(atBat == "red") {
+            awayPlayerHits[awayBatterNum]++;
+            awayPlayerABs[awayBatterNum]++;
+            awayBatterNum++;
+            if(awayBatterNum > 8) {
+                awayBatterNum = 0
+            }
+
+            awayHits++;
+            awayHits_elem.innerHTML = awayHits
+        }
+        else {
+            homePlayerHits[homeBatterNum]++;
+            homePlayerABs[homeBatterNum]++;
+            homeBatterNum++;
+            if(homeBatterNum > 8) {
+                homeBatterNum = 0
+            }
+
+            homeHits++;
+            homeHits_elem.innerHTML = homeHits
+        }
+
+        if(!onFirst) {
+            runnerToBase(atBat, 1);
+            onFirst = true
+        }
+        else if(!onSecond) {
+            runnerToBase(atBat, 2);
+            onSecond = true
+        }
+        else if(!onThird) {
+            runnerToBase(atBat, 3);
+            onThird = true
+        }
+        else {
+            if(atBat == "red") {
+                runsThisInning++;
+                awayScore++;
+                thisInningAway.innerHTML = runsThisInning;
+                awayRuns.innerHTML = awayScore
+            }
+            else {
+                runsThisInning++;
+                homeScore++;
+                thisInningHome.innerHTML = runsThisInning;
+                homeRuns.innerHTML = homeScore
+            }
+        }
+    }
+    else {
+
+        if(topOfInning) {
+            awayPlayerABs[awayBatterNum]++;
+            awayBatterNum++;
+            if(awayBatterNum > 8) {
+                awayBatterNum = 0
+            }
+        }
+        else {
+            homePlayerABs[homeBatterNum]++;
+            homeBatterNum++;
+            if(homeBatterNum > 8) {
+                homeBatterNum = 0
+            }
+        }
+
+        outs++;
+
+        if(outs == 1) {
+            fillOut(1);
+        }
+
+        if(outs == 2) {
+            fillOut(2);
+        }
+
+        if(outs == 3) {
+            makeOuts();
+        }
+
+        if(!isMuted) {
+            // calledOut.play()
+            strikeOut.play()
+        }
+
+        var actionButton = document.getElementById("main_action");
+        // var outsThisInning = document.getElementById("outs_this_inning")
+        // outsThisInning.innerHTML = "outs: " + outs
+        if(outs == 3) {
+            // runsThisInning = 0
+            outs = 0;
+            onFirst = false;
+            onSecond = false;
+            onThird = false;
+
+            if(atBat == "red") { // switching to the bottom of the inning
+                topOfInning = false;
+                atBat = "blue";
+                makeField("red");
+
+                // outsThisInning.innerHTML = "outs: " + outs
+                actionButton.innerHTML = "Pitch";
+                if(runsThisInning == 0) {
+                    thisInningAway.innerHTML = 0
+                }
+                runsThisInning = 0;
+                awayBatted = true
+                // showInning();
+            }
+            else { // switching to the top of the inning
+                topOfInning = true;
+                curInning++;
+                actionButton.innerHTML = "Hit";
+
+                // end game if past the 9th inning and away team is winning
+                if(curInning >= 10 && awayScore > homeScore) {
+                    gameOver = true
+                }
+                else if(curInning > 10 && homeScore > awayScore) {
+                    gameOver = true
+                }
+                else {
+                    // window.alert(curInning, homeScore, awayScore)
+                    atBat = "red";
+                    makeField("blue");
+                    if(runsThisInning == 0) {
+                        thisInningHome.innerHTML = 0
+                    }
+                    runsThisInning = 0;
+                    // outsThisInning.innerHTML = "outs: " + outs
+                    var inningNumber = document.getElementById("current_inning");
+                    inningNumber.innerHTML = "current inning: " + curInning;
+                    awayBatted = false
+                    // showInning();
+                }
+            }
+            outs = 0;
+
+            // window.alert(curInning)
+
+            if(curInning >= 9 && homeScore > awayScore) {
+                gameOver = true
+            }
+            else if(curInning >= 10 && awayScore > homeScore) {
+                gameOver = true
+            }
+
+            if(gameOver) {
+                updateStats();
+                window.alert("Game Over!");
+                if(awayScore > homeScore) {
+                    window.alert("You won " + awayScore + " to " + homeScore + ". Nice job!")
+                }
+                else if(awayScore < homeScore) {
+                    window.alert("You lost " + homeScore + " to " + awayScore + ". Better luck next time!")
+                }
+                else if(awayScore == homeScore) {
+                    window.alert("You tied " + homeScore + " to " + awayScore + ". Better luck next time!")
+                }
+
+//               window.alert("home: " + homePlayerHits)
+//               window.alert("away: " + awayPlayerHits)
+//               window.alert("home: " + homePlayerABs)
+//               window.alert("away: " + awayPlayerABs)
+
+                // send game stats to db
+                // send game result to db
+                // interpret the results into a post game summary?
+                // updateStats(homePlayerHits, homePlayerABs, awayPlayerHits, awayPlayerABs)
+
+                restartGame()
+            }
+        }
+    }
+}
+
+//
+// start game
+//
+makeField("blue");
+      
+    </script>
+      
+    </html>
