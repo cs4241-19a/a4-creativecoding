@@ -22,11 +22,8 @@ Baseline requirements met:
 - HTML/CSS validates
 
 ## Technical Achievements
-- **Stereo Confidence**: Stereo will always play.  Usually if people implement a stereo it will sometimes not fail because the AudioContext will not initialize until user interaction.  I implemented a feature so that the AudioContext will always initialize.
-- **Tech Achievement 1**: I wrote my own custom GLSL shaders to use as a material for my Three.js objects.
-- **Tech Achievement 2**: My audiovisualizer uses both FFT and amplitude analysis to drive visualization.
-- **Tech Achievement 3**: I optimized the efficiency of my reaction-diffusion algorithm by...
-- **Tech Achievement 4**: I visualized the dataset X using three different visualization technqiues provided by D3, andprovided
+- **Stereo Confidence**: Stereo will always play.  Usually if people implement a stereo it will sometimes fail because the AudioContext will not initialize until user interaction.  I implemented a brute-force strategy so that the AudioContext will always initialize.
+- **Synced User Controls to Stereo Bars**: The stereo bars will auto-update if the user makes a change to the bar color, bar opacity, bar glow, speed, or volume (for user experience purposes, changing a selected song won't automatically restart the stereo in case the user still wants to listen to currently playing song) 
 
 ### Design/Evaluation Achievements
 - **Color of sliders matches user's color choice**: The sliders from the dat.gui will automatically change color as the user selects a color for stereo bars.  Used [this](https://gist.github.com/tzi/2953155) to learn how.
