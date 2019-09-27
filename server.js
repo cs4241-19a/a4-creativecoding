@@ -1,24 +1,29 @@
-// server.js
-// where your node app starts
+/*
+ * Server file for CS 4241 Assignment 4
+ * by Terry Hearst
+ */
 
-// init project
-const express = require("express"),
-      app = express()
+// #######################
+// ## INITIALIZE SERVER ##
+// #######################
 
-// we've started you off with Express, 
-// but feel free to use whatever libs or frameworks you'd like through `package.json`.
+const express = require('express')
+const app = express()
+const helmet = require('helmet')
+const path = require('path')
 
-// http://expressjs.com/en/starter/static-files.html
-app.use(express.static("public"))
+// Helmet middleware
+app.use(helmet())
 
-// http://expressjs.com/en/starter/basic-routing.html
-app.get('/', function(request, response)
-{
-  response.sendFile(__dirname + "/views/index.html")
+// Host static files
+app.use(express.static('public'))
+
+// Route '/' to main page
+app.get('/', function (request, response) {
+  response.sendFile(path.join(__dirname, 'views', 'index.html'))
 })
 
-// listen for requests :)
-const listener = app.listen(process.env.PORT, function()
-{
-  console.log("Your app is listening on port " + listener.address().port)
+// Listen for requests
+const listener = app.listen(process.env.PORT, function () {
+  console.log('Your app is listening on port ' + listener.address().port)
 })
