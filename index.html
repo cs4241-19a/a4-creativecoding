@@ -16,16 +16,14 @@
 		</div>
   
   <span id="instruction">Instruction</span>
-  <button id="hide" onclick="hide()">
-    Hide
-  </button>
+  <button id="hide" onclick="hide()">HIHI</button>
 
 </body>
 
 <script type="text/javascript">
   
 var AudioContext = window.AudioContext || window.webkitAudioContext || window.mozAudioContext;
-
+var button = 1;
 var audioContext = new AudioContext();
 var dropbox, musicFile;
 
@@ -199,10 +197,15 @@ alert( 'Uploaded  (＾▽＾) ')
          
   
   function hide(){
-    alert("hide")
-    if(document.getElemnetById("hide").innerHTML == "Hide"){
+
+   if(button === 1){
       document.getElementById("instruction").style.display="none";
-      document.getElemnetById("hide").innerHTML ="Show";
+     // document.getElemnetById("hide").innerHTML ="Show";
+     button=0;
+    } else{
+      document.getElementById("instruction").style.display="inline-block";
+      //document.getElemnetById("hide").innerHTML ="Hide";
+      button=1;
     }
   }
 
