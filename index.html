@@ -155,8 +155,20 @@ for(let j=0; j<appdata.length;j++){
     
     
   }
-alert( '文件已上传...')
+alert( 'Uploaded  (＾▽＾) ')
   } 
+  
+   var controls = new function(){
+   this.colorR = 255-80;
+   this.colorG = 50;
+   this.colorB = 50;
+ }
+ 
+ var gui = new dat.GUI();
+  gui.add(controls,'colorR',0,255);
+  gui.add(controls,'colorG',0,255);
+  gui.add(controls,'colorB',0,255);
+  
   
   const appdata = []
       
@@ -170,9 +182,9 @@ alert( '文件已上传...')
 
       function add(number){
          for (let i = 0; i < number; i++) {
-           let r = 256-i*5-80;
-	    		  let g = 50;
-			      let b = 50;
+           let r = controls.colorR-i*5;
+	    		  let g = controls.colorG;
+			      let b = controls.colorB;
 			      let rgb = '#'+r.toString(16)+g.toString(16)+b.toString(16);
             let geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
             let material = new THREE.MeshBasicMaterial({color: rgb});
@@ -190,9 +202,7 @@ alert( '文件已上传...')
 
   
   
- var controls = new function(){
 
- }
   
 
 </script>
