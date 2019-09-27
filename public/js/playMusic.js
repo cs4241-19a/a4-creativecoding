@@ -72,7 +72,7 @@ function draw(color) {
         analyzer.getByteFrequencyData(frequency);
         for(i = 0; i < interval; i = i + 1) {
             let num = i;
-            barHeight = ((frequency[num] - 128) * 2);
+            barHeight = ((frequency[num] - 100) * 2);
             context.globalAlpha = opacity;
             if(glow === true) {
                 context.shadowBlur = 20;

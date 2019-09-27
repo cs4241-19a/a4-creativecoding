@@ -3,7 +3,7 @@ Assignment 4 - Creative Coding: Interactive Multimedia Experiences
 
 ## IA Audio Visualizer
 
-Janette Fong http://a4-charlieroberts.glitch.me
+Janette Fong [https://a4-jlfong.glitch.me/](https://a4-jlfong.glitch.me/)
 
 The website allows the user to play music from IA, a VOCALOID.  The user can also control specify what song they want to hear, volume, speed, and also customize the stereo bars (color, opacity, glow).
 
@@ -22,14 +22,12 @@ Baseline requirements met:
 - HTML/CSS validates
 
 ## Technical Achievements
+- **Stereo Confidence**: Stereo will always play.  Usually if people implement a stereo it will sometimes not fail because the AudioContext will not initialize until user interaction.  I implemented a feature so that the AudioContext will always initialize.
 - **Tech Achievement 1**: I wrote my own custom GLSL shaders to use as a material for my Three.js objects.
 - **Tech Achievement 2**: My audiovisualizer uses both FFT and amplitude analysis to drive visualization.
 - **Tech Achievement 3**: I optimized the efficiency of my reaction-diffusion algorithm by...
 - **Tech Achievement 4**: I visualized the dataset X using three different visualization technqiues provided by D3, andprovided
 
 ### Design/Evaluation Achievements
-- **Color of sliders**: The sliders from the dat.gui will change color as the user selects a color for stereo bars
-- **Testing**: Tested the application with n = 10 users, finding that the stereo bars will appear and music will play for all users
-- **Design Achievement 1**: I ensured that my application would run on both desktops / mobile devices by changing X
-- **Design Achievement 2**: I followed best practices for accessibility, including providing alt attributes for images and using semantic HTML. There are no `<div>` or `<span>` elements in my document.
-- **Design Achievement 3**: We tested the application with n=X users, finding that...
+- **Color of sliders matches user's color choice**: The sliders from the dat.gui will automatically change color as the user selects a color for stereo bars.  Used [this](https://gist.github.com/tzi/2953155) to learn how.
+- **Testing**: Tested the application with n = 10 users, finding that the stereo bars will appear, music will play for all users, and functionality for user control works.
