@@ -26,7 +26,7 @@ const changeParam = new function () {
   this.barHeight = 1
   this.barWidth = 4
   this.barFit = 2
-  this.canvasClr = "#000000"
+  this.canvasClr = '#000000'
 }()
 
 const startMello = function () {
