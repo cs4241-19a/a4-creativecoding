@@ -1,0 +1,18 @@
+{
+  "dependencies": {
+    "commonjs": "0.0.1",
+    "compress": "^0.99.0",
+    "compression": "^1.7.4",
+    "dat.gui": "^0.7.6",
+    "express": "^4.17.1",
+    "helmet": "^3.21.1",
+    "npm-watch": "^0.6.0",
+    "react-autocomplete": "^1.8.1",
+    "standard": "^14.3.1",
+    "toastr": "^2.1.4",
+    "uniq": "^1.0.1"
+  },
+  "devDependencies": {
+    "htmlhint": "^0.11.0"
+  }
+}
