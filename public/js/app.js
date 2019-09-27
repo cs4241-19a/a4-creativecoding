@@ -1,6 +1,7 @@
 import * as THREE from "three";
 
 import { active_geometry } from "./shape_logic";
+import { random_range } from "./utils";
 
 
 var camera, scene, renderer;
@@ -17,6 +18,37 @@ document.getElementById('loop').addEventListener('click', event => {
   sound.play();
   const button = document.getElementById('loop');
   button.parentNode.removeChild(button);
+});
+
+/**
+ * Keybinds for controlling visualizer (not case sensitive)
+ * 
+ * C - spawn new cube at a random location
+ */
+document.addEventListener("keydown", event => {
+  switch (event.keyCode) {
+  case 67:{
+    console.log("pressed c");
+    const geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
+    const material = new THREE.MeshNormalMaterial();
+    material.transparent = true;
+    const mesh = new THREE.Mesh(geometry, material);
+    mesh.position.set(random_range(-1, 1), random_range(-1, 1), 0);
+    active_geometry.push({
+      geometry: geometry,
+      material: material,
+      mesh: mesh,
+      fade_rate: 0.05,
+      on_tick: function(){
+        //console.log("tick");
+      },
+    });
+    scene.add(mesh);
+    break;
+  }
+  default:
+    break;
+  }
 });
 
 function init() {
@@ -56,6 +88,16 @@ function animate() {
   mesh.rotation.y += 0.02;
 
   renderer.render( scene, camera );
+  let beep = active_geometry;
+  active_geometry.forEach(managed_object => {
+    managed_object.material.opacity -= managed_object.fade_rate;
+    (managed_object.on_tick)();
+    if (managed_object.material.opacity < 0) {
+      managed_object.material.opacity = null;
+      scene.remove(managed_object.mesh);
+      //active_geometry.splice(active_geometry.indexOf(this));
+    }
+  })
 
 }
 

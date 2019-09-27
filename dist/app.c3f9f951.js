@@ -34019,8 +34019,13 @@ exports.SceneUtils = SceneUtils;
 function LensFlare() {
   console.error('THREE.LensFlare has been moved to /examples/js/objects/Lensflare.js');
 }
-},{}],"js/app.js":[function(require,module,exports) {
+},{}],"js/shape_logic.js":[function(require,module,exports) {
 "use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.active_geometry = void 0;
 
 var THREE = _interopRequireWildcard(require("three"));
 
@@ -34028,7 +34033,65 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+/**
+ * Data Definition:
+ * {
+ *   geomtery: THREE.geometry,
+ *   material: THREE.material,
+ *   mesh: THREE.mesh,
+ *   fade_rate: int,
+ *   on_tick: function,
+ * }
+ */
+var active_geometry = [];
+exports.active_geometry = active_geometry;
+},{"three":"../node_modules/three/build/three.module.js"}],"js/utils.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.random_choice = random_choice;
+exports.random_range = random_range;
+
+/**
+ * Return a random selection from given array
+ * @param {Array} arr Arry of things to choose from
+ */
+function random_choice(arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
+/**
+ * Get a decimal number between `min` and `max` (inclusive)
+ * @param {Int} min smallest allowed number(inclusive)
+ * @param {Int} max largest allowed number(inclusive)
+ */
+
+
+function random_range(min, max) {
+  var diff = max - min;
+  return Math.random() * diff + min;
+}
+},{}],"js/app.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.scene = void 0;
+
+var THREE = _interopRequireWildcard(require("three"));
+
+var _shape_logic = require("./shape_logic");
+
+var _utils = require("./utils");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
 var camera, scene, renderer;
+exports.scene = scene;
 var geometry, material, mesh;
 var listener = new THREE.AudioListener();
 var sound = new THREE.Audio(listener);
@@ -34040,12 +34103,51 @@ document.getElementById('loop').addEventListener('click', function (event) {
   var button = document.getElementById('loop');
   button.parentNode.removeChild(button);
 });
+/**
+ * Keybinds for controlling visualizer (not case sensitive)
+ * 
+ * C - spawn new cube at a random location
+ */
+
+document.addEventListener("keydown", function (event) {
+  switch (event.keyCode) {
+    case 67:
+      {
+        console.log("pressed c");
+
+        var _geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
+
+        var _material = new THREE.MeshNormalMaterial();
+
+        _material.transparent = true;
+
+        var _mesh = new THREE.Mesh(_geometry, _material);
+
+        _mesh.position.set((0, _utils.random_range)(-1, 1), (0, _utils.random_range)(-1, 1), 0);
+
+        _shape_logic.active_geometry.push({
+          geometry: _geometry,
+          material: _material,
+          mesh: _mesh,
+          fade_rate: 0.05,
+          on_tick: function on_tick() {//console.log("tick");
+          }
+        });
+
+        scene.add(_mesh);
+        break;
+      }
+
+    default:
+      break;
+  }
+});
 
 function init() {
   camera = new THREE.PerspectiveCamera(70, window.innerWidth / window.innerHeight, 0.01, 10);
   camera.position.z = 1;
   camera.add(listener);
-  scene = new THREE.Scene();
+  exports.scene = scene = new THREE.Scene();
   geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
   material = new THREE.MeshNormalMaterial();
   mesh = new THREE.Mesh(geometry, material);
@@ -34070,8 +34172,19 @@ function animate() {
   mesh.rotation.x += 0.01;
   mesh.rotation.y += 0.02;
   renderer.render(scene, camera);
+  var beep = _shape_logic.active_geometry;
+
+  _shape_logic.active_geometry.forEach(function (managed_object) {
+    managed_object.material.opacity -= managed_object.fade_rate;
+    managed_object.on_tick();
+
+    if (managed_object.material.opacity < 0) {
+      managed_object.material.opacity = null;
+      scene.remove(managed_object.mesh); //active_geometry.splice(active_geometry.indexOf(this));
+    }
+  });
 }
-},{"three":"../node_modules/three/build/three.module.js"}],"../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"three":"../node_modules/three/build/three.module.js","./shape_logic":"js/shape_logic.js","./utils":"js/utils.js"}],"../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -34099,7 +34212,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51231" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "24664" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
