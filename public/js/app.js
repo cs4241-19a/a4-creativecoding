@@ -4,8 +4,14 @@
 window.onload = function() {
   var visualizer = new Visualizer();
   visualizer.init();
-  document.getElementById('playButton').onclick = function() {
+  document.getElementById('play1').onclick = function() {
       visualizer.loadDefaultAndPlay(visualizer.url);
+  };
+  document.getElementById('play2').onclick = function() {
+    visualizer.loadDefaultAndPlay(visualizer.url2);
+  };
+  document.getElementById('play3').onclick = function() {
+    visualizer.loadDefaultAndPlay(visualizer.url3);
   };
 };
 
@@ -14,8 +20,10 @@ var Visualizer = function() {
   this.audioContext;
   this.source;
   this.url = 'materials/test.mp3';
+  this.url2 =  'materials/test2.mp3';
+  this.url3 =  'materials/test3.mp3';
   this.file;
-  this.infoContainer = document.getElementById('info');
+  this.infoContainer = document.getElementById('logger'); //TODO: delete
   this.statsContainer = document.getElementById('stats');
   this.stats;
   this.gui;
@@ -45,11 +53,12 @@ Visualizer.prototype = {
       } catch (e) {
           this.infoContainer.textContent = 'audio context is not supported :(';
       }
-    //   this._handleDragDrop();
+      this._handleDragDrop();
       this._initStats();
       this._initControlPanel();
       this._prepareScene();
       this._initControls();
+      this._pause();
   },
   _initStats: function(statsContainer) {
       var stats = new Stats();
@@ -120,60 +129,60 @@ Visualizer.prototype = {
     // ====================
 
   },
-//   _handleDragDrop: function() {
-//     // ========== OPTIONAL: ADD FILES ==========
+  _handleDragDrop: function() {
+    // ========== OPTIONAL: ADD FILES ==========
 
-//       var that = this,
-//           dropContainer = document.body,
-//           uploadBtn = document.getElementById('upload');
-//       //listen the file upload
-//       uploadBtn.onchange = function() {
-//           if (!that.audioContext || that.processing) {
-//               return;
-//           };
-//           if (uploadBtn.files.length !== 0) {
-//               that.processing = true;
-//               that.infoContainer.textContent = 'uploading...';
-//               that.file = uploadBtn.files[0];
-//               that.fileName = that.file.name;
-//               that._readFile(that.file);
-//               uploadBtn.value='';//fix for chrome: when uploading the same file this onchange event wont trigger
-//           };
-//       };
-//       //handle drag and drop
-//       dropContainer.addEventListener("dragenter", function() {
-//           if (that.processing) {
-//               return;
-//           };
-//           that.infoContainer.textContent = 'drop it to the page...';
-//       }, false);
-//       dropContainer.addEventListener("dragover", function(e) {
-//           e.stopPropagation();
-//           e.preventDefault();
-//           e.dataTransfer.dropEffect = 'copy';
-//       }, false);
-//       dropContainer.addEventListener("dragleave", function() {
-//           if (that.status) {
-//               that.infoContainer.textContent = 'playing ' + that.fileName;
-//           } else {
-//               that.infoContainer.textContent = that.appName;
-//           };
-//       }, false);
-//       dropContainer.addEventListener("drop", function(e) {
-//           e.stopPropagation();
-//           e.preventDefault();
-//           if (!that.audioContext || that.processing) {
-//               console.log('there is a file under processing, please wait');
-//               return;
-//           };
-//           that.processing = true;
-//           that.infoContainer.textContent = 'uploading...';
-//           //get the dropped file
-//           that.file = e.dataTransfer.files[0];
-//           that.fileName = that.file.name;
-//           that._readFile(e.dataTransfer.files[0]);
-//       }, false);
-//   },
+      var that = this,
+          dropContainer = document.body,
+          uploadBtn = document.getElementById('upload');
+      //listen the file upload
+      uploadBtn.onchange = function() {
+          if (!that.audioContext || that.processing) {
+              return;
+          };
+          if (uploadBtn.files.length !== 0) {
+              that.processing = true;
+              that.infoContainer.textContent = 'uploading...';
+              that.file = uploadBtn.files[0];
+              that.fileName = that.file.name;
+              that._readFile(that.file);
+              uploadBtn.value='';//fix for chrome: when uploading the same file this onchange event wont trigger
+          };
+      };
+      //handle drag and drop
+      dropContainer.addEventListener("dragenter", function() {
+          if (that.processing) {
+              return;
+          };
+          that.infoContainer.textContent = 'drop it to the page...';
+      }, false);
+      dropContainer.addEventListener("dragover", function(e) {
+          e.stopPropagation();
+          e.preventDefault();
+          e.dataTransfer.dropEffect = 'copy';
+      }, false);
+      dropContainer.addEventListener("dragleave", function() {
+          if (that.status) {
+              that.infoContainer.textContent = 'playing ' + that.fileName;
+          } else {
+              that.infoContainer.textContent = that.appName;
+          };
+      }, false);
+      dropContainer.addEventListener("drop", function(e) {
+          e.stopPropagation();
+          e.preventDefault();
+          if (!that.audioContext || that.processing) {
+              console.log('there is a file under processing, please wait');
+              return;
+          };
+          that.processing = true;
+          that.infoContainer.textContent = 'uploading...';
+          //get the dropped file
+          that.file = e.dataTransfer.files[0];
+          that.fileName = that.file.name;
+          that._readFile(e.dataTransfer.files[0]);
+      }, false);
+  },
   loadDefaultAndPlay: function(url) {
       var that = this,
           // load the default file
@@ -188,7 +197,7 @@ Visualizer.prototype = {
           console.log('there is a file under processing, please wait');
           return;
       };
-      this.fileName = 'bbc_sherlock_london.mp3'
+      this.fileName = url;
       xhr.open('GET', url, true);
       xhr.responseType = "arraybuffer";
       xhr.onload = function() {
@@ -209,7 +218,7 @@ Visualizer.prototype = {
           fr = new FileReader();
       fr.onload = function(e) {
           var fileResult = e.target.result;
-          if (!that.audioContext) {
+          if (!this.audioContext) {
               return;
           };
           that.play(fileResult);
@@ -233,6 +242,37 @@ Visualizer.prototype = {
           that.processing = false;
           that.infoContainer.textContent = '!Fail to decode';
       });
+  },
+  _pause: function() {
+    var that = this,
+        susresBtn = document.getElementById('pause'),
+        stopBtn  = document.getElementById('stop');
+    if (!that.audioContext) {
+        return
+    }
+    stopBtn.onclick = function() {
+        that.audioContext.close().then(function() {
+            that.infoContainer.textContent = "music stopped."
+            try {
+                that.audioContext = new AudioContext();
+            } catch (e) {
+                that.infoContainer.textContent = 'audio context is not supported :(';
+            }
+        });
+    }
+    susresBtn.onclick = function() {
+        if(that.audioContext.state === 'running') {
+            that.audioContext.suspend().then(function() {
+                that.infoContainer.textContent = "music paused."
+                susresBtn.textContent = 'Resume';
+          });
+        } else if(that.audioContext.state === 'suspended') {
+            that.audioContext.resume().then(function() {
+                that.infoContainer.textContent = "music resumed."
+                susresBtn.textContent = 'Pause';
+          });  
+        }
+      }
   },
   _visualize: function(buffer) {
       var audioContext = this.audioContext,
