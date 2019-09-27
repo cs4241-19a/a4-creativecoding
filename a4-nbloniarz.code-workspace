@@ -1,0 +1,11 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"eslint.alwaysShowStatus": true,
+		"git.ignoreLimitWarning": true
+	}
+}
