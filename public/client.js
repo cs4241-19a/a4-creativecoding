@@ -4,6 +4,37 @@
  */
 
 const THREE = require('three')
+const dat = require('dat.gui')
+
+// ########################
+// ## SETUP GAME OF LIFE ##
+// ########################
+
+const GameOfLifeClass = function () {
+  this.running = false
+  this.speed = 3
+  this.edit = function () {
+    window.alert('Button pressed')
+  }
+  this.showHelp = function () {
+    window.alert('Show help')
+  }
+}
+
+const gameOfLife = new GameOfLifeClass()
+
+// ###################
+// ## SETUP DAT.GUI ##
+// ###################
+
+window.onload = function () {
+  const gui = new dat.GUI()
+
+  gui.add(gameOfLife, 'running').name('Running')
+  gui.add(gameOfLife, 'speed', 1, 20).name('Iterations/sec').step(1)
+  gui.add(gameOfLife, 'edit').name('Edit board contents')
+  gui.add(gameOfLife, 'showHelp').name('Show help')
+}
 
 // ###########################
 // ## SETUP THREE.JS CANVAS ##
@@ -31,7 +62,7 @@ renderer.setSize(w, h)
 const scene = new THREE.Scene()
 const camera = new THREE.PerspectiveCamera(75, w / h, 0.1, 1000)
 
-camera.position.z = 10
+camera.position.z = 8
 
 // Create knot
 const geo1 = new THREE.TorusKnotGeometry(1, 0.4, 64, 8, 2, 3)
