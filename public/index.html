@@ -14,35 +14,11 @@
       <script src="https://kit.fontawesome.com/1f29d09d72.js"></script>
 
     <!--dat.gui import-->
-      <!-- <script type="text/javascript" src="dat.gui.min.js"></script> -->
-    <!--my js files-->
-      <script src="/js/scripts.js"></script>
-      <!-- <script src="/js/myGui.js"></script> -->
-      <script src="/js/audio.js"></script>
-
-
       <script type="text/javascript" src="dat.gui.js"></script>
-      <script type="text/javascript">
-          
-        let FizzyText = function() {
-          this.message = 'dat.gui';
-          this.speed = 0.8;
-          this.displayOutline = false;
-          this.explode = function() { ... };
-          // Define render logic ...
-        };
-
-        window.onload = function() {
-          var text = new FizzyText();
-          var gui = new dat.GUI();
-          gui.add(text, 'message');
-          gui.add(text, 'speed', -5, 5);
-          gui.add(text, 'displayOutline');
-          gui.add(text, 'explode');
-        };
-
-      </script>
-
+    <!--my js files-->
+      <script type="text/javascript" src="/js/scripts.js"></script>
+      <script type="text/javascript" src="/js/myGui.js"></script>
+      <script type="text/javascript" src="/js/audio.js"></script>
 
 
     <title>creative coding -- a4-hcaouette -- CS4241 Assignment 4</title>
@@ -75,11 +51,9 @@
       <!--row 1-->
       <!-- <div class="row justify-content-center snapChil">
         <div class="col centerBox">
-          <h1>Hunter Caouette's Cheese World</h1>
-          <h2>Welcome to the cheese world!</h2>
+          <h1></h1>
         </div>
       </div> -->
-      <!--close row 1-->
 
       <canvas id="canvas" width="512" height="256" ></canvas>
 
@@ -95,25 +69,6 @@
         <input class="video-url-input" type="text" />
         <button type="submit">Load Video</button>
       </form>
-
-
-       <style>
-           #canvas {
-               margin-left: auto;
-               margin-right: auto;
-               display: block;
-               background-color: black;
-           }
-           #controls {
-               text-align: center;
-           }
-           #start_button, #stop_button {
-               font-size: 16pt;
-           }
-           #msg {
-               text-align: center;
-           }
-       </style>
 
 
 
