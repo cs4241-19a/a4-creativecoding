@@ -10,6 +10,8 @@ const dat = require('dat.gui')
 // ## SETUP GAME OF LIFE ##
 // ########################
 
+const gridSize = 3
+
 const GameOfLifeClass = function () {
   this.running = false
   this.speed = 3
@@ -64,10 +66,31 @@ const camera = new THREE.PerspectiveCamera(75, w / h, 0.1, 1000)
 
 camera.position.z = 8
 
-// Create knot
-const geo1 = new THREE.TorusKnotGeometry(1, 0.4, 64, 8, 2, 3)
-const mat1 = new THREE.MeshStandardMaterial({ color: 0x0000FF })
-const mesh1 = new THREE.Mesh(geo1, mat1)
+// Create different geometries
+const geos =
+[
+  new THREE.Geometry(),   // Blank
+  new THREE.SphereGeometry(1.3/(gridSize/2), 8, 6),   // Sphere
+  new THREE.TorusGeometry(1.3/(gridSize/2), 0.5/(gridSize/2), 8, 16),   // Simple torus
+  new THREE.TorusKnotGeometry(1.3/(gridSize/2), 0.6/(gridSize/2), 64, 8, 2, 3),  // Torus knot 1
+  new THREE.TorusKnotGeometry(1.5/(gridSize/2), 0.45/(gridSize/2), 64, 8, 3, 4)  // Torus knot 2
+]
+const mats =
+[
+  new THREE.MeshStandardMaterial({ color: 0xFF0000 }),
+  new THREE.MeshStandardMaterial({ color: 0xFFFF00 }),
+  new THREE.MeshToonMaterial({ color: 0x30FF30 }),
+  new THREE.MeshNormalMaterial(/*{ color: 0x4040FF }*/),
+]
+
+const meshes = []
+for (let i = 0; i < gridSize; i++) {
+  meshes[i] = []
+  for (let j = 0; j < gridSize; j++) {
+    meshes[i][j] = new THREE.Mesh(geos[0], mats[0])
+  }
+}
+const mesh1 = new THREE.Mesh(geos[4], mats[3])
 
 scene.add(mesh1)
 
@@ -79,7 +102,8 @@ scene.add(ambLight)
 scene.add(dirLight)
 
 // Grid
-var gridHelper = new THREE.GridHelper(10, 20)
+const gridColor = 0x808080
+const gridHelper = new THREE.GridHelper(10, gridSize, gridColor, gridColor)
 gridHelper.rotation.x = Math.PI / 2
 scene.add(gridHelper)
 
