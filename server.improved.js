@@ -11,7 +11,6 @@ const http = require('http'),
 	serveStatic = require('serve-static'),
 	serveFavicon = require('serve-favicon'),
 	session = require('express-session'),
-	db = require('./public/db'),
 	path = require('path'),
 	compression = require('compression'),
 	helmet = require('helmet');
@@ -55,19 +54,6 @@ const sendFile = function(response, filename) {
 		}
 	});
 };
-
-function saveUsers(){
-	var json = JSON.stringify(db.users.getUsers());
-	console.log(json);
-  
-	fs.writeFile("./object.json", json, (err) => {
-		if (err) {
-			console.error(err);
-			return;
-		};
-		console.log("File has been created");
-	});
-}
 
 
 var listener = express.listen(port, function () {

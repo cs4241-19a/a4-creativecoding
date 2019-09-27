@@ -1,6 +1,6 @@
 ## Brian's Paint Program
 
-your hosting link e.g. http://a4-charlieroberts.glitch.me
+https://a4-brian-earl.glitch.me/
 
 My application is a simple paint program which allows the user to draw using an array of colors and brush sizes.To start drawing, simply hold down the left mouse button and move your mouse around the screen. This will make you draw with the currently selected color. Additionally, you can also select the eraser brush to erase parts of your drawing. On the top right of the page you will find the options menu, with this you are able to choose your brush, your brush color, and your brush size. Additionally, you can clear the current drawing or change the background color. From this menu you can also save your current drawing or load a picture to draw on. To bring the help documentation back up, press the "Welcome" button.
 
