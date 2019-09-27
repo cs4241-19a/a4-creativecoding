@@ -1,3 +1,4 @@
+/*jshint esversion: 6 */
 import {app} from './main.js';
 
 // Draws the contents of a game grid onto the canvas
@@ -7,7 +8,7 @@ function displayGrid() {
 
   if(app.smooth) {
     // Filling with a white layer for trail effects
-    ctx.fillStyle = 'rgba(255, 255, 255, 0.3)';
+    ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
     ctx.fillRect(0, 0, 800, 600);
   }
   else {ctx.clearRect(0, 0, 800, 600);}
