@@ -1,8 +1,10 @@
 import { getCanvas, audioInit, audioGraph } from './setUpModule.js'
 import {visualizer} from "./visualizerModule";
+import * as dat from 'dat.gui';
+
+const gui = new dat.GUI();
 
 let currColor = 0
-
 
 const blue = function () {
   currColor = 0
@@ -20,6 +22,10 @@ const red = function () {
   currColor = 3
 }
 
+let changeHeight = new function() {
+  this.barHeight = 1
+};
+
 
 const startMello = function () {
   const canvas = getCanvas()
@@ -34,7 +40,7 @@ const startMello = function () {
 
   const draw = function () {
     window.requestAnimationFrame(draw)
-    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor)
+    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor, changeHeight.barHeight)
   }
   draw()
 }
@@ -52,7 +58,7 @@ const startAC = function () {
 
   const draw = function () {
     window.requestAnimationFrame(draw)
-    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor)
+    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor, changeHeight.barHeight)
   }
   draw()
 }
@@ -70,7 +76,7 @@ const startElectro = function () {
 
   const draw = function () {
     window.requestAnimationFrame(draw)
-    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor)
+    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor, changeHeight.barHeight)
   }
   draw()
 }
@@ -88,7 +94,7 @@ const startRamm = function () {
 
   const draw = function () {
     window.requestAnimationFrame(draw)
-    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor)
+    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor, changeHeight.barHeight)
   }
   draw()
 }
@@ -106,7 +112,7 @@ const startInst = function () {
 
   const draw = function () {
     window.requestAnimationFrame(draw)
-    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor)
+    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor, changeHeight.barHeight)
   }
   draw()
 }
@@ -124,7 +130,7 @@ const startBeat = function () {
 
   const draw = function () {
     window.requestAnimationFrame(draw)
-    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor)
+    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor, changeHeight.barHeight)
   }
   draw()
 }
@@ -142,7 +148,7 @@ const startDub = function () {
 
   const draw = function () {
     window.requestAnimationFrame(draw)
-    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor)
+    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor, changeHeight.barHeight)
   }
   draw()
 }
@@ -160,6 +166,5 @@ window.onload = function () {
   document.getElementById('pink').onclick = pink
   document.getElementById('red').onclick = red
 
-
-
+  gui.add(changeHeight, 'barHeight', 0, 3).name('Bar Height');
 }
