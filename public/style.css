@@ -1,0 +1,46 @@
+html, body {
+    height: 100%;
+}
+
+div.formContainer {
+    border-radius: 5%;
+    background-color: white;
+    padding: 5px;
+    margin-top: 30px;
+    margin-left: 5%;
+    width: 90%;
+}
+
+form {
+    width: 90%;
+    margin-left: 5%;
+    margin-top:5%;
+}
+
+body {
+    background-color: skyblue;
+}
+
+.nav-wrapper {
+    padding-left: 10px;
+
+}
+
+.canvas-wrapper {
+    border: "1px solid black";
+    border-radius: 5%;
+    position: relative;
+    margin-top: 30px;
+    margin-left: 6%;
+    background-color: white;
+}
+
+input.colorInput {
+    width: 100%;
+    border: none;
+}
+
+img.background {
+    height: 100px;
+    width: auto;
+}

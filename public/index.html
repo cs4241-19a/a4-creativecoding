@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Sticker Creator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="icon" href="favicon.ico?v=1.1">
+    <link rel="stylesheet" href="/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- additional fonts -->
+    <link
+        href="https://fonts.googleapis.com/css?family=Amatic+SC|Berkshire+Swash|Bubblegum+Sans|Bungee+Shade|Crafty+Girls|Great+Vibes|Mansalva|Pacifico|Rubik+Mono+One|VT323&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <nav>
+        <div class="nav-wrapper nav-container blue">
+            <a href="/" class="brand-logo"><img src="/assets/goat.png" alt="Logo"></a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="https://www.redbubble.com/people/goGoats?asc=u" target="_blank">Storefront</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <ul class="sidenav" id="mobile-demo">
+        <li><a href="https://www.redbubble.com/people/goGoats?asc=u" target="_blank">Storefront</a></li>
+    </ul>
+
+    <div class="row">
+        <div class="col s12 l3">
+            <div class="z-depth-3 formContainer">
+                <h3 class="center-align">Make Your Sticker</h3>
+                <form>
+                    <div class="row">
+                        <div class="input-field">
+                            <input id="sticker_text" type="text" onkeyup="CanvasManager.updateText(this)">
+                            <label for="sticker_text">Sticker Text</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field">
+                            <select id="font_selector" class="fontSelector" onchange="CanvasManager.updateFont(this)">
+                                <option value="" disabled selected>Sticker Font</option>
+                                <option value="Tahoma">Tahoma</option>
+                                <option value="Arial">Arial</option>
+                                <option value="Mansalva">Mansalva</option>
+                                <option value="Bubblegum Sans">Bubblegum</option>
+                                <option value="Crafty Girls">Crafty Girls</option>
+                                <option value="Bungee Shade">Bungee Shade</option>
+                                <option value="Rubik Mono One">Rubik</option>
+                                <option value="Pacifico">Pacifico</option>
+                                <option value="VT323">VT323</option>
+                                <option value="Amatic SC">Amatic</option>
+                                <option value="Great Vibes">Great Vibes</option>
+                                <option value="Berkshire Swash">Berkshire Swash</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <p class="range-field">
+                            <input type="range" id="font_size" min="24" max="300"
+                                oninput="CanvasManager.updateSize(this)" />
+                        </p>
+                    </div>
+                    <div class="row">
+                        <input type="color" class="colorInput" id="color_hex"
+                            oninput="CanvasManager.updateColor(this)" />
+                    </div>
+                    <div class="row">
+                        <div class="file-field input-field">
+                            <div class="btn">
+                                <span>Background</span>
+                                <input type="file" id="file_input" accept="image/gif, image/jpeg, image/png, image/jpg"
+                                    onchange="CanvasManager.updateImgSrc(this)">
+                            </div>
+                            <div class="file-path-wrapper">
+                                <input class="file-path validate" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field">
+                            <input id="email" type="text" onkeyup="CanvasManager.updateEmail(this)">
+                            <label for="email">Email</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field">
+                            <input id="coupon" type="text" onkeyup="CanvasManager.updateCode(this)">
+                            <label for="coupon">Coupon Code</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <a onclick="CanvasManager.send()" class="waves-effect waves-light btn" style="width: 100%">
+                            <i class="material-icons left">send</i>Submit</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="col s12 l9">
+            <div class="row canvas-container">
+                <canvas class="canvas-wrapper z-depth-3" id="drawing_pane"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+    <script src="/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+</body>
+
+</html>
