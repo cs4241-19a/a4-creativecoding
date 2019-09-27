@@ -2564,18 +2564,54 @@ exports.pentatonic = pentatonic;
 var diatonic = ['f', 'c', 'g', 'd', 'a', 'e', 'b'];
 exports.diatonic = diatonic;
 
-var Tone = require("Tone"); //create a synth and connect it to the master output (your speakers)
+var Tone = require("Tone");
 
-
-var synth = new Tone.Synth().toMaster();
+var synth;
 
 function playNote(note, scale, length, octave) {
   var trueNote = scale[note] + octave;
   synth.triggerAttackRelease(trueNote, length);
 }
 
-function setup() {
-  Tone.start();
+var getFromInstrument = function getFromInstrument(newInstrument) {
+  switch (newInstrument) {
+    case 'AMSynth':
+      return new Tone.AMSynth().toMaster();
+
+    case 'DuoSynth':
+      return new Tone.DuoSynth().toMaster();
+
+    case 'FMSynth':
+      return new Tone.FMSynth().toMaster();
+
+    case 'MembraneSynth':
+      return new Tone.MembraneSynth().toMaster();
+
+    case 'MetalSynth':
+      return new Tone.MetalSynth().toMaster();
+
+    case 'MonoSynth':
+      return new Tone.MonoSynth().toMaster();
+
+    case 'NoiseSynth':
+      return new Tone.NoiseSynth().toMaster();
+
+    case 'PluckSynth':
+      return new Tone.PluckSynth().toMaster();
+
+    case 'PolySynth':
+      return new Tone.PolySynth().toMaster();
+
+    default:
+      return new Tone.Synth().toMaster();
+  }
+};
+
+function setup(newInstrument) {
+  synth = getFromInstrument(newInstrument);
+  Tone.start()["catch"](function (err) {
+    console.log(err);
+  });
 }
 
 },{"Tone":1}],4:[function(require,module,exports){
@@ -2584,13 +2620,9 @@ function setup() {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.colorController = exports.scaleController = exports.gui = exports.setup = void 0;
+exports.instrumentController = exports.lengthController = exports.colorController = exports.scaleController = exports.gui = exports.setup = void 0;
 
-var dat = _interopRequireWildcard(require("dat.gui"));
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+var _dat = require("dat.gui");
 
 var gui;
 exports.gui = gui;
@@ -2598,17 +2630,25 @@ var colorController;
 exports.colorController = colorController;
 var scaleController;
 exports.scaleController = scaleController;
+var lengthController;
+exports.lengthController = lengthController;
+var instrumentController;
+exports.instrumentController = instrumentController;
 
 var FizzyText = function FizzyText() {
   this.scale = 'Major';
   this.colors = 'Red Gradient';
+  this.length = 'Eighth Note';
+  this.instrument = 'Synth';
 };
 
 var setup = function setup() {
   var text = new FizzyText();
-  exports.gui = gui = new dat.GUI();
+  exports.gui = gui = new _dat.GUI();
   exports.scaleController = scaleController = gui.add(text, 'scale', ['Major', 'Minor', 'Pentatonic', 'Diatonic']);
   exports.colorController = colorController = gui.add(text, 'colors', ['Red Gradient', 'Blue Gradient', 'Rainbow', 'Greyscale']);
+  exports.lengthController = lengthController = gui.add(text, 'length', ['Sixteenth Note', 'Eighth Note', 'Quarter Note', 'Half Note', 'Whole Note']);
+  exports.instrumentController = instrumentController = gui.add(text, 'instrument', ['AMSynth', 'DuoSynth', 'FMSynth', 'MembraneSynth', 'MetalSynth', 'MonoSynth', 'NoiseSynth', 'PluckSynth', 'PolySynth', 'Synth']);
 };
 
 exports.setup = setup;
@@ -2632,119 +2672,75 @@ var color = board.redGradient;
 var scale = audio.major;
 var note = -1;
 var octave = -1;
+var helpString = 'To start press anywhere on the screen. Where you click will change the music and color. \n' + 'From left to right the notes will change. From up to down the octave will change. \n' + 'Use the settings in the top right to change scale and colors.';
+var length = '8n';
+var instrument;
 
 var getHelp = function getHelp(e) {
-  e.preventDefault();
-  window.alert('To start press anywhere on the screen. Where you click will change the music and color');
-};
+  'use strict';
 
-var handleClick = function handleClick(e) {
   e.preventDefault();
-  audio.setup();
-  var rect = canvas.getBoundingClientRect();
-  var x = e.clientX - rect.left;
-  var y = e.clientY - rect.top;
-  var fill = board.pickColor(x, color);
-  board.createCircles(board.ctx, x, y, fill);
-  note = findNote(x);
-  octave = findOctave(y);
-  audio.playNote(note, scale, '8n', octave);
+  window.alert(helpString);
 };
 
 var changeColor = function changeColor(value) {
-  switch (value) {
-    case 'Red Gradient':
-      color = board.redGradient;
-      break;
+  'use strict';
 
-    case 'Blue Gradient':
-      color = board.blueGradient;
-      break;
-
-    case 'Rainbow':
-      color = board.rainbow;
-      break;
-
-    case 'Greyscale':
-      color = board.greyScale;
-      break;
+  if (value === 'Red Gradient') {
+    color = board.redGradient;
+  } else if (value === 'Blue Gradient') {
+    color = board.blueGradient;
+  } else if (value === 'Rainbow') {
+    color = board.rainbow;
+  } else if (value === 'Greyscale') {
+    color = board.greyScale;
   }
 };
 
 var changeScale = function changeScale(value) {
-  switch (value) {
-    case 'Major':
-      scale = audio.major;
-      break;
+  'use strict';
 
-    case 'Minor':
-      scale = audio.minor;
-      break;
-
-    case 'Pentatonic':
-      scale = audio.pentatonic;
-      break;
-
-    case 'Diatonic':
-      scale = audio.diatonic;
-      break;
+  if (value === 'Major') {
+    scale = audio.major;
+  } else if (value === 'Minor') {
+    scale = audio.minor;
+  } else if (value === 'Pentatonic') {
+    scale = audio.pentatonic;
+  } else if (value === 'Diatonic') {
+    scale = audio.diatonic;
   }
 };
 
 var findNote = function findNote(x) {
-  var note;
+  'use strict';
 
-  if (scale != audio.pentatonic) {
-    switch (true) {
-      case x < 200:
-        note = 0;
-        break;
-
-      case x >= 200 && x < 400:
-        note = 1;
-        break;
-
-      case x >= 400 && x < 600:
-        note = 2;
-        break;
-
-      case x >= 600 && x < 800:
-        note = 3;
-        break;
-
-      case x >= 800 && x < 1000:
-        note = 4;
-        break;
-
-      case x >= 1000 && x < 1200:
-        note = 5;
-        break;
-
-      case x >= 1200 && x <= 1400:
-        note = 6;
-        break;
+  if (scale !== audio.pentatonic) {
+    if (x < 200) {
+      note = 0;
+    } else if (x >= 200 && x < 400) {
+      note = 1;
+    } else if (x >= 400 && x < 600) {
+      note = 2;
+    } else if (x >= 600 && x < 800) {
+      note = 3;
+    } else if (x >= 800 && x < 1000) {
+      note = 4;
+    } else if (x >= 1000 && x < 1200) {
+      note = 5;
+    } else if (x >= 1200 && x <= 1400) {
+      note = 6;
     }
   } else {
-    switch (true) {
-      case x < 240:
-        note = 0;
-        break;
-
-      case x >= 240 && x < 480:
-        note = 1;
-        break;
-
-      case x >= 480 && x < 720:
-        note = 2;
-        break;
-
-      case x >= 720 && x < 960:
-        note = 3;
-        break;
-
-      case x >= 960 && x <= 1200:
-        note = 4;
-        break;
+    if (x < 240) {
+      note = 0;
+    } else if (x >= 240 && x < 480) {
+      note = 1;
+    } else if (x >= 480 && x < 720) {
+      note = 2;
+    } else if (x >= 720 && x < 960) {
+      note = 3;
+    } else if (x >= 960 && x <= 1200) {
+      note = 4;
     }
   }
 
@@ -2752,50 +2748,67 @@ var findNote = function findNote(x) {
 };
 
 var findOctave = function findOctave(y) {
-  switch (true) {
-    case y < 44:
-      octave = 9;
-      break;
+  'use strict';
 
-    case y < 88:
-      octave = 8;
-      break;
-
-    case y < 132:
-      octave = 7;
-      break;
-
-    case y < 176:
-      octave = 6;
-      break;
-
-    case y < 220:
-      octave = 5;
-      break;
-
-    case y < 264:
-      octave = 4;
-      break;
-
-    case y < 308:
-      octave = 3;
-      break;
-
-    case y < 352:
-      octave = 2;
-      break;
-
-    case y <= 400:
-      octave = 1;
-      break;
+  if (y < 44) {
+    octave = 9;
+  } else if (y < 88) {
+    octave = 8;
+  } else if (y < 132) {
+    octave = 7;
+  } else if (y < 176) {
+    octave = 6;
+  } else if (y < 220) {
+    octave = 5;
+  } else if (y < 264) {
+    octave = 4;
+  } else if (y < 308) {
+    octave = 3;
+  } else if (y < 352) {
+    octave = 2;
+  } else if (y <= 400) {
+    octave = 1;
   }
 
   return octave;
 };
 
+var changeLength = function changeLength(value) {
+  'use strict';
+
+  if (value === 'Sixteenth Note') {
+    length = '16n';
+  } else if (value === 'Eighth Note') {
+    length = '8n';
+  } else if (value === 'Quarter Note') {
+    length = '4n';
+  } else if (value === 'Half Note') {
+    length = '2n';
+  } else if (value === 'Whole Note') {
+    length = '1n';
+  }
+};
+
+var handleClick = function handleClick(e) {
+  'use strict';
+
+  e.preventDefault();
+  audio.setup(instrument);
+  var rect = canvas.getBoundingClientRect();
+  var x = e.clientX - rect.left;
+  var y = e.clientY - rect.top;
+  var fill = board.pickColor(x, color);
+  board.createCircles(board.ctx, x, y, fill);
+  note = findNote(x);
+  octave = findOctave(y);
+  audio.playNote(note, scale, length, octave);
+};
+
 window.onload = function () {
+  'use strict';
+
   gui.setup();
-  window.alert('To start press anywhere on the screen. Where you click will change the music and color');
+  window.alert(helpString);
   help.onclick = getHelp;
   canvas.onclick = handleClick;
   gui.colorController.onChange(function (value) {
@@ -2803,6 +2816,12 @@ window.onload = function () {
   });
   gui.scaleController.onChange(function (value) {
     changeScale(value);
+  });
+  gui.lengthController.onChange(function (value) {
+    changeLength(value);
+  });
+  gui.instrumentController.onChange(function (value) {
+    instrument = value;
   });
 };
 
@@ -2824,13 +2843,13 @@ if (canvas.getContext) {
   exports.ctx = ctx = canvas.getContext('2d');
 }
 
-var redGradient = ['#cc0000', '#ff6600', '#ff6699', '#ff66ff'];
+var redGradient = ['#cc0000', '#ff6600', '#ff6699', '#ff66ff', '#dba9c9', '#e8d8eb'];
 exports.redGradient = redGradient;
-var rainbow = ['#FF0000', '#0033cc', '#ffff00', '#00ff00'];
+var rainbow = ['#a128ed', '#FF0000', '#0033cc', '#ffff00', '#00ff00', '#eda528', '#2f302f'];
 exports.rainbow = rainbow;
-var blueGradient = ['#003399', '#6600cc', '#0099ff', '#9999ff'];
+var blueGradient = ['#02031f', '#003399', '#6600cc', '#0099ff', '#9999ff', '#89e0df', '#cce3e3'];
 exports.blueGradient = blueGradient;
-var greyScale = ['#000000', '#595959', '#999999', '#d9d9d9'];
+var greyScale = ['#000000', '#595959', '#999999', '#d9d9d9', '#f0f7f7', '#f0f7f7', '#f0f7f7'];
 exports.greyScale = greyScale;
 
 function createCircles(ctx, x, y, fill) {
@@ -2850,22 +2869,14 @@ function createCircles(ctx, x, y, fill) {
 function pickColor(x, scale) {
   var color;
 
-  switch (true) {
-    case x < 400:
-      color = scale[0];
-      break;
-
-    case x >= 400 && x < 800:
-      color = scale[1];
-      break;
-
-    case x >= 800 && x < 1200:
-      color = scale[2];
-      break;
-
-    case x >= 1200 && x <= 1600:
-      color = scale[3];
-      break;
+  if (x < 400) {
+    color = scale[0];
+  } else if (x >= 400 && x < 800) {
+    color = scale[1];
+  } else if (x >= 800 && x < 1200) {
+    color = scale[2];
+  } else if (x >= 1200 && x <= 1600) {
+    color = scale[3];
   }
 
   return color;
