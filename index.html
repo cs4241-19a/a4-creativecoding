@@ -25,13 +25,17 @@ var audioContext = new AudioContext();
 var dropbox, musicFile;
 
    var controls = new function(){
-   this.scale = 1;
+     this.scale = 1;
+     this.colorR = 256-80;
      this.colorG = 50;
+     this.colorB = 50;
  }
  
  var gui = new dat.GUI();
   gui.add(controls,'scale',0.5,3);
-   gui.add(controls,'colorG',0,255);
+   gui.add(controls,'colorR',0,255);
+  gui.add(controls,'colorG',0,255);
+  gui.add(controls,'colorB',0,255);
   
 	dropbox = document.getElementById("dropbox");
 	dropbox.addEventListener("dragenter", dragenter, false);
@@ -117,6 +121,11 @@ for(let j=0; j<appdata.length;j++){
      var value = dataArray[j * step]*controls.scale/5;
             if(value <1)
               value = 1;
+	    		   let r = controls.colorR;
+	    		   let g = controls.colorG;
+	    		   let b = controls.colorB;
+	    		   let rgb = '#'+r.toString(16)+g.toString(16)+b.toString(16);
+            appdata[j].material.color.set(rgb);
             appdata[j].scale.y = value;
 
   
