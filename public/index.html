@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Webware Assignment 4</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"></script>
+
+</head>
+<body>
+<!-- The overlay -->
+<div id="overlay">
+    <h2 class="popup-text">Help Screen</h2>
+    <p class="popup-text"><i>Press anywhere to exit</i></p>
+    <p class="popup-text"><i>Reopen with "?" in top left</i></p>
+
+    <br>
+    <ul class="popup-text">
+        <li>Select track from dropdown and hit load</li>
+        <li>Hit play/pause button to control track</li>
+        <li>Slider below each track is the progress, drag to scrub through the song</li>
+        <li>Bottom slider is the mixer, use this to fade the volume between the left and right tracks</li>
+        <li>Slider to the side represents the speed, go down to slow and up to speed up</li>
+    </ul>
+</div>
+
+<input id="openHelp" type="button" value="?"/>
+
+<script src="main.js" type="module"></script>
+
+<section id="body">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 mx-auto center-div">
+                <h1 class="text-center">DJ Mixer</h1>
+                <div class="row">
+                    <div class="col-lg-6 text-center">
+                        <h2>Left Track</h2>
+                        <label for="selectionLeft"></label>
+                        <select id="selectionLeft">
+                            <option value="imfine">I'm Fine - William Black</option>
+                            <option value="fractures">Fractures - Illenium</option>
+                            <option value="shelter">Shelter - Porter Robinson</option>
+                            <option value="takeaway">Takeaway - The Chainsmokers</option>
+                        </select>
+                        <input id="loadLeft" type="button" value="Load Track"/>
+                        <div class="row">
+                            <canvas id="canvasLeft" class="canvas"></canvas>
+                            <label for="speedLeft"></label>
+                            <input type="range" orient="vertical" class="custom-range" value="1" min="0.5" max="3"
+                                   step="0.1" id="speedLeft">
+                        </div>
+                        <label for="scrubLeft"></label>
+                        <input type="range" class="custom-range" value="0" min="0" max="200" step="1" id="scrubLeft">
+                        <input id="pauseLeft" class="pause-button" type="button" value="Play" disabled/>
+                        <audio id="audioLeft"></audio>
+                    </div>
+                    <div class="col-lg-6 text-center">
+                        <h2>Right Track</h2>
+                        <label for="selectionRight"></label>
+                        <select id="selectionRight">
+                            <option value="fractures">Fractures - Illenium</option>
+                            <option value="shelter">Shelter - Porter Robinson</option>
+                            <option value="imfine">I'm Fine - William Black</option>
+                            <option value="takeaway">Takeaway - The Chainsmokers</option>
+                        </select>
+                        <input id="loadRight" type="button" value="Load Track"/>
+                        <div class="row">
+                            <label for="speedRight"></label>
+                            <input type="range" orient="vertical" class="custom-range" value="1" min="0.5" max="3"
+                                   step="0.1" id="speedRight">
+                            <canvas id="canvasRight" class="canvas"></canvas>
+                        </div>
+                        <label for="scrubRight"></label>
+                        <input type="range" class="custom-range" value="0" min="0" max="200" step="1" id="scrubRight">
+                        <input id="pauseRight" class="pause-button" type="button" value="Play" disabled/>
+                        <audio id="audioRight"></audio>
+                    </div>
+                </div>
+                <div class="text-center">
+                    <label for="mixerSlider">Track Mixer</label>
+                    <input type="range" class="custom-range" min="-1" max="1" step="0.1" id="mixerSlider">
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
