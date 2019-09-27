@@ -1,0 +1,30 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#startupControls{
+  horiz-align: center;
+  padding: 30px;
+}
+
+.btn-primary:not(:disabled):not(.disabled).active{
+  background-color: green;
+}
+
+.visualizerControls{
+  position: absolute;
+  horiz-align: center;
+  padding: 30px;
+  width: 100%;
+}
+
+.audioControls{
+  padding-top: 10px;
+  width: 100%;
+}
+
+
