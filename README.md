@@ -11,9 +11,19 @@ This project is a simple DJ mixing board with audio visualization. It allows use
 
 ![App Screenshot](Application.JPG)
 
-There were some difficulties with structuring the application to allow for making the code modular between the two sides of the mixer. After some updates it was able to be made into a module which allowed for shared code for both sides. There were also issues with initializing the audio source, and needed to be resolved by initializing the audo after the user had first interacted with the app. 
+There were some difficulties with structuring the application to allow for making the code modular between the two sides of the mixer. After some updates it was able to be made into a module which allowed for shared code for both sides. There were also issues with initializing the audio source, and needed to be resolved by initializing the audo after the user had first interacted with the app.
 
 Linting and validation was done in WebStorm. This was a combination of their default linting parameters and ESLint. Semicolons were enforced. HTML and CSS were validated using both the internal WebStorm tools and online W3C checkers. The only issues found were custom parameters added to the slider which the online validators weren't able to catch because they didn't look at HTML with CSS.
+
+## Parameters Exposed to User
+A total of 9 parameters are exposed to the user, 4 for each track and the common volume slider.
+
+- Parameters for each track
+  - Song selection to load
+  - Speed control
+  - Time scrubbing
+  - Play/Pause
+- Common volume slider
 
 ## Technical Achievements
 - **Tech Achievement 1**: Utilized modules to create portable code to function in multiple canvas elements with the same code base. Allowing for easily adding the two visualization elements.
