@@ -2517,6 +2517,21 @@
     Object.defineProperty(exports, '__esModule', {
       value: true
     })
+    exports.info = void 0
+
+    var info = function info () {
+      var popup = document.getElementById('myPopup')
+      popup.classList.toggle('show')
+    }
+
+    exports.info = info
+  }, {}],
+  3: [function (require, module, exports) {
+    'use strict'
+
+    Object.defineProperty(exports, '__esModule', {
+      value: true
+    })
     exports.audioGraph = exports.audioInit = exports.getCanvas = void 0
 
     var getCanvas = function getCanvas () {
@@ -2559,12 +2574,14 @@
 
     exports.audioGraph = audioGraph
   }, {}],
-  3: [function (require, module, exports) {
+  4: [function (require, module, exports) {
     'use strict'
 
     var _setUpModule = require('./setUpModule.js')
 
     var _visualizerModule = require('./visualizerModule')
+
+    var _infoModule = require('./infoModule')
 
     var dat = _interopRequireWildcard(require('dat.gui'))
 
@@ -2722,13 +2739,15 @@
       document.getElementById('green').onclick = green
       document.getElementById('pink').onclick = pink
       document.getElementById('red').onclick = red
+      document.getElementById('infoBtn').onclick = _infoModule.info
       gui.add(changeParam, 'barHeight', 0, 3).name('Bar Height')
       gui.add(changeParam, 'barWidth', 0, 6).name('Bar Width')
       gui.add(changeParam, 'barFit', 0.5, 5).name('Visualizer Fit')
-      gui.addColor(changeParam, 'canvasClr').name('Canvas Color')
+      gui.addColor(changeParam, 'canvasClr').name('Canvas Color');
+      (0, _infoModule.info)()
     }
-  }, { './setUpModule.js': 2, './visualizerModule': 4, 'dat.gui': 1 }],
-  4: [function (require, module, exports) {
+  }, { './infoModule': 2, './setUpModule.js': 3, './visualizerModule': 5, 'dat.gui': 1 }],
+  5: [function (require, module, exports) {
     'use strict'
 
     Object.defineProperty(exports, '__esModule', {
@@ -2785,4 +2804,4 @@
 
     exports.visualizer = visualizer
   }, {}]
-}, {}, [3])
+}, {}, [4])

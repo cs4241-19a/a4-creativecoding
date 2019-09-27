@@ -1,5 +1,6 @@
 import { getCanvas, audioInit, audioGraph } from './setUpModule.js'
 import { visualizer } from './visualizerModule'
+import { info } from './infoModule'
 import * as dat from 'dat.gui'
 
 const gui = new dat.GUI()
@@ -167,9 +168,12 @@ window.onload = function () {
   document.getElementById('green').onclick = green
   document.getElementById('pink').onclick = pink
   document.getElementById('red').onclick = red
+  document.getElementById('infoBtn').onclick = info
 
   gui.add(changeParam, 'barHeight', 0, 3).name('Bar Height')
   gui.add(changeParam, 'barWidth', 0, 6).name('Bar Width')
   gui.add(changeParam, 'barFit', 0.5, 5).name('Visualizer Fit')
   gui.addColor(changeParam, 'canvasClr').name('Canvas Color')
+
+  info()
 }
