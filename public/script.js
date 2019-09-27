@@ -99,7 +99,7 @@ CanvasManager = {
         const httpPost = new XMLHttpRequest();
         httpPost.onreadystatechange = function (err) {
             if (httpPost.readyState == 4 && httpPost.status == 200) {
-                M.toast({ html: 'Congrats! We got your sticker, we will be in contact with you shortly!', classes: 'rounded' });
+                M.toast({ html: 'We got your image, we will be in contact with you shortly!', classes: 'rounded' });
             } else {
                 console.log(err);
             }

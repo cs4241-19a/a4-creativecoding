@@ -56,7 +56,7 @@ app.post("/submit", (req, res) => {
             const msg = {
                 from: 'gogoatsrb@yahoo.com',
                 to: req.body.stickerInfo.email,
-                subject: 'Sticker Order (`' + req.body.stickerInfo.text + '`)',
+                subject: 'Sticker (`' + req.body.stickerInfo.text + '`)',
                 html: 'Hey There!<br><br>Thanks for making a sticker!<br><br><img src="cid:unique@sticker.order"/>',
                 attachments: [{
                     filename: path,
