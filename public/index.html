@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>IA Audio Visualizer</title>
     <link rel="stylesheet" type="text/css" href="/css/style.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.js"></script>
 </head>
 <body>
     <div class="bg-hero-image"></div>
@@ -13,21 +14,24 @@
         <p>People can use IA's voice bank to create their own songs.  The songs provided were created by Soundcloud user, Kita-Kei, and are being shared through a Creative Commons License.</p>
     </div>
     <div class="song-dropdown">
-        <select>
-            <option value="0">Select Song:</option>
-            <option value="1">Azure Lines</option>
-            <option value="2">Azure Sky</option>
-            <option value="3">Planisphere</option>
-            <option value="4">Travelers</option>
-            <option value="5">Waypoints</option>
-        </select>
+        <form action="">
+            <select id="songList">
+                <option value="azureLinesOption">Azure Lines</option>
+                <option value="azureSkyOption">Azure Sky</option>
+                <option value="planisphereOption">Planisphere</option>
+                <option value="travelersOption">Travelers</option>
+                <option value="waypointsOption">Waypoints</option>
+            </select>
+        </form>
     </div>
     <button id="testButton">Play Song</button>
-    <button id="testButton2">Play Song2</button>
     <canvas id="studio-canvas" width="1024" height="600"></canvas>
-    <!--<audio controls id="audio"></audio>-->
-    <audio id="audio" src="../audio/AzureLines.mp3"></audio>
+    <audio controls id="audio"></audio>
+    <audio id="azureLines" src="../audio/AzureLines.mp3"></audio>
     <audio id="azureSky" src="../audio/AzureSky.mp3"></audio>
-    <script src="js/main.js"></script>
+    <audio id="planisphere" src="../audio/Planisphere.mp3"></audio>
+    <audio id="travelers" src="../audio/Travelers.wav"></audio>
+    <audio id="waypoints" src="../audio/Waypoints.mp3"></audio>
+    <script src="js/main.js" type="module"></script>
 </body>
 </html>

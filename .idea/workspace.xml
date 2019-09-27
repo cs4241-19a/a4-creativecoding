@@ -2,23 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="daf20861-b3b5-4e43-b7ec-aba3a1125616" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jsLinters/jslint.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/audio/AzureLines.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/audio/AzureSky.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/audio/Planisphere.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/audio/Travelers.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/audio/Waypoints.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/ia.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/ia2.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/ia3.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/ia4.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/images/ia5.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/js/main.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/controlGui.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/js/playMusic.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/main.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -72,7 +60,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1569372933289</updated>
-      <workItem from="1569372934580" duration="21950000" />
+      <workItem from="1569372934580" duration="38529000" />
     </task>
     <servers />
   </component>
