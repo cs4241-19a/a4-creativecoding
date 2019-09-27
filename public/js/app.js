@@ -55,7 +55,7 @@ Visualizer.prototype = {
       }
       this._handleDragDrop();
       this._initStats();
-      this._initControlPanel();
+    //   this._initControlPanel();
       this._prepareScene();
       this._initControls();
       this._pause();
@@ -68,65 +68,99 @@ Visualizer.prototype = {
       this.statsContainer.appendChild(stats.domElement);
       this.stats = stats;
   },
-  _initControlPanel: function() { //TODO Change page style
-      var controlPanel = document.getElementById('controlPanel'),
-          actionBtn = document.getElementById('action');
-      actionBtn.onclick = function() {
-          var left = controlPanel.style.left;
-          if (left == '0px' || left == '') {
-              controlPanel.style.left = '-190px';
-              actionBtn.textContent = '>>';
-          } else {
-              controlPanel.style.left = '0px';
-              actionBtn.textContent = '<<';
-          };
-      };
-  },
+//   _initControlPanel: function() { //TODO Change page style
+//       var controlPanel = document.getElementById('controlPanel'),
+//           actionBtn = document.getElementById('action');
+//       actionBtn.onclick = function() {
+//           var left = controlPanel.style.left;
+//           if (left == '0px' || left == '') {
+//               controlPanel.style.left = '-190px';
+//               actionBtn.textContent = '>>';
+//           } else {
+//               controlPanel.style.left = '0px';
+//               actionBtn.textContent = '<<';
+//           };
+//       };
+//   },
   _initControls: function() {
-      var gui = this.gui,
-          controls = this.controls,
-          orbitControls = this.orbitControls,
-          scene = this.scene;
     // ========== GUI ==========
-      gui = new dat.GUI(); //the control panel
+    var gui = this.gui,
+        controls = this.controls,
+        orbitControls = this.orbitControls,
+        scene = this.scene,
+        that = this;
+    gui = new dat.GUI(); //{ autoPlace: false }
+    //   gui.domElement.id = 'gui';
+
       controls = new function() {
           this.autoRotate = false;
           this.barColor = 0x7a7a7a;
+          this.barEmissive = 0x7a7a7a;
           this.capColor = 0x848484;
-          this.ambientColor = 0x0c0c0c;
-          this.dropSpeed = 0.3;
+          this.capEmissive = 0x848484;
+          this.dropLag = 0.3;
+          this.positionX = 0;
+          this.positionY = 10
+          this.positionZ = 110;
       };
-      //initialize the control ui, custom the meter color
-      gui.add(controls, 'dropSpeed', 0.0, 0.5);
-      gui.addColor(controls, 'barColor').onChange(function(e) {
+
+    //GUI: Camera postions
+        gui.add(controls, 'positionX', 0, 110).onChange(function(e) { that.camera.position.x = e; })
+        gui.add(controls, 'positionY', 0, 110).onChange(function(e) { that.camera.position.y = e; })
+        gui.add(controls, 'positionZ', 0, 110).onChange(function(e) { that.camera.position.z = e; })
+    //GUI: cap drop lag
+        gui.add(controls, 'dropLag', 0.0, 0.5);
+    //GUI: rotation
+        gui.add(controls, 'autoRotate').onChange(function(e) {
+        orbitControls.autoRotate = e;
+    });
+    var folder = gui.addFolder('COLORS');
+
+    //GUI: bar color
+    folder.addColor(controls, 'barColor').onChange(function(e) {
           scene.children.forEach(function(child) {
               if (child.name.indexOf('cube') > -1) {
                   child.material.color.setStyle(e);
                   child.material.ambient = new THREE.Color(e)
-                  child.material.emissive = new THREE.Color(e)
+                //   child.material.emissive = new THREE.Color(0x7a7a7a)
                   child.material.needsUpdate = true;
               }
           });
       });
-      gui.addColor(controls, 'capColor').onChange(function(e) {
+    //GUI: barEmissive color
+    folder.addColor(controls, 'barEmissive').onChange(function(e) {
         scene.children.forEach(function(child) {
-            if (child.name.indexOf('cap') > -1) {
-                child.material.color.setStyle(e);
-                child.material.ambient = new THREE.Color(e)
-                child.material.emissive = new THREE.Color(e)
+            if (child.name.indexOf('cube') > -1) {
+                // child.material.ambient = new THREE.Color(e)
+                child.material.emissive = new THREE.Color(e) //new THREE.Color(e)
                 child.material.needsUpdate = true;
             }
         });
     });
-      gui.add(controls, 'autoRotate').onChange(function(e) {
-          orbitControls.autoRotate = e;
-      });
-      // gui.addColor(controls, 'meterBottomColor').onChange(function(e) {
-      //     // cube.color = new THREE.Color(e);
-      // });
-      this.controls = controls;
-      this.gui = gui;
-    // ====================
+    //GUI: cap color
+    folder.addColor(controls, 'capColor').onChange(function(e) {
+        scene.children.forEach(function(child) {
+            if (child.name.indexOf('cap') > -1) {
+                child.material.color.setStyle(e);
+                child.material.ambient = new THREE.Color(e)
+                // child.material.emissive = new THREE.Color(0x848484)
+                child.material.needsUpdate = true;
+            }
+        });
+    });
+    //GUI: capEmissive color
+    folder.addColor(controls, 'capEmissive').onChange(function(e) {
+        scene.children.forEach(function(child) {
+            if (child.name.indexOf('cap') > -1) {
+                // child.material.ambient = new THREE.Color(e)
+                child.material.emissive = new THREE.Color(e) //new THREE.Color(e)
+                child.material.needsUpdate = true;
+            }
+        });
+    });
+    folder.open();
+    this.controls = controls;
+    this.gui = gui;
 
   },
   _handleDragDrop: function() {
@@ -460,7 +494,7 @@ Visualizer.prototype = {
                   if (height > cap.position.y) {
                       cap.position.y = (height - 0.5)>0?(height - 0.5) : 0.5;
                   } else {
-                      cap.position.y -= 0.51 - controls.dropSpeed;
+                      cap.position.y -= 0.51 - controls.dropLag;
                   };
               }
           };
