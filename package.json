@@ -20,5 +20,8 @@
     "parcel": "^1.12.3",
     "postprocessing": "^6.7.0",
     "three": "^0.108.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.4.0"
   }
 }
