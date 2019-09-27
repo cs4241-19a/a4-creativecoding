@@ -40,6 +40,8 @@ window.onload  = function(){
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(window.devicePixelRatio); //added 
     renderer.setClearColor( 0xffffff, 0);
+    renderer.gammaOutput = true;
+    renderer.gammaFactor = 2.2;
     document.body.appendChild(renderer.domElement);
     
     //tone mapping 
@@ -81,6 +83,7 @@ window.onload  = function(){
         console.log("should be loaded");
         gltf.scene.scale.set(2,2,2);
 
+        
         //options for menu
     options = {
         velx: 0,
@@ -110,10 +113,10 @@ window.onload  = function(){
     gui = new dat.GUI();
 
     //setting up menu
-    cam = gui.addFolder('Camera');
-    cam.add(options.camera, 'speed', 0, 0.0010).listen();
-    cam.add(camera.position, 'y', 0, 100).listen();
-    cam.open();
+    // cam = gui.addFolder('Camera');
+    // cam.add(options.camera, 'speed', 0, 0.0010).listen();
+    // cam.add(camera.position, 'y', 0, 100).listen();
+    // cam.open();
 
     velocity = gui.addFolder('Velocity');
     velocity.add(options, 'velx', -0.2, 0.2).name('X').listen();
@@ -121,16 +124,24 @@ window.onload  = function(){
     velocity.open();
 
     box = gui.addFolder('Mesh');
-     box.add(gltf.scene.scale, 'x', 0, 3).name('Width').listen();
-     box.add(gltf.scene.scale, 'y', 0, 3).name('Height').listen();
-     box.add(gltf.scene.scale, 'z', 0, 3).name('Length').listen();
+     box.add(gltf.scene.scale, 'x', 1, 10).name('Width').listen();
+     box.add(gltf.scene.scale, 'y', 1, 10).name('Height').listen();
+     box.add(gltf.scene.scale, 'z', 1, 10).name('Length').listen();
 //    box.add(mesh.material, 'wireframe').listen();
    box.open();
 
     gui.add(options, 'stop');
    //s gui.add(options, 'reset');
 
-
+   gui.addColor(API, 'color')
+   .listen()
+   .onChange(function() {
+       //mesh.material.color.set(API.color);
+       gltf.set.color(API.color);
+       render(camera);
+   });
+   render(camera);
+   
     })
    
       //loader = new THREE.TextureLoader(manager);
@@ -155,14 +166,15 @@ window.onload  = function(){
     */
     //gui
     //animation 
-    render();
+  
 }
 
 //cube animation
 var render = function() {
     
     requestAnimationFrame(render);
-  
+    
+    
     // var timer = Date.now() * options.camera.speed;
     // camera.position.x = Math.cos(timer) * 100;
     // camera.position.z = Math.sin(timer) * 100;
