@@ -22,8 +22,9 @@ const red = function () {
   currColor = 3
 }
 
-let changeHeight = new function() {
+let changeParam = new function() {
   this.barHeight = 1
+  this.barWidth = 3
 };
 
 
@@ -40,7 +41,7 @@ const startMello = function () {
 
   const draw = function () {
     window.requestAnimationFrame(draw)
-    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor, changeHeight.barHeight)
+    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor, changeParam.barHeight, changeParam.barWidth)
   }
   draw()
 }
@@ -58,7 +59,7 @@ const startAC = function () {
 
   const draw = function () {
     window.requestAnimationFrame(draw)
-    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor, changeHeight.barHeight)
+    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor, changeParam.barHeight, changeParam.barWidth)
   }
   draw()
 }
@@ -76,7 +77,7 @@ const startElectro = function () {
 
   const draw = function () {
     window.requestAnimationFrame(draw)
-    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor, changeHeight.barHeight)
+    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor, changeParam.barHeight, changeParam.barWidth)
   }
   draw()
 }
@@ -94,7 +95,7 @@ const startRamm = function () {
 
   const draw = function () {
     window.requestAnimationFrame(draw)
-    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor, changeHeight.barHeight)
+    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor, changeParam.barHeight, changeParam.barWidth)
   }
   draw()
 }
@@ -112,7 +113,7 @@ const startInst = function () {
 
   const draw = function () {
     window.requestAnimationFrame(draw)
-    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor, changeHeight.barHeight)
+    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor, changeParam.barHeight, changeParam.barWidth)
   }
   draw()
 }
@@ -130,7 +131,7 @@ const startBeat = function () {
 
   const draw = function () {
     window.requestAnimationFrame(draw)
-    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor, changeHeight.barHeight)
+    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor, changeParam.barHeight, changeParam.barWidth)
   }
   draw()
 }
@@ -148,7 +149,7 @@ const startDub = function () {
 
   const draw = function () {
     window.requestAnimationFrame(draw)
-    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor, changeHeight.barHeight)
+    visualizer(canvas, jsonAudioInit, jsonAudioGraph, results, currColor, changeParam.barHeight, changeParam.barWidth)
   }
   draw()
 }
@@ -166,5 +167,6 @@ window.onload = function () {
   document.getElementById('pink').onclick = pink
   document.getElementById('red').onclick = red
 
-  gui.add(changeHeight, 'barHeight', 0, 3).name('Bar Height');
+  gui.add(changeParam, 'barHeight', 0, 3).name('Bar Height');
+  gui.add(changeParam, 'barWidth', 0, 6).name('Bar Width');
 }
