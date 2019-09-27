@@ -8,10 +8,12 @@ I am a frequent user of the site [Redbubble](www.redbubble.com). It is a print o
 
 1. User enters stickerText
 2. User selects a font
-3. User selects a font size
+3. User selects a font size***
 4. User selects a color or a background
 5. User enters an email
 6. User clicks submit and receives an email with their image.
+
+***When selecting a font, the CDN lazy loads the fonts so you need to select another font then back to the desired font for it to render properly.
 
 ## Technological Acheivements
 
