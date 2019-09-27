@@ -1,0 +1,24 @@
+{
+  "name": "a4-Alexander-Rus",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "dependencies": {
+    "compression": "^1.7.4",
+    "dat.gui": "^0.7.6",
+    "express": "^4.17.1",
+    "helmet": "^3.21.1",
+    "sweetalert2": "^8.17.6"
+  },
+  "devDependencies": {
+    "eslint": "^6.4.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.18.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}

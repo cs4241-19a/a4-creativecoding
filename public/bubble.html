@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <title>Bubble Sort</title>
+	    <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/addons/p5.dom.min.js"></script>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js"></script>
+
+    </head>
+    <body onload="sweetalertclick()">
+        <script>
+            function sweetalertclick() {
+                swal("Bubble Sort", "This is a visual represention of Bubble Sort!\nWith this algorithm you can controle the:\n1. The color of the sorting elements labeled 'color1'\n2. The color of the background labeld 'color2'\n3. The position on the Y axis the columns sit labeld 'Height'\n\nAlso hit the play button to enjoy some cool tunes!\n\nClick 'Reset' to resart the sorting. ") }
+        </script>
+            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <a class="navbar-brand" href="index.html">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/1/1b/WPI_logo.png" width="30" height="30" class="d-inline-block align-top" alt="">
+                           Bubble Sort </a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                      <ul class="navbar-nav">
+                        <li class="nav-item">
+                          <a class="nav-link" href="index.html">Home</a>
+                        </li>
+                        <li class="nav-item">
+                                <a class="nav-link" href="bubble.html">Reset</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="#" onclick="sweetalertclick()">Instructions</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Algorithms
+                          </a>
+                          <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <a class="dropdown-item" href="bubble.html">Bubble Sort</a>
+                            <a class="dropdown-item" href="quickSort.html">Quick Sort</a>
+                          </div>
+                          <li>
+                            <audio controls>
+                              <source src='Hudson_Mohawke_Chimes.mp3' type="audio/mpeg">
+                            </audio>
+                          </li>
+                      </ul>
+                    </div>
+                  </nav>
+                  <script src="bubble.js"></script>
+
+    </body>
+</html>
