@@ -149,7 +149,6 @@ var visualize = function () {
         return yScale(d[vm.yValue]);
       })
 
-
     yAxis = d3.axisRight(yScale);
 
     svg.selectAll('g').remove()

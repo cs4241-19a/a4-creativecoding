@@ -5,6 +5,8 @@ your hosting link e.g. http://a4-charlieroberts.glitch.me
 - The goal of this application was to compare video games sales in different countries, and see how certain games sold differently across the globe.
 - The hardest part was learning D3, since I have never used it before. I had to take several tutorials and had quite a few headaches getting even simple things to work correctly.
 - The JS Linter I used was ESLint, it follows the default rules. I used it mostly for checking for unused and nonexistant variables. I found it to be quite helpful when coding.
+- One bug I have is my x axis dissapears when the max or min sales is changed. I had it working but it stopped at some point along the way and I was unable to find the fix for this.
+- In the future I would like to add other console sales (since this is just PS4) and present the data in a bit more interesting way 
 
 ## Technical Achievements
 - **Tech Achievement 1**: I used a kaggle dataset from https://www.kaggle.com/sidtwr/videogames-sales-dataset that I transferred to a JSON format
