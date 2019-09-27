@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Creative App</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css"/>
+</head>
+<body>
+<audio type="audio/mpeg">
+    <source id="audioSource" src="">
+</audio>
+<div id="instructionsBox" class="modal" role="dialog">
+    <div class="modal-content" role=document>
+        <h1>Welcome to the Audio Visualizer!</h1>
+        <p>This audio visualizer displays three groups of frequencies: lows (bass), mids, and highs (treble), shown in visual elements from bottom to top, respectively.</p>
+        <h2>Controls</h2>
+        <p>On the right, you will find the visualizer controls. There are three tracks available, which may be selected using the "Track" dropdown. The Play/Pause controls the playback of the selected track.</p>
+        <p>There are three sliders: Playback speed, volume, and "Pulse." The first two are self-explanatory. "Pulse" controls how much the visualizer circles increase in size when the are displaying frequencies.</p>
+        <p>The colors folder allows you to pick the color for the three visualizer groups.</p>
+        <br>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"> Close</button>
+
+    </div>
+</div>
+<canvas id="canvas" style="display: block"></canvas>
+<script type="text/javascript" src="UI/dat.gui.js"></script>
+<script type="module" src="main.js"></script>
+</body>
+</html>
