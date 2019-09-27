@@ -2,10 +2,11 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8"/>
-  <title>可视化音乐播放器</title>
+  <title>Assignment 4</title>
   <script src="https://threejsfundamentals.org/threejs/resources/threejs/r105/three.min.js"></script>
   <script src="https://cdn.bootcss.com/jquery/1.8.1/jquery.js"></script>
   <script src="OrbitControls.js"></script>
+  <script type="text/javascript" src="dat.gui.js"></script>
 </head>
 <body>
   
@@ -14,29 +15,13 @@
         <span>Click to upload or simply drag the file here</span>
 		</div>
 
-<!-- <audio src="" controls="controls"></audio> -->
-<p id="tip"></p>
-
-<canvas id="cas" width="500" height="500"></canvas>
 </body>
 
 <script type="text/javascript">
   
-  
-var canvas = document.getElementById("cas");
-var canvasCtx = canvas.getContext("2d");
-//首先实例化AudioContext对象 很遗憾浏览器不兼容，只能用兼容性写法；audioContext用于音频处理的接口，并且工作原理是将AudioContext创建出来的各种节点(AudioNode)相互连接，音频数据流经这些节点并作出相应处理。
-//总结就一句话 AudioContext 是音频对象，就像 new Date()是一个时间对象一样
 var AudioContext = window.AudioContext || window.webkitAudioContext || window.mozAudioContext;
-if (!AudioContext) {
-  alert("您的浏览器不支持audio API，请更换浏览器（chrome、firefox）再尝试，另外本人强烈建议使用谷歌浏览器！")
-}
-var audioContext = new AudioContext();//实例化
-// 总结一下接下来的步骤
-// 1 先获取音频文件（目前只支持单个上传）
-// 2 读取音频文件，读取后，获得二进制类型的音频文件
-// 3 对读取后的二进制文件进行解码
-  
+
+var audioContext = new AudioContext();
 var dropbox, musicFile;
 
 	dropbox = document.getElementById("dropbox");
@@ -86,18 +71,17 @@ var dropbox, musicFile;
     //e.target.result 即为读取的音频文件（此文件为二进制文件）
     //下面开始解码操作 解码需要一定时间，这个时间应该让用户感知到
     var count = 0;
-    $('#tip').text('开始解码')
+
     var timer = setInterval(function(){
       count++;
-      $('#tip').text('解码中,已用时'+count+'秒')
     },1000)
-    //开始解码，解码成功后执行回调函数
+    //开始解码，解码成功后执行回调函数 
     
     
     
     audioContext.decodeAudioData(e.target.result, function(buffer) {
       clearInterval(timer)
-      $('#tip').text('解码成功，用时共计:'+count+'秒')
+
       // 创建AudioBufferSourceNode 用于播放解码出来的buffer的节点
       let audioBufferSourceNode = audioContext.createBufferSource();
       // 创建AnalyserNode 用于分析音频频谱的节点
@@ -204,6 +188,11 @@ alert( '文件已上传...')
         camera.position.z = 50;
          
 
+  
+  
+ var controls = new function(){
+
+ }
   
 
 </script>
