@@ -17,7 +17,7 @@ app.use(responseTime())
 app.use(compression())
 
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/views/home.html');
+  res.sendFile(__dirname + '/public/home.html');
 });
 
 // listen for requests :)
