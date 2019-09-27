@@ -1,0 +1,24 @@
+//import * as dat from 'dat.gui';
+//const dat = require('dat.gui');
+
+var marioAttributes = function () {
+    this.message = 'dat.gui';
+    this.speed = 0.8;
+    this.displayOutline = false;
+    this.explode = function () {};
+
+};
+
+const showGui = function () {
+    var text = new marioAttributes();
+    var gui = new dat.GUI();
+    gui.add(text, 'message');
+    gui.add(text, 'speed', -5, 5);
+    gui.add(text, 'displayOutline');
+    gui.add(text, 'explode');
+}
+//dropdown for changing obj
+
+export {
+    showGui
+}
