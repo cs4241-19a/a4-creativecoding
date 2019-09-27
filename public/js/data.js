@@ -26,7 +26,7 @@ const getQuakeData = function () {
 const parseQuakeData = function (data) {
   for (var i = 0; i < data.length; i++) {
     var currObj = data[i]
-    var obj = {mag: currObj.mag,
+    var obj = { mag: currObj.mag,
       state: currObj.state, 
       place: currObj.place, 
       time: currObj.time,
@@ -36,13 +36,11 @@ const parseQuakeData = function (data) {
       type: currObj.type,
       title: currObj.title, 
       coordinates: currObj.coordinates,
-      id: currObj.
+      id: currObj.id
     }
 
     // add to global array
     earthquakeData.push(obj)
   }
 }
-
-
-export{getQuakeData, earthquakeData};
+export {getQuakeData, earthquakeData }

@@ -1,5 +1,15 @@
-import * as map from './map.js';
-import * as data from './data.js';
+import * as map from './map.js'
+import * as data from './data.js'
+
+// toggle information
+const toggleInfo = function () {
+  var x = document.getElementById('info')
+  if (x.style.opacity == 0) {
+    x.style.opacity = 1
+  } else {
+    x.style.opacity = 0
+  }
+}
 
 /*************************************************************************************
  *                                                                                   *
@@ -16,15 +26,15 @@ const exeGuiFeatures = function (gui, map) {
   gui.add(map, 'titleTextColor').onChange(function () { map.changeInfoTextColor() })
 }
 
-window.onload = functionv() {
+window.onload = function () {
 
-    // get earthquake data
-    data.getQuakeData()
-    
-    // draw map & plot points
-    var m = new map.makeMap()
-    var gui = new dat.GUI();
-
-    //execute gui exeGuiFeatures
-    exeGuiFeatures(gui, m)
+  const button = document.getElementById('toggleInfo')
+  button.onclick = toggleInfo
+  // get earthquake data
+  data.getQuakeData()
+  // draw map & plot points
+  var m = new map.makeMap()
+  var gui = new dat.GUI()
+  // execute gui exeGuiFeatures
+  exeGuiFeatures(gui, m)
 }

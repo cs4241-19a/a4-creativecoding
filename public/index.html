@@ -1,6 +1,15 @@
 <!doctype html>
 <html lang="en">
   <head>
+
+      <style>
+          .center {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          }
+      </style>
+
     <title>USA Earthquakes</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,10 +32,34 @@
               <h1 class="title center">
                   Eathquakes in the USA
               </h1> 
-              Hover over a point on the map for a description, click on the point to be redirected!
       </section>
-
-      <svg width="960" height="600"> </svg>    
+      <br>
+      <div class="center">
+          <svg width="960" height="600"> </svg>
+      </div>
+      <br>
+      <br>
+      <div class="center">
+          <a class="button btn is-primary is-focused" id="toggleInfo">Help</a>
+      </div>
+      <br>
+      <div class="columns">
+        <div class = "column">
+        </div>
+        <div class="column">
+          <div class = "content notification is-link" id = "info">
+            <h3 class="center"> Help Section </h3>
+            <ul>
+                <li> Click on the help button to toggle this section! </li>
+                <li> This website shows information about earthquakes across the US so far in 2019! </li>
+                <li> Hover over a point for more information! </li>
+                <li> Click on a point to be redirected to earthquakes.usgs.gov! </li>
+                <li> Play with map settings on the top right gui! </li>
+            </ul>
+          </div> 
+        </div>
+        <div class = "column"></div>  
+      </div> 
   </body>
   <script src='/js/main.js' type="module"></script>
   <script src="/js/dat.gui.min.js"></script>
