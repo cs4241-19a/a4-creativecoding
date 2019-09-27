@@ -10,12 +10,11 @@ const responseTime = require('response-time')
 const helmet = require('helmet')
 const compression = require('compression')
 
-
-
 app.use(express.static('public'));
 app.use(helmet())
 app.use(bodyParser.json())
 app.use(responseTime())
+app.use(compression())
 
 app.get('/', function (req, res) {
   res.sendFile(__dirname + '/views/home.html');
