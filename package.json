@@ -1,0 +1,42 @@
+{
+  "name": "a4-creativecoding",
+  "version": "1.0.0",
+  "description": "Assignment 4 - Creative Coding: Interactive Multimedia Experiences ===",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rm -rf .cache dist",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "parcel watch client/index.html",
+    "build": "parcel build client/index.html",
+    "start": "node server/loader.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bwhetherington/a4-creativecoding.git"
+  },
+  "keywords": [],
+  "author": "Benjamin Hetherington <b.w.hetherington@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bwhetherington/a4-creativecoding/issues"
+  },
+  "homepage": "https://github.com/bwhetherington/a4-creativecoding#readme",
+  "devDependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.6.2",
+    "@babel/preset-react": "^7.0.0",
+    "parcel-bundler": "^1.12.3"
+  },
+  "dependencies": {
+    "compression": "^1.7.4",
+    "dat.gui": "^0.7.6",
+    "esm": "^3.2.25",
+    "express": "^4.17.1",
+    "fractal-noise": "^0.9.0",
+    "helmet": "^3.21.1",
+    "morgan": "^1.9.1",
+    "simplex-noise": "^2.4.0",
+    "three-full": "^17.1.0"
+  }
+}

@@ -1,0 +1,1 @@
+{"version":3,"sources":["css/index.css"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA;AACA;AACA;AACA;AACA","file":"css.967bad95.css","sourceRoot":"../client","sourcesContent":["body {\n  margin: 0px;\n}\n\ncanvas {\n  width: 100%;\n  height: 100%;\n}\n"]}
