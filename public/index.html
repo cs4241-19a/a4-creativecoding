@@ -11,21 +11,19 @@
         <link type="text/css" rel="stylesheet" href="style/style.css">
     </head>
     <body>
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <nav class="navbar navbar-expand-sm navbar-dark bg-dark" id="navbar">
               <div class="navbar-header">
                 <a class="navbar-brand" href="#navbar">3D Audio Visualization ThreeJS</a>
               </div>
               <div class="collapse navbar-collapse" id="navbarMenu">
                 <ul class="nav navbar-nav mr-auto">
-                  <img src="../materials/info.png" id="info" style="width:30px;height:30px;border:0;">
+                  <img src="../materials/info.png" id="info" style="width:28px;height:28px;border:1px;">
                   <a href="https://github.com/zonglinpeng/a4-creativecoding">
-                    <img src="../materials/git.png" id="git" style="width:30px;height:30px;border:0;">
+                    <img src="../materials/git.png" id="git" style="width:28px;height:28px;border:1px;">
                   </a>
-                  <!-- <a href="javascript:void(0);" id="playButton">Play Default</a> -->
-
                   <button id="play1" class="btn-outline-success">Play Chill</button>
                   <button id="play2" class="btn-outline-success">Play Bass</button>
-                  <button id="play3" class="btn-outline-success">Play Harcore</button>
+                  <button id="play3" class="btn-outline-success">Play Hardcore</button>
 
                   <button id="pause" class="btn-outline-secondary">Pause</button>
                   <button id="stop" class="btn-outline-danger">Stop</button>
@@ -35,24 +33,13 @@
               </div>
           </nav>
         <div id="container">
-            <!-- the container to display corresponding information -->
             <div id="stats"></div>
-            <div id="logger"></div>
+            <div id="logger"></div> <!-- TODO: Move to bottom -->
             <div id="action"></div>
-
-            <!-- <div id="controlPanel">
-                <a href="javascript:void(0);" id="playButton">Play Default</a>
-                <p>or upload a file</p>
-                <input type="file" id="upload" />
-                <p>or drag and drop a file to play</p>
-                <small>Visit Source Code:<a href="https://github.com/zonglinpeng/a4-creativecoding" target="_blank">My Github</a></small>
-                <div id="action"></div>
-            </div> -->
-            <!-- the container to render the scene -->
             <div id="visualizer_container"></div>
-
         </div>
-        <script type="text/javascript" src="js/app.js"></script>
+        
+        <script type="module" src="js/app.js"></script>
         <script type="text/javascript" src="js/three.min.js"></script>
         <script type="text/javascript" src="js/OrbitControls.js"></script>
         <script type="text/javascript" src="js/dat.gui.min.js"></script>
@@ -61,9 +48,10 @@
         <script>
           const infoAlert = function(){
             swal("How To Use", 
-            ">Add: Select models and enter year and mpg.\n"+
-            ">Delete: Select models and enter its ID. All models with same ID will be removed\n"+
-            ">Modify: Select models enter its ID, year, and mpg. First model with the given ID will be removed")
+            ">Play Sample: Select green buttons to play music.\n"+
+            ">Play Uploaded: Select upload buttons to upload music.\n"+
+            ">Pause/Resume: Select grey button to change pause or resume status.\n"+
+            ">Stop: Select red button to close the soundtrack.")
           }
           const infoIcon = document.getElementById('info');                    
           infoIcon.onclick = infoAlert;
