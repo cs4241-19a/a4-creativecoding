@@ -26,6 +26,7 @@ var API = {
 window.onload  = function(){
     //Creating a Scene 
     scene = new THREE.Scene();
+    scene.background = new THREE.Color( 0xffffff );
     camera = new THREE.PerspectiveCamera(
         44, window.innerWidth / window.innerHeight, 
         0.25, 20);
@@ -36,9 +37,10 @@ window.onload  = function(){
     //camera.updateMatrixWorld();
 
     //rendering 
-    renderer = new THREE.WebGLRenderer({antialias: true});
+    renderer = new THREE.WebGLRenderer({alpha: true});
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(window.devicePixelRatio); //added 
+    renderer.setClearColor( 0xffffff, 0);
     document.body.appendChild(renderer.domElement);
     
     //tone mapping 
@@ -52,9 +54,10 @@ window.onload  = function(){
     controls.enableZoom = false;
     
     //light
-    light = new THREE.PointLight(0xff0000, 1, 100);
-    light.position.set(50,50,50);
-    scene.add(light);
+     light = new THREE.PointLight(0xffffff, 1, 100);
+     light.position.set(50,50,50);
+     light.intensity = 5;
+     scene.add(light);
     //the cube 
     /*
     geometry = new THREE.BoxGeometry(5,5,5,5,5,5);
