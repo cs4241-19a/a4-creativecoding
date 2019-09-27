@@ -51,7 +51,7 @@ function createGui() {
         volumeStrength = newValue;
         adjustVolume(newValue);
     });
-    gui.add(adjustableValues, 'song', ["Azure Lines", "Azure Sky", "Planisphere", "Travelers", "Waypoints"]).onChange(function (newValue) {
+    gui.add(adjustableValues, 'song', ["Azure Lines", "Planisphere", "Travelers", "Waypoints"]).onChange(function (newValue) {
         songSelected = newValue;
     });
 };

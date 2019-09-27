@@ -43,9 +43,6 @@ function playSelectedSong() {
         case("Azure Lines"):
             audio.src = document.getElementById("azureLines").src;
             break;
-        case("Azure Sky"):
-            audio.src = document.getElementById("azureSky").src;
-            break;
         case("Planisphere"):
             audio.src = document.getElementById("planisphere").src;
             break;
