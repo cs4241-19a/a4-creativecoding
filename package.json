@@ -1,6 +1,10 @@
 {
-  "name": "a4-creativecoding",
+  "name": "audio_visualizer",
   "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
   "dependencies": {
     "compression": "^1.7.4",
     "express": "^4.17.1",

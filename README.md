@@ -2,7 +2,7 @@
 
 your hosting link e.g. http://a4-charlieroberts.glitch.me
 
-Include a very brief summary of your project here. Images are encouraged, along with concise, high-level text. Be sure to include:
+This application visualizes the frequencies in a piece of music. The volume of any given frequency is represented by a bar on one of the visualizer items.
 
 - the goal of the application
 - challenges you faced in realizing the application
