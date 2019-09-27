@@ -1,4 +1,4 @@
-var FizzyText = function() {
+let FizzyText = function() {
   this.message = 'dat.gui';
   this.speed = 0.8;
   this.displayOutline = false;
