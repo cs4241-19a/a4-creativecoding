@@ -1,0 +1,44 @@
+{
+  "name": "a4-creativecoding",
+  "version": "1.0.0",
+  "description": "A simple Node app built on Express, instantly up and running.",
+  "main": "server.js",
+  "scripts": {
+    "start": "npm run gulp; node server.js",
+    "gulp": "gulp"
+  },
+  "dependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "babelify": "^10.0.0",
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "connect-flash": "^0.1.1",
+    "dat.gui": "^0.7.6",
+    "express": "^4.17.1",
+    "express-favicon": "^2.0.1",
+    "gulp": "^4.0.2",
+    "helmet": "^3.21.1",
+    "mime": "^2.4.4",
+    "path": "^0.12.7",
+    "pouchdb": "^7.1.1",
+    "pouchdb-upsert": "^2.2.0",
+    "prettier": "^1.18.2",
+    "serve-favicon": "^2.5.0",
+    "vinyl-source-stream": "^2.0.0",
+    "Tone": "latest"
+  },
+  "engines": {
+    "node": "10.x"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "express"
+  ],
+  "devDependencies": {
+    "browserify": "^16.5.0",
+    "eslint": "^6.4.0",
+    "tone": "^13.8.27"
+  }
+}

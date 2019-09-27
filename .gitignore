@@ -1,0 +1,13 @@
+.gitignore
+.idea/.gitignore
+.idea/a4-creativecoding.iml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+node_modules/
+package-lock.json
+.idea/inspectionProfiles/
+.idea/jsLinters/
+my_db/
+.idea/jsLibraryMappings.xml
+.idea/watcherTasks.xml
