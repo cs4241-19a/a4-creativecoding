@@ -120,12 +120,13 @@ var dropbox, musicFile;
       var dataArray = new Uint8Array(bufferLength);
       console.log(dataArray)
       //alert(bufferLength); 
-      function render() {
+      function render() { 
           requestAnimationFrame(render);
-          for(let j = 0; j < bufferLength; j++) {
-       //     alert(dataArray[j]); 
-             appdata[j].scale.z = dataArray[j];
-          }
+for(let j=0; j<appdata.length;j++){
+    appdata[j].rotation.x += 0.2*(Math.random());
+    appdata[j].rotation.y += -0.2*(Math.random());
+  
+  }
         renderer.render(scene, camera);
         }
 // function render() {
@@ -183,6 +184,7 @@ alert( '文件已上传...')
         document.body.appendChild(renderer.domElement);
       
       
+  
       function add(number){
          for (let i = 0; i < number; i++) {
            let r = 256-i*5-80;
@@ -199,7 +201,7 @@ alert( '文件已上传...')
            
     }
         }
-      add(128);
+      add(30);
         camera.position.z = 15;
         
 
