@@ -1,5 +1,9 @@
 # Sticker Creator
 
+https://a4-jgerlskis.glitch.me/
+
+Used ESLint which uses their ESLint recommended settings.
+
 ## Overview
 
 I am a frequent user of the site [Redbubble](www.redbubble.com). It is a print on demand site that allows creators to upload their own designs and shoppers buy their artowrk on various products, most commonly stickers. A lot of the time, the artwork is plain text with an overlayed background. Most people want to create their own stickers for their laptops, notebooks, cars, or whatever they can think of, but don't have the time or experience to create something like this in an editor like gimp or photoshop. My site solves this problem.
