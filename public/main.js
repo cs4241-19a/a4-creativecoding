@@ -2,7 +2,7 @@ import * as datg from './datgui.js';
 
 var scene = new THREE.Scene();
 var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-camera.position.z = 150;
+camera.position.z = 300;
 
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -11,7 +11,7 @@ document.body.appendChild(renderer.domElement);
 //controls
 var controls = new THREE.OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true;
-controls.dampingFactor = 0.25;
+controls.dampingFactor = 0.2;
 controls.enableZoom = true;
 
 //lighting
@@ -51,6 +51,8 @@ var animate = function () {
 	requestAnimationFrame(animate);
 
 	controls.update();
+
+
 
 	renderer.render(scene, camera);
 };
