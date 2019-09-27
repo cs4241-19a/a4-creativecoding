@@ -16,12 +16,7 @@
     "helmet": "^3.21.1",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "pug": "^2.0.4",
-    "eslint-config-standard": "^14.1.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-node": "^10.0.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1"
+    "pug": "^2.0.4"
   },
   "devDependencies": {
     "eslint-config-standard": "^14.1.0",

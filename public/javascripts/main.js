@@ -4,7 +4,7 @@
 //////////////////////////////////////////
 //////////////////////////////////////////
 import graphicsFunction  from "./visuals.js";
-//OTHER IMPORT STATEMENT HERE
+import controlFunction from "./pageControl.js";
 //////////////////////////////////////////
 //////////////////////////////////////////
 //                 CLOSE                //
@@ -13,3 +13,4 @@ import graphicsFunction  from "./visuals.js";
 
 //RUNNING THREEJS FILE
 graphicsFunction();
+controlFunction();
