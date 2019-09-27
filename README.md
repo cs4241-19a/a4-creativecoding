@@ -1,72 +1,37 @@
-Assignment 4 - Creative Coding: Interactive Multimedia Experiences
-===
+## 3D Animation Interactions
 
-Due: September 27th, by 11:59 PM.
+https://a4-randyagudelo.glitch.me/
 
-For this assignment we will focus on client-side development using popular audio/graphics/visualization technologies; the server requirements are minimal. The goal of this assignment is to refine our JavaScript knowledge while exploring the multimedia capabilities of the browser.
+- The goal of the application is for the user to have fun with animations through interactions (through the use of three.js). 
+The application displays several icosahedrons where the user can interact with a range of aspects such as the number of shapes,
+size, rotation, background color, and camera/perspective. 
 
-Baseline Requirements
----
+- Initial challenges I faced were: 
 
-Your application is required to implement the following functionalities:
+ 1. Trying to give the dat.gui functionality in a way that interacts with three.js elements. 
 
-- A server created using Express (you can also use an alternative server framework such as Koa) for basic file delivery and middleware. Your middleware stack should include the `compression` and `helmet` [middlewares]((https://expressjs.com/en/resources/middleware.html)) by default. You are not required to use Glitch for this assignment (but using Glitch is fine!); [Heroku](https://www.heroku.com) is another excellent option to explore. The course staff can't be resposible for helping with all other hosting options outside of Glitch, but some of us do have experience with other systems. It also never hurts to ask on Slack, as there's 99 other classmates who might have the experience you're looking for!
-- A client-side interactive experience using at least one of the web technologies frameworks we discussed in class over the past week.
-  - [Three.js](https://threejs.org/): A library for 3D graphics / VR experiences
-  - [D3.js](https://d3js.org): A library that is primarily used for interactive data visualizations
-  - [Canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API): A 2D raster drawing API included in all modern browsers
-  - [SVG](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API): A 2D vector drawing framework that enables shapes to be defined via XML.
-  - [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API): An API for audio synthesis, analysis, processing, and file playback.
-- A user interface for interaction with your project, which must expose at least six parameters for user control. [dat.gui](https://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage) is highly recommended for this. You might also explore interaction by tracking mouse movement via the `window.onmousemove` event handler in tandem with the `event.clientX` and `event.clientY` properties. Consider using the [Pointer Events API](https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events) to ensure that that mouse and touch events will both be supported in your app.
-- Your application should display basic documentation for the user interface when the application first loads. This documentation should be dismissable, however, users should be able to redisplay it via either a help buton (this could, for example, be inside a dat.gui interface) or via a keyboard shortcut (commonly the question mark).
-- Your application should feature at least two different ES6 modules that you write ([read about ES6 modules](https://www.sitepoint.com/understanding-es6-modules/)) and include into a main JavaScript file. This means that you will need to author *at least three JavaScript files* (a `app.js` or `main.js` file and two modules). We'll discuss modules in class on Monday 9/23; for this assignment modules should contain at least two functions.
-- You are required to use a linter for your JavaScript. There are plugins for most IDEs, however it will be difficult to run the linter directly in Glitch. If you haven't moved to developing on your personal laptop and then uploading to Glitch when your project is completed, this is the assignment to do so!
-- Your HTML and CSS should validate. There are options/plugins for most IDEs to check validation.
+2. It was quite difficult to figure out how exactly to incorporate mouse controls so that the user is able to control the camera through OrbitControl.js as
+I was having trouble trying to implement it. 
 
-The interactive experience should possess a reasonable level of complexity. Some examples:
-### Three.js
-- A generative algorithm creates simple agents that move through a virtual world. Your interface controls the behavior / appearance of these agents.
-- A simple 3D game
-- An 3D audio visualization of a song of your choosing. User interaction should control aspects of the visualization. 
-### Canvas
-- Implement a generative algorithm such as [Conway's Game of Life](https://bitstorm.org/gameoflife/) (or 1D cellular automata) and provide interactive controls. Note that the Game of Life has been created by 100s of people using <canvas>; we'll be checking to ensure that your implementation is not a copy of these.
-- Design a 2D audio visualizer of a song of your choosing. User interaction should control visual aspects of the experience. 
-### Web Audio API
-- Create a screen-based musical instrument using the Web Audio API. You can use projects such as [Interface.js](http://charlie-roberts.com/interface/) or [Nexus UI](https://nexus-js.github.io/ui/api/#Piano) to provide common musical interface elements, or use dat.GUI in combination with mouse/touch events (use the Pointer Events API). Your GUI should enable users to control aspects of sound synthesis.
-### D3.js
-- Create visualizations using the datasets found at [Awesome JSON Datasets](https://github.com/jdorfman/Awesome-JSON-Datasets). Experiment with providing different visualizations of the same data set, and providing users interactive control over visualization parameters and/or data filtering. Alternatively, create a single visualization with using one of the more complicated techniques shown at [d3js.org](d3js.org) and provide meaningful points of interaction for users.
+3. Creating a function that is able to update (increase/decrease) the number of shapes in the background based off the user interface was
+quite difficult to figure out.
 
-Deliverables
----
-
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-yourname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. *NOTE: If you don't use Glitch for hosting (where we can see the files) then you must include all project files that you author in your repo for this assignment*.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-gitname-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here. Images are encouraged, along with concise, high-level text. Be sure to include:
-
-- the goal of the application
-- challenges you faced in realizing the application
-- a brief description of the JS linter you used and what rules it follows (we'll be looking at your JS files for consistency)
+- I used standard.js as the linter. Some of its rules are use 2 spaces for indentation, no un-used variables, always use strict equality and inequality ('==='),
+commas have a space after them, else statements are on the same lines as their curly braces, no semicolons, multiple blank lines are not allowed, and more. The rules can be seen online. 
+I did not use the linter on the OrbitControls.js file because that is just a library/package. I have it 'hard coded' because the other methods to include it did not work for me.
 
 ## Technical Achievements
-- **Tech Achievement 1**: I wrote my own custom GLSL shaders to use as a material for my Three.js objects.
-- **Tech Achievement 2**: My audiovisualizer uses both FFT and amplitude analysis to drive visualization.
-- **Tech Achievement 3**: I optimized the efficiency of my reaction-diffusion algorithm by...
-- **Tech Achievement 4**: I visualized the dataset X using three different visualization technqiues provided by D3, andprovided
+- **Tech Achievement 1**: Created a function that was able to maintain the center of focus on the main shape in the center when the window gets resized. 
+This means that if the window gets resized the main shape will always be in the center no matter what. 
+- **Tech Achievement 2**: Created more than 6 parameters for user control. (These parameters include changing the background color, 
+adjusting the rotation of the background shapes on the x,y,z axes, adjusting the scale of the background shapes on the x,y,z axes, 
+increasing or decreasing the number of background shapes, changing the display of the background shapes to wireframe, changing the 
+camera position on either x or z axes, and user controlled camera option) 
+- **Tech Achievement 3**: Created the functionality/option for the user to be able to freely control the camera/perspective using mouse control 
+while also allowing the user to return to the default camera position. 
 
 ### Design/Evaluation Achievements
-- **Design Achievement 1**: I ensured that my application would run on both desktops / mobile devices by changing X
-- **Design Achievement 2**: I followed best practices for accessibility, including providing alt attributes for images and using semantic HTML. There are no `<div>` or `<span>` elements in my document.
-- **Design Achievement 3**: We tested the application with n=X users, finding that...
+- **Design Achievement 1**: I ensured that my application would be able to be viewed correctly and possibly run on both desktops / mobile devices by adding 
+the meta tag viewport and adding functionality that ensures that the main shape will always take the center of focus on whatever screen. This is done primarily
+so that the webpage is able to optimize the view when on mobile devices.
+- **Design Achievement 2**: I followed best practices for accessibility as there are no `<div>` or `<span>` elements in my document.
