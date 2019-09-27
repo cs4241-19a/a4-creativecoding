@@ -1,0 +1,57 @@
+<html>
+
+<head>
+	<title>a4</title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-exp.min.css">
+	<link rel="stylesheet" href="https://unpkg.com/spectre.css/dist/spectre-icons.min.css">
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+
+	<script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js"></script>
+
+	<link rel="stylesheet" href="/home.css">
+</head>
+
+<body>
+	<!-- Instructions Modal -->
+	<div class="header">
+		<button id="question" class="btn btn-action"> <i class="fas fa-question show-modal"></i></button>
+		<div id="instructions" class="modal active">
+			<div class="modal-overlay"></div>
+			<div class="modal-container">
+				<div class="modal-header">
+					<button class="btn btn-clear float-right close-modal"></button>
+					<div class="modal-title">3D Object Viewer</div>
+				</div>
+				<div class="modal-body">
+					<div class="content">
+						<p>View Mario in a 3D web environment! Scroll to zoom in/out. Click and drag your cursor on
+							the
+							canvas to rotate Mario!</p>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-primary close-modal">Close</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/87/three.min.js"></script>
+	<script type="text/javascript" src="dat.gui.js"></script>
+	<script src="/assets/OrbitControls.js"></script>
+	<script src="/assets/OBJLoader.js"></script>
+	<script src="/assets/MTLLoader.js"></script>
+	<script src="/main.js" type="module"></script>
+</body>
+
+</html>
