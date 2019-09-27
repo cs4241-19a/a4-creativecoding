@@ -20,6 +20,8 @@
 </body>
 
 <script type="text/javascript">
+  
+  
 var canvas = document.getElementById("cas");
 var canvasCtx = canvas.getContext("2d");
 //首先实例化AudioContext对象 很遗憾浏览器不兼容，只能用兼容性写法；audioContext用于音频处理的接口，并且工作原理是将AudioContext创建出来的各种节点(AudioNode)相互连接，音频数据流经这些节点并作出相应处理。
@@ -180,7 +182,8 @@ alert( '文件已上传...')
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
       
-      
+      var controls = new THREE.OrbitControls(camera);//创建控件对象 camera是你的相机对象
+controls.addEventListener('change', render);//监听鼠标、键盘事件
   
       function add(number){
          for (let i = 0; i < number; i++) {
