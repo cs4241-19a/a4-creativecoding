@@ -14,6 +14,11 @@
 			<input type="file" name="" value="" id="musicFile" >
         <span>Click to upload or simply drag the file here</span>
 		</div>
+  
+  <span id="instruction">Instruction</span>
+  <button id="hide" onclick="hide()">
+    Hide
+  </button>
 
 </body>
 
@@ -118,7 +123,7 @@ for(let j=0; j<appdata.length;j++){
      var value = dataArray[j * step]*controls.scale/5;
             if(value <1)
               value = 1;
-            if(controls.color == 1){
+            if(controls.color == 1){ 
 	    		   let r = 176-j*5; 
 	    		   let g = 50;
 	    		   let b = 50;
@@ -192,6 +197,14 @@ alert( 'Uploaded  (＾▽＾) ')
       add(30);
         camera.position.z = 50;
          
+  
+  function hide(){
+    alert("hide")
+    if(document.getElemnetById("hide").innerHTML == "Hide"){
+      document.getElementById("instruction").style.display="none";
+      document.getElemnetById("hide").innerHTML ="Show";
+    }
+  }
 
   
   
