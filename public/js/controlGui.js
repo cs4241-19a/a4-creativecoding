@@ -39,7 +39,8 @@ function createGui() {
         let sliderList = document.getElementsByClassName("slider-fg");
         let i;
         for(i = 0; i < sliderList.length; i = i + 1) {
-          sliderList[i].style.background
+          sliderList[i].style.backgroundColor = newValue.toString() + " !important";
+          console.log(sliderList[i].style.backgroundColor);
         }
         //.querySelector("#slider-fg").style.background = "background-color: " + newValue;
         draw(newValue);
