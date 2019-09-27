@@ -22,9 +22,8 @@ class App {
   constructor() {
     this.settings = {
       amplitude: 3,
-      dropoff: 0.2,
-      layers: 4,
-      drops: 10
+      persistence: 0.2,
+      octaves: 4
     };
     this.constructRenderer();
     this.constructScene();
@@ -88,26 +87,13 @@ class App {
     lightSettings.add(this.light.position, "x", -100, 100);
     lightSettings.add(this.light.position, "y", -100, 100);
     lightSettings.add(this.light.position, "z", -100, 100);
+    lightSettings.addColor(this.light, "color");
     lightSettings.add(this.light, "intensity", 0, 10);
 
     const terrainSettings = gui.addFolder("Terrain");
     const tA = terrainSettings.add(this.settings, "amplitude", 0, 10);
-    const tP = terrainSettings.add(this.settings, "dropoff", 0, 1);
-    const tO = terrainSettings.add(this.settings, "layers", 1, 30);
-    const tD = terrainSettings.add(this.settings, "drops", 0, 10000);
-
-    const eroder = {
-      erode: () => {
-        this.deleteMesh(this.terrainMesh);
-        for (let i = 0; i < this.settings.drops; i++) {
-          this.terrainGen.erode();
-        }
-        this.terrainMesh = this.terrainGen.toMesh();
-        this.scene.add(this.terrainMesh);
-      }
-    };
-
-    terrainSettings.add(eroder, "erode");
+    const tP = terrainSettings.add(this.settings, "persistence", 0, 1);
+    const tO = terrainSettings.add(this.settings, "octaves", 1, 30);
 
     tA.onFinishChange(() => {
       this.updateTerrain();
@@ -120,8 +106,6 @@ class App {
     tO.onFinishChange(() => {
       this.updateTerrain();
     });
-
-    // gui.add(this.light.position, "z", 10, 200);
   }
 
   constructRenderer() {
@@ -151,33 +135,6 @@ class App {
   constructScene() {
     const scene = new Scene();
     this.scene = scene;
-    const fog = new Fog(0x304050, 0.025, 75);
-    // scene.fog = fog;
-
-    const cube = new BoxGeometry(1, 1, 1);
-    const mat = new MeshPhongMaterial({ color: 0x444444, shininess: 1000 });
-    const mesh = new Mesh(cube, mat);
-    mesh.position.y = 10;
-    this.scene.add(mesh);
-
-    // const mesh = new Mesh(
-    //   new BoxGeometry(1, 1, 1),
-    //   new MeshPhongMaterial({ color: 0x444444, shininess: 2000 })
-    // );
-
-    const sky = new Sky();
-    sky.scale.setScalar(450000);
-    this.scene.add(sky);
-    scene.sky = sky;
-
-    // Add Sun Helper
-    const sunSphere = new Mesh(
-      new SphereBufferGeometry(20000, 16, 8),
-      new MeshBasicMaterial({ color: 0xffffff })
-    );
-    sunSphere.position.y = -700000;
-    sunSphere.visible = false;
-    scene.add(sunSphere);
   }
 
   attachRenderer() {
