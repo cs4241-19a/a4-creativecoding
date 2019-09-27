@@ -35,6 +35,13 @@ function createGui() {
     const stereoBars = gui.addFolder('Stereo Bars')
     stereoBars.addColor(adjustableValues, 'color').onChange(function (newValue) {
         barColor = newValue;
+        console.log(document.getElementsByClassName("slider-fg"));
+        let sliderList = document.getElementsByClassName("slider-fg");
+        let i;
+        for(i = 0; i < sliderList.length; i = i + 1) {
+          sliderList[i].style.background
+        }
+        //.querySelector("#slider-fg").style.background = "background-color: " + newValue;
         draw(newValue);
     });
     stereoBars.add(adjustableValues, 'opacity', 0, 1).onChange(function (newValue) {
