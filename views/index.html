@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-    <title>CS4241 Assignment 2</title>
+    <title>CS4241 Assignment 4</title>
     <meta charset="utf-8">
     <link rel="stylesheet" type = "text/css" href="/views/style.css">
     <meta name = "Description" content = "Dice Roller">
@@ -10,32 +10,34 @@
     <script type="module" src="/scripts/dat.gui.module.js"></script>
     <script type="module" src="/public/roll3DDice.js"></script>
     <script type="module" src="/public/draw2dDiceAndError.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/108/three.min.js"></script>
+    <script type="module" src = "/public/client.js"></script>
 </head>
 <body>
-<audio src="/resources/Sen no Kiseki II OST - Chasing After the Mountain Hare.mp3" controls autoplay loop>Your browser does not support audio</audio>
+<audio src="/resources/SennoKisekiIIOST-ChasingAftertheMountainHare.mp3" controls autoplay loop>Your browser does not support audio</audio>
 <div class = "heading">
-    <h1>
-        <div id = "title">
-            Dice Roller
-        </div>
-    </h1>
+  <div id="head1">
+    <div id="title">
+        Dice Roller
+    </div>
+  </div>
 </div>
 <div class = "heading">
     <div class = "inputBox">
         <div class = "labelInput">
             <label for = "typeDice">Dice Type:</label>
-            <form action="">
+            <form action="action">
                 <input type="text" id="typeDice" value="">
             </form>
         </div>
         <div class = "labelInput">
             <label for = "numDice">Number of Dice:</label>
-            <form action = "">
-                <input type = "number" id = "numDice" value = "Number of Dice">
+            <form action = "action">
+                <input type = "number" id = "numDice">
             </form>
         </div>
         <div class = "labelInput">
-            <form action = "">
+            <form action = "action">
                 <input type = "radio" id = "-" name = "add/sub">
                 <label for = "-">-</label>
                 <input type = "radio" id = "+" name = "add/sub">
@@ -44,8 +46,8 @@
         </div>
         <div class = "labelInput">
             <label for = "flatDice">Flat Modifier:</label>
-            <form action = "">
-                <input type = "number" id = "flatDice" value = "Flat Number added to Result">
+            <form action = "action">
+                <input type = "number" id = "flatDice">
             </form>
         </div>
         <div id = "errorBox">
@@ -54,7 +56,7 @@
             </div>
         </div>
         <div class = "labelInput">
-            <button id = "submitButton" href="#canvas">
+            <button id = "submitButton">
                 Roll Dice
             </button>
         </div>
@@ -70,7 +72,4 @@
 </div>
 <a id="canvas"></a>
 </body>
-<script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/108/three.min.js'></script>
-<script src= "https://cdnjs.cloudflare.com/ajax/libs/cannon.js/0.6.2/cannon.min.js"></script>
-<script type="module" src = "/public/client.js"></script>
 </html>
