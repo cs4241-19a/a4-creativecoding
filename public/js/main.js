@@ -86,7 +86,7 @@ var visualize = function () {
     .attr("fill", function (d) {
       return colorController.customColor(d[vm.yValue]);
     })
-    .on("mouseover", function () {
+    .on("mouseover", function (d, i) {
       d3.select(this)
         .transition()
         .duration(50)
@@ -99,7 +99,7 @@ var visualize = function () {
       // Assign the div the game and value
       div.html(d.Game + ": " + d[vm.yValue]);
     })
-    .on("mouseout", function () {
+    .on("mouseout", function (d, i) {
       d3.select(this)
         .transition()
         .duration(50)
@@ -148,6 +148,7 @@ var visualize = function () {
       .attr("cy", function (d) {
         return yScale(d[vm.yValue]);
       })
+
 
     yAxis = d3.axisRight(yScale);
 
