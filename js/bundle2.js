@@ -8,7 +8,7 @@ const GLTFLoader = require('three-gltf-loader');
 //need to declare these variables globally 
 //creating a scene 
 var scene, camera, renderer, controls;
-var light;
+var light, lightAmb;
 //the cube
 //var geometry, material;
 //the 3d model 
@@ -33,8 +33,8 @@ window.onload  = function(){
     camera.position.z = 0;
     camera.position.x = 0;
     camera.position.y = 12;
-    //camera.lookAt(scene.position);
-    //camera.updateMatrixWorld();
+    camera.lookAt(scene.position);
+    camera.updateMatrixWorld();
 
     //rendering 
     renderer = new THREE.WebGLRenderer({alpha: true});
@@ -58,6 +58,9 @@ window.onload  = function(){
      light.position.set(50,50,50);
      light.intensity = 5;
      scene.add(light);
+
+     lightAmb = new THREE.AmbientLight(0x777777);
+     scene.add(lightAmb)
     //the cube 
     /*
     geometry = new THREE.BoxGeometry(5,5,5,5,5,5);
@@ -77,22 +80,9 @@ window.onload  = function(){
         mesh = gltf.scene;
         scene.add(gltf.scene);
         console.log("should be loaded");
-        gltf.scene.scale.set(5,5,5);
+        gltf.scene.scale.set(2,2,2);
 
-    })
-   
-      //loader = new THREE.TextureLoader(manager);
-    //mesh = new THREE.Mesh();
-    /*
-    new GLTFLoader(manager).load('../3dModel/scene.gltf', function (gltf){
-        mesh = gltf.scene;
-
-        mesh.material = new THREE.MeshStandardMaterial({
-            color: API.color
-        });
-    })*/
-    //scene.add(mesh);
-    //options for menu
+        //options for menu
     options = {
         velx: 0,
         vely: 0,
@@ -103,17 +93,18 @@ window.onload  = function(){
           this.velx = 0;
           this.vely = 0;
         },
-        reset: function() {
-          this.velx = 0.1;
-          this.vely = 0.1;
-          camera.position.z = 75;
-          camera.position.x = 0;
-          camera.position.y = 0;
-          mesh.scale.x = 1;
-          mesh.scale.y = 1;
-          mesh.scale.z = 1;
-          mesh.material.wireframe = true;
-        }
+        // reset: function() {
+        //   this.velx = 0.1;
+        //   this.vely = 0.1;
+        //   camera.position.z = 0;
+        //   camera.position.x = 0;
+        //   camera.position.y = 12;
+        //   gltf.scene.scale.set(2,2,2);
+        // //   mesh.scale.x = 1;
+        // //   mesh.scale.y = 1;
+        // //   mesh.scale.z = 1;
+        // //   mesh.material.wireframe = true;
+        // }
       };
       
     //setting up gui
@@ -130,16 +121,31 @@ window.onload  = function(){
     velocity.add(options, 'vely', -0.2, 0.2).name('Y').listen();
     velocity.open();
 
-    //box = gui.addFolder('Mesh');
-//     box.add(mesh.scale, 'x', 0, 3).name('Width').listen();
-//     box.add(mesh.scale, 'y', 0, 3).name('Height').listen();
-//     box.add(mesh.scale, 'z', 0, 3).name('Length').listen();
+    box = gui.addFolder('Mesh');
+     box.add(gltf.scene.scale, 'x', 0, 3).name('Width').listen();
+     box.add(gltf.scene.scale, 'y', 0, 3).name('Height').listen();
+     box.add(gltf.scene.scale, 'z', 0, 3).name('Length').listen();
 //    box.add(mesh.material, 'wireframe').listen();
-  // box.open();
+   box.open();
 
     gui.add(options, 'stop');
-    gui.add(options, 'reset');
+   //s gui.add(options, 'reset');
 
+
+    })
+   
+      //loader = new THREE.TextureLoader(manager);
+    //mesh = new THREE.Mesh();
+    /*
+    new GLTFLoader(manager).load('../3dModel/scene.gltf', function (gltf){
+        mesh = gltf.scene;
+
+        mesh.material = new THREE.MeshStandardMaterial({
+            color: API.color
+        });
+    })*/
+    //scene.add(mesh);
+    
     /*
     gui.addColor(API, 'color')
         .listen()
@@ -155,18 +161,18 @@ window.onload  = function(){
 
 //cube animation
 var render = function() {
-    /*
+    
     requestAnimationFrame(render);
   
-    var timer = Date.now() * options.camera.speed;
-    camera.position.x = Math.cos(timer) * 100;
-    camera.position.z = Math.sin(timer) * 100;
-    camera.lookAt(scene.position); 
-    camera.updateMatrixWorld();
-  */
+    // var timer = Date.now() * options.camera.speed;
+    // camera.position.x = Math.cos(timer) * 100;
+    // camera.position.z = Math.sin(timer) * 100;
+    // camera.lookAt(scene.position); 
+    // camera.updateMatrixWorld();
+  
     //cube.rotation.x += options.velx;
     //cube.rotation.y += options.vely;
-    requestAnimationFrame(render);
+    //requestAnimationFrame(render);
     renderer.render(scene, camera);
   
   };
