@@ -1,8 +1,8 @@
 import { getCanvas, audioInit, audioGraph } from './setUpModule.js'
-import {visualizer} from "./visualizerModule";
-import * as dat from 'dat.gui';
+import { visualizer } from './visualizerModule'
+import * as dat from 'dat.gui'
 
-const gui = new dat.GUI();
+const gui = new dat.GUI()
 
 let currColor = 0
 
@@ -22,12 +22,11 @@ const red = function () {
   currColor = 3
 }
 
-let changeParam = new function() {
+const changeParam = new function () {
   this.barHeight = 1
   this.barWidth = 4
   this.barFit = 2
-};
-
+}()
 
 const startMello = function () {
   const canvas = getCanvas()
@@ -168,7 +167,7 @@ window.onload = function () {
   document.getElementById('pink').onclick = pink
   document.getElementById('red').onclick = red
 
-  gui.add(changeParam, 'barHeight', 0, 3).name('Bar Height');
-  gui.add(changeParam, 'barWidth', 0, 6).name('Bar Width');
-  gui.add(changeParam, 'barFit', 0.5, 5).name('Visualizer Fit');
+  gui.add(changeParam, 'barHeight', 0, 3).name('Bar Height')
+  gui.add(changeParam, 'barWidth', 0, 6).name('Bar Width')
+  gui.add(changeParam, 'barFit', 0.5, 5).name('Visualizer Fit')
 }
