@@ -16,7 +16,7 @@
 		</div>
   
   <span id="instruction">Instruction</span>
-  <button id="hide" onclick="hide()">HIHI</button>
+  <button id="hideBtn" onclick="hide()">HIHI</button>
 
 </body>
 
@@ -200,7 +200,8 @@ alert( 'Uploaded  (＾▽＾) ')
 
    if(button === 1){
       document.getElementById("instruction").style.display="none";
-     // document.getElemnetById("hide").innerHTML ="Show";
+     alert(document.getElemnetById("hideBtn").innerHTML );
+      document.getElemnetById("hideBtn").innerHTML = "Show";
      button=0;
     } else{
       document.getElementById("instruction").style.display="inline-block";
