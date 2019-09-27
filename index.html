@@ -5,6 +5,7 @@
   <title>可视化音乐播放器</title>
   <script src="https://threejsfundamentals.org/threejs/resources/threejs/r105/three.min.js"></script>
   <script src="https://cdn.bootcss.com/jquery/1.8.1/jquery.js"></script>
+  <script src="js/controls/OrbitControls.js"></script>
 </head>
 <body>
   
@@ -171,7 +172,7 @@ for(let j=0; j<appdata.length;j++){
     
   }
 alert( '文件已上传...')
-  }
+  } 
   
   const appdata = []
       
@@ -182,7 +183,7 @@ alert( '文件已上传...')
         renderer.setSize(window.innerWidth, window.innerHeight);
         document.body.appendChild(renderer.domElement);
       
-      var controls = new THREE.OrbitControls(camera);//创建控件对象 camera是你的相机对象
+var controls = new THREE.OrbitControls(camera);//创建控件对象 camera是你的相机对象
 controls.addEventListener('change', render);//监听鼠标、键盘事件
   
       function add(number){
