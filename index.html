@@ -26,16 +26,13 @@ var dropbox, musicFile;
 
    var controls = new function(){
      this.scale = 1;
-     this.colorR = 256-80;
-     this.colorG = 50;
-     this.colorB = 50;
+     this.color = 1;
  }
  
  var gui = new dat.GUI();
   gui.add(controls,'scale',0.5,3);
-   gui.add(controls,'colorR',0,255);
-  gui.add(controls,'colorG',0,255);
-  gui.add(controls,'colorB',0,255);
+  gui.add(controls, 'color', { Red: 1, Green: 2, Blue: 3 } );
+
   
 	dropbox = document.getElementById("dropbox");
 	dropbox.addEventListener("dragenter", dragenter, false);
@@ -121,12 +118,26 @@ for(let j=0; j<appdata.length;j++){
      var value = dataArray[j * step]*controls.scale/5;
             if(value <1)
               value = 1;
-	    		   let r = controls.colorR-j*5; 
-	    		   let g = controls.colorG-j*5;
-	    		   let b = controls.colorB-j*5;
+            if(controls.color == 1){
+	    		   let r = 176-j*5; 
+	    		   let g = 50;
+	    		   let b = 50;
 	    		   let rgb = '#'+rgbToHex(r)+rgbToHex(g)+rgbToHex(b);
-           
-            appdata[j].material.color.set(rgb);
+              appdata[j].material.color.set(rgb);
+            } else if(controls.color == 2){
+	    		   let g = 176-j*5; 
+	    		   let r = 50;
+	    		   let b = 50;
+	    		   let rgb = '#'+rgbToHex(r)+rgbToHex(g)+rgbToHex(b);
+              appdata[j].material.color.set(rgb);
+            } else{
+	    		   let b = 176-j*5; 
+	    		   let g = 50;
+	    		   let r = 50;
+	    		   let rgb = '#'+rgbToHex(r)+rgbToHex(g)+rgbToHex(b);
+              appdata[j].material.color.set(rgb);
+            }
+            
             appdata[j].scale.y = value;
 
   
