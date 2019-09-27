@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>The Game of Life</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="../js/dat.gui.min.js"></script>
+  </head>
+  <body class="d-flex flex-column bd-highlight">
+    <h1 class="d-flex justify-content-center">Conway's Game of Life</h1>
+    <canvas class="container" id="canvas" width="800" height="600" style="background: #ffffff; padding: 0px; border:1px solid #000000;"></canvas>
+    
+    <p class="d-flex justify-content-center" id="genCount">Current generation:</p>
+    <section class="row">
+      <p class="col-sm" id="rules">
+        <u id="ruleHead">The Game of Life operates using rules to determine if a cell lives or dies</u><br>
+        The rules are based on the number of living neighbors a cell has:<br><br>
+        <u>n=0,1: </u>Any living cell with 0 or 1 neighbors will die, and any dead cell will see no change<br>
+        <u>n=2: </u>Any living cell will survive, any dead cell will see no change<br>
+        <u>n=3: </u>Any living cell will survive, any dead cell will be turned into a living cell<br>
+        <u>n=4+: </u>Any living cell will die, any dead cell will see no change<br><br>
+        Each turn in the game is a generation, and the above rules are applied to all cells in the grid (living and dead) at the same time<br>
+      </p>
+      <p class="col-sm" id="help">
+        <u id="helpHead">Press 'h' to open the user interface for the game</u><br>
+        The different fields have the following actions:<br>
+        <u>layout: </u>Select a different starting layout from a premade list (or random)<br>
+        <u>help: </u>Whether or not to display this message<br>
+        <u>rules: </u>Whether or not to display the above rules<br>
+        <u>zoom: </u>A slider for zooming the simulation<br>
+        <u>stop: </u>Stops the simulation while active<br>
+        <u>smooth: </u>Applies a trailing effect to cells to smooth the animations and reduce jittering<br>
+        <u>cellColor: </u>A color selector for the cells on the grid<br>
+      </p>
+    </section>
+
+    <script src="../js/main.js" type="module"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>
