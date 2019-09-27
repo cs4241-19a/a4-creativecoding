@@ -105,8 +105,10 @@ var dropbox, musicFile;
          analyser.getByteFrequencyData(dataArray);
 
 for(let j=0; j<appdata.length;j++){
-     var value = dataArray[j * step] / 4;
-            value = value < 1 ? 1 : value;
+     var value = dataArray[j * step]/3;
+  
+            if(value <1)
+              value = 1;
             appdata[j].scale.y = value;
 
   
@@ -159,15 +161,11 @@ alert( 'Uploaded  (＾▽＾) ')
   } 
   
    var controls = new function(){
-   this.colorR = 255-80;
-   this.colorG = 50;
-   this.colorB = 50;
+   this.scale = 1;
  }
  
  var gui = new dat.GUI();
-  gui.add(controls,'colorR',0,255);
-  gui.add(controls,'colorG',0,255);
-  gui.add(controls,'colorB',0,255);
+  gui.add(controls,'scale',0.5,3);
   
   
   const appdata = []
@@ -182,9 +180,9 @@ alert( 'Uploaded  (＾▽＾) ')
 
       function add(number){
          for (let i = 0; i < number; i++) {
-           let r = controls.colorR-i*5;
-	    		  let g = controls.colorG;
-			      let b = controls.colorB;
+           let r = 256-80-i*5;
+	    		  let g = 50;
+			      let b = 50;
 			      let rgb = '#'+r.toString(16)+g.toString(16)+b.toString(16);
             let geometry = new THREE.BoxGeometry(0.5, 0.5, 0.5);
             let material = new THREE.MeshBasicMaterial({color: rgb});
