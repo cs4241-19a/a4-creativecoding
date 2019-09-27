@@ -22,7 +22,7 @@ Baseline requirements met:
 - HTML/CSS validates
 
 ## Technical Achievements
-- **Stereo Confidence**: Stereo will always play.  Usually if people implement a stereo it will sometimes fail because the AudioContext will not initialize until user interaction.  I implemented a brute-force strategy so that the AudioContext will always initialize.
+- **Stereo Confidence**: Stereo will always initialize.  Usually if people implement a stereo it will sometimes fail because the AudioContext did not initialize successfully.  I implemented a brute-force strategy so that the AudioContext will always initialize.
 - **Synced User Controls to Stereo Bars**: The stereo bars will auto-update if the user makes a change to the bar color, bar opacity, bar glow, speed, or volume (for user experience purposes, changing a selected song won't automatically restart the stereo in case the user still wants to listen to currently playing song) 
 
 ### Design/Evaluation Achievements
