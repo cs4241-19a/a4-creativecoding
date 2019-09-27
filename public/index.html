@@ -4,6 +4,7 @@
     <title>CS4241 Assignment 4 - Creative Coding</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet"
           type="text/css"
           href="css/style.css" />
@@ -11,21 +12,23 @@
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
   </head>
+  <body>
+    <button type="button" class="btn btn-primary btn-circle btn-xl tutorial" id="tutorialBtn"><i class="fa fa-question"></i></button>
+    <button type="button" class="btn btn-primary btn-circle btn-xl tutorial" id="closeBtn"><i class="fa fa-times"></i></button>
+    
+    <section class="title">
+      <div class="container text-left text-white">
+        <h1 id="titleTxt">Shape Destroyer</h1>
+        <h4 id="directionsTitleTxt">Directions</h4>
+        <p id="directionsTxt">Move with your mouse to aim your cannons at different shapes. Click and hold to fire lasers and destroy shapes. The more shapes you destroy, the higher your score. You can enhance your shape destroying experience using the laser control panel.</p>
+        <button type="button" class="btn btn-danger" type="button" id="startBtn">Energize Laser Cannons</button>    
+      </div>
+    </section>
 
-    <section class="h-100 title">
-        <header class="container h-100">
-          <div class="d-flex align-items-center justify-content-center h-100">
-            <div class="d-flex flex-column">
-              <h1 class="text align-self-center p-2">Shape Destroyer</h1>
-              <h4 class="text align-self-center p-2">Directions</h4>
-              <p class="text align-self-center p-2">Move with your mouse to aim your cannons at different shapes. Click and hold to fire lasers and destroy shapes. The more shapes you destroy, the higher your score. You can enhance your shape destroying experience using the laser control panel.</p>
-              <button class="btn btn-danger align-self-center p-2" type="button" name="button">Energize Laser Cannons</button>
-            </div>
-          </div>
-        </header>
+    <section>
+      <canvas id="gameCanvas"></canvas>
     </section>
     
-
     <script type="module" src="js/main.js"></script>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
             integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
