@@ -1,130 +1,172 @@
-//based on an example found here: https://codepen.io/programking/pen/MyOQpO
+// based on an example found here: https://codepen.io/programking/pen/MyOQpO
 const THREE = require('three')
 const dat = require('dat.gui')
-//const OrbitControls = require('three-orbitcontrols');
-//const GLTFLoader = require('three-gltf-loader');
+const OrbitControls = require('three-orbitcontrols')
 
-//need to declare these variables globally 
-//creating a scene 
-var scene, camera, renderer, controls;
-//the cube
-var geometry, material;
-//gui stuff 
-var options, gui;
-//things on menu
-var cam, velocity, box;
-//color
-//var API = {
-//    color: 0xffffff,
-//    exposure: 1.0
-//};
+// need to declare these variables globally
+// creating a scene
+var scene, camera, renderer
+// gui stuff
+var gui
 
-window.onload  = function(){
-    //Creating a Scene 
-    scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(
-        4, window.innerWidth / window.innerHeight, 
-        0.1, 1000);
-    camera.position.z = 75;
-    camera.position.x = 50;
-    camera.position.y = 50;
-    camera.lookAt(scene.position);
-    camera.updateMatrixWorld();
+var controller, controls
 
-    //rendering 
-    renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    document.body.appendChild(renderer.domElement);
-    
-    //controls 
-    //controls = new OrbitControls(camera, renderer.domElement);
-    //controls.addEventListener('change', render);
-    //controls.enableZoom = false;
-    
-    //the cube 
-    geometry = new THREE.BoxGeometry(5,5,5,5,5,5);
-    material = new THREE.MeshBasicMaterial(
-        {opacity: 0.1,
-        blending: THREE.NormalBlending,
-        depthTest: true});
-    
-    cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
-        
-    //options for menu
-    options = {
-        velx: 0,
-        vely: 0,
-        camera: {
-          speed: 0.0001
-        },
-        stop: function() {
-          this.velx = 0;
-          this.vely = 0;
-        },
-        reset: function() {
-          this.velx = 0.1;
-          this.vely = 0.1;
-          camera.position.z = 75;
-          camera.position.x = 0;
-          camera.position.y = 0;
-          cube.scale.x = 1;
-          cube.scale.y = 1;
-          cube.scale.z = 1;
-          cube.material.wireframe = true;
-        }
-      };
-      
-    //setting up gui
-    gui = new dat.GUI();
+var name, width, height, length
 
-    //setting up menu
-    cam = gui.addFolder('Camera');
-    cam.add(options.camera, 'speed', 0, 0.0010).listen();
-    cam.add(camera.position, 'y', 0, 100).listen();
-    cam.open();
+window.onload = function () {
+  // Creating a Scene
+  scene = new THREE.Scene()
 
-    velocity = gui.addFolder('Velocity');
-    velocity.add(options, 'velx', -0.2, 0.2).name('X').listen();
-    velocity.add(options, 'vely', -0.2, 0.2).name('Y').listen();
-    velocity.open();
+  // setting up gui
+  gui = new dat.GUI()
 
-    box = gui.addFolder('Cube');
-    box.add(cube.scale, 'x', 0, 3).name('Width').listen();
-    box.add(cube.scale, 'y', 0, 3).name('Height').listen();
-    box.add(cube.scale, 'z', 0, 3).name('Length').listen();
-    box.add(cube.material, 'wireframe').listen();
-    box.open();
+  gui.add(resetButton).name('reset scene').listen()
 
-    gui.add(options, 'stop');
-    gui.add(options, 'reset');
+  controller = new THREE.Object3D()
+  controller.objects = []
+  controller.scene = scene
+  controller.gui = gui
+  controller.color = 0xFFFFFF
+  controller.number_of_objects = controller.objects.length
+  controller.selected_cube = 'test123'
 
-    //gui.addColor(API, 'color')
-    //    .listen()
-    //    .onChange(function() {
-    //        cube.material.color.set(API.color);
-    //        render();
-    //    });
-    
-    //gui
-    //animation 
-    render();
+  // scene.background = new THREE.Color( 0xf0f0f0 )
+
+  // scene.add( new THREE.AmbientLight( 0x505050 ) );
+
+  scene.background = new THREE.Color(0xf0f0f0)
+  scene.add(new THREE.AmbientLight(0x505050))
+  var light = new THREE.SpotLight(0xffffff, 1.5)
+  light.position.set(0, 500, 2000)
+  light.angle = Math.PI / 9
+  light.castShadow = true
+  light.shadow.camera.near = 1000
+  light.shadow.camera.far = 4000
+  light.shadow.mapSize.width = 1024
+  light.shadow.mapSize.height = 1024
+  scene.add(light)
+
+  var geometry = new THREE.BoxBufferGeometry(40, 40, 40)
+  for (var i = 0; i < 200; i++) {
+    var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }))
+    object.position.x = Math.random() * 1000 - 500
+    object.position.y = Math.random() * 600 - 300
+    object.position.z = Math.random() * 800 - 400
+    object.rotation.x = Math.random() * 2 * Math.PI
+    object.rotation.y = Math.random() * 2 * Math.PI
+    object.rotation.z = Math.random() * 2 * Math.PI
+    object.scale.x = Math.random() * 2 + 1
+    object.scale.y = Math.random() * 2 + 1
+    object.scale.z = Math.random() * 2 + 1
+    object.castShadow = true
+    object.receiveShadow = true
+    object.name = 'cube_' + controller.objects.length
+    // console.log(object.name)
+
+    controller.scene.add(object)
+    controller.objects.push(object)
+    controller.number_of_objects = controller.objects.length
+    controller.selected_cube = object
+
+  }
+
+  resetGui( controller )
+  /*
+  name = gui.add(controller.selected_cube, 'name').listen()
+  width = gui.add(controller.selected_cube.scale, 'x', 0, 5).name('Width').listen()
+  height = gui.add(controller.selected_cube.scale, 'y', 0, 5).name('Height').listen()
+  length = gui.add(controller.selected_cube.scale, 'z', 0, 5).name('Length').listen()
+  */
+
+  camera = new THREE.PerspectiveCamera(
+    70, window.innerWidth / window.innerHeight,
+    0.1, 5000)
+  camera.position.z = 1200
+  // camera.position.x = 50
+  // camera.position.y = 50
+  camera.lookAt(scene.position)
+  camera.updateMatrixWorld()
+
+  // rendering
+  renderer = new THREE.WebGLRenderer()
+  renderer.setSize(window.innerWidth, window.innerHeight)
+  document.body.appendChild(renderer.domElement)
+
+  // controls
+  controls = new OrbitControls(camera, renderer.domElement)
+
+  controls.enableDamping = true // an animation loop is required when either damping or auto-rotation are enabled
+  controls.dampingFactor = 0.05
+  controls.screenSpacePanning = false
+  controls.minDistance = 100
+  controls.maxDistance = 1200
+
+  document.addEventListener('mousedown', onDocumentMouseDown)
+  document.addEventListener("keydown", keyPress)
+
+  render()
 }
 
-//cube animation
-var render = function() {
+var keyPress = function ( event ) {
+  console.log(event.which);
+  switch ( event.which ) {
+    case 32:
+      scene.background = new THREE.Color(Math.random() * 0xffffff)
+      break;
+  }
+}
 
-    requestAnimationFrame(render);
-  
-    var timer = Date.now() * options.camera.speed;
-    camera.position.x = Math.cos(timer) * 100;
-    camera.position.z = Math.sin(timer) * 100;
-    camera.lookAt(scene.position); 
-    camera.updateMatrixWorld();
-  
-    cube.rotation.x += options.velx;
-    cube.rotation.y += options.vely;
-  
-    renderer.render(scene, camera);
-  
-  };
+var resetButton = function() {
+  console.log("reset")
+}
+
+var resetGui = function( theController ) {
+  name = gui.add(theController.selected_cube, 'name').listen()
+  width = gui.add(theController.selected_cube.scale, 'x', 0, 5).name('Width').listen()
+  height = gui.add(theController.selected_cube.scale, 'y', 0, 5).name('Height').listen()
+  length = gui.add(theController.selected_cube.scale, 'z', 0, 5).name('Length').listen()
+}
+
+// cube animation
+var render = function () {
+  requestAnimationFrame(render)
+
+  controls.update()
+
+  renderer.render(scene, camera)
+}
+
+function onDocumentMouseDown (event) {
+  event.preventDefault()
+  var mouse3D = new THREE.Vector3((event.clientX / window.innerWidth) * 2 - 1,
+    -(event.clientY / window.innerHeight) * 2 + 1, 0.5)
+  var raycaster = new THREE.Raycaster()
+  raycaster.setFromCamera(mouse3D, camera)
+  var intersects = raycaster.intersectObjects(controller.objects)
+  // console.log("hello")
+
+  if (intersects.length > 0) {
+
+    var selectedObject = intersects[0].object
+    controller.selected_cube = selectedObject
+    controller.selected_cube.material.color.setHex( 0x37e584 )
+    // console.log(controller.selected_cube.name)
+
+    gui.remove(name)
+    gui.remove(length)
+    gui.remove(width)
+    gui.remove(height)
+
+
+
+    resetGui( controller , name, width, height, length)
+    /*
+    name = gui.add(controller.selected_cube, 'name').listen()
+    width = gui.add(controller.selected_cube.scale, 'x', 0, 5).name('Width').listen()
+    height = gui.add(controller.selected_cube.scale, 'y', 0, 5).name('Height').listen()
+    length = gui.add(controller.selected_cube.scale, 'z', 0, 5).name('Length').listen()
+    */
+  }
+
+
+}
