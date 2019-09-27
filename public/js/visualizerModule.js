@@ -34,10 +34,10 @@ const visColor = function (canvas, jsonAudioInit, jsonAudioGraph, results, color
   }
 }
 
-const visualizer = function (canvas, jsonAudioInit, jsonAudioGraph, results, color, h, w, f) {
+const visualizer = function (canvas, jsonAudioInit, jsonAudioGraph, results, color, h, w, f, canvClr) {
   const x = 0
   jsonAudioGraph.analyser.getByteFrequencyData(results)
-  jsonAudioInit.ctx.fillStyle = 'black'
+  jsonAudioInit.ctx.fillStyle = canvClr
   jsonAudioInit.ctx.fillRect(0, 0, canvas.width, canvas.height)
   visColor(canvas, jsonAudioInit, jsonAudioGraph, results, color, x, h, w, f)
 }

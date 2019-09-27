@@ -3,7 +3,7 @@ const getCanvas = function () {
   const canvas = document.createElement('canvas')
   document.getElementById('canvas').appendChild(canvas)
   canvas.width = 1500
-  canvas.height = 800
+  canvas.height = 750
 
   return canvas
 }
