@@ -55,4 +55,4 @@ Sample Readme (delete the above when you're ready to submit, and modify the belo
 https://a4-anaghalate.glitch.me
 
 - the goal of the application WAS to create some sort of interactive game which would replicate tetris
-- I faced several challanges and had all of my assignments due on this friday and thus was unable to complete the project
+- I faced several challanges and had all of my assignments due on this friday and thus was unable to complete the project but did finish the server side aspect
