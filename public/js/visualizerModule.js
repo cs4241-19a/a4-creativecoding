@@ -1,4 +1,4 @@
-let visColor = function(canvas, jsonAudioInit, jsonAudioGraph, results, color, x, h, w) {
+let visColor = function(canvas, jsonAudioInit, jsonAudioGraph, results, color, x, h, w, f) {
 
     for (let i = 0; i < jsonAudioGraph.analyser.frequencyBinCount; i++) {
         const barHeight = results[i] * h
@@ -29,18 +29,18 @@ let visColor = function(canvas, jsonAudioInit, jsonAudioGraph, results, color, x
                 jsonAudioInit.ctx.fillStyle = 'rgb(' + b + ',' + r + ',' + g + ')'
                 break;
         }
-        jsonAudioInit.ctx.fillRect(x, canvas.height - barHeight, (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * 2.5, barHeight)
+        jsonAudioInit.ctx.fillRect(x, canvas.height - barHeight, (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * f, barHeight)
 
-        x += (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * 2.5 + 1
+        x += (canvas.width / jsonAudioGraph.analyser.frequencyBinCount) * f + 1
     }
 }
 
-let visualizer = function (canvas, jsonAudioInit, jsonAudioGraph, results, color, h, w) {
+let visualizer = function (canvas, jsonAudioInit, jsonAudioGraph, results, color, h, w,f ) {
     let x = 0
     jsonAudioGraph.analyser.getByteFrequencyData(results)
     jsonAudioInit.ctx.fillStyle = 'black'
     jsonAudioInit.ctx.fillRect(0, 0, canvas.width, canvas.height)
-    visColor(canvas, jsonAudioInit, jsonAudioGraph, results, color, x, h, w)
+    visColor(canvas, jsonAudioInit, jsonAudioGraph, results, color, x, h, w, f)
 }
 
 export { visualizer }
