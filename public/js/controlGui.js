@@ -22,7 +22,6 @@ function closeInstructions() {
     document.getElementById("helpButton").style.display = "";
 }
 
-
 function createGui() {
     const adjustableValues = {
         color: barColor,
