@@ -36,4 +36,4 @@ var paint = function() {
 	ctx.stroke();
 };
 
-export{resize};
+export{resize}; 

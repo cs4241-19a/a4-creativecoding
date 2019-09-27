@@ -8,8 +8,18 @@ let FizzyText = function() {
 	this.Brush_Size = 5;
 	this.Brushes = "Pencil";
 	this.Clear = function(){
-		main.ctx.fillStyle = main.backgroundColor;
-		main.ctx.fillRect(0, 0, main.canvas.width, main.canvas.height);
+		$.confirm({
+			title: 'Warning!',
+			content: 'Are you sure you want to clear your drawing?',
+			buttons: {
+				yes: function () {
+					main.ctx.fillStyle = main.backgroundColor;
+					main.ctx.fillRect(0, 0, main.canvas.width, main.canvas.height);
+				},
+				no: function () {
+				}
+			}
+		});
 	};
 	this.Save_Image = function(){
 		let canvasImage = document.getElementById('drawArea').toDataURL('image/jpeg', 1.0);
@@ -51,9 +61,20 @@ function init() {
 		main.changeBrush(brushes.object.Brushes);
 	});
 	getBackColor.onFinishChange(function(){
-		main.changeBackgroundColor(getBackColor.object.Background_Color);
-		main.ctx.fillStyle = main.backgroundColor;
-		main.ctx.fillRect(0, 0, main.canvas.width, main.canvas.height);
+		$.confirm({
+			title: 'Warning!',
+			content: 'By changing the background color you will also clear your current drawing, do you still wish to continue?',
+			buttons: {
+				yes: function () {
+					main.changeBackgroundColor(getBackColor.object.Background_Color);
+					main.ctx.fillStyle = main.backgroundColor;
+					main.ctx.fillRect(0, 0, main.canvas.width, main.canvas.height);
+				},
+				no: function () {
+					FizzyText.Background_Color = main.backgroundColor;
+				}
+			}
+		});
 	});
 	helpPopup();
 };
