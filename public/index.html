@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Assignment 4</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+        <link rel="stylesheet" href="style.css"/>
+        <script src="lib/webGL/webgl-utils.js"></script>
+        <script src="lib/webGL/initShaders.js"></script>
+        <script src="lib/webGL/MV.js"></script>
+    </head>
+    <body onload="main()">
+        <div class="container mt-3">
+            <header class="h1 mb-3 p-2" style="text-align: center;">
+                <span class="title"></span>
+            </header>
+            <div class="row">
+                <div class="column col-6">
+                    <canvas id="webgl">
+                        Please use a browser that supports the "canvas" tag.
+                    </canvas> <!--  -->
+                    <canvas id="text" height="400" style="border: 1px solid black; width: 100%;"></canvas>
+                    <canvas id="text2" height="400" style="border: 1px solid black; width: 100%;"></canvas>
+                </div>
+                <div class="column col-6">
+                    <div class="container">
+                        <div class="row">
+                            <div class="accordion" id="accordionExample" style="width: 100%;">
+                                <div class="card">
+                                    <div class="card-header" id="headingOne">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                                Rules
+                                            </button>
+                                        </h2>
+                                    </div>
+
+                                    <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <ul>
+                                                <li>
+                                                    Click play to start the game!
+                                                </li>
+                                                <li>
+                                                    Type the words on the screen before they disappear.
+                                                </li>
+                                                <li>
+                                                    In regular mode, you get 3 lives. For every word you miss,
+                                                    you'll lose a life! The game is over when you have no more lives.
+                                                </li>
+                                                <li>
+                                                    In unlimited mode, you have unlimited lives! The game is over when
+                                                    your fingers start bleeding.
+                                                </li>
+                                                <li>
+                                                    To stop the game, click the 'Stop' button.
+                                                </li>
+                                                <li>
+                                                    <b>Note:</b> You don't have to hit enter after typing! The game
+                                                    will detect the correct word, and clear it so you can start typing the next one.
+                                                </li>
+                                                <li>
+                                                    <b>Settings:</b> Open the settings tab to change the mode,
+                                                    select your level of difficulty, and to turn on music and sound effects!
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card">
+                                    <div class="card-header" id="headingThree">
+                                        <h2 class="mb-0">
+                                            <button class="btn btn-link collapsed" type="button" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                                Settings
+                                            </button>
+                                        </h2>
+                                    </div>
+                                    <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
+                                        <div class="card-body">
+                                            <div class="row mt-3" style="align-items: baseline; justify-content: space-evenly;">
+                                                <div class="column">
+                                                    <p>Mode:&nbsp;</p>
+                                                </div>
+                                                <div class="column">
+                                                    <button id="regularMode" type="button" class="btn btn-primary">Regular</button>
+                                                </div>
+                                                <div class="column">
+                                                    <button id="unlimitedMode" type="button" class="btn btn-primary">Unlimited</button>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-3" style="align-items: baseline; justify-content: space-evenly;">
+                                                <div class="column">
+                                                    <p>Level:&nbsp;</p>
+                                                </div>
+                                                <div class="column">
+                                                    <button id="easy" type="button" class="btn btn-primary">Easy</button>
+                                                </div>
+                                                <div class="column">
+                                                    <button id="medium" type="button" class="btn btn-primary">Hard</button>
+                                                </div>
+                                                <div class="column">
+                                                    <button id="hard" type="button" class="btn btn-primary">Challenge</button>
+                                                </div>
+                                            </div>
+                                            <div class="row mt-3" style="align-items: baseline; text-align: left; justify-content: space-evenly;">
+                                                <div class="column">
+                                                    <p>Music:&nbsp;</p>
+                                                </div>
+                                                <div class="column">
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input" id="musicToggle">
+                                                        <label class="custom-control-label" for="musicToggle">On</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row" style="align-items: baseline; justify-content: space-evenly;">
+                                                <div class="column">
+                                                    <p>Sounds:&nbsp;</p>
+                                                </div>
+                                                <div class="column">
+                                                    <div class="custom-control custom-switch">
+                                                        <input type="checkbox" class="custom-control-input" id="soundToggle">
+                                                        <label class="custom-control-label" for="soundToggle">On</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <hr/>
+                                            <div class="row mt-3" style="align-items: baseline; justify-content: space-evenly;">
+                                                <div class="column">
+                                                    <p>Current Game:&nbsp;</p>
+                                                </div>
+                                                <div class="column">
+                                                    <span id="modeBadge" class="badge badge-pill badge-secondary p-2">Regular</span>
+                                                </div>
+                                                <div class="column">
+                                                    <span id="levelBadge" class="badge badge-pill badge-secondary p-2">Easy</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row mt-3">
+                            <label class="p-2 font-italic">Type the words before they disappear!</label>
+                            <input type="text" id="inputText" class="form-control p-4" aria-label="input-box">
+                        </div>
+                        <div class="row mt-3 p-2">
+                            <div class="column col-6">
+                                <p class="font-weight-bold">
+                                    Score:&nbsp;
+                                    <span id="score">0</span>
+                                </p>
+                            </div>
+                            <div class="column col-6">
+                                <div class="row">
+                                    <span>Lives:&nbsp;</span>
+                                    <div id="livesContainer">
+                                        <i class="fa fa-heart" aria-hidden="true"></i>
+                                        &nbsp;
+                                        <i class="fa fa-heart" aria-hidden="true"></i>
+                                        &nbsp;
+                                        <i class="fa fa-heart" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="justify-content: center;">
+                            <button id="startGame" type="button" class="btn btn-success" style="width: 80%;">Play</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="canvas.js"></script>
+        <script src="settings.js"></script>
+        <script src="main.js"></script>
+    </body>
+</html>
