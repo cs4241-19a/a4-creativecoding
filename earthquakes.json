@@ -2,6 +2,7 @@
   "earthquakes": [
     {
       "mag": 1.24,
+      "state": "CA",
       "place": "13km SW of Searles Valley, CA",
       "time": 1569375600160,
       "updated": 1569375819278,
@@ -17,6 +18,7 @@
     },
     {
       "mag": 1.56,
+      "state": "OK",
       "place": "22km ENE of Mooreland, Oklahoma",
       "time": 1569375200642,
       "updated": 1569375414951,
@@ -32,6 +34,7 @@
     },
     {
       "mag": 1.37,
+      "state": "CA",
       "place": "7km S of Brawley, CA",
       "time": 1569375047870,
       "updated": 1569375260383,
@@ -47,6 +50,7 @@
     },
     {
       "mag": 1.72,
+      "state": "CA",
       "place": "24km ESE of Little Lake, CA",
       "time": 1569374693330,
       "updated": 1569374923770,
@@ -62,6 +66,7 @@
     },
     {
       "mag": 0.83,
+      "state": "CA",
       "place": "3km WNW of Cobb, CA",
       "time": 1569374596420,
       "updated": 1569374693839,
@@ -77,6 +82,7 @@
     },
     {
       "mag": 1,
+      "state": "CA",
       "place": "67km NE of Lone Pine, California",
       "time": 1569374289980,
       "updated": 1569374779458,
@@ -92,6 +98,7 @@
     },
     {
       "mag": 0.66,
+      "state": "CA",
       "place": "7km WNW of The Geysers, CA",
       "time": 1569374284300,
       "updated": 1569374384784,
@@ -107,6 +114,7 @@
     },
     {
       "mag": 1.3,
+      "state": "NV",
       "place": "47km ENE of Warm Springs, Nevada",
       "time": 1569374208570,
       "updated": 1569374399005,
@@ -122,6 +130,7 @@
     },
     {
       "mag": 0.84,
+      "state": "CA",
       "place": "6km NW of The Geysers, CA",
       "time": 1569374198730,
       "updated": 1569375361977,
@@ -137,6 +146,7 @@
     },
     {
       "mag": 1.06,
+      "state": "CA",
       "place": "8km E of Ridgecrest, CA",
       "time": 1569373887650,
       "updated": 1569374112801,
@@ -151,22 +161,8 @@
       "id": "ci38856887"
     },
     {
-      "mag": 4.6,
-      "place": "62km N of Isabela, Puerto Rico",
-      "time": 1569373507374,
-      "updated": 1569375537630,
-      "url": "https://earthquake.usgs.gov/earthquakes/eventpage/us70005ky1",
-      "detail": "https://earthquake.usgs.gov/earthquakes/feed/v1.0/detail/us70005ky1.geojson",
-      "type": "earthquake",
-      "title": "M 4.6 - 62km N of Isabela, Puerto Rico",
-      "coordinates": [
-        -67.0909,
-        19.0581
-      ],
-      "id": "us70005ky1"
-    },
-    {
       "mag": 1.3,
+      "state": "NV",
       "place": "34km W of Sandy Valley, Nevada",
       "time": 1569373030680,
       "updated": 1569374319889,
@@ -182,6 +178,7 @@
     },
     {
       "mag": 0.8,
+      "state": "CA",
       "place": "19km ESE of Little Lake, CA",
       "time": 1569372544370,
       "updated": 1569372771002,
@@ -197,6 +194,7 @@
     },
     {
       "mag": 0.69,
+      "state": "CA",
       "place": "22km ESE of Little Lake, CA",
       "time": 1569372422620,
       "updated": 1569372639524,
