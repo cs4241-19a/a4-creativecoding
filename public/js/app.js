@@ -1,6 +1,7 @@
-
-
 import * as THREE from "three";
+
+import { active_geometry } from "./shape_logic";
+
 
 var camera, scene, renderer;
 var geometry, material, mesh;
@@ -57,3 +58,5 @@ function animate() {
   renderer.render( scene, camera );
 
 }
+
+export {scene}
