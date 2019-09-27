@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>CS4241 Assignment 4</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" type = "text/css" href="/views/style.css">
+    <meta name = "Description" content = "Dice Roller">
+    <meta name = "Keywords" content = "Dice, Roll, D&D">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script type="module" src="/scripts/dat.gui.module.js"></script>
+    <script type="module" src="/public/roll3DDice.js"></script>
+    <script type="module" src="/public/draw2dDiceAndError.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/108/three.min.js"></script>
+    <script type="module" src = "/public/client.js"></script>
+</head>
+<body>
+<audio src="/resources/SennoKisekiIIOST-ChasingAftertheMountainHare.mp3" controls autoplay loop>Your browser does not support audio</audio>
+<div class = "heading">
+  <div id="head1">
+    <div id="title">
+        Dice Roller
+    </div>
+  </div>
+</div>
+<div class = "heading">
+    <div class = "inputBox">
+        <div class = "labelInput">
+            <label for = "typeDice">Dice Type:</label>
+            <form action="action">
+                <input type="text" id="typeDice" value="">
+            </form>
+        </div>
+        <div class = "labelInput">
+            <label for = "numDice">Number of Dice:</label>
+            <form action = "action">
+                <input type = "number" id = "numDice">
+            </form>
+        </div>
+        <div class = "labelInput">
+            <form action = "action">
+                <input type = "radio" id = "-" name = "add/sub">
+                <label for = "-">-</label>
+                <input type = "radio" id = "+" name = "add/sub">
+                <label for = "+">+</label>
+            </form>
+        </div>
+        <div class = "labelInput">
+            <label for = "flatDice">Flat Modifier:</label>
+            <form action = "action">
+                <input type = "number" id = "flatDice">
+            </form>
+        </div>
+        <div id = "errorBox">
+            <div id = "errorLabel">
+                <label>Error Label</label>
+            </div>
+        </div>
+        <div class = "labelInput">
+            <button id = "submitButton">
+                Roll Dice
+            </button>
+        </div>
+    </div>
+</div>
+<div class = "heading">
+    <div class = "inputBox">
+        <div id = "dice"></div>
+    </div>
+</div>
+<div class = "labelInput">
+    <label id = "resultLabel">Result: </label>
+</div>
+<a id="canvas"></a>
+</body>
+</html>
