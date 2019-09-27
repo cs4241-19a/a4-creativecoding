@@ -2,9 +2,9 @@ import * as THREE from "../three.module.js"
 import {blocks, width, height, ROWS, COLS, blockWidth, blockHeight, baseBlock, ball, game} from "/constants.js"
 
 //start this bad larry up
-var scene = null
-var renderer = null
-var camera = null
+var scene = null;
+var renderer = null;
+var camera = null;
 start();
 
 //////////////////////////////////////////
@@ -16,7 +16,7 @@ function goToScore() {
     })
     .then( function( r ) {
       window.location.href = r.url
-    })
+    });
   return false;
 }
 //////////////////////////////////////////
@@ -94,7 +94,8 @@ function start() {
         var delta = timestamp - time;
         time = timestamp;
         var baseBlockDelta = baseBlock.speed*delta/1000;
-            if ((baseBlock.dir === -1 && baseBlock.x > baseBlockDelta) || (baseBlock.dir === 1 && baseBlock.x + baseBlockDelta + baseBlock.width < width))
+            if ((baseBlock.dir === -1 && baseBlock.x > baseBlockDelta) ||
+                (baseBlock.dir === 1 && baseBlock.x + baseBlockDelta + baseBlock.width < width))
                 baseBlock.x += baseBlockDelta * baseBlock.dir;
             if (game.state === "running") {
                 ball.x += ball.velocity.x * delta / 1000;
@@ -109,7 +110,7 @@ function start() {
                 ball.mesh.position.y = ball.y;
             }
             if (baseBlock) {
-                baseBlock.mesh.position.x = baseBlock.x+baseBlock.width/2
+                baseBlock.mesh.position.x = baseBlock.x+baseBlock.width/2;
                 baseBlock.mesh.position.y = baseBlock.y+baseBlock.height/2;
             }
     }
@@ -119,11 +120,11 @@ function start() {
 function updateStatus() {
     var s = document.getElementById("status");
     if (game.lives === 0) {
-      window.alert("GAME OVER")
+      window.alert("GAME OVER");
 	    game.state = "over";
       goToScore();
     } else if (game.blockCount === 0) {
-      window.alert("YOU WIN")
+      window.alert("YOU WIN");
       resetGame();
       game.state = "over";
       goToScore();
@@ -133,8 +134,8 @@ function updateStatus() {
 
 //reset the whole game
 function resetGame() {
-    game.lives = 1
-    game.score = 0
+    game.lives = 1;
+    game.score = 0;
     game.blockCount = ROWS*COLS;
   
   //remove everything
@@ -246,13 +247,14 @@ function initKeys() {
         baseBlock.dir = -1;
     else if (e.keyCode === 72)
       //h button to show directions
-        window.alert("Need help? Here's how to play- space bar to start, right arrow to move bar right, left arrow to move bar left, up arrow to make it speedy, and down arrown to slow it back down")
+        window.alert("Need help? Here's how to play- space bar to start, right arrow to move bar right, left arrow to" +
+            " move bar left, up arrow to make it speedy, and down arrow to slow it back down");
     else if (e.keyCode === 38)
       //arrow up, speed up, make it harder
-        ball.velocity.x += 100
+        ball.velocity.x += 100;
     else if (e.keyCode === 40)
       //arrow down
-      ball.velocity.x = 10
+      ball.velocity.x = 10;
     else if (e.keyCode === 32 && game.state === "ready") {
       //space bar
         ball.velocity.x += baseBlock.dir * 25;
@@ -269,7 +271,7 @@ function initKeys() {
   }, false);
   
   document.addEventListener("keyup", function(e) {
-  //stop motin when key is 'let go'
+  //stop motion when key is 'let go'
 	if ((e.keyCode === 39 && baseBlock.dir === 1) ||
 	    (e.keyCode === 37 && baseBlock.dir === -1))
     	    baseBlock.dir = 0;
@@ -286,9 +288,9 @@ function initGame() {
 	    blocks[i] = [];
 	    for (var j = 0; j < COLS; j++) {
         //iterate through the columns
-	      var material = new THREE.MeshPhongMaterial(
+	      var material1 = new THREE.MeshPhongMaterial(
 		    {color: new THREE.Color("rgb(118, 215, 196)")});
-	      var object = new THREE.Mesh(geometry, material);
+	      var object = new THREE.Mesh(geometry, material1);
         //blocks [row][column]
 	      blocks[i][j] = { status: 0, object: object};
 	      object.position.set(j*blockWidth+blockWidth/2,
@@ -313,5 +315,6 @@ function initGame() {
     //set the game state
     game.state = "ready";
     resetbaseBlock();
-    window.alert("Need help? Here's how to play- space bar to start, right arrow to move bar right, left arrow to move bar left, up arrow to make it speedy, and down arrown to slow it back down")
+    window.alert("Need help? Here's how to play- space bar to start, right arrow to move bar right, left arrow to move " +
+        "bar left, up arrow to make it speedy, and down arrow to slow it back down")
 }
