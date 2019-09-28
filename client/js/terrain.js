@@ -6,27 +6,19 @@ import {
   FlatShading
 } from "three-full";
 
-import { averageNeighbors, fillMatrix } from "./noise";
+import { normalize, fillMatrix } from "./noise";
 
 class Terrain {
   constructor(width, height, options = {}) {
-    const {
-      amplitude = 0.5,
-      dropoff = 0.2,
-      layers = 10,
-      sedimentPickup = 0.01,
-      drops
-    } = options;
-    this.drops = drops;
+    const { amplitude = 0.5, persistence = 0.2, octaves = 10 } = options;
     this.amplitude = amplitude;
-    this.dropoff = dropoff;
-    this.layers = layers;
+    this.persistence = persistence;
+    this.octaves = octaves;
     this.width = width;
     this.height = height;
-    this.sedimentPickup = sedimentPickup;
     this.simplices = [];
     this.changeQueue = [];
-    for (let i = 0; i < layers; i++) {
+    for (let i = 0; i < octaves; i++) {
       this.simplices.push(new SimplexNoise());
     }
 
@@ -55,13 +47,13 @@ class Terrain {
     return this.simplices[layer].noise4d(x, y, z, w);
   }
 
-  addLayers(x, y, dropoff, layers) {
+  addLayers(x, y, persistence, octaves) {
     let sum = 0;
     let mult = 0.01;
 
-    for (let i = 0; i < layers; i++) {
+    for (let i = 0; i < octaves; i++) {
       const add = this.getNoise(i, x * mult, y * mult, 0, 0) / mult / 10;
-      mult /= dropoff;
+      mult /= persistence;
       sum += add;
     }
 
@@ -73,9 +65,10 @@ class Terrain {
     for (let x = 0; x < this.width; x++) {
       for (let y = 0; y < this.height; y++) {
         const index = x + y * this.width;
-        this.data[index] = this.addLayers(x, y, this.dropoff, this.layers);
+        this.data[index] = this.addLayers(x, y, this.persistence, this.octaves);
       }
     }
+    normalize(this.data);
   }
 
   toMesh() {

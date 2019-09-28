@@ -4,6 +4,7 @@
   "description": "Assignment 4 - Creative Coding: Interactive Multimedia Experiences ===",
   "main": "index.js",
   "scripts": {
+    "postinstall": "parcel build client/index.html",
     "clean": "rm -rf .cache dist",
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch": "parcel watch client/index.html",

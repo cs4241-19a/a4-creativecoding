@@ -4,16 +4,7 @@ import {
   WebGLRenderer,
   Scene,
   PerspectiveCamera,
-  BoxGeometry,
-  Mesh,
-  MeshPhongMaterial,
-  PointLight,
-  DirectionalLight,
-  Fog,
-  Sky,
-  OrbitControls,
-  SphereBufferGeometry,
-  MeshBasicMaterial
+  OrbitControls
 } from "three-full";
 import { GUI } from "dat.gui";
 import Terrain from "./terrain";
@@ -21,9 +12,9 @@ import Terrain from "./terrain";
 class App {
   constructor() {
     this.settings = {
-      amplitude: 3,
+      amplitude: 10,
       persistence: 0.2,
-      octaves: 4
+      octaves: 8
     };
     this.constructRenderer();
     this.constructScene();
@@ -65,19 +56,6 @@ class App {
       this.camera.aspect = this.aspectRatio;
       this.camera.updateProjectionMatrix();
     });
-    // window.addEventListener("mousedown", () => {
-    //   this.mouseDown = true;
-    // });
-    // window.addEventListener("mouseup", () => {
-    //   this.mouseDown = false;
-    // });
-    // window.addEventListener("mousemove", e => {
-    //   if (this.mouseDown) {
-    //     const { movementX: dx, movementY: dy } = e;
-    //     this.camera.rotation.y += dx * 0.01;
-    //     this.camera.rotation.x += dy * 0.01;
-    //   }
-    // });
   }
 
   constructGUI() {
@@ -91,7 +69,7 @@ class App {
     lightSettings.add(this.light, "intensity", 0, 10);
 
     const terrainSettings = gui.addFolder("Terrain");
-    const tA = terrainSettings.add(this.settings, "amplitude", 0, 10);
+    const tA = terrainSettings.add(this.settings, "amplitude", 0, 50);
     const tP = terrainSettings.add(this.settings, "persistence", 0, 1);
     const tO = terrainSettings.add(this.settings, "octaves", 1, 30);
 
