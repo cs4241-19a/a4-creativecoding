@@ -9,11 +9,11 @@ Daydream is a simple 3D multi-character polygon world where each user is randoml
 
 **Obstacles**
 
-Hanging Chatboxes: After a character exits the world, their speech bubble remains in the air.
+- **Hanging Chatboxes** : After a character exits the world, their speech bubble remains in the air.
 Buggy if 3+ users/characters: I've noticed that as soon as a third character joins the world and the other two starts a conversation, one of those two disappears from the 3rd character's view, even though they still exist in the views of each other.
-Blank Modal: I tried to use the Bootstrap modal to inform users with general info about the game that pops up at first page load and can be brought back by a button at the top corner, but the modal would pop up only without the text inside. I was not able to fix it on time and hence, I resorted to a less fancy way of displaying info inside a banner-like element that stays at the top of the screen at all-times.
-Deploying: This was actually the most challenging part for me since I was not able to host on Glitch after trying for a lot of hours, I resorted to deploying via Heroku, which also imposed a lot of new challenges and took a lot of time.
-Works better locally: The app functions way better when I was implementing and hosting it locally on my laptop via Webstorm. The chat feature is way smoother, and the top banner is always styled propery via css. I believe some things got lost in translation once I uploaded the project to places such as Glitch, Goorm, Heroku etc. (for example, unecessary file paths, conflicting port numbers etc.) 
+- **Blank Modal** : I tried to use the Bootstrap modal to inform users with general info about the game that pops up at first page load and can be brought back by a button at the top corner, but the modal would pop up only without the text inside. I was not able to fix it on time and hence, I resorted to a less fancy way of displaying info inside a banner-like element that stays at the top of the screen at all-times.
+- **Deploying** : This was actually the most challenging part for me since I was not able to host on Glitch after trying for a lot of hours, I resorted to deploying via Heroku, which also imposed a lot of new challenges and took a lot of time.
+- **Works better locally** : The app functions way better when I was implementing and hosting it locally on my laptop via Webstorm. The chat feature is way smoother, and the top banner is always styled propery via css. I believe some things got lost in translation once I uploaded the project to places such as Glitch, Goorm, Heroku etc. (for example, unecessary file paths, conflicting port numbers etc.) 
 
 **Linter**
 
