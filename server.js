@@ -1,21 +1,16 @@
-// where your node app starts
-
-// init project
 const express = require('express')
+const compression = require('compression')
+const helmet = require('helmet')
 const app = express()
 
-// we've started you off with Express, 
-// but feel free to use whatever libs or frameworks you'd like through `package.json`.
-
-// http://expressjs.com/en/starter/static-files.html
 app.use(express.static('public'))
+app.use(compression())
+app.use(helmet())
 
-// http://expressjs.com/en/starter/basic-routing.html
 app.get('/', function (request, response) {
   response.sendFile(__dirname + '/index.html')
 })
 
-// listen for requests :)
 const listener = app.listen(process.env.PORT, function () {
   console.log('Your app is listening on port ' + listener.address().port)
 })
