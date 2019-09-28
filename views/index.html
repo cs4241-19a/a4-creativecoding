@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Welcome to Glitch!</title>
+    <meta name="description" content="A cool thing made with Glitch">
+    <link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/87/three.js"></script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/style.css">
+    <script src="/main.js" type = "module"></script>
+
+</head>
+
+<body>
+
+    <button id="help">
+        Help
+    </button>
+
+    <p>
+        Upload Background Image via URL: <input type="url" id="pic">
+    </p>
+  
+    <div class="slidecontainer">
+        <input type="range" min="1" max="5" value="1" class="slider" id="sizeRange">
+        <p>Zoom: <span id="sizeVal"></span></p>
+    </div>
+  
+    <div class="slidecontainer">
+        <input type="range" min="-3" max="3" value="0" class="slider" id="xPos">
+        <p>Y Displacement: <span id="xPosVal"></span></p>
+    </div>
+  
+      <div class="slidecontainer">
+        <input type="range" min="-3" max="3" value="0" class="slider" id="yPos">
+        <p> X Displacement: <span id="yPosVal"></span></p>
+    </div>
+  
+    <select id="shape">
+        <option value="0">Sphere</option>
+        <option value="3">Pyramid</option>
+        <option value="4">Cube</option>
+    </select>
+  
+    <button id="create">
+        Render Shape
+    </button>
+
+    <div class="slidecontainer">
+        <input type="range" min="0" max="100" value="50" class="slider" id="xspeedRange">
+        <p>Spin Speed: <span id="xspeedVal"></span></p>
+    </div>
+
+      <div class="slidecontainer">
+        <input type="range" min="0" max="100" value="50" class="slider" id="zspeedRange">
+        <p>Spin Speed: <span id="zspeedVal"></span></p>
+    </div>
+  
+        <div class="slidecontainer">
+        <input type="range" min="0" max="100" value="50" class="slider" id="yspeedRange">
+        <p>Spin Speed: <span id="yspeedVal"></span></p>
+    </div>
+  
+
+    <div id="instructions" class="hidden">
+        <p class="center">
+            Select a bacground image by pasting the image URL into the box, if no image is given it will default to a black screen.
+            Use the zoom slider to set how far the viewpoint will be from the shape.
+            Use the X and Y position sliders to place the shape in the window.
+            Use the dropdown menu to select the shape to be displayed.
+            Click the "Render Shape" button to display the shape. 
+        </p>
+      <p class = "center">
+          After Displaying the shape, you can change the rotation speeds around the X, Y, and Z axes using their respective sliders.
+          To modify any other aspects of the image you must repeat the steps described above to create a new shape.
+      </p>
+      
+        <button id = "close">
+            close
+        </button>
+    </div>
+
+
+</body>
+
+</html>
