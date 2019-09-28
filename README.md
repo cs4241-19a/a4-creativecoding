@@ -1,22 +1,21 @@
 Assignment 4 - Creative Coding: Interactive Multimedia Experiences
 ===
-
-Due: September 27th, by 11:59 PM.
-
-For this assignment we will focus on client-side development using popular audio/graphics/visualization technologies; the server requirements are minimal. The goal of this assignment is to refine our JavaScript knowledge while exploring the multimedia capabilities of the browser.
-
 Baseline Requirements
 ---
+My application implements the minimal requirements and functionalities:
 
-Your application is required to implement the following functionalities:
+1) Server using express that uses compression and helmet.
 
-- A server created using Express (you can also use an alternative server framework such as Koa) for basic file delivery and middleware. Your middleware stack should include the `compression` and `helmet` [middlewares]((https://expressjs.com/en/resources/middleware.html)) by default. You are not required to use Glitch for this assignment (but using Glitch is fine!); [Heroku](https://www.heroku.com) is another excellent option to explore. The course staff can't be resposible for helping with all other hosting options outside of Glitch, but some of us do have experience with other systems. It also never hurts to ask on Slack, as there's 99 other classmates who might have the experience you're looking for!
-- A client-side interactive experience using at least one of the web technologies frameworks we discussed in class over the past week.
-  - [Three.js](https://threejs.org/): A library for 3D graphics / VR experiences
-  - [D3.js](https://d3js.org): A library that is primarily used for interactive data visualizations
-  - [Canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API): A 2D raster drawing API included in all modern browsers
-  - [SVG](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API): A 2D vector drawing framework that enables shapes to be defined via XML.
-  - [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API): An API for audio synthesis, analysis, processing, and file playback.
+2) A client-side interactive experience that uses Canvas.
+
+3) User Control Parameters:
+   - Keyboard ^ button moves red block user north
+   - Keyboard > button moves red block user east
+   - Keyboard "down" button moves red block user south
+   - Keyboard < button moves red block user west
+   - Bedtime Button, when clicked, enables user to see the time to gauge their bedtime.
+   - Goal and How to Play Buttons show user how to
+   
 - A user interface for interaction with your project, which must expose at least six parameters for user control. [dat.gui](https://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage) is highly recommended for this. You might also explore interaction by tracking mouse movement via the `window.onmousemove` event handler in tandem with the `event.clientX` and `event.clientY` properties. Consider using the [Pointer Events API](https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events) to ensure that that mouse and touch events will both be supported in your app.
 - Your application should display basic documentation for the user interface when the application first loads. This documentation should be dismissable, however, users should be able to redisplay it via either a help buton (this could, for example, be inside a dat.gui interface) or via a keyboard shortcut (commonly the question mark).
 - Your application should feature at least two different ES6 modules that you write ([read about ES6 modules](https://www.sitepoint.com/understanding-es6-modules/)) and include into a main JavaScript file. This means that you will need to author *at least three JavaScript files* (a `app.js` or `main.js` file and two modules). We'll discuss modules in class on Monday 9/23; for this assignment modules should contain at least two functions.
