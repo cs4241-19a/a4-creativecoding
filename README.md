@@ -1,22 +1,32 @@
 ## The Big Bang Theory TV Show Viewer
 
-your hosting link e.g. http://a4-danielcaffrey.glitch.me
+http://a4-danielcaffrey.glitch.me
 
-Include a very brief summary of your project here. Images are encouraged, along with concise, high-level text. Be sure to include:
+This project uses d3.js and dat.gui to display information about the show "The Big Bang Theory".
 
-- the goal of the application
-- challenges you faced in realizing the application
-- a brief description of the JS linter you used and what rules it follows (we'll be looking at your JS files for consistency)
+- The goal is to give a small taste of how D3 can visualize data by letting the user affect the visualization
+- Integrating d3.js and dat.gui was a challenge, as I have never used either and there were not too 
+many examples that I found online
+- I have been using the standard.js linter, which has been checking for syntax errors and 
+coding style violations. The only problems being flagged by the linter currenlty are:
+  - Undefined variables (which are really just variables like d3 that are defined using the imported scripts)
+  - Two instances of using '==' as opposed to '===' (which was done for convenience as I coded and changed how
+variables would be passed in)
+  - Addition of strings being used as opposed to "path.join()" when making the response to a get request in server.js
+  
+Notes:
+- When a user goes straight from the help screen to an episode/series, the help screen goes away, but the drop down menu for the help screen does not update
+- When a user types a number into sroll bar, this sometimes causes the data to be printed twice
 
 ## Technical Achievements
 - **Tech Achievement 1**: Using d3.js, visualized data from a JSON file containing information about the TV Show "The Big Bang Theory" 
 - **Tech Achievement 2**: Using dat.gui, allowed the user to select either an episode or a season of the show, and to view information accordingly
-- **Tech Achievement 3**: Used a standard.js as a linter 
-- **Tech Achievement 4**: Implemented each function for gathering data from the JSON file in a module
-- **Tech Achievement 5**: Use of compression and helmet middlewears
+- **Tech Achievement 4**: Using dat.gui, allowed the user to customize the colors they saw when viewing episodes in a particular series
+- **Tech Achievement 5**: Using dat.gui, created a help screen that can be dismissed and brought back at any point
+- **Tech Achievement 6**: Used a standard.js as a linter 
+- **Tech Achievement 7**: Implemented functions for gathering data from the JSON file in modules
+- **Tech Achievement 8**: Use of express with compression and helmet middlewears
 
 
 ### Design/Evaluation Achievements
-- **Design Achievement 1**: I ensured that my application would run on both desktops / mobile devices by changing X
-- **Design Achievement 2**: I followed best practices for accessibility, including providing alt attributes for images and using semantic HTML. There are no `<div>` or `<span>` elements in my document.
-- **Design Achievement 3**: We tested the application with n=X users, finding that...
+- **Design Achievement 1**: I followed best practices for accessibility, including providing alt attributes for images and using semantic HTML. There are no `<div>` or `<span>` elements in my document.

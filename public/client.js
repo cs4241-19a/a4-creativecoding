@@ -2,7 +2,7 @@ import selectEpisode from './selectEpisode.js'
 import selectSeason from './selectSeason.js'
 
 const displayHelp = function (display) {
-  let helpString = 'Weclome! This software will allow you to view details about episodes of the TV Show "The Big Bang Theory."'
+  let helpString = 'Welcome! This software will allow you to view details about episodes of the TV Show "The Big Bang Theory."'
   helpString += ' Settings in the "episodes" folder will show you information about a specific episode'
   helpString += ' Settings in the "seasons" folder will show you information about all the episodes in a given season'
   helpString += ' To exit this help screen, select "Hide" from the dropdown menu. To bring it back, select "Show'
