@@ -1,0 +1,103 @@
+html {
+  background-color: black;
+}
+
+#test {
+  text-align: center;
+  border-color: aliceblue;
+  margin: 0px;
+}
+
+h1 {
+  text-align: center;
+  color: white;
+  font-family: trench;
+  font-size: 100px;
+  margin-block-end: 0.1em;
+  margin-block-start: 0.1em;
+}
+
+.flex-container > button {
+  display: flex;
+  padding: 15px;
+  font-size: 25px;
+  font-family: trench;
+  font-weight: bold;
+  border-style: solid none solid none;
+
+  background-color: gray;
+}
+
+.flex-container {
+  display: flex;
+  justify-content: center;
+}
+
+#name {
+  margin-left: 15%;
+  margin-right: 15%;
+  border-color: aliceblue;
+}
+
+#bottom {
+  margin-left: none;
+  margin-right: none;
+  border-style: solid solid solid solid;
+  border-color: aliceblue;
+}
+
+#Sun {
+  border-style: solid none solid solid;
+}
+
+#Neptune {
+  border-style: solid solid solid none;
+}
+
+#selected,
+#facts {
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 30px;
+  font-family: trench;
+}
+
+@font-face {
+  font-family: trench;
+  src: url(trench100free.ttf);
+}
+
+#bottom {
+  margin-bottom: 30px;
+}
+
+.modal {
+  position: fixed;
+  z-index: 1;
+  padding-top: 100px;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  font-family: trench;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
