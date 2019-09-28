@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>CS4241 Assignment 4</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+    <h1 id='title'>3D Game of Life</h1><br>
+
+    <canvas id="canvas"></canvas><br>
+
+    <p id="description">This is an implementation of Conway's famous game of life extrapolated into 3D.
+        The entire game operates under a rule set that may be formalized as a tuple (shown below). The equations below
+        are the formalizaiton of the game of life
+        projected to 3d. Where E and F are the respective rule sets for living
+        cells and the non-filled cells. The respective L and U variables indicate the bounds for the count of neighbors
+        to either sustain a generation
+        or populate the non-filled cell. E and F are the count of numbers for an individual cell.
+    </p>
+    <p>For example, Conway's game of life can be represented as {2,3,3,3}<br>
+        Notable, the two rule sets that generate a comparable game of life that is not infinitely expansive, and
+        posseses gliders are:</p>
+    <p><i>{4,6,6,6}</i> and <i>{}</i></p>
+    <p id='equation'><i>E<sub>l</sub>, E<sub>u</sub>, F<sub>l</sub>, F<sub>u</sub></i><br>
+        <i>E<sub>l</sub> &le; E &le; E<sub>u</sub></i> <br>
+        <i>F<sub>l</sub> &le; F &le; F<sub>u</sub></i> <br>
+    </p>
+
+    <form action=''>
+        E<sub>l</sub>:<input type='number' id='el' value='4'>
+        E<sub>u</sub>:<input type='number' id='eu' value='6'>
+        F<sub>l</sub>:<input type='number' id='fl' value='6'>
+        F<sub>u</sub>:<input type='number' id='fu' value='6'>
+        Frames:<input type='number' id='frames' value='10'>
+        <label>Auto-play</label><input type="checkbox" id="auto"><br>
+        <br>
+        Points:<input type='text' id='coordinates' value='{(1,2,3),(4,5,6),(-1,2,3)}'>
+        <button id='submit'>Run!</button>
+    </form>
+</body>
+
+<script>
+    const generate = function (e) {
+        //prevent default action from being carried out
+        e.preventDefault();
+
+        //Fetching all the input data
+        const coords = document.querySelector('#coordinates');
+        const auto = document.querySelector('#auto').checked;
+        const frames = document.querySelector('#frames');
+        const el = document.querySelector('#el');
+        const eu = document.querySelector('#eu');
+        const fl = document.querySelector('#fl');
+        const fu = document.querySelector('#fu');
+
+        const json = {
+            coordinates: coords.value,
+            autoPlay: auto,
+            frameNumber: frames.value,
+            el: el.value,
+            eu: eu.value,
+            fl: fl.value,
+            fu: fu.value
+        };
+        const body = JSON.stringify(json);
+
+        fetch('/submit', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body
+        })
+            .then(function (response) {
+                return response.text();
+            })
+            .then(function (data) {
+                console.log(data);
+            });
+    }
+
+    window.onload = function () {
+        const button = document.querySelector('button');
+        button.onclick = generate;
+    }
+</script>
