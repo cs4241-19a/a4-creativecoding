@@ -6,16 +6,14 @@ const GLTFLoader = require('three-gltf-loader');
 
 //need to declare these variables globally 
 //creating a scene 
-var scene, camera, renderer, controls;
+var scene, camera, renderer, controls;// options;
 var light, lightAmb;
 //the cube
 //var geometry, material;
-//the 3d model 
-var manager, loader, mesh;
-//gui stuff 
-var options, gui;
+var zoomIn, zoomOut;
+var gui, loader, box, cam;
 //things on menu
-var cam, velocity, box;
+//var cam, velocity, box;
 //color
 var API = {
     color: 0xffffff,
@@ -52,9 +50,15 @@ window.onload  = function(){
     //controls 
     controls = new OrbitControls(camera, renderer.domElement);
     controls.addEventListener('change', render);
-    controls.enableZoom = false;
-    
-    
+    //controls.enablePan = false;
+    //controls.enableRotate = false;
+    //controls.enableZoom = false;
+    //zooming
+    zoomIn = document.getElementById('zoom-in');
+    zoomOut =document.getElementById('zoom-out');
+    // zoomIn.addEventListener('click',onZoomIn, false );
+    // zoomOut.addEventListener('click', onZoomOut, false );
+
     //light
      light = new THREE.PointLight(0xffffff, 1, 100);
      light.position.set(50,50,50);
@@ -86,44 +90,44 @@ window.onload  = function(){
 
         //gltf.scene.mesh.material
         //options for menu
-    options = {
-        velx: 0,
-        vely: 0,
-        camera: {
-          speed: 0.0001
-        },
-        stop: function() {
-          this.velx = 0;
-          this.vely = 0;
-        },
-        // reset: function() {
-        //   this.velx = 0.1;
-        //   this.vely = 0.1;
-        //   camera.position.z = 0;
-        //   camera.position.x = 0;
-        //   camera.position.y = 12;
-        //   gltf.scene.scale.set(2,2,2);
-        // //   mesh.scale.x = 1;
-        // //   mesh.scale.y = 1;
-        // //   mesh.scale.z = 1;
-        // //   mesh.material.wireframe = true;
-        // }
-      };
+     //options = {
+    //     velx: 0,
+    //     vely: 0,
+    //     camera: {
+    //       speed: 0.0001
+    //     },
+    //     stop: function() {
+    //       this.velx = 0;
+    //       this.vely = 0;
+    //     },
+    //     // reset: function() {
+    //     //   this.velx = 0.1;
+    //     //   this.vely = 0.1;
+    //     //   camera.position.z = 0;
+    //     //   camera.position.x = 0;
+    //     //   camera.position.y = 12;
+    //     //   gltf.scene.scale.set(2,2,2);
+    //     // //   mesh.scale.x = 1;
+    //     // //   mesh.scale.y = 1;
+    //     // //   mesh.scale.z = 1;
+    //     // //   mesh.material.wireframe = true;
+    //   
+    //   };
       
     //setting up gui
     gui = new dat.GUI();
 
     //setting up menu
-     cam = gui.addFolder('Camera');
-     cam.add(options.camera, 'speed', 0, 0.0010).listen();
-     cam.add(camera.position, 'y', 0, 100).listen();
-     cam.open();
+    //  cam = gui.addFolder('Camera');
+    //  cam.add(options.camera, 'speed', 0, 0.0010).listen();
+    //  cam.add(camera.position, 'y', 0, 100).listen();
+    //  cam.open();
 
 
-    velocity = gui.addFolder('Velocity');
-    velocity.add(options, 'velx', -0.2, 0.2).name('X').listen();
-    velocity.add(options, 'vely', -0.2, 0.2).name('Y').listen();
-    velocity.open();
+    // velocity = gui.addFolder('Velocity');
+    // velocity.add(options, 'velx', -0.2, 0.2).name('X').listen();
+    // velocity.add(options, 'vely', -0.2, 0.2).name('Y').listen();
+    // velocity.open();
 
     box = gui.addFolder('Mesh');
      box.add(gltf.scene.scale, 'x', 1, 10).name('Width').listen();
@@ -132,18 +136,24 @@ window.onload  = function(){
 //    box.add(mesh.material, 'wireframe').listen();
    box.open();
 
-    gui.add(options, 'stop');
+        cam = gui.addFolder('Camera');
+        cam.add(camera.position, 'x', 0, 10).name('X-Axis').listen();
+        cam.add(camera.position, 'y', 0, 10).name('Y-Axis').listen();
+        cam.add(camera.position, 'z', 0, 15).name('z-Axis').listen();
+        cam.open();
+
+  //  gui.add(options, 'stop');
    //s gui.add(options, 'reset');
 
-   gui.addColor(API, 'color')
-   .listen()
-   .onChange(function() {
-       //mesh.material.color.set(API.color);
-       //gltf.set.color(API.color);
-      // gltf.mesh.Color.set(API.color);   
-      // set(API.color);
-       render();
-   });
+//    gui.addColor(API, 'color')
+//    .listen()
+//    .onChange(function() {
+//        //mesh.material.color.set(API.color);
+//        //gltf.set.color(API.color);
+//       // gltf.mesh.Color.set(API.color);   
+//       // set(API.color);
+//        render();
+//    });
    render();
    
     })
@@ -194,4 +204,14 @@ var render = function() {
   
   };
 
-  
+//   function onZoomIn(){
+//         console.log("zoom in was called");
+//         camera.zoomIn;
+//         //options.ZoomIn;
+//     }
+
+//     function onZoomOut(){
+//         console.log("zoom out was called");
+//         controls.zoomOut;
+//         //options.ZoomOut
+//     }
