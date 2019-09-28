@@ -54,3 +54,9 @@ the hosting link e.g. http://a4-charlieroberts.glitch.me
 - **Design Achievement 1**: The application is minimalistic is color so that all the attention can be focused on the colorful board game. The other user interface buttons are alligned neatly and are out of the way of the gameboard.
 - **Design Achievement 2**:The application is very convenient to use. The user can simulate rolling a die and even getting a response for the tile they land on without 3d objects such as dice and cards! The game is mess free! In addition, the user can play the game at their own pace and does not have to wait for another player.
 - **Design Achievement 3**: The application is relaxing and requires repetitive actions. It is great for users to play when they are winding down, relaxing, and trying to fall asleep. The user can even check the time within the application to make sure that it is not their bedtime.
+
+## Other Resources:
+- https://i.pinimg.com/originals/db/29/31/db2931e5414bdaf6fe15ba8df10e2cde.jpg
+- w3 schools- especially for the movement of the red block on the canvas
+- codepen
+- canvas and javascript documentation online
