@@ -2,12 +2,30 @@
 <html lang='en'>
   <head>
     <title>CS4241 Assignment 4</title>
-    <script src='js/app.js'></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.6/dat.gui.min.js"></script>
+    <script type ="module" src='js/app.js'></script>
     <link rel='stylesheet' href="css/styles.css"/>
     <meta charset="utf-8">
   </head>
   <body>
-    <canvas id="canvas" width = "800" height="500"></canvas>
+    <h1>Sine Wave Visualizer</h1>
+    <div id='helpMenu'>
+        <h3>Documentation Menu</h3>
+        <p>This program uses HTML canvas to display an oscillating sine wave. In the top right corner of this window, there are multiple
+          input sliders that can be used to alter properties of the wave. Values can also be inputted into the textboxes to the right 
+          of the sliders. The following properties can be modified: </p>
+          <ul>
+            <li>Amplitude: Amplitude or height of the wave</li>
+            <li>Frequency: Lengthens or shortens the period of the wave</li>
+            <li>Phase shift: Horizontal shift of wave</li>
+            <li>Vertical shift: Shifts wave up or down</li>
+            <li>Speed: How fast the wave oscillates</li>
+            <li>Color: Color of the wave</li>
+          </ul>
+        <button id="closeButton">Close</button> <br><br>
+      </div>
+    <button id="helpButton">Show Documentation</button> <br><br>
+    <div id="canvas-container">
+      <canvas id="canvas" width = "800" height="500"></canvas>
+    </div>
   </body>
 </html>
