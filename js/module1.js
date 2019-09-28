@@ -1,7 +1,7 @@
-var x, y, z;
+var x, y, z
 
-z = 0;
-x = 0;
-y = 12;
+z = 0
+x = 0
+y = 12
 
-export {x , y, z}
+export { x, y, z }
