@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CS4241-19a-a4</title>
+    <script src="https://d3js.org/d3.v5.js"></script>
+    <script src='bundle.js'></script>
+
+</head>
+<body>
+    <h1>Moss Calcium Period Data</h1>
+    <p>Moss senses a chemical in fungi to prevent fungal invaders. When we add that chemical to moss, the intra-cellular calcium oscelates. This data visualization describes the period of calcium oscelations observed in moss. The periods displayed are all peroids collected from the time series of one plant. Each period comes from a 3 by 3 pixel grid within the plant over time. In the control, many of the circles are similar sizes indicating that the periods are not uniform. In the treatment, the circles of 3 and 4 are the largest, indicating that there is some uniformity in the singal.</p>
+    <button onclick="help()">Help me!</button>
+    <div class="interaction">
+    <h4>User Interaction:</h4>
+    <button onclick="mixUp()">Mix Up</button>
+    <select onchange="reloadData()" id="dataToLoad">
+        <option value="control">Control</option>
+        <option value="treatment">Treatment</option>
+    </select>
+    <select onchange="changeText()" id="periodFormat">
+        <option value="frames">Period in Frames</option>
+        <option value="seconds">Period in Seconds</option>
+    </select>
+    <select onchange="changeText()" id="displayValues"> 
+        <option value="period">Display Period</option>
+        <option value="value">Display Period and Occurances</option>
+    </select>
+    <h5>Font Size:</h5>
+    <p>Min</p>
+    <input onchange="changeFontSize()" class="slider" type="range" min="1" max="25" value="5" id="minFontSize">
+    <p>Max</p>
+    <input onchange="changeFontSize()" class="slider" type="range" min="1" max="25" value="9" id="maxFontSize">
+    <h5>Color Options:</h5>
+    <p>Red</p>
+    <input onchange="changeColor()" class="slider" type="range" min="1" max="255" value="10" id="red">
+    <p>Green</p>
+    <input onchange="changeColor()" class="slider" type="range" min="1" max="255" value="250" id="green">
+    <p>Blue</p>
+    <input onchange="changeColor()" class="slider" type="range" min="1" max="255" value="250" id="blue">
+    </div>  
+        <div class="scaling-svg-container" 
+        style="padding-bottom: 50% /* 100% * 55/60 */">
+        <svg class="scaling-svg" viewBox="0 0 300 150" >
+        <!-- SVG content -->
+      </svg>
+    </div>
+</body>
+</html>
