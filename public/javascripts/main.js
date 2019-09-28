@@ -11,16 +11,12 @@ var gui
 
 var controller, controls
 
-var name, width, height, length
+var name, width, height, length, wireframe, color
 
 window.onload = function () {
-  // Creating a Scene
+
   scene = new THREE.Scene()
-
-  // setting up gui
   gui = new dat.GUI()
-
-  gui.add(resetButton).name('reset scene').listen()
 
   controller = new THREE.Object3D()
   controller.objects = []
@@ -29,10 +25,6 @@ window.onload = function () {
   controller.color = 0xFFFFFF
   controller.number_of_objects = controller.objects.length
   controller.selected_cube = 'test123'
-
-  // scene.background = new THREE.Color( 0xf0f0f0 )
-
-  // scene.add( new THREE.AmbientLight( 0x505050 ) );
 
   scene.background = new THREE.Color(0xf0f0f0)
   scene.add(new THREE.AmbientLight(0x505050))
@@ -46,6 +38,39 @@ window.onload = function () {
   light.shadow.mapSize.height = 1024
   scene.add(light)
 
+  createCubes()
+
+  resetGui(controller)
+
+  camera = new THREE.PerspectiveCamera(
+    70, window.innerWidth / window.innerHeight,
+    0.1, 5000)
+  camera.position.z = 1200
+
+  camera.lookAt(scene.position)
+  camera.updateMatrixWorld()
+
+  // rendering
+  renderer = new THREE.WebGLRenderer()
+  renderer.setSize(window.innerWidth, window.innerHeight)
+  document.body.appendChild(renderer.domElement)
+
+  // controls
+  controls = new OrbitControls(camera, renderer.domElement)
+
+  controls.enableDamping = true // an animation loop is required when either damping or auto-rotation are enabled
+  controls.dampingFactor = 0.05
+  controls.screenSpacePanning = false
+  controls.minDistance = 100
+  controls.maxDistance = 1200
+
+  document.addEventListener('mousedown', onDocumentMouseDown)
+  document.addEventListener('keydown', keyPress)
+
+  render()
+}
+
+var createCubes = function () {
   var geometry = new THREE.BoxBufferGeometry(40, 40, 40)
   for (var i = 0; i < 200; i++) {
     var object = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ color: Math.random() * 0xffffff }))
@@ -67,64 +92,29 @@ window.onload = function () {
     controller.objects.push(object)
     controller.number_of_objects = controller.objects.length
     controller.selected_cube = object
-
   }
-
-  resetGui( controller )
-  /*
-  name = gui.add(controller.selected_cube, 'name').listen()
-  width = gui.add(controller.selected_cube.scale, 'x', 0, 5).name('Width').listen()
-  height = gui.add(controller.selected_cube.scale, 'y', 0, 5).name('Height').listen()
-  length = gui.add(controller.selected_cube.scale, 'z', 0, 5).name('Length').listen()
-  */
-
-  camera = new THREE.PerspectiveCamera(
-    70, window.innerWidth / window.innerHeight,
-    0.1, 5000)
-  camera.position.z = 1200
-  // camera.position.x = 50
-  // camera.position.y = 50
-  camera.lookAt(scene.position)
-  camera.updateMatrixWorld()
-
-  // rendering
-  renderer = new THREE.WebGLRenderer()
-  renderer.setSize(window.innerWidth, window.innerHeight)
-  document.body.appendChild(renderer.domElement)
-
-  // controls
-  controls = new OrbitControls(camera, renderer.domElement)
-
-  controls.enableDamping = true // an animation loop is required when either damping or auto-rotation are enabled
-  controls.dampingFactor = 0.05
-  controls.screenSpacePanning = false
-  controls.minDistance = 100
-  controls.maxDistance = 1200
-
-  document.addEventListener('mousedown', onDocumentMouseDown)
-  document.addEventListener("keydown", keyPress)
-
-  render()
 }
 
-var keyPress = function ( event ) {
-  console.log(event.which);
-  switch ( event.which ) {
+var keyPress = function (event) {
+  console.log(event.which)
+  switch (event.which) {
     case 32:
       scene.background = new THREE.Color(Math.random() * 0xffffff)
-      break;
+      break
   }
 }
 
-var resetButton = function() {
-  console.log("reset")
-}
+var resetGui = function (theController) {
+  var params = {
+    color: 0xff00ff
+  }
 
-var resetGui = function( theController ) {
   name = gui.add(theController.selected_cube, 'name').listen()
   width = gui.add(theController.selected_cube.scale, 'x', 0, 5).name('Width').listen()
   height = gui.add(theController.selected_cube.scale, 'y', 0, 5).name('Height').listen()
   length = gui.add(theController.selected_cube.scale, 'z', 0, 5).name('Length').listen()
+  wireframe = gui.add(theController.selected_cube.material, 'wireframe').listen()
+  color = gui.addColor(params, 'color').onChange(function () { controller.selected_cube.material.color.set(params.color) })
 }
 
 // cube animation
@@ -146,27 +136,17 @@ function onDocumentMouseDown (event) {
   // console.log("hello")
 
   if (intersects.length > 0) {
-
     var selectedObject = intersects[0].object
     controller.selected_cube = selectedObject
-    controller.selected_cube.material.color.setHex( 0x37e584 )
-    // console.log(controller.selected_cube.name)
+    controller.selected_cube.material.color.setHex(0x37e584)
 
     gui.remove(name)
     gui.remove(length)
     gui.remove(width)
     gui.remove(height)
+    gui.remove(wireframe)
+    gui.remove(color)
 
-
-
-    resetGui( controller , name, width, height, length)
-    /*
-    name = gui.add(controller.selected_cube, 'name').listen()
-    width = gui.add(controller.selected_cube.scale, 'x', 0, 5).name('Width').listen()
-    height = gui.add(controller.selected_cube.scale, 'y', 0, 5).name('Height').listen()
-    length = gui.add(controller.selected_cube.scale, 'z', 0, 5).name('Length').listen()
-    */
+    resetGui(controller, name, width, height, length)
   }
-
-
 }
