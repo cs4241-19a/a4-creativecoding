@@ -8,7 +8,7 @@ Due: September 27th, by 11:59 PM.
 https://alppiskin-a4-alppiskin-alp-piskin.glitch.me/
 
 This application creates pretty visuals with user interaction. The logic was inspired by hierarchy models, which creates a sequence that's similar to a helix. With the controls, you can modify size, angles, and the background. Biggest issue I faced was trying to use Glitch with the linter and the module system, which I failed miserably.
-Used ESLint at WebStorm but carried the final project to Glitch in the ends.
+Used ESLint at WebStorm but carried the final project to Glitch in the end.
 
 ## Technical Achievements
 - **Tech Achievement 1**: Wrote logic for controls.
