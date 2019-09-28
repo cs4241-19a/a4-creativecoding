@@ -10,7 +10,8 @@
     "express": "~4.16.1",
     "express-session": "~1.16.2",
     "serve-favicon": "~2.5.0",
-    "three": "^0.108.0"
+    "three": "^0.108.0",
+    "morgan": "latest"
   },
   "devDependencies": {
     "eslint": "^6.4.0"
