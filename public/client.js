@@ -5,12 +5,13 @@
 
 const THREE = require('three')
 const dat = require('dat.gui')
+const golBoard = require('./gameoflife.js')
 
 // ########################
 // ## SETUP GAME OF LIFE ##
 // ########################
 
-const gridSize = 10
+const gridSize = 20
 
 function showHelp () {
   const popup = document.getElementById('help-popup')
@@ -23,6 +24,13 @@ const GameOfLifeClass = function () {
   this.rotSpeed = 0.6
   this.editMode = false
   this.showHelp = showHelp
+  this.singleStep = function () {
+    golBoard.runIteration()
+    this.changed = true
+  }
+
+  golBoard.setupBoard(gridSize)
+  this.changed = true
 }
 
 const gameOfLife = new GameOfLifeClass()
@@ -35,6 +43,7 @@ window.onload = function () {
   const gui = new dat.GUI()
 
   gui.add(gameOfLife, 'running').name('Running')
+  gui.add(gameOfLife, 'singleStep').name('Single Step')
   gui.add(gameOfLife, 'speed', 1, 20).name('Iterations/Sec').step(1)
   gui.add(gameOfLife, 'rotSpeed', 0, 5).name('Rotation Speed')
   gui.add(gameOfLife, 'editMode').name('Edit Mode')
@@ -166,7 +175,7 @@ scene.add(gridHelper)
 // Make mesh for the object that will assist you in edit mode
 const s = 3 / (gridSize / 2)
 const editGeo = new THREE.CubeGeometry(s, s, s)
-const editMat = new THREE.MeshBasicMaterial({color: 0xFFFFFF, transparent: true, opacity: 0.3})
+const editMat = new THREE.MeshBasicMaterial({ color: 0xFFFFFF, transparent: true, opacity: 0.3 })
 
 const editMesh = new THREE.Mesh(editGeo, editMat)
 scene.add(editMesh)
@@ -184,18 +193,18 @@ scene.add(editMesh)
  * me positions of +/- infinity for both x and y. So I use this janky method that WILL WORK assuming that you don't
  * change the camera's position. Whatever.
  */
-const boardBoundaries = {x1: 0, y1: 0, x2: 0, y2: 0}
+const boardBoundaries = { x1: 0, y1: 0, x2: 0, y2: 0 }
 function calculateBoardCornerScreenCoordinates () {
   // uhh yeah, I just measured these...
   // they work in all resolutions I promise... at least they're close enough
-  
-  const top = map(138, 0, 1287, 0, canvas.clientHeight)
+
+  const top = map(140, 0, 1287, 0, canvas.clientHeight)
   const distFromCenter = (canvas.clientHeight / 2) - top
-  
-  boardBoundaries.x1 = Math.round((canvas.clientWidth / 2)  - distFromCenter)
+
+  boardBoundaries.x1 = Math.round((canvas.clientWidth / 2) - distFromCenter)
   boardBoundaries.y1 = Math.round((canvas.clientHeight / 2) - distFromCenter)
 
-  boardBoundaries.x2 = Math.round((canvas.clientWidth / 2)  + distFromCenter)  
+  boardBoundaries.x2 = Math.round((canvas.clientWidth / 2) + distFromCenter)
   boardBoundaries.y2 = Math.round((canvas.clientHeight / 2) + distFromCenter)
 
   console.log('New board screen coordinates:')
@@ -209,32 +218,35 @@ calculateBoardCornerScreenCoordinates()
 
 window.onmousemove = function (event) {
   if (gameOfLife.editMode) {
-    editMat.opacity = 0.3
-    
-    const i = Math.round(map(event.x, boardBoundaries.x1, boardBoundaries.x2, 0, gridSize))
-    const j = Math.round(map(event.y, boardBoundaries.y1, boardBoundaries.y2, 0, gridSize))
-    
-    //console.log(i, j)
-    
-    const cellPosition = calcCellPosition(i, j)
-    
-    editMesh.position.x = cellPosition.x
-    editMesh.position.y = cellPosition.y
+    const i = Math.floor(map(event.x, boardBoundaries.x1, boardBoundaries.x2, 0, gridSize))
+    const j = Math.floor(map(event.y, boardBoundaries.y1, boardBoundaries.y2, 0, gridSize))
+
+    // console.log(i, j)
+
+    if (i >= 0 && i < gridSize && j >= 0 && j < gridSize) {
+      const cellPosition = calcCellPosition(i, j)
+      editMat.opacity = 0.3
+
+      editMesh.position.x = cellPosition.x
+      editMesh.position.y = cellPosition.y
+    } else {
+      editMat.opacity = 0
+    }
   } else {
     editMat.opacity = 0
   }
 }
 
-window.onmouseclick = function (event) {
-   if (gameOfLife.editMode) {
-    
-    const i = Math.round(map(event.x, boardBoundaries.x1, boardBoundaries.x2, 0, gridSize))
-    const j = Math.round(map(event.y, boardBoundaries.y1, boardBoundaries.y2, 0, gridSize))
-    
-    console.log("Clicked at ", i, j)
-    
-    // TODO
-    //gameOfLife.cells[j][i] = 
+window.onmousedown = function (event) {
+  if (gameOfLife.editMode) {
+    const i = Math.floor(map(event.x, boardBoundaries.x1, boardBoundaries.x2, 0, gridSize))
+    const j = Math.floor(map(event.y, boardBoundaries.y1, boardBoundaries.y2, 0, gridSize))
+
+    if (i >= 0 && i < gridSize && j >= 0 && j < gridSize) {
+      console.log('Clicked at ', i, j)
+      golBoard.toggleCell(i, j)
+      gameOfLife.changed = true
+    }
   }
 }
 
@@ -256,15 +268,56 @@ function resize () {
     camera.aspect = (width / height)
     camera.updateProjectionMatrix()
     renderer.setSize(width, height)
-    
+
     calculateBoardCornerScreenCoordinates()
   }
 }
 
 // Update the geometry every frame
 // dt - time in seconds since last frame
+let elapsed = 0
+
 function update (dt) {
   resize()
+
+  if (gameOfLife.running) {
+    elapsed += dt
+    // console.log(elapsed)
+  }
+
+  if (elapsed >= (1 / gameOfLife.speed)) {
+    gameOfLife.changed = true
+    elapsed -= (1 / gameOfLife.speed)
+    golBoard.runIteration()
+  }
+
+  // Set each mesh's properties
+  if (gameOfLife.changed) {
+    gameOfLife.changed = false
+    for (let j = 0; j < gridSize; j++) {
+      for (let i = 0; i < gridSize; i++) {
+        const mesh = meshes[j][i]
+        const cell = golBoard.getCell(i, j)
+        if (cell.alive) {
+          if (cell.count < 5) {
+            mesh.geometry = geos[1]
+            mesh.material = mats[0]
+          } else if (cell.count < 8) {
+            mesh.geometry = geos[2]
+            mesh.material = mats[1]
+          } else if (cell.count < 11) {
+            mesh.geometry = geos[3]
+            mesh.material = mats[2]
+          } else /* if (cell.count < 16) */ {
+            mesh.geometry = geos[4]
+            mesh.material = mats[3]
+          }
+        } else {
+          mesh.geometry = geos[0]
+        }
+      }
+    }
+  }
 
   // Rotate all meshes
   for (let j = 0; j < gridSize; j++) {
