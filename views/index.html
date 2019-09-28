@@ -36,7 +36,7 @@
             <div class="select">
               <select id="rotationOption">
                 <option value="Free">Free Rotation</option>
-                <option value="Slow">Fixed</option>
+                <option value="Fixed">Fixed</option>
               </select>
             </div>
           </div>
@@ -44,20 +44,15 @@
       </div>
       <div class="level-item has-text-centered">
         <div>
-          <p class="heading">Choose year to display data (2001-2014)</p>
-          <input class="input is-rounded" id="yearInput" value="2001" type="number">
-        </div>
-      </div>
-      <div class="level-item has-text-centered">
-        <div>
-          <p class="heading">Followers</p>
-          <p class="title">456K</p>
-        </div>
-      </div>
-      <div class="level-item has-text-centered">
-        <div>
-          <p class="heading">Likes</p>
-          <p class="title">789</p>
+          <p class="heading">Data Displayed</p>
+          <div class="field has-addons">
+            <div class="select">
+              <select id="dataOption">
+                <option value="total">Total Co2 emissions in metric tons</option>
+                <option value="perCapita">Co2 emissions in metric tons per capita</option>
+              </select>
+            </div>
+          </div>
         </div>
       </div>
     </nav>

@@ -13,10 +13,14 @@ const getEmissionsdata = function(year){
 }
 
 const buildD3 = function(){
+    this.pointSize = 5
+    this.pointColor = 'red'
+    this.titleBackground = 'white'
+    this.borders = 'rgb(' + 71 + ',' + 186 + ',' + 224 + ')'
+    this.titleTextColor = 'black'
     var p;
     var year;
-    var yearInput = document.getElementById("yearInput");
-    year = yearInput.value
+    year = 2010
     const mousedown =function() {
         m0 = [d3.event.pageX, d3.event.pageY];
         svg.selectAll("path").attr("d", path);
@@ -58,7 +62,7 @@ const buildD3 = function(){
         .on("mousedown", mousedown);
 
     svg.on("mousemove", function() {
-        if (m0) {
+        if (m0 && !lock) {
             p = d3.mouse(this);
             proj.rotate([λ(p[0]), φ(p[1])]);
             svg.selectAll("path").attr("d", path);
@@ -120,7 +124,15 @@ const buildD3 = function(){
                     if(d.total == -1){
                         return "white"
                     }else{
-                        d_rel = 100*Math.log(d.total)/Math.log(2500000)
+                        let score, max
+                        if(total){
+                            score = d.total
+                            max = 2500000
+                        }else{
+                            score = d.perCapita
+                            max = 500
+                        }
+                        d_rel = 100*Math.log(100*score)/Math.log(max)
                         var r, g, b = 0;
                         if(d_rel > 50) {
                             r = 255;
@@ -139,7 +151,11 @@ const buildD3 = function(){
                     if(d.total == -1){
                         text= d.name + " had no emission data for this year"
                     }else{
-                        text =  d.name + " had emission of " + d.total + " metric tons of Co2"
+                        if(total){
+                            text =  d.name + " had emission of " + d.total + " metric tons of Co2"
+                        }else{
+                            text =  d.name + " had emission of " + d.perCapita + " metric tons of Co2 per capita"
+                        }
                     }
                     
                     tooltip.transition()        
@@ -163,9 +179,57 @@ const buildD3 = function(){
         })
         
     }
+
+    
+  
+      this.changeBorders = function () {
+        svg.selectAll('path')
+          .attr('stroke', this.borders)
+      }
+  
+      this.changeInfoBackground = function () {
+        d3.select('body').select('tooltip')
+          .attr('style', 'background: ' + this.titleBackground)
+      }
+  
+      this.changeInfoTextColor = function () {
+        d3.select('body').select('tooltip')
+          .attr('style', 'color: ' + this.titleTextColor)
+      }
+
+    this.updateColours = function(r_d, g_d, b_d){
+        console.log("updating")
+        svg.selectAll("countries").style("fill", function(d){
+            if(d.total == -1){
+                return "white"
+            }else{
+                
+                let score, max, r_base = 255 + r_d, g_base = 255 + g_d
+                if(total){
+                    score = d.total
+                    max = 2500000
+                }else{
+                    score = d.perCapita
+                    max = 500
+                }
+                d_rel = 100*Math.log(100*score)/Math.log(max)
+                var r, g, b = 0 + b_d;
+                if(d_rel > 50) {
+                    r = r_base;
+                    g = Math.round(510 - 5.1 * d_rel);
+                }
+                else {
+                    g = g_base;
+                    r = Math.round(5.10 * d_rel);
+                }
+                var h = r * 0x10000 + g * 0x100 + b * 0x1;
+                return '#' + ('000000' + h.toString(16)).slice(-6);
+            }
+        })
+    }
 }
 
-var m0, o0;
+var m0, o0, lock = false, total = true;
 
 globeConfig = {
     pointSize: 2
@@ -177,5 +241,22 @@ window.onload = function(){
         console.log("Value changed");
     })
     buildD3()
-    yearInput.addEventListener("input", buildD3)
+
+    document.getElementById("rotationOption").addEventListener("change", function(){
+        if(document.getElementById("rotationOption").value == "Fixed"){
+            lock = true
+        }else{
+            lock = false
+        }
+    })
+
+    document.getElementById("dataOption").addEventListener("change", function(){
+        if(document.getElementById("dataOption").value == "total"){
+            total = true
+        }else{
+            total = false
+        }
+        buildD3()
+        updateColours(-100, -100, 100)
+    })
 }
