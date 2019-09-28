@@ -26,14 +26,10 @@ My application implements the minimal requirements and functionalities:
 6)  My application uses the ES Linter through Webstorm.
 
 7) My HTML and CSS validates through Webstorm.
-----------------------------------------------------------------------------------------
-4. Ensure that your project has the proper naming scheme `a4-yourname` so we can find it.
-
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-gitname-firstname-lastname`.
-
+---------------------------------------------------------------------------------------------------------------------------------------
 ## Application Name: Zoo Adventure
 
-the hosting link e.g. http://a4-charlieroberts.glitch.me
+the hosting link: https://glitch.com/~a4-manasi-danke
 
 ### Zoo Adventure is an online and interactive board game that a user can play online and on the go. The user is able to move the piece with their keyboard and also interact with the buttons and instructions provided. They can play this game on the go as a mess-free way to relax before bedtime.
 
