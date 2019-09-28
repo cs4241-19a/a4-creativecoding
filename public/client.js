@@ -44,7 +44,7 @@ const gameOfLife = new GameOfLifeClass()
 // ###################
 
 window.onload = function () {
-  const myDat = new MyDatModule(gameOfLife, golBoard)
+  MyDatModule.init(gameOfLife, golBoard)
 
   // Show the help screen at the start
   showHelp()
