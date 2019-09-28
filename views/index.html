@@ -4,14 +4,6 @@
 		<meta charset="utf-8">
 		<title>CS 4241 Assignment 4</title>
 		<meta name="description" content="CS 4241 Assignment 4">
-		<!--link id="favicon" rel="icon" href="https://glitch.com/edit/favicon-app.ico" type="image/x-icon"-->
-		<!--meta http-equiv="X-UA-Compatible" content="IE=edge"-->
-		<!--meta name="viewport" content="width=device-width, initial-scale=1"-->
-
-		<!-- Milligram stylesheets -->
-		<!--link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic"-->
-		<!--link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css"-->
-		<!--link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.css"-->
 
 		<!-- import the webpage's stylesheet -->
 		<link rel="stylesheet" href="/style.css">
@@ -20,12 +12,26 @@
 		<script src="/bundle.js" defer></script>
 	</head>
 	<body>
-		<div id="viewport"></div>
-		<!--div id="editor">
-			<h1>LifeGrid</h1>
-			<button>Test 1</button>
-			<button>Test 2</button>
-			<button>Test 3</button>
-		</div-->
+		<section class="popup">
+		  <p class="popup-text" id="help-popup">
+		    <b style="font-size: 2em">LifeGrid</b>
+		    <br/><br/>
+		    This is an implementation of Conway's Game of Life. The visualization involves 3D shapes that get more complex
+		    as they are alive for longer.
+		    <br/><br/>
+		    Using the dialog in the top right corner, you can toggle whether or not the program is running, and also control
+		    the rate at which the iterations occur. For fun, you can control the rate at which the objects spin around. You
+		    can also enter edit mode.
+		    <br/><br/>
+		    <b style="font-size: 1.25em">Edit Mode</b>
+		    <br/><br/>
+		    When in edit mode, you can click on a cell to toggle if that cell is occupied or not.
+		    <br/><br/>
+		    <b style="font-size: 1.25em">Help Screen</b>
+		    <br/><br/>
+		    You can toggle this help screen in the menu in the top right corner. Enjoy!
+		  </p>
+		</section>
+		<main id="viewport"></main>
 	</body>
 </html>
