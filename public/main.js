@@ -99,11 +99,11 @@ const animate = function () {
 
       const newColor = frequencyBinCount[thing.id] / 300;
       if (color === 0) {
-        thing.material.color.setRGB(0, 0, newColor);
+        thing.material.color.setRGB(0.05, 0.05, newColor);
       } else if (color === 1) {
-        thing.material.color.setRGB(0, newColor, 0);
+        thing.material.color.setRGB(0.05, newColor, 0.05);
       } else if (color === 2) {
-        thing.material.color.setRGB(newColor, 0, 0);
+        thing.material.color.setRGB(newColor, 0.05, 0.05);
       }
     }
   });
