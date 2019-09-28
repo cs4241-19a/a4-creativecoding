@@ -8,13 +8,12 @@ var directionsTxt = document.getElementById('directionsTxt')
 
 var tutorialBtn = document.getElementById('tutorialBtn')
 var closeBtn = document.getElementById('closeBtn')
+var replayBtn = document.getElementById('replayBtn')
+
+var livesTxt = document.getElementById('livesTxt')
+var scoreTxt = document.getElementById('scoreTxt')
 
 const gameCanvas = document.getElementById('gameCanvas')
-// const ctx = gameCanvas.getContext('2d')
-
-// ctx style test
-// ctx.fillStyle = 'green'
-// ctx.fillRect(10, 10, 150, 100)
 
 window.onload = function () {
   const startBtn = document.querySelector('#startBtn')
@@ -23,6 +22,8 @@ window.onload = function () {
   tutorialBtn.onclick = showDocumentation
   const closeBtn = document.querySelector('#closeBtn')
   closeBtn.onclick = hideDocumentation
+  const replayBtn = document.querySelector('#replayBtn')
+  replayBtn.onclick = restartgame
 }
 
 const startgame = function (e) {
@@ -34,9 +35,33 @@ const startgame = function (e) {
   directionsTxt.style.display = 'none'
   startBtn.style.display = 'none'
   tutorialBtn.style.display = 'block'
+  replayBtn.style.display = 'block'
+
+  livesTxt.style.display = 'block'
+  scoreTxt.style.display = 'block'
 
   gameCanvas.style.display = 'block'
   mod1.start()
+  mod1.playBgMusic()
+}
+
+const restartgame = function (e) {
+  e.preventDefault()
+
+  console.log('Restarting game')
+  titleTxt.style.display = 'none'
+  directionsTitleTxt.style.display = 'none'
+  directionsTxt.style.display = 'none'
+  startBtn.style.display = 'none'
+  tutorialBtn.style.display = 'block'
+  replayBtn.style.display = 'block'
+
+  livesTxt.style.display = 'block'
+  scoreTxt.style.display = 'block'
+
+  gameCanvas.style.display = 'block'
+  mod1.restart()
+  mod1.playBgMusic()
 }
 
 const showDocumentation = function (e) {
@@ -48,6 +73,10 @@ const showDocumentation = function (e) {
   directionsTxt.style.display = 'block'
   tutorialBtn.style.display = 'none'
   closeBtn.style.display = 'block'
+  replayBtn.style.display = 'none'
+
+  livesTxt.style.display = 'none'
+  scoreTxt.style.display = 'none'
 
   gameCanvas.style.display = 'none'
   // pause game
@@ -62,6 +91,10 @@ const hideDocumentation = function (e) {
   directionsTxt.style.display = 'none'
   tutorialBtn.style.display = 'block'
   closeBtn.style.display = 'none'
+  replayBtn.style.display = 'block'
+
+  livesTxt.style.display = 'block'
+  scoreTxt.style.display = 'block'
 
   gameCanvas.style.display = 'block'
   // unpause game

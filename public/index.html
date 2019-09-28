@@ -13,19 +13,24 @@
           crossorigin="anonymous">
   </head>
   <body>
-    <button type="button" class="btn btn-primary btn-circle btn-xl tutorial" id="tutorialBtn"><i class="fa fa-question"></i></button>
-    <button type="button" class="btn btn-primary btn-circle btn-xl tutorial" id="closeBtn"><i class="fa fa-times"></i></button>
+    <button type="button" class="btn btn-info btn-circle btn-xl tutorial" id="tutorialBtn"><i class="fa fa-question"></i></button>
+    <button type="button" class="btn btn-info btn-circle btn-xl tutorial" id="closeBtn"><i class="fa fa-times"></i></button>
+    <button type="button" class="btn btn-primary btn-circle btn-xl replay" id="replayBtn"><i class="fa fa-play"></i></button>
     
     <section class="title">
       <div class="container text-left text-white">
-        <h1 id="titleTxt">Shape Destroyer</h1>
+        <h1 id="titleTxt">Lonely Astronaut</h1>
         <h4 id="directionsTitleTxt">Directions</h4>
-        <p id="directionsTxt">Move with your mouse to aim your cannons at different shapes. Click and hold to fire lasers and destroy shapes. The more shapes you destroy, the higher your score. You can enhance your shape destroying experience using the laser control panel.</p>
-        <button type="button" class="btn btn-danger" type="button" id="startBtn">Energize Laser Cannons</button>    
+        <p id="directionsTxt">You are an astronaut floating in space who has unfortunately stumbled into a stampede of asteroids. Evade the asteroids with your mouse to avoid your inevitable demise. The longer you survive, the higher your score. The game ends when your lives counter hits 0. You can enhance your lonely astronaut experience using the control panel on the right. If you want to restart, press the play button in right top corner.</br>Music by bensound.com</p>
+        <button type="button" class="btn btn-danger" type="button" id="startBtn">Ready to Survive</button>    
       </div>
     </section>
 
     <section>
+      <div class="text-left text-white">
+        <h3 id="livesTxt">Lives:</h3>
+        <h3 id="scoreTxt">Score:</h3>
+      </div>
       <canvas id="gameCanvas"></canvas>
     </section>
     
