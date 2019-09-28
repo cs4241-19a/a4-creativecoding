@@ -11,9 +11,9 @@ This application creates pretty visuals with user interaction. The logic was ins
 Used ESLint at WebStorm but carried the final project to Glitch in the ends.
 
 ## Technical Achievements
-- **Tech Achievement 1**: Wrote logic for controls
-- **Tech Achievement 2**: The beautiful FPS tracker from Stats library (from examples)
+- **Tech Achievement 1**: Wrote logic for controls.
+- **Tech Achievement 2**: The beautiful FPS tracker from Stats library (from examples).
 
 ### Design/Evaluation Achievements
-- **Design Achievement 1**: Validated HTML/CSS
-- **Design Achievement 2**: Pretty Visuals
+- **Design Achievement 1**: Validated HTML/CSS.
+- **Design Achievement 2**: Pretty Visuals.
