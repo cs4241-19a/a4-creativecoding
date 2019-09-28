@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>3D Music Visualization</title>
+
+<!--    vertex shader that passes through vertex position without modifying it-->
+    <script id="vertexShader" type="x-shader/x-vertex">
+        attribute vec2 position;
+        void main(void) {
+            gl_Position = vec4(position, 0, 1);
+        }
+		</script>
+
+<!--    fragment shader that multiplies the output color wiht the spectrum intensity
+to create some cool visuals. Also, 1 is scaled by 0.2 since most audio is in the first 20% of the spectrum texture-->
+<!--    this shader is an adaptation of this one: https://www.shadertoy.com/view/XsXXDn-->
+    <script id="fragmentShader" type="x-shader/x-fragment">
+			precision mediump float;
+
+            uniform float time;
+            uniform vec2 resolution;
+            uniform sampler2D spectrum;
+
+            void main(void) {
+                  vec3 c;
+                  float z = 0.1 * time;
+                  vec2 uv = gl_FragCoord.xy / resolution;
+                  vec2 p = uv - 0.5;
+                  p.x *= resolution.x / resolution.y;
+                  float l = 0.5 * length(p);
+                  for (int i = 0; i < 3; i++) {
+                        z += 0.1;
+                        uv += p / l * (sin(z) + 1.0) * abs(sin(l * 9.0 - z * 2.0));
+                        c[i] = 0.01 / length(abs(mod(uv, 1.0) - 0.5));
+                  }
+                  float intensity = texture2D(spectrum, vec2(l, 0.5)).x;
+                  gl_FragColor = vec4(c / l * intensity, time);
+            }
+		</script>
+
+</head>
+<body>
+<div id="content">
+    <audio id="audio" controls></audio>
+    <div id="out">
+        <label for="thefile" class="file"> Choose an audio file
+            <input type="file" id="thefile" accept="audio/*" />
+        </label>
+    </div>
+    <canvas id="oscillatingElement"></canvas>
+</div>
+
+<script src="http://threejs.org/build/three.min.js"></script>
+<script type="module" src="js/webGLShaders.js"></script>
+<link rel="stylesheet" href="/css/allStyles.css">
+<link rel="stylesheet" href="/css/3DVizStyle.css">
+
+</body>
+</html>

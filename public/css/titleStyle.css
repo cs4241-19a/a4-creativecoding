@@ -1,0 +1,59 @@
+.titleSection {
+    text-align:center;
+    color:ghostwhite;
+    font-family:"Roboto", monospace;
+    font-weight:300;
+    font-size:32px;
+    padding-top:40vh;
+    /*height:100vh;*/
+    /*overflow:hidden;*/
+    -webkit-backface-visibility: hidden;
+    -webkit-transform: translate3d(0,0,0);
+}
+
+.titleDiv{
+    display:inline-block;
+    overflow:hidden;
+    white-space:nowrap;
+}
+
+
+.titleDiv:last-of-type span {
+    margin-left:0;
+    animation: slidein 3s;
+}
+
+#typed {
+    font-size: 24px;
+}
+
+@keyframes showup {
+    0% {opacity:0;}
+    20% {opacity:1;}
+    80% {opacity:1;}
+    100% {opacity:0;}
+}
+
+@keyframes slidein {
+    from {
+        margin-left:-800px;
+    }
+    to {
+        margin-left:0;
+    }
+}
+
+@keyframes reveal {
+    0% {opacity:0;width:0;}
+    20% {opacity:1;width:0;}
+    30% {width:450px;}
+    80% {opacity:1;}
+    100% {opacity:1;width:355px;}
+}
+
+
+p {
+    font-size:12px;
+    color:#999;
+    margin-top:200px;
+}

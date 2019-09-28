@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300');
+
+.homeContentSection {
+    background-color: ghostwhite;
+    margin-top: 50vh;
+    padding: 8vh 3vh;
+    /*height: 50vh;*/
+    font-family: Roboto, monospace;
+    align-content: center;
+    text-align: center;
+}
+
+h2 {
+    padding-bottom: 5vh;
+}
+
+canvas {
+    width: 100vw;
+    height: 100vh;
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -9999;
+}
+
+.card{
+    padding-top: 5vh;
+    margin: 0.5vh;
+    list-style: none;
+    position: relative;
+    min-height: 20vh;
+    filter: brightness(0.75) saturate(1.2) contrast(0.85);
+    transform-origin: center;
+    transition:
+            filter 100ms linear,
+            transform 100ms linear;
+    background-color: rgba(114, 126, 203, 0.8);
+    align-content: center;
+    text-align: center;
+    vertical-align: center;
+}
+
+.card:hover {
+    transform: scale(1.03) translateZ(0);
+}
+
