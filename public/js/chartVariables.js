@@ -1,7 +1,10 @@
 import chartFxns, { clamp } from './chartFxns.js'
 export default {getSelectedData, setSelectedData, getSelectedColor, setSelectedColor, getSelectedMaxFontSize, setSelectedMaxFontSize, setSelectedMinFontSize, getSelectedMinFontSize, getSelectedText, setSelectedText, shuffleArray, loadData, getText1, getText2, getText3, getText4}
 
+// This keeps track of what the selected data is (treatment or control)
 let selectedData = null
+
+// This takes in a data set and makes it into a list where each element has 4 properties (the properties are used in the display)
 function loadData(data){ 
     let dataMap = {}
         for(let i = 1; i < data.length; i++){
@@ -28,9 +31,9 @@ function loadData(data){
     selectedData = dataList
 }
 
+// These keep track of the font sizes and the color
 let selectedMinFontSize = 5
 let selectedMaxFontSize = 9
-
 let selectedColor = `rgba(17, 0, 255, .5)`
 
 
@@ -43,6 +46,10 @@ function shuffleArray(array) {
         array[j] = temp;
     }
 }
+
+/* These 4 functions are used to set what the text is that is displayed on the chart based on the user selections. 
+There are 4 options: just the period in frames, just the period in frames, or either of those displays with the number of values at that period
+  */
 
 function getText1(d) {
     return d.data.label
@@ -60,10 +67,11 @@ function getText4(d){
     return d.data.periodInSec  + ":" + d.data.count
 }
 
+// Keeps track of which display is being used
 let selectedGetText = getText1
 
 
-//Getters and Setters
+//Getters and Setters: make sure that values are holding the right value even across modules
 function getSelectedData(){
     return selectedData
 }
