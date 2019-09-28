@@ -21,7 +21,7 @@ body {
 
 h1 {
     color: white;
-    font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter";
+    font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", serif;
     margin-top: 6px;
     font-size: 3em;
     font-weight: 600;
@@ -229,7 +229,7 @@ p {
 }
 
 .defaultTo {
-    font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter";
+    font-family: "Courier New", Courier, "Lucida Sans Typewriter", "Lucida Typewriter", serif;
     font-style: italic;
 }
 
@@ -258,7 +258,12 @@ p {
     font-style: italic;
 }
 
-
+#lol {
+    background: rgb(255,0,0);
+    background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(0,0,255,1) 50%, rgba(0,255,31,1) 100%);
+    box-shadow: 0 1px 10px darkslategray;
+    cursor: pointer;
+}
 
 
 

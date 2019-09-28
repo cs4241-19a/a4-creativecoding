@@ -15,8 +15,9 @@ will change which aspects of the visualizer. Biggest challenge was to change par
 - **Tech Achievement 1**: Integrated two frameworks (Web Audio API and Canvas) to implement an audio visualizer
 - **Tech Achievement 2**: The parameters for the visualizer are updates in realtime without restarting the song
 - **Tech Achievement 3**: Server implements serve-favicon middleware and the html shows a panda favicon
-- **Tech Achievement 4**: Minimized duplication of functions by making 3 modules with all the major functions in them
+- **Tech Achievement 4**: Minimized duplication of functions by making 4 modules with all the major functions in them
 - **Tech Achievement 5**: Minimized use of global variables and modularized the code by passing all components of the visualizer as parameters to the functions in the modules
+- **Tech Achievement 6**: Implemented video element
 
 ### Design/Evaluation Achievements
 - **Design Achievement 1**: Hard coded all the css stylesheet

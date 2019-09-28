@@ -1,6 +1,7 @@
 import { getCanvas, audioInit, audioGraph } from './setUpModule.js'
 import { visualizer } from './visualizerModule'
 import { info } from './infoModule'
+import { lol } from './lolModule'
 import * as dat from 'dat.gui'
 
 const gui = new dat.GUI()
@@ -169,6 +170,7 @@ window.onload = function () {
   document.getElementById('pink').onclick = pink
   document.getElementById('red').onclick = red
   document.getElementById('infoBtn').onclick = info
+  document.getElementById('lol').onclick = lol
 
   gui.add(changeParam, 'barHeight', 0, 3).name('Bar Height')
   gui.add(changeParam, 'barWidth', 0, 6).name('Bar Width')

@@ -2532,6 +2532,26 @@
     Object.defineProperty(exports, '__esModule', {
       value: true
     })
+    exports.lol = void 0
+
+    var lol = function lol () {
+      document.getElementById('canvas').innerHTML = ''
+      var video = document.createElement('VIDEO')
+      video.setAttribute('src', 'media/video.mp4')
+      video.setAttribute('width', '800')
+      video.setAttribute('height', '700')
+      document.getElementById('canvas').appendChild(video)
+      video.play()
+    }
+
+    exports.lol = lol
+  }, {}],
+  4: [function (require, module, exports) {
+    'use strict'
+
+    Object.defineProperty(exports, '__esModule', {
+      value: true
+    })
     exports.audioGraph = exports.audioInit = exports.getCanvas = void 0
 
     var getCanvas = function getCanvas () {
@@ -2574,7 +2594,7 @@
 
     exports.audioGraph = audioGraph
   }, {}],
-  4: [function (require, module, exports) {
+  5: [function (require, module, exports) {
     'use strict'
 
     var _setUpModule = require('./setUpModule.js')
@@ -2582,6 +2602,8 @@
     var _visualizerModule = require('./visualizerModule')
 
     var _infoModule = require('./infoModule')
+
+    var _lolModule = require('./lolModule')
 
     var dat = _interopRequireWildcard(require('dat.gui'))
 
@@ -2740,14 +2762,15 @@
       document.getElementById('pink').onclick = pink
       document.getElementById('red').onclick = red
       document.getElementById('infoBtn').onclick = _infoModule.info
+      document.getElementById('lol').onclick = _lolModule.lol
       gui.add(changeParam, 'barHeight', 0, 3).name('Bar Height')
       gui.add(changeParam, 'barWidth', 0, 6).name('Bar Width')
       gui.add(changeParam, 'barFit', 0.5, 5).name('Visualizer Fit')
       gui.addColor(changeParam, 'canvasClr').name('Canvas Color');
       (0, _infoModule.info)()
     }
-  }, { './infoModule': 2, './setUpModule.js': 3, './visualizerModule': 5, 'dat.gui': 1 }],
-  5: [function (require, module, exports) {
+  }, { './infoModule': 2, './lolModule': 3, './setUpModule.js': 4, './visualizerModule': 6, 'dat.gui': 1 }],
+  6: [function (require, module, exports) {
     'use strict'
 
     Object.defineProperty(exports, '__esModule', {
@@ -2804,4 +2827,4 @@
 
     exports.visualizer = visualizer
   }, {}]
-}, {}, [4])
+}, {}, [5])

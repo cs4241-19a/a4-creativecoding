@@ -4,9 +4,9 @@ const visColor = function (canvas, jsonAudioInit, jsonAudioGraph, results, color
 
     jsonAudioGraph.analyser.fftSize = 64 * Math.pow(2, 8 - (Math.round(w) + 1))
 
-    let r = barHeight + (25 * (i / jsonAudioGraph.analyser.frequencyBinCount))
-    let g = 250 * (i / jsonAudioGraph.analyser.frequencyBinCount)
-    let b = 50
+    const r = barHeight + (25 * (i / jsonAudioGraph.analyser.frequencyBinCount))
+    const g = 250 * (i / jsonAudioGraph.analyser.frequencyBinCount)
+    const b = 50
 
     switch (color) {
       case 0:
