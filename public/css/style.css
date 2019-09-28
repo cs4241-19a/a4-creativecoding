@@ -1,0 +1,19 @@
+body { 
+    margin: 0; 
+    background-color: black;
+}
+
+.scaling-svg-container {
+    position: relative; 
+    height: 0; 
+    width: 100%; 
+    padding: 0;
+    padding-bottom: 100%; 
+   }
+   .scaling-svg {
+    position: absolute; 
+    height: 100%; 
+    width: 100%; 
+    left: 0; 
+    top: 0;
+   }
