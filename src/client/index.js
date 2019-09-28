@@ -23,16 +23,16 @@ Promise.all([
 
 	 switch (document.getElementById('selected_color').value) {
       case 'red':
-        document.getElementById('health_header').value = 'red_tank.png'; // set what color tank to use
+        document.getElementById('health_header').class = 'red_tank.png'; // set what color tank to use
         break;
       case 'green':
-        document.getElementById('health_header').value = 'green_tank.png'; // set what color tank to use
+        document.getElementById('health_header').class = 'green_tank.png'; // set what color tank to use
         break;
       case 'blue':
-        document.getElementById('health_header').value = 'blue_tank.png'; // set what color tank to use
+        document.getElementById('health_header').class = 'blue_tank.png'; // set what color tank to use
         break;
       case 'purple':
-        document.getElementById('health_header').value = 'purple_tank.png'; // set what color tank to use
+        document.getElementById('health_header').class = 'purple_tank.png'; // set what color tank to use
         break;
 	 }
 
