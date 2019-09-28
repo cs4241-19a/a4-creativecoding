@@ -1,0 +1,24 @@
+{
+  "name": "",
+  "version": "",
+  "description": "",
+  "author": "",
+  "scripts": {
+    "start": "node server.improved.js"
+  },
+  "dependencies": {
+    "dat.gui": "^0.7.6",
+    "express": "^4.16.4",
+    "express-session": "^1.16.1",
+    "firebase": "^6.1.0",
+    "helmet": "^3.21.1",
+    "mime": "^2.4.4",
+    "modern-normalize": "^0.5.0",
+    "morgan": "^1.9.1",
+    "npminstall": "^4.2.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "compression": "^1.7.4",
+    "browserify": "^16.5.0"
+  }
+}

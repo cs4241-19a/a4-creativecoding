@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>A Simple Matching Game</title>
+		<link rel="stylesheet" type="text/css" href="css/style.css">
+		<style>
+			body { margin: 0; }
+			canvas { width: 200px; height: 200px }
+		</style>
+  </head>
+  <body>
+  <button id="myBtn">Information</button>
+
+	<div id="help" class="modal">
+  	<div class="modal-content">
+    <span class="close">&times;</span>
+    	<p>Welcome to a fun matching Game!</p>
+      <p>In the first text bar you fill select the number for your first cube. In the second you will select your second choice.</p>
+
+      <p>If they match they will remain fliped over, if they do not then they will flip back. Match all the cubes to win! </p>
+      <p>The Format for selecting cubes is as follows:</p>
+      <p>1       3      5</p>
+      <p>2       4      6</p>
+  	</div>
+	</div>
+
+  <h1 id="win"></h1>
+  <div>
+	<p>Enter First Choice:</p>
+	<input id="pick1" type="text" size="40" onkeydown="firstMatch(event)">
+	<p>Enter Second Choice:</p>
+	<input id="pick2" type="text" size="40" onkeydown="secondMatch(event)">
+  </div>
+
+		<script src="https://threejs.org/build/three.js"></script>
+		<script src="js/help.js"></script>
+		<script src="js/scene.js"></script>
+  <div>
+  <p>Enter Hex for Cubes</p>
+	<input id="hex" type="text" placeholder="0x000000">
+	<p>Set Winning Message</p>
+	<input id="winmes" type="text" placeholder="Congrats!">
+  <p>Set Color of Winning Message</p>
+	<input id="winColor" type="text" placeholder="FFFFFF">
+  <p>Set Font Size of Winning Message</p>
+	<input id="winFont" type="text" placeholder="24">
+  <p>Set Wrong Answer Message</p>
+	<input id="wrong" type="text" placeholder="Wrong!">
+  <p>Set Wrong Answer Message Font Size</p>
+	<input id="wrongSize" type="text" placeholder="24">
+  <button id="set" onclick="setting()">Submit</button>
+  </div>
+	</body>
+</html>
