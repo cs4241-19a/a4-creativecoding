@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Audio Visualization by Elie Hess</title>
+
+	<link href="bootstrap.css" rel="stylesheet">
+	<link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+<audio id="music" src="Caracas.mp3"></audio>
+<div id="buttons">
+	<button class="btn" id="playBtn">Play</button>
+	<button class="btn" id="pauseBtn">Pause</button>
+	<button class="btn" id="stopBtn">Stop</button>
+	<button class="btn" id="helpBtn">Help</button>
+</div>
+
+<div id="moreButtons">
+	<button class="btn" id="colorBtn">Change Color</button>
+</div>
+
+<div id="helpMenu">
+	<br>
+	<h1>Audio Visualization</h1>
+	<h2>Created by Elie Hess</h2>
+	<h3>Usage:</h3>
+	<p>
+		Click the Play button to start playing the song. <br>
+		Click the Pause button to pause the song. <br>
+		Click the Stop button to pause the song and reset it to the beginning. <br>
+		Click the Help button to pause the song and redisplay this message. <br>
+		While the audio is playing, click the "Open Controls" button at the top right to control the visualization. <br>
+		While the audio is playing, click the "Color" button to cycle through blue, green, and red visuals <br> <br>
+		The song playing is <a href="https://tintamare.bandcamp.com/track/caracas">"Caracas"</a> by Tintamare
+	</p>
+</div>
+</body>
+
+<script src="main.js" type="module"></script>
+
+<script src="./build/dat.gui.js"></script>
+<script src="./build/three.js"></script>
+<script src="./build/jquery.js"></script>
+<script src="./build/bootstrap.js"></script>
+
+</html>
