@@ -5,8 +5,7 @@ For this assignment we will focus on client-side development using popular audio
 
 
 ## A Digital Visualization Portfolio
-
-your hosting link e.g. http://a4-petrakumi12.glitch.me
+Link: http://a4-petrakumi12.glitch.me
 
 Include a very brief summary of your project here. Images are encouraged, along with concise, high-level text. Be sure to include:
 
