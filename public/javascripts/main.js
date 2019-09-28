@@ -1,7 +1,15 @@
+import acolor from './color.js'
+import {min, max} from './distances.js'
+//import keyPress from './keyPress.js';
+//import keyPress from './keyPress.js';
+
+
 // based on an example found here: https://codepen.io/programking/pen/MyOQpO
 const THREE = require('three')
 const dat = require('dat.gui')
 const OrbitControls = require('three-orbitcontrols')
+
+
 
 // need to declare these variables globally
 // creating a scene
@@ -61,8 +69,8 @@ window.onload = function () {
   controls.enableDamping = true // an animation loop is required when either damping or auto-rotation are enabled
   controls.dampingFactor = 0.05
   controls.screenSpacePanning = false
-  controls.minDistance = 100
-  controls.maxDistance = 1200
+  controls.minDistance = min//100
+  controls.maxDistance =  max//1200
 
   document.addEventListener('mousedown', onDocumentMouseDown)
   document.addEventListener('keydown', keyPress)
@@ -138,7 +146,7 @@ function onDocumentMouseDown (event) {
   if (intersects.length > 0) {
     var selectedObject = intersects[0].object
     controller.selected_cube = selectedObject
-    controller.selected_cube.material.color.setHex(0x37e584)
+    controller.selected_cube.material.color.setHex(acolor)
 
     gui.remove(name)
     gui.remove(length)
