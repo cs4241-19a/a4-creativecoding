@@ -34019,33 +34019,7 @@ exports.SceneUtils = SceneUtils;
 function LensFlare() {
   console.error('THREE.LensFlare has been moved to /examples/js/objects/Lensflare.js');
 }
-},{}],"js/shape_logic.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.active_geometry = void 0;
-
-var THREE = _interopRequireWildcard(require("three"));
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-/**
- * Data Definition:
- * {
- *   geomtery: THREE.geometry,
- *   material: THREE.material,
- *   mesh: THREE.mesh,
- *   fade_rate: int,
- *   on_tick: function,
- * }
- */
-var active_geometry = [];
-exports.active_geometry = active_geometry;
-},{"three":"../node_modules/three/build/three.module.js"}],"js/utils.js":[function(require,module,exports) {
+},{}],"js/utils.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34072,7 +34046,130 @@ function random_range(min, max) {
   var diff = max - min;
   return Math.random() * diff + min;
 }
-},{}],"js/app.js":[function(require,module,exports) {
+},{}],"js/shape_logic.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.create_box = create_box;
+exports.mid_splash = mid_splash;
+exports.sin_curve_right = sin_curve_right;
+exports.sin_curve_left = sin_curve_left;
+exports.active_geometry = void 0;
+
+var THREE = _interopRequireWildcard(require("three"));
+
+var _app = require("./app");
+
+var _utils = require("./utils");
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; if (obj != null) { var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+/**
+ * Data Definition:
+ * {
+ *   geomtery: THREE.geometry,
+ *   material: THREE.material,
+ *   mesh: THREE.mesh,
+ *   fade_rate: int,
+ *   on_tick: function,
+ * }
+ */
+var active_geometry = [];
+exports.active_geometry = active_geometry;
+
+function generate_sin(min_x, max_x) {
+  var vect_2s = [];
+  var cur_x = min_x;
+
+  while (cur_x <= max_x) {
+    vect_2s.push(new THREE.Vector2(cur_x, 0));
+    vect_2s.push(new THREE.Vector2(cur_x + .5, .5));
+    vect_2s.push(new THREE.Vector2(cur_x + 1, -.5));
+    cur_x += 1.5;
+  }
+
+  return vect_2s;
+}
+
+function create_box() {
+  var geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
+  var material = new THREE.MeshNormalMaterial();
+  material.transparent = true;
+  var mesh = new THREE.Mesh(geometry, material);
+  mesh.position.set((0, _utils.random_range)(-.5, .6), (0, _utils.random_range)(-.5, .5), (0, _utils.random_range)(-2, 1));
+  active_geometry.push({
+    geometry: geometry,
+    material: material,
+    mesh: mesh,
+    fade_rate: 0.005,
+    on_tick: function on_tick() {
+      this.mesh.rotation.x += (0, _utils.random_range)(-2, 2);
+      this.mesh.rotation.y += (0, _utils.random_range)(-.5, .5);
+    }
+  });
+
+  _app.scene.add(mesh);
+}
+
+function mid_splash() {
+  var geometry = new THREE.RingBufferGeometry(.15, .3, 64);
+  var material = new THREE.MeshBasicMaterial({
+    color: (0, _utils.random_choice)([0x00efff, 0x1aef00]),
+    side: THREE.DoubleSide
+  });
+  material.transparent = true;
+  var mesh = new THREE.Mesh(geometry, material);
+  mesh.position.set(0, 0, .5);
+  active_geometry.push({
+    geometry: geometry,
+    material: material,
+    mesh: mesh,
+    fade_rate: 0.02,
+    on_tick: function on_tick() {
+      mesh.position.z -= .16;
+    }
+  });
+
+  _app.scene.add(mesh);
+}
+
+function sin_curve_create(right) {
+  var color = (0, _utils.random_choice)([0xff0000, 0x00ff00, 0xff00ff, 0xeeffee, 0xffa0e1]);
+  var direction = right ? .002 : -.002;
+  var curve = new THREE.SplineCurve(generate_sin(-2, 2));
+  var points = curve.getPoints(100);
+  var geometry = new THREE.BufferGeometry().setFromPoints(points);
+  var material = new THREE.LineBasicMaterial({
+    color: color
+  });
+  material.transparent = true; // Create the final object to add to the scene
+
+  var splineObject = new THREE.Line(geometry, material);
+  active_geometry.push({
+    geometry: geometry,
+    material: material,
+    mesh: splineObject,
+    fade_rate: 0.005,
+    on_tick: function on_tick() {
+      this.mesh.position.x += direction;
+    }
+  });
+
+  _app.scene.add(splineObject);
+}
+
+function sin_curve_right() {
+  sin_curve_create(true);
+}
+
+function sin_curve_left() {
+  sin_curve_create(false);
+}
+},{"three":"../node_modules/three/build/three.module.js","./app":"js/app.js","./utils":"js/utils.js"}],"js/app.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -34083,8 +34180,6 @@ exports.scene = void 0;
 var THREE = _interopRequireWildcard(require("three"));
 
 var _shape_logic = require("./shape_logic");
-
-var _utils = require("./utils");
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
@@ -34107,34 +34202,32 @@ document.getElementById('loop').addEventListener('click', function (event) {
  * Keybinds for controlling visualizer (not case sensitive)
  * 
  * C - spawn new cube at a random location
+ * X - spawn new ring traveling backwards
  */
 
 document.addEventListener("keydown", function (event) {
   switch (event.keyCode) {
     case 67:
       {
-        console.log("pressed c");
+        (0, _shape_logic.create_box)();
+        break;
+      }
 
-        var _geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
+    case 88:
+      {
+        (0, _shape_logic.mid_splash)();
+        break;
+      }
 
-        var _material = new THREE.MeshNormalMaterial();
+    case 90:
+      {
+        (0, _shape_logic.sin_curve_right)();
+        break;
+      }
 
-        _material.transparent = true;
-
-        var _mesh = new THREE.Mesh(_geometry, _material);
-
-        _mesh.position.set((0, _utils.random_range)(-1, 1), (0, _utils.random_range)(-1, 1), 0);
-
-        _shape_logic.active_geometry.push({
-          geometry: _geometry,
-          material: _material,
-          mesh: _mesh,
-          fade_rate: 0.05,
-          on_tick: function on_tick() {//console.log("tick");
-          }
-        });
-
-        scene.add(_mesh);
+    case 65:
+      {
+        (0, _shape_logic.sin_curve_left)();
         break;
       }
 
@@ -34150,12 +34243,12 @@ function init() {
   exports.scene = scene = new THREE.Scene();
   geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
   material = new THREE.MeshNormalMaterial();
-  mesh = new THREE.Mesh(geometry, material);
-  scene.add(mesh);
+  mesh = new THREE.Mesh(geometry, material); //scene.add( mesh );
+
   renderer = new THREE.WebGLRenderer({
     antialias: true
   });
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setSize(window.innerWidth - 30, window.innerHeight - 30);
   document.body.appendChild(renderer.domElement); // Set up the looping sample
 
   var audioLoader = new THREE.AudioLoader();
@@ -34179,12 +34272,13 @@ function animate() {
     managed_object.on_tick();
 
     if (managed_object.material.opacity < 0) {
-      managed_object.material.opacity = null;
-      scene.remove(managed_object.mesh); //active_geometry.splice(active_geometry.indexOf(this));
+      scene.remove(managed_object.mesh);
+      managed_object.material.dispose();
+      managed_object.geometry.dispose();
     }
   });
 }
-},{"three":"../node_modules/three/build/three.module.js","./shape_logic":"js/shape_logic.js","./utils":"js/utils.js"}],"../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"three":"../node_modules/three/build/three.module.js","./shape_logic":"js/shape_logic.js"}],"../node_modules/parcel/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -34212,7 +34306,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "24664" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56488" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

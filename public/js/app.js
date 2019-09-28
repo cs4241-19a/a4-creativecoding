@@ -1,7 +1,6 @@
 import * as THREE from "three";
 
-import { active_geometry } from "./shape_logic";
-import { random_range } from "./utils";
+import { active_geometry, create_box, mid_splash, sin_curve_right, sin_curve_left } from "./shape_logic";
 
 
 var camera, scene, renderer;
@@ -24,26 +23,24 @@ document.getElementById('loop').addEventListener('click', event => {
  * Keybinds for controlling visualizer (not case sensitive)
  * 
  * C - spawn new cube at a random location
+ * X - spawn new ring traveling backwards
  */
 document.addEventListener("keydown", event => {
   switch (event.keyCode) {
   case 67:{
-    console.log("pressed c");
-    const geometry = new THREE.BoxGeometry(0.1, 0.1, 0.1);
-    const material = new THREE.MeshNormalMaterial();
-    material.transparent = true;
-    const mesh = new THREE.Mesh(geometry, material);
-    mesh.position.set(random_range(-1, 1), random_range(-1, 1), 0);
-    active_geometry.push({
-      geometry: geometry,
-      material: material,
-      mesh: mesh,
-      fade_rate: 0.05,
-      on_tick: function(){
-        //console.log("tick");
-      },
-    });
-    scene.add(mesh);
+    create_box();
+    break;
+  }
+  case 88:{
+    mid_splash();
+    break;
+  }
+  case 90:{
+    sin_curve_right();
+    break;
+  }
+  case 65:{
+    sin_curve_left();
     break;
   }
   default:
@@ -64,10 +61,10 @@ function init() {
   material = new THREE.MeshNormalMaterial();
 
   mesh = new THREE.Mesh( geometry, material );
-  scene.add( mesh );
+  //scene.add( mesh );
 
   renderer = new THREE.WebGLRenderer( { antialias: true } );
-  renderer.setSize( window.innerWidth, window.innerHeight );
+  renderer.setSize( window.innerWidth-30, window.innerHeight-30 );
   document.body.appendChild( renderer.domElement );
 
   // Set up the looping sample
@@ -93,9 +90,9 @@ function animate() {
     managed_object.material.opacity -= managed_object.fade_rate;
     (managed_object.on_tick)();
     if (managed_object.material.opacity < 0) {
-      managed_object.material.opacity = null;
       scene.remove(managed_object.mesh);
-      //active_geometry.splice(active_geometry.indexOf(this));
+      managed_object.material.dispose();
+      managed_object.geometry.dispose();
     }
   })
 
