@@ -1,0 +1,50 @@
+body{
+    background-color: black;
+}
+
+input{
+    color: white;
+}
+
+span{
+    color: white;
+    font-size:30px;
+}
+
+#dropbox:hover{
+    background-color: #7f7f7f;
+}
+
+
+label{
+    position: relative;
+}
+#musicFile{
+    position: absolute;
+    left: 0;
+    top: 0;
+    opacity: 0;
+}
+#btn{
+    margin-right: 5px;
+}
+#text{
+    color: white;
+}
+
+
+#hideBtn{
+    margin:7px;
+    width:200px;
+    font-size:25px;
+    background-color:rgba(0,0,0,0);
+    color:white;
+    border-radius:3em;
+    border:3px solid;
+}
+
+#hideBtn:hover {
+    background-color: #555555; /* Grey */
+    color: white;
+    cursor: pointer;
+}
