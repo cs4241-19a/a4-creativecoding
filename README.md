@@ -1,6 +1,6 @@
 ## Audio Visualizer
 
-http://a4-charlieroberts.glitch.me
+https://yangjack1998-a4-creativecoding-1.glitch.me/public/
 
 This is a audio visualizer which allows user to upload music and visualize these music. Users can choose either click 
 to choose the file or simply drag it in. They can also custom the scale and color of the visualizer. 
@@ -18,9 +18,7 @@ In this project, most of the errors are fix automatically and manually. Some err
 
 ## Technical Achievements
 - **Multiple Uploading Ways**: Created two ways for users to upload music, either have a search window to browser or just simply drag the file in.
-- ****: My audiovisualizer uses both FFT and amplitude analysis to drive visualization.
-- **Tech Achievement 3**: I optimized the efficiency of my reaction-diffusion algorithm by...
-- **Tech Achievement 4**: I visualized the dataset X using three different visualization technqiues provided by D3, andprovided
+- **User Interactivity**: User are able to choose songs, scale and color
 
 ### Design/Evaluation Achievements
 - **Gradual Change in Color**: The color of the cubes reflects the frequency of the music. The darker color, the lower frequency
