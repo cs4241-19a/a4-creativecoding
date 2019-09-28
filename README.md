@@ -49,5 +49,7 @@ using the "change" button, which is only enabled when the user is in drum mode.
 - **Design Achievement 2**: I designed all the audio visualizations as well as the d3 midi visualisers and reactive synth instrument.
 - **Design Achievement 3**: I designed the interaction for switching the drum pad mode from synth to drumkit.
 - **Design Achievement 4**: I updated the edit mode capabilities, allowing users to move around more of the UI, like the button columns on the 
-left and right of the screen.
-- **Design Achievement 5**: I tested my application on several people, making modifications to the UI/UX accordingly.
+left and right of the screen. I also updated which buttons are shown/hidden on each mode, making the UI much more intuitive and user-friendly.
+This includes updating the "mode" button, so that now all possible modes appear, rather than forcing the user to cycle through each mode.
+- **Design Achievement 5**: I added mouse support for the MIDI piano to remove any hardware requirements (for accessibility)
+- **Design Achievement 6**: I tested my application on several people, making modifications to the UI/UX accordingly.

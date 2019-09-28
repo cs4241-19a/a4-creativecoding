@@ -1,0 +1,45 @@
+{
+  "name": "a3-persistence",
+  "version": "1.0.0",
+  "description": "Assignment 3 - Persistence: Two-tier Web Application with Flat File Database, Express server, and CSS template ===",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kitzeller/a3-persistence.git"
+  },
+  "author": "kit zellerbach",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kitzeller/a3-persistence/issues"
+  },
+  "homepage": "https://github.com/kitzeller/a3-persistence#readme",
+  "dependencies": {
+    "babel-eslint": "^10.0.3",
+    "bcryptjs": "^2.4.3",
+    "compression": "^1.7.4",
+    "connect-ensure-login": "^0.1.1",
+    "cookie-parser": "^1.4.4",
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "express-session": "^1.16.2",
+    "helmet": "^3.21.0",
+    "hydra-synth": "^1.0.25",
+    "lowdb": "^1.0.0",
+    "mongoose": "^5.7.1",
+    "morgan": "^1.9.1",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "response-time": "^2.3.2",
+    "serve-favicon": "^2.5.0",
+    "socket.io": "^2.2.0",
+    "timesync": "^1.0.3",
+    "uuid": "^3.3.3"
+  },
+  "devDependencies": {
+    "eslint": "^6.4.0"
+  }
+}

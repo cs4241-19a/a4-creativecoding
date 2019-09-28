@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>wavelength</title>
+    <link rel="stylesheet" type="text/css" href="vendor/codemirror/codemirror.css">
+    <link rel="stylesheet" type="text/css" href="css/tomorrow-night-eighties.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+<body>
+<div id="canvas-container">
+    <canvas height="1000" width="1000" id="myCanvas"></canvas>
+</div>
+
+<div id="snackbar"></div>
+
+<div id="logout-div">
+    <div id="drum-side-buttons">
+        <button disabled id="change-loop" class="fake-box">change</button>
+        <button id="start-loop" class="fake-box">start</button>
+        <button id="stop-loop" class="fake-box" disabled>stop</button>
+    </div>
+
+    <button id="edit" class="fake-box">edit</button>
+
+    <div id="piano-side-buttons" style="display: none">
+        <button id="autocomplete" class="fake-box">auto</button>
+        <button id="improvise" class="fake-box">improvise</button>
+        <button id="record" class="fake-box">record</button>
+    </div>
+</div>
+
+<div id="sounds-div" class="pad-top">
+    <div class="box pad-e" data-code="a"><i class="fas fa-drum"></i></div>
+    <div class="box pad-e" data-code="b"><i class="fas fa-chevron-down"></i></div>
+    <div class="box pad-e" data-code="c"><i class="fas fa-times-circle"></i></div>
+    <div class="box pad-e" data-code="d"><i class="fas fa-language"></i></div>
+    <div class="box pad-e" data-code="e"><i class="fas fa-dog"></i></div>
+    <div class="box pad-e" data-code="f"><i class="fas fa-archive"></i></div>
+    <div class="box pad-e" data-code="g"><i class="fas fa-wifi"></i></div>
+    <div class="box pad-e" data-code="h"><i class="fas fa-hourglass"></i></div>
+</div>
+
+<div id="profile-div">
+    <form action="/me" method="get">
+        <button id="profile" class="fake-box" type="submit">...</button>
+    </form>
+    <form action="/logout" method="get">
+        <button class="fake-box" type="submit">logout</button>
+    </form>
+</div>
+
+<div id="help-div">
+    <div class="dropdown">
+        <button id="dropdownbtn" class="dropbtn fake-box">mode</button>
+        <div id="myDropdown" class="dropdown-content">
+            <button data-id='hydra' class="fake-box">hydra</button>
+            <button data-id='midi' class="fake-box">midi</button>
+            <button data-id='tone' class="fake-box">tone</button>
+            <button data-id='audiovisual' class="fake-box">audiovisual</button>
+            <button data-id='piano' class="fake-box">piano</button>
+            <button data-id='gibber' class="fake-box">gibber</button>
+            <button data-id='d3' class="fake-box">d3</button>
+        </div>
+    </div>
+
+    <button id="join-session" class="fake-box">session</button>
+    <button id="save" class="fake-box">save</button>
+    <button id="load" class="fake-box">load</button>
+    <a href="#ex1" class="fake-box pad-h" rel="modal:open">Help</a>
+</div>
+
+<div id="sequence-div" class="pad-bottom" style="width: 125px">
+    <button id="synth" class="fake-box hover">synth</button>
+    <button id="drum" disabled class="fake-box">drum</button>
+</div>
+
+<label for="code"></label><textarea id="code" name="code" style="display: none;">
+// hola, mundo!
+// to run code, press Shift-Enter
+src(o0)
+    .modulate(o0, 0.0001)
+    .layer(shape(3, 0.3, 0).diff(shape()).rotate(0, 0.1).repeat([1, 1], 1).scale([0.1, 0.2, 0.5, 1, 2].fast()).scrollX(0, 0).luma(0.6).invert(() => Math.sin(time)))
+    .modulateRotate(osc(10, 0.1, 0.2), -0.01)
+    .scrollX(-0.001)
+    .out()
+</textarea>
+
+<label for="gibber"></label><textarea id="gibber" name="gibber" style="display: none;">
+// hola, mundo!
+// to run code, press Shift-Enter
+
+Gibber.scale.root.seq( ['c4','eb4'], 2)
+
+// create bass monosynth and sequence 1/8 note octaves
+a = Mono('bass').note.seq( [0,7], 1/8 )
+
+// simple kick / snare drum pattern
+b = EDrums('xoxo')
+b.snare.snappy = 1
+
+// create lead synth and sequence with random notes/durations
+c = Mono('easyfx')
+    .note.seq( Rndi(0,12), [1/4,1/8,1/2,1,2].rnd( 1/8,4 ) )
+
+// Gibber.clear()
+</textarea>
+
+<div class="pad">
+    <div class="box pad-0" data-code="50">2</div>
+    <div class="box pad-0" data-code="51">3</div>
+    <div class="box pad-0" data-code="52">4</div>
+    <div class="box pad-0" data-code="53">5</div>
+    <div class="box pad-0" data-code="54">6</div>
+    <div class="box pad-0" data-code="55">7</div>
+    <div class="box pad-0" data-code="56">8</div>
+
+    <div class="box pad-1" data-code="87">W</div>
+    <div class="box pad-1" data-code="69">E</div>
+    <div class="box pad-1" data-code="82">R</div>
+    <div class="box pad-1" data-code="84">T</div>
+    <div class="box pad-1" data-code="89">Y</div>
+    <div class="box pad-1" data-code="85">U</div>
+    <div class="box pad-1" data-code="73">I</div>
+
+    <div class="box pad-2" data-code="83">S</div>
+    <div class="box pad-2" data-code="68">D</div>
+    <div class="box pad-2" data-code="70">F</div>
+    <div class="box pad-2" data-code="71">G</div>
+    <div class="box pad-2" data-code="72">H</div>
+    <div class="box pad-2" data-code="74">J</div>
+    <div class="box pad-2" data-code="75">K</div>
+
+    <div class="box pad-3" data-code="90">Z</div>
+    <div class="box pad-3" data-code="88">X</div>
+    <div class="box pad-3" data-code="67">C</div>
+    <div class="box pad-3" data-code="86">V</div>
+    <div class="box pad-3" data-code="66">B</div>
+    <div class="box pad-3" data-code="78">N</div>
+    <div class="box pad-3" data-code="77">M</div>
+</div>
+
+<div id="hydra-div" class="pad-bottom" style="display: none;">
+    <div class="box pad-y" data-code="a">osc</div>
+    <div class="box pad-y" data-code="b">solid</div>
+    <div class="box pad-y" data-code="c">voronoi</div>
+    <div class="box pad-y" data-code="d">gradient</div>
+    <div class="box pad-y" data-code="e">shape</div>
+    <div class="box pad-y" data-code="f">noise</div>
+    <div class="box pad-y" data-code="g">camera</div>
+    <div class="box pad-y" data-code="h">screen</div>
+    <div class="box pad-y" data-code="i">sound</div>
+    <div class="box pad-y" data-code="j">random</div>
+</div>
+
+<div id="piano" class="piano" style="display: none">
+</div>
+
+<div id="svg-container" style="display: none;">
+</div>
+
+<div id="midi-container" style="display: none">
+    <div id="drop_zone">
+        <p>Drag a midi file into this drop zone or click a button below.</p>
+    </div>
+</div>
+
+<div id="midioptions" class="pad-bottom" style="display: none; margin: 5px; width: 480px;">
+    <div class="box pad-1" data-file="mii.mid">mii</div>
+    <div class="box pad-1" data-file="potc.mid">potc</div>
+    <div class="box pad-1" data-file="demons.mid">demons</div>
+    <div class="box pad-1" data-file="blame.mid">blame</div>
+    <div class="box pad-1" data-file="faded.mid">faded</div>
+    <div class="box pad-1" data-file="stop">stop</div>
+</div>
+
+<div id="audiovisualbuttons" class="pad-bottom" style="display: none; margin: 5px">
+    <button class="ghost-button" data-id="first">first</button>
+    <button class="ghost-button" data-id="second">second</button>
+    <button class="ghost-button" data-id="third">third</button>
+    <button class="ghost-button" data-id="fourth">fourth</button>
+    <button class="ghost-button" data-id="fifth">fifth</button>
+</div>
+
+<div id="audiovisual" style="display: none">
+    <canvas id="renderer" height="768" width="1366" style="display: none"></canvas>
+    <canvas id="babylonCanvas" style="display: none"></canvas>
+    <canvas id="marchingCanvas" style="display: none"></canvas>
+</div>
+
+<div id="drums" style="display: none; z-index: 1;">
+    <canvas id="drumCanvas"></canvas>
+</div>
+
+<!-- Modal HTML embedded directly into document -->
+<div id="ex1" class="modal">
+    <h2>Welcome!</h2>
+    <p>This is wavelength. A web app for real-time audio-visual collaboration using Hydra and Tone.js!</p>
+    <p>Some experimental features include using Magenta.js for Music Machine Learning.</p>
+    <p>It is currently being developed for a Webware class at WPI.</p>
+    <p>There are several modes, which can be toggled clicking the "mode" button on the left. The modes include
+        Hydra, Tone, Gibber, Audiovisuals, and MIDI Piano and MIDI Visualizer.</p>
+    <ul>
+        <li>Tone: Includes a synth/drum pad with a sequencer mode and effects.</li>
+        <li>Hydra: An editor for Hydra code to change the background visuals.</li>
+        <li>Midi: A midi player/audio visualizer.</li>
+        <li>Audiovisual: Audiovisualizers made in canvas2D and Babylon.js for whatever sound is coming from your
+            speakers.
+        </li>
+        <li>Piano: A piano that needs to be controlled by MIDI keyboard (or mouse) with melody generation and
+            autocompletion
+            models.
+        </li>
+        <li>Gibber: An editor for Gibber code to create music.</li>
+        <li>d3: An interactive sound generator using mouse position.</li>
+    </ul>
+    <p> You can join private sessions by clicking "session" and typing in a session name. Anyone who joins this session
+        will be able to collaborate with you.
+        You can also save and load sessions by clicking "save" and typing in a name, which will save the visuals and
+        sequencer state to your personal storage
+        on the web app. You can load your states by clicking "load" and typing in the same name.</p>
+    <p>Thank you to Professor Charlie Roberts for his help, as well as Mariana Pachon Puentes for her support.</p>
+</div>
+
+<script src="https://use.fontawesome.com/releases/v5.10.2/js/all.js" data-auto-replace-svg="nest"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+<script src="https://unpkg.com/tone@13.8.25/build/Tone.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.9.0/p5.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@magenta/music@1.1.5"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"
+        integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+        crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-modal/0.9.1/jquery.modal.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r68/three.min.js"></script>
+
+<!--Babylon-->
+<script src="https://preview.babylonjs.com/babylon.js"></script>
+<script src="https://preview.babylonjs.com/loaders/babylonjs.loaders.min.js"></script>
+<script src="https://code.jquery.com/pep/0.4.3/pep.js"></script>
+<script src="https://cdn.babylonjs.com/materialsLibrary/babylonjs.materials.min.js"></script>
+
+<!-- UI -->
+<script src="vendor/dat.gui.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="vendor/codemirror/codemirror.js"></script>
+<script src="vendor/codemirror/javascript.js"></script>
+<script src="vendor/hydra.js"></script>
+<script src='vendor/gibber.audio.lib.js'></script>
+<script src="vendor/marching.js"></script>
+<script src="https://d3js.org/d3.v5.min.js"></script>
+<script src="https://unpkg.com/@tonejs/midi"></script>
+<!--<script src="js/hydra-samples.js"></script>-->
+<script src="js/audio-visuals.js"></script>
+<!--<script src="js/piano-module.js"></script>-->
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
+
