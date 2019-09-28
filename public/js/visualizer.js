@@ -1,7 +1,6 @@
 const visualizer = {
 
   init () {
-    // bundle.js:20Create canvas
     this.canvas = document.createElement('canvas')
     document.body.appendChild(this.canvas)
 
