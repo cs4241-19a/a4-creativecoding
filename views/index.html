@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<title>CS 4241 Assignment 4</title>
+		<meta name="description" content="CS 4241 Assignment 4">
+
+		<!-- import the webpage's stylesheet -->
+		<link rel="stylesheet" href="/style.css">
+
+		<!-- import the webpage's client-side javascript file -->
+		<script src="/bundle.js" defer></script>
+	</head>
+	<body>
+		<section class="popup">
+		  <h1 class="popup-text">LifeGrid</h1>
+		  <p class="popup-text" id="popup-text-paragraph">
+		    This is an implementation of Conway's Game of Life. The visualization involves 3D shapes that get more complex
+		    as they are alive for longer.
+		    <br/><br/>
+		    Using the dialog in the top right corner, you can toggle whether or not the program is running, and also control
+		    the rate at which the iterations occur. For fun, you can control the rate at which the objects spin around. You
+		    can also enter edit mode.
+		    <br/><br/>
+		    <b style="font-size: 1.25em">Edit Mode</b>
+		    <br/><br/>
+		    When in edit mode, you can click on a cell to toggle if that cell is occupied or not.
+		    <br/><br/>
+		    <b style="font-size: 1.25em">Help Screen</b>
+		    <br/><br/>
+		    You can toggle this help screen in the menu in the top right corner. Enjoy!
+		  </p>
+		</section>
+		<main id="viewport"></main>
+	</body>
+</html>
