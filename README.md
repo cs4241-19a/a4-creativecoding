@@ -8,7 +8,7 @@ Readme
 
 https://a4-vanand23.glitch.me/
 
-Created a D3.js visualization of the 3 most populated countries, China, India, and the US using historical population data ranging from to 1960 to 2018 from [Awesome JSON Datasets](https://github.com/jdorfman/Awesome-JSON-Datasets)
+Created a D3.js visualization of the 3 most populated countries, China, India, and the US using historical population data ranging from to 1960 to 2018 from [Awesome JSON Datasets](https://github.com/jdorfman/Awesome-JSON-Datasets).
 
 - The goal is to be able to interactively analyze the historical population data as well as make predictions about how the population will grow and affect the future of the world. 
 - The challenge of this project was to figure out the topic and the technology I wanted to use. After I narrowed it down to data visualization and using D3.js, I had to find out what story I wanted to convey to the user. I came across the Awesome JSON Datasets website mentioned above and found my inspiration to depict historical population data of the 3 most populated countries as well as add user interactions to help analyze the data. 
