@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="panda.jpg" />
+    <link href="css/index.css" rel="stylesheet" type="text/css">
+    <title>Audio Visualizer</title>
+</head>
+<body>
+<div id="navContainer">
+    <div id="nav">
+        <h1> Audio Visualizer </h1>
+    </div>
+    <button id="infoBtn" class="popup btn2">i
+        <span class="popuptext" id="myPopup">
+            <p class="head">
+                Audio Visualizer: Information
+            </p>
+            <p>
+                Welcome to Audio Visualizer - an application that visualizes different genres of music and allows you to control different aspects of the visualization.
+                Refer to this documentation to access all the features of this application.
+            </p>
+            <p class="head">
+                Core Visualizer Customization:
+            </p>
+            <p>
+                <a class="boldT">Song Genre</a> - Select a song from the list of buttons at the bottom.
+                <a class="imp">Make sure you do this step before any customizations to the visualizer to see realtime changes</a>
+            </p>
+            <p>
+                <a class="boldT">Visualizer Color</a> - Select one of the colors from the bottom of the screen and see the changes in the visualizer in realtime <a class="defaultTo"> {default: blue-green} </a>
+            </p>
+            <p>
+                <a class="imp">Highly recommend the Rainbow 3D effect</a>
+            </p>
+            <p class="head">
+                Additional Visualizer Customization:
+            </p>
+            <p>
+                You can change additional aspects of the visualizer by altering the parameters in the drop down window on the top right. These properties display the changes to
+                the visualizer in realtime. You can toggle this window by clicking on Close Controls / Open Controls button. This window is displayed by default.
+            </p>
+            <p>
+               <a class="boldT">Bar Height</a> - Move the slider to change the height of the bars relative to each other <a class="defaultTo"> {default: 1} </a>
+            </p>
+            <p>
+                <a class="boldT">Bar Width</a> - Move the slider to change the width of the bars <a class="defaultTo"> {default: 4} </a>
+            </p>
+            <p>
+                <a class="boldT">Visualizer Fit</a> - Move the slider to change the number of bars that fit the canvas screen <a class="defaultTo"> {default: 2} </a>
+            </p>
+            <p>
+                <a class="boldT">Canvas Color</a> - Change the background color for the visualizer by selecting a color of your choice from the color palette
+                <a class="defaultTo"> {default: black} </a>
+            </p>
+            <p>
+                Toggle this menu by clicking on the info button <a class="infoB">i</a>  on the top left. Click on this window to close it.
+            </p>
+        </span>
+    </button>
+</div>
+<div id="container">
+    <script src="js/bundle.js"></script>
+    <div id="canvas"></div>
+    <div id="btnContainer">
+        <button id="mello" class="btn">Mellow Music</button>
+        <button id="electro" class="btn">Electronic</button>
+        <button id="acdc" class="btn">AC / DC</button>
+        <button id="instru" class="btn">Instrumental</button>
+        <button id="beats" class="btn">Beats</button>
+        <button id="dubstep" class="btn">Dubstep</button>
+        <button id="rammstein" class="btn">Fricken Rammstein</button>
+    </div>
+    <div id="btnContainer2">
+        <button class="lbl">Color</button>
+        <button id="blue" class="btn">Blue - Green</button>
+        <button id="green" class="btn">Green - Red</button>
+        <button id="pink" class="btn">Pink - Green</button>
+        <button id="red" class="btn">Red - Green</button>
+        <button id="lol" class="btn">Rainbow 3D</button>
+    </div>
+</div>
+</body>
+</html>
