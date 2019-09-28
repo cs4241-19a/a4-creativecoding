@@ -1,223 +1,122 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-//based on an example found here: https://codepen.io/programking/pen/MyOQpO
-const THREE = require('three');
-const dat = require('dat.gui');
-const OrbitControls = require('three-orbitcontrols');
-const GLTFLoader = require('three-gltf-loader');
+"use strict";
 
-//need to declare these variables globally 
-//creating a scene 
-var scene, camera, renderer, controls;// options;
+var _module = require("./module1.js");
+
+var _light_module = require("./light_module.js");
+
+var THREE = require('three');
+
+var dat = require('dat.gui');
+
+var OrbitControls = require('three-orbitcontrols');
+
+var GLTFLoader = require('three-gltf-loader'); //const babelify = require("babelify");
+//browserify().transform(babelify, {presets: ["@babel/preset-env", "@babel/preset-react"]});
+//ES6 
+
+
+var scene, camera, renderer, controls;
 var light, lightAmb;
-//the cube
-//var geometry, material;
-var zoomIn, zoomOut;
 var gui, loader, box, cam;
-//things on menu
-//var cam, velocity, box;
-//color
-var API = {
-    color: 0xffffff,
-    exposure: 1.0
-};
 
-window.onload  = function(){
-    //Creating a Scene 
-    scene = new THREE.Scene();
-    scene.background = new THREE.Color( 0xffffff );
-    camera = new THREE.PerspectiveCamera(
-        44, window.innerWidth / window.innerHeight, 
-        0.25, 20);
-    camera.position.z = 0;
-    camera.position.x = 0;
-    camera.position.y = 12;
-    camera.lookAt(scene.position);
-    camera.updateMatrixWorld();
+window.onload = function () {
+  //Creating a Scene 
+  scene = new THREE.Scene();
+  scene.background = new THREE.Color(0xffffff);
+  camera = new THREE.PerspectiveCamera(44, window.innerWidth / window.innerHeight, 0.25, 20);
+  camera.position.z = _module.z;
+  camera.position.x = _module.x;
+  camera.position.y = _module.y;
+  camera.lookAt(scene.position);
+  camera.updateMatrixWorld(); //rendering 
 
-    //rendering 
-    renderer = new THREE.WebGLRenderer({alpha: true});
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio); //added 
-    renderer.setClearColor( 0xffffff, 0);
-    renderer.gammaOutput = true;
-    renderer.gammaFactor = 2.2;
-    document.body.appendChild(renderer.domElement);
-    
-    //tone mapping 
-    //renderer.toneMapping = new THREE.LinearToneMapping;
-    //renderer.toneMappingExposure = API.exposure;
-    renderer.gammaOutput = true;
+  renderer = new THREE.WebGLRenderer({
+    alpha: true
+  });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(window.devicePixelRatio); //added 
 
-    //controls 
-    controls = new OrbitControls(camera, renderer.domElement);
-    controls.addEventListener('change', render);
-    //controls.enablePan = false;
-    //controls.enableRotate = false;
-    //controls.enableZoom = false;
-    //zooming
-    zoomIn = document.getElementById('zoom-in');
-    zoomOut =document.getElementById('zoom-out');
-    // zoomIn.addEventListener('click',onZoomIn, false );
-    // zoomOut.addEventListener('click', onZoomOut, false );
+  renderer.setClearColor(0xffffff, 0);
+  renderer.gammaOutput = true;
+  renderer.gammaFactor = 2.2;
+  document.body.appendChild(renderer.domElement);
+  renderer.gammaOutput = true; //controls 
 
-    //light
-     light = new THREE.PointLight(0xffffff, 1, 100);
-     light.position.set(50,50,50);
-     light.intensity = 5;
-     scene.add(light);
+  controls = new OrbitControls(camera, renderer.domElement);
+  controls.addEventListener('change', render); //light
 
-     lightAmb = new THREE.AmbientLight(0x777777);
-     scene.add(lightAmb);
-    //the cube 
-    /*
-    geometry = new THREE.BoxGeometry(5,5,5,5,5,5);
-    material = new THREE.MeshBasicMaterial(
-        {opacity: 0.1,
-        blending: THREE.NormalBlending,
-        depthTest: true});
-    */
-    //cube = new THREE.Mesh(geometry, material);
-    //scene.add(cube);
-    
-    //the 3d model 
-    manager = new THREE.LoadingManager(render);
-    loader = new GLTFLoader();
-  
-    loader.load('/3dModel/Garza_Mesh.glb', (gltf) => {
-        mesh = gltf.scene;
-        scene.add(gltf.scene);
-        console.log("should be loaded");
-        gltf.scene.scale.set(2,2,2);
+  light = new THREE.PointLight(0x16a183, 1, 100);
+  light.position.set(_light_module.posz, _light_module.posx, _light_module.posy);
+  light.intensity = _light_module.intensity;
+  scene.add(light);
+  lightAmb = new THREE.AmbientLight(0x777777);
+  scene.add(lightAmb); //the 3d model 
+  //manager = new THREE.LoadingManager(render);
 
-        //gltf.scene.mesh.material
-        //options for menu
-     //options = {
-    //     velx: 0,
-    //     vely: 0,
-    //     camera: {
-    //       speed: 0.0001
-    //     },
-    //     stop: function() {
-    //       this.velx = 0;
-    //       this.vely = 0;
-    //     },
-    //     // reset: function() {
-    //     //   this.velx = 0.1;
-    //     //   this.vely = 0.1;
-    //     //   camera.position.z = 0;
-    //     //   camera.position.x = 0;
-    //     //   camera.position.y = 12;
-    //     //   gltf.scene.scale.set(2,2,2);
-    //     // //   mesh.scale.x = 1;
-    //     // //   mesh.scale.y = 1;
-    //     // //   mesh.scale.z = 1;
-    //     // //   mesh.material.wireframe = true;
-    //   
-    //   };
-      
-    //setting up gui
-    gui = new dat.GUI();
+  loader = new GLTFLoader();
+  loader.load('/3dModel/Garza_Mesh.glb', function (gltf) {
+    //mesh = gltf.scene;
+    scene.add(gltf.scene);
+    console.log("should be loaded");
+    gltf.scene.scale.set(2, 2, 2); //setting up gui
 
-    //setting up menu
-    //  cam = gui.addFolder('Camera');
-    //  cam.add(options.camera, 'speed', 0, 0.0010).listen();
-    //  cam.add(camera.position, 'y', 0, 100).listen();
-    //  cam.open();
-
-
-    // velocity = gui.addFolder('Velocity');
-    // velocity.add(options, 'velx', -0.2, 0.2).name('X').listen();
-    // velocity.add(options, 'vely', -0.2, 0.2).name('Y').listen();
-    // velocity.open();
+    gui = new dat.GUI(); //playing with mesh
 
     box = gui.addFolder('Mesh');
-     box.add(gltf.scene.scale, 'x', 1, 10).name('Width').listen();
-     box.add(gltf.scene.scale, 'y', 1, 10).name('Height').listen();
-     box.add(gltf.scene.scale, 'z', 1, 10).name('Length').listen();
-//    box.add(mesh.material, 'wireframe').listen();
-   box.open();
+    box.add(gltf.scene.scale, 'x', 1, 10).name('Width').listen();
+    box.add(gltf.scene.scale, 'y', 1, 10).name('Height').listen();
+    box.add(gltf.scene.scale, 'z', 1, 10).name('Length').listen();
+    box.open(); //playing with camera 
 
-        cam = gui.addFolder('Camera');
-        cam.add(camera.position, 'x', 0, 10).name('X-Axis').listen();
-        cam.add(camera.position, 'y', 0, 10).name('Y-Axis').listen();
-        cam.add(camera.position, 'z', 0, 15).name('z-Axis').listen();
-        cam.open();
+    cam = gui.addFolder('Camera');
+    cam.add(camera.position, 'x', 0, 10).name('X-Axis').listen();
+    cam.add(camera.position, 'y', 0, 10).name('Y-Axis').listen();
+    cam.add(camera.position, 'z', 0, 15).name('z-Axis').listen();
+    cam.open();
+    render();
+  });
+}; //cube animation
 
-  //  gui.add(options, 'stop');
-   //s gui.add(options, 'reset');
 
-//    gui.addColor(API, 'color')
-//    .listen()
-//    .onChange(function() {
-//        //mesh.material.color.set(API.color);
-//        //gltf.set.color(API.color);
-//       // gltf.mesh.Color.set(API.color);   
-//       // set(API.color);
-//        render();
-//    });
-   render();
-   
-    })
-   
-      //loader = new THREE.TextureLoader(manager);
-    //mesh = new THREE.Mesh();
-    /*
-    new GLTFLoader(manager).load('../3dModel/scene.gltf', function (gltf){
-        mesh = gltf.scene;
+var render = function render() {
+  requestAnimationFrame(render);
+  renderer.render(scene, camera);
+};
 
-        mesh.material = new THREE.MeshStandardMaterial({
-            color: API.color
-        });
-    })*/
-    //scene.add(mesh);
-    
-    /*
-    gui.addColor(API, 'color')
-        .listen()
-        .onChange(function() {
-            mesh.material.color.set(API.color);
-            render();
-        });
-    */
-    //gui
-    //animation 
-  
-}
+},{"./light_module.js":2,"./module1.js":3,"dat.gui":4,"three":7,"three-gltf-loader":5,"three-orbitcontrols":6}],2:[function(require,module,exports){
+"use strict";
 
-//cube animation
-var render = function() {
-    
-    requestAnimationFrame(render);
-    
-    //controls.update();
-    // var timer = Date.now() * options.camera.speed;
-    // camera.position.x = Math.cos(timer) * 100;
-    // camera.position.z = Math.sin(timer) * 100;
-    // camera.lookAt(scene.position); 
-    // camera.updateMatrixWorld();
-    
-    //gltf.scene.mesh.x += options.velx;
-    //gltf.scene.mesh.y += options.vely;
-    //cube.rotation.x += options.velx;
-    //cube.rotation.y += options.vely;
-    //requestAnimationFrame(render);
-    renderer.render(scene, camera);
-  
-  };
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.intensity = exports.posz = exports.posy = exports.posx = void 0;
+var posx, posy, posz, intensity;
+exports.intensity = intensity;
+exports.posz = posz;
+exports.posy = posy;
+exports.posx = posx;
+exports.posx = posx = 50;
+exports.posy = posy = 50;
+exports.posz = posz = 50;
+exports.intensity = intensity = 5;
 
-//   function onZoomIn(){
-//         console.log("zoom in was called");
-//         camera.zoomIn;
-//         //options.ZoomIn;
-//     }
+},{}],3:[function(require,module,exports){
+"use strict";
 
-//     function onZoomOut(){
-//         console.log("zoom out was called");
-//         controls.zoomOut;
-//         //options.ZoomOut
-//     }
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.z = exports.y = exports.x = void 0;
+var x, y, z;
+exports.z = z;
+exports.y = y;
+exports.x = x;
+exports.z = z = 0;
+exports.x = x = 0;
+exports.y = y = 12;
 
-},{"dat.gui":2,"three":5,"three-gltf-loader":3,"three-orbitcontrols":4}],2:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 /**
  * dat-gui JavaScript Controller Library
  * http://code.google.com/p/dat-gui
@@ -2756,7 +2655,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 })));
 
 
-},{}],3:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 /**
  * @author Rich Tibbett / https://github.com/richtr
  * @author mrdoob / http://mrdoob.com/
@@ -5978,7 +5877,7 @@ var _GLTFLoader = ( function () {
 
 module.exports = _GLTFLoader;
 
-},{"three":5}],4:[function(require,module,exports){
+},{"three":7}],6:[function(require,module,exports){
 /* three-orbitcontrols addendum */ var THREE = require('three');
 /**
  * @author qiao / https://github.com/qiao
@@ -7152,7 +7051,7 @@ THREE.MapControls.prototype = Object.create( THREE.EventDispatcher.prototype );
 THREE.MapControls.prototype.constructor = THREE.MapControls;
 /* three-orbitcontrols addendum */ module.exports = exports.default = THREE.OrbitControls;
 
-},{"three":5}],5:[function(require,module,exports){
+},{"three":7}],7:[function(require,module,exports){
 (function (global, factory) {
 	typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) :
 	typeof define === 'function' && define.amd ? define(['exports'], factory) :

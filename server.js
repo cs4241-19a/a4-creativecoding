@@ -7,6 +7,8 @@ const express       = require( 'express' ),
       helmet        = require('helmet'),
       compression   = require('compression')
       //THREE         = require('three')
+//       babelify = require("babelify");
+// browserify().transform(babelify, {presets: ["@babel/preset-env", "@babel/preset-react"]});
 app.use(express.static('./'))
 app.use(helmet())
 app.use(compression())

@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/AlejandraGarza42/a4-creativecoding#readme",
   "dependencies": {
+    "@babel/core": "^7.6.2",
+    "babelify": "^10.0.0",
     "compression": "^1.7.4",
     "dat.gui": "^0.7.6",
     "datguivr": "^0.1.6",
@@ -28,5 +30,9 @@
     "three": "^0.108.0",
     "three-gltf-loader": "^1.108.0",
     "three-orbitcontrols": "^2.108.1"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.6.2",
+    "@babel/preset-react": "^7.0.0"
   }
 }
