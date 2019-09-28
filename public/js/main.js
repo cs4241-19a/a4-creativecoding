@@ -45,7 +45,8 @@ window.onload = function () {
               '<p><strong>Max Length</strong>: Changes the maximum length of the bar</p>' +
               '<p><strong>Base Color</strong>: Changes the color of the octagonal base</p>' +
               '<p><strong>Help</strong>: Redisplays this menu</p>' +
-              '<p>Project created by James Plante<p>'
+              '<p><strong>Project created by James Plante</strong><p>' +
+              '<p>Song: Teamwork by Scott Holmes (unmodified). Licenced under the <a href="https://creativecommons.org/licenses/by-nc/4.0/legalcode">CC Attribution-NonCommercial 4.0 International License.</a>'
       }
       Swal.fire(windowObj)
     }
