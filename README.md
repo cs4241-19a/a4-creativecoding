@@ -33,6 +33,10 @@ To test, you can create an account, or use:
 
 ![audio_vis](img/a4_audiovis.png)
 
+Here's cool gif I made using gource which shows my commits to the project repo!
+
+![gource](img/gource.gif)
+
 
 ## Technical Achievements
 - **Tech Achievement 1**: I created a MIDI File visualizer using d3.js, and added other audio visualizations using canvas2d and babylon.js. The midi
