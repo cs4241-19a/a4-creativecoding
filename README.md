@@ -21,6 +21,19 @@ a page and have an image displayed on the game canvas.
 8. Major challenges with the screen, leaderboard, instructions, and healthbar... etc.
 9. For some reason most keyboards don't let a user use the left, up and spacebar at the same time. This is a limitation for this code. In the future I will use a different set of keys for controls.
 
+###### User inputs
+There are a bunch of things the user can do for input to this program. 
+1. Selecting a tank
+2. Type a username
+3. Close and bring up the help menu. For loading screen use the button, for game screen press q. 
+4. Use the up arrow key to move forward.
+5. Use the back arrow key to move backwards.
+6. Use the left arrow key to turn right.
+7. Use the right arrow key to turn right.
+8. Any combination of forward/backward and left/right.
+9. Spacebar to shoot bullets. 
+10. Spacebar and combination of forward/backward and left/right keys.
+
 #### JS Linter Used
 I used eslint which is for the commandline. I installed it and run eslint --fix ./* which automaticlly fixes all problems according to the linter. The default for this linter is pretty simple. 
 Basic examples: 
@@ -28,6 +41,7 @@ Basic examples:
 2. function name(this) { }
 3. this.x = x;
 The only errors left are cammelcase errors and tab errors becasuse notepad++ is super weird about tabs vs spaces. 
+I validated the html and css using the online websites that Prof. Roberts recommended http://jigsaw.w3.org/css-validator/ and https://validator.w3.org/. The only issue with validation was with the css validator where the import I am using for css from bootstrap gives some errors from how it was conpressed. Not something I can control. 
 
 ## Technical Achievements
 - **IO Video Game**This is the primary technical achievement for this project. Multiple users can log in and battle each other. I used an IO package to do this, however designing the paths to pass data for all people concurrently
