@@ -1,0 +1,101 @@
+.bodystyle {
+    flex-direction: column;
+}
+
+.center {
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.tooltip {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 25px;
+}
+
+.helper {
+    float:left;
+    position: fixed;
+    top: 600px;
+    left: 55px;
+    display: flex;
+    background-color: beige;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.helper-button {
+    position: fixed;
+    top: 600px;
+    left: 20px;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: cadetblue;
+    border: 2px solid black;
+}
+
+.question {
+    font-weight: bold;
+    color:white;
+}
+
+.sales {
+    background-color: white;
+    border: 1px solid white;
+}
+
+.left-padding {
+    padding-left: 25px;
+}
+
+.header {
+    font-weight: bold;
+    font-style: italic;
+}
+
+.subtext {
+    font-size: 10px;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+.legendY {
+    font-size: 20px;
+    font-weight: bold;
+    transform: rotate(-90deg);
+}
+
+.yContainer {
+    display: flex;
+    align-content: flex-end;
+    justify-content: flex-end;
+}
+
+.legendX {
+    font-size: 20px;
+    font-weight: bold;
+    position: fixed;
+    top: 529px;
+    left: 890px;
+}
+
+.toolSection {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+h1 {
+    font-size: 30px;
+    font-family: Gill Sans, sans-serif;
+}
+
+h2 {
+    font-weight: bold;
+    font-size: 30px;
+    font-family: Gill Sans, sans-serif;
+}

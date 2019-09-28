@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+    <title>Assignment 4</title>
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+</head>
+
+<body class="bodystyle">
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-body">
+            <div class="container center row">
+                <h1 class="title">Video Game Sales</h1>
+            </div>
+        </div>
+    </section>
+
+    <div class = "container">
+        <h2>This figure shows PS4 game Sales in: </h2>
+        <h2 class = "title" id = "country">Europe</h2>
+    </div>
+    
+    <h2 class = "legendX">Release Year</h2>
+<br>
+    <section class = "center">
+        <h2 class = "legendY">Sales in Millions</h2>
+        <svg id="datavis" class="sales"></svg>
+    </section>
+
+    <section class = "toolSection"></section>
+
+    <button id = "helper" class = "helper-button" >
+        <p class = "question">?</p>
+    </button>
+
+    <section id = "helper-text" class = "helper">
+        <ul>
+            <li class = "header">Welcome to my Video Game Visualization Website!</li>
+            <li class = "subtext">(Click on the question mark to close this window.)</li>
+            <br>
+            <li class = "header">The Data</li>
+            <li>This chart displays video game sales in different areas around the world</li>
+            <li>Take note, these are only PS4 sales in the millions!</li>
+            <br>
+            <li class = "header">The Controls</li>
+            <li>To change the properties in the chart, use the control menu in the top right corner of your screen.</li>
+            <li>You can close these controls by pressing "Close Controls"</li>
+            <li>Have fun messing around!</li>
+            </div>
+        </ul>
+    </section>
+
+    <!-- Scripts -->
+    <script src='https://d3js.org/d3.v5.min.js'></script>
+    <script src="https://d3js.org/d3-axis.v1.min.js"></script>
+    <script type="text/javascript" src="../js/dat.gui.min.js"></script>
+    <script type = "module" src = "../js/module1.js"></script>
+    <script type = "module" src="../js/main.js"></script>
+</body>
+
+</html>
