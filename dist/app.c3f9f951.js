@@ -34027,6 +34027,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.random_choice = random_choice;
 exports.random_range = random_range;
+exports.random_color = random_color;
 
 /**
  * Return a random selection from given array
@@ -34046,6 +34047,10 @@ function random_range(min, max) {
   var diff = max - min;
   return Math.random() * diff + min;
 }
+
+function random_color() {
+  return Math.floor(random_range(0, 0xFFFFFF));
+}
 },{}],"js/shape_logic.js":[function(require,module,exports) {
 "use strict";
 
@@ -34056,6 +34061,7 @@ exports.create_box = create_box;
 exports.mid_splash = mid_splash;
 exports.sin_curve_right = sin_curve_right;
 exports.sin_curve_left = sin_curve_left;
+exports.screen_filter = screen_filter;
 exports.active_geometry = void 0;
 
 var THREE = _interopRequireWildcard(require("three"));
@@ -34169,6 +34175,26 @@ function sin_curve_right() {
 function sin_curve_left() {
   sin_curve_create(false);
 }
+
+function screen_filter() {
+  var geometry = new THREE.PlaneGeometry(5, 20, 32);
+  var material = new THREE.MeshBasicMaterial({
+    color: (0, _utils.random_color)(),
+    side: THREE.DoubleSide
+  });
+  material.transparent = true;
+  material.opacity = .2;
+  var plane = new THREE.Mesh(geometry, material);
+  active_geometry.push({
+    geometry: geometry,
+    material: material,
+    mesh: plane,
+    fade_rate: 0.003,
+    on_tick: function on_tick() {}
+  });
+
+  _app.scene.add(plane);
+}
 },{"three":"../node_modules/three/build/three.module.js","./app":"js/app.js","./utils":"js/utils.js"}],"js/app.js":[function(require,module,exports) {
 "use strict";
 
@@ -34188,6 +34214,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 var camera, scene, renderer;
 exports.scene = scene;
 var geometry, material, mesh;
+var camera_rotation_index = 0;
+var camera_rotations = [0, -.05, 0, .05];
 var listener = new THREE.AudioListener();
 var sound = new THREE.Audio(listener);
 init();
@@ -34203,6 +34231,10 @@ document.getElementById('loop').addEventListener('click', function (event) {
  * 
  * C - spawn new cube at a random location
  * X - spawn new ring traveling backwards
+ * Z - spawn sin wave moving right
+ * A - spawn sin wave moving left
+ * S - spawn plane acting as a screen filter
+ * D - cycle through camera rotation modes
  */
 
 document.addEventListener("keydown", function (event) {
@@ -34231,6 +34263,18 @@ document.addEventListener("keydown", function (event) {
         break;
       }
 
+    case 83:
+      {
+        (0, _shape_logic.screen_filter)();
+        break;
+      }
+
+    case 68:
+      {
+        camera_rotation_index += 1;
+        camera_rotation_index %= camera_rotations.length;
+      }
+
     default:
       break;
   }
@@ -34241,10 +34285,6 @@ function init() {
   camera.position.z = 1;
   camera.add(listener);
   exports.scene = scene = new THREE.Scene();
-  geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
-  material = new THREE.MeshNormalMaterial();
-  mesh = new THREE.Mesh(geometry, material); //scene.add( mesh );
-
   renderer = new THREE.WebGLRenderer({
     antialias: true
   });
@@ -34262,8 +34302,7 @@ function init() {
 
 function animate() {
   requestAnimationFrame(animate);
-  mesh.rotation.x += 0.01;
-  mesh.rotation.y += 0.02;
+  camera.rotation.z += camera_rotations[camera_rotation_index];
   renderer.render(scene, camera);
   var beep = _shape_logic.active_geometry;
 
@@ -34306,7 +34345,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56488" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "56661" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

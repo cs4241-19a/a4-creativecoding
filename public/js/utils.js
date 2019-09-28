@@ -15,3 +15,7 @@ export function random_range(min, max){
     const diff = max-min;
     return Math.random() * diff + min;
 }
+
+export function random_color(){
+    return Math.floor(random_range(0, 0xFFFFFF));
+}

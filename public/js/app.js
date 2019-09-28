@@ -1,10 +1,13 @@
 import * as THREE from "three";
 
-import { active_geometry, create_box, mid_splash, sin_curve_right, sin_curve_left } from "./shape_logic";
+import { active_geometry, create_box, mid_splash, sin_curve_right, sin_curve_left, screen_filter } from "./shape_logic";
 
 
 var camera, scene, renderer;
 var geometry, material, mesh;
+
+let camera_rotation_index = 0;
+const camera_rotations = [0, -.05, 0, .05];
 
 const listener = new THREE.AudioListener();
 const sound = new THREE.Audio(listener);
@@ -24,6 +27,10 @@ document.getElementById('loop').addEventListener('click', event => {
  * 
  * C - spawn new cube at a random location
  * X - spawn new ring traveling backwards
+ * Z - spawn sin wave moving right
+ * A - spawn sin wave moving left
+ * S - spawn plane acting as a screen filter
+ * D - cycle through camera rotation modes
  */
 document.addEventListener("keydown", event => {
   switch (event.keyCode) {
@@ -43,6 +50,14 @@ document.addEventListener("keydown", event => {
     sin_curve_left();
     break;
   }
+  case 83:{
+    screen_filter();
+    break;
+  }
+  case 68:{
+    camera_rotation_index += 1;
+    camera_rotation_index %= camera_rotations.length;
+  }
   default:
     break;
   }
@@ -56,12 +71,6 @@ function init() {
   camera.add(listener);
 
   scene = new THREE.Scene();
-
-  geometry = new THREE.BoxGeometry( 0.2, 0.2, 0.2 );
-  material = new THREE.MeshNormalMaterial();
-
-  mesh = new THREE.Mesh( geometry, material );
-  //scene.add( mesh );
 
   renderer = new THREE.WebGLRenderer( { antialias: true } );
   renderer.setSize( window.innerWidth-30, window.innerHeight-30 );
@@ -81,8 +90,7 @@ function animate() {
 
   requestAnimationFrame( animate );
 
-  mesh.rotation.x += 0.01;
-  mesh.rotation.y += 0.02;
+  camera.rotation.z += camera_rotations[camera_rotation_index];
 
   renderer.render( scene, camera );
   let beep = active_geometry;

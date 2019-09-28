@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { scene } from './app';
-import { random_range, random_choice } from "./utils";
+import { random_range, random_choice, random_color } from "./utils";
 import { Vector2 } from "three";
 
 /**
@@ -102,5 +102,24 @@ export function sin_curve_right(){
 export function sin_curve_left(){
   sin_curve_create(false);
 }
+
+export function screen_filter(){
+  const geometry = new THREE.PlaneGeometry( 5, 20, 32 );
+  const material = new THREE.MeshBasicMaterial( {color: random_color(), side: THREE.DoubleSide} );
+  material.transparent = true;
+  material.opacity = .2;
+  const plane = new THREE.Mesh( geometry, material );
+  active_geometry.push({
+    geometry: geometry,
+    material: material,
+    mesh: plane,
+    fade_rate: 0.003,
+    on_tick: function(){
+    },
+  })
+  scene.add( plane );
+}
+
+
 
 export {active_geometry};
