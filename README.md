@@ -35,7 +35,7 @@ My application implements the minimal requirements and functionalities:
 
 the hosting link e.g. http://a4-charlieroberts.glitch.me
 
-Zoo Adventure is an online and interactive board game that a user can play online and on the go. The user is able to move the piece with their keyboard and also interact with the buttons and instructions provided. They can play this game on the go as a mess-free way to relax before bedtime.
+### Zoo Adventure is an online and interactive board game that a user can play online and on the go. The user is able to move the piece with their keyboard and also interact with the buttons and instructions provided. They can play this game on the go as a mess-free way to relax before bedtime.
 
 - Goal of the Application: 
   - The user has to navigate through the game by rolling a die, moving the red block piece to the correct tile, and the executing the movement for the tile they have landed on by pressing the button. They have to make it to the end of the path to the picnic basket before their bed time. Time button is provided so the user can keep track of the time while using the application without exiting it.
@@ -47,12 +47,10 @@ Zoo Adventure is an online and interactive board game that a user can play onlin
    - I used ES Lint via Webstorm, and it alligns my starting and closing tags. It enforces the consistent use of either function declarations and expressions
 
 ## Technical Achievements
-- **Tech Achievement 1**: I wrote my own custom GLSL shaders to use as a material for my Three.js objects.
-- **Tech Achievement 2**: My audiovisualizer uses both FFT and amplitude analysis to drive visualization.
-- **Tech Achievement 3**: I optimized the efficiency of my reaction-diffusion algorithm by...
-- **Tech Achievement 4**: I visualized the dataset X using three different visualization technqiues provided by D3, andprovided
+- **Tech Achievement 1**: I implemented Javascript functions using the Date and Math libraries(getting time and selecting a random number between 1 and 6 for the die roll)
+- **Tech Achievement 2**: I implemeted more than 6 ways that the user can interact with the board game interface and had to write multiple respective functions.
 
 ### Design/Evaluation Achievements
-- **Design Achievement 1**: I ensured that my application would run on both desktops / mobile devices by changing X
-- **Design Achievement 2**: I followed best practices for accessibility, including providing alt attributes for images and using semantic HTML. There are no `<div>` or `<span>` elements in my document.
-- **Design Achievement 3**: We tested the application with n=X users, finding that...
+- **Design Achievement 1**: The application is minimalistic is color so that all the attention can be focused on the colorful board game. The other user interface buttons are alligned neatly and are out of the way of the gameboard.
+- **Design Achievement 2**:The application is very convenient to use. The user can simulate rolling a die and even getting a response for the tile they land on without 3d objects such as dice and cards! The game is mess free! In addition, the user can play the game at their own pace and does not have to wait for another player.
+- **Design Achievement 3**: The application is relaxing and requires repetitive actions. It is great for users to play when they are winding down, relaxing, and trying to fall asleep. The user can even check the time within the application to make sure that it is not their bedtime.
