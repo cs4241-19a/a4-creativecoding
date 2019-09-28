@@ -1,0 +1,130 @@
+{
+    "2017": {
+        "New South Wales": {
+            "population": 7.81,
+            "growth": 1.43,
+            "area": 800642
+        },
+        "Victoria": {
+            "population": 6.15,
+            "growth": 1.99,
+            "area": 227416
+        },
+        "Queensland": {
+            "population": 4.9,
+            "growth": 1.66,
+            "area": 1730648
+        },
+        "South Australia": {
+            "population": 1.71,
+            "growth": 0.23,
+            "area": 983482
+        },
+        "Western Australia": {
+            "population": 2.64,
+            "growth": 1.15,
+            "area": 2529875
+        },
+        "Tasmania": {
+            "population": 0.519,
+            "growth": 0.13,
+            "area": 68401
+        },
+        "Northern Territory": {
+            "population": 0.245,
+            "growth": 0.2,
+            "area": 1349129
+        },
+        "Australian Capital Territory": {
+            "population": 0.402,
+            "growth": 1.65,
+            "area": 2358
+        }
+
+    },
+    "2018": {
+        "New South Wales": {
+            "population": 7.89,
+            "growth": 1.02,
+            "area": 800642
+        },
+        "Victoria": {
+            "population": 6.27,
+            "growth": 1.95,
+            "area": 227416
+        },
+        "Queensland": {
+            "population": 4.97,
+            "growth": 1.43,
+            "area": 1730648
+        },
+        "South Australia": {
+            "population": 1.72,
+            "growth": 0.58,
+            "area": 983482
+        },
+        "Western Australia": {
+            "population": 2.67,
+            "growth": 1.14,
+            "area": 2529875
+        },
+        "Tasmania": {
+            "population": 0.52,
+            "growth": 0.32,
+            "area": 68401
+        },
+        "Northern Territory": {
+            "population": 0.246,
+            "growth": 0.53,
+            "area": 1349129
+        },
+        "Australian Capital Territory": {
+            "population": 0.407,
+            "growth": 1.23,
+            "area": 2358
+        }
+
+    },
+    "2019": {
+        "New South Wales": {
+            "population": 7.992,
+            "growth": 1.3,
+            "area": 800642
+        },
+        "Victoria": {
+            "population": 6.38,
+            "growth": 1.81,
+            "area": 227416
+        },
+        "Queensland": {
+            "population": 5.046,
+            "growth": 1.53,
+            "area": 1730648
+        },
+        "South Australia": {
+            "population": 1.731,
+            "growth": 0.68,
+            "area": 983482
+        },
+        "Western Australia": {
+            "population": 2.72,
+            "growth": 1.97,
+            "area": 2529875
+        },
+        "Tasmania": {
+            "population": 0.52,
+            "growth": 0.29,
+            "area": 68401
+        },
+        "Northern Territory": {
+            "population": 0.248,
+            "growth": 0.88,
+            "area": 1349129
+        },
+        "Australian Capital Territory": {
+            "population": 0.413,
+            "growth": 1.45,
+            "area": 2358
+        }
+    }
+}

@@ -1,0 +1,30 @@
+{
+  "name": "australia-map",
+  "version": "1.0.0",
+  "engines": {
+    "node": ">=8"
+  },
+  "description": "A Map Visualization Project",
+  "main": "server.js",
+  "scripts": {
+    "start": "nodemon --exec babel-node server.js"
+  },
+  "dependencies": {
+    "express": "^4.16.3"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.4.4",
+    "@babel/core": "^7.4.4",
+    "@babel/node": "^7.4.4",
+    "@babel/preset-env": "^7.4.4",
+    "@babel/register": "^7.4.4",
+    "eslint": "^6.4.0",
+    "nodemon": "^1.19.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "none"
+  },
+  "author": "",
+  "license": "ISC"
+}
