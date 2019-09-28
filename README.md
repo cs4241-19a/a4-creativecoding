@@ -47,4 +47,7 @@ using the "change" button, which is only enabled when the user is in drum mode.
 ### Design/Evaluation Achievements
 - **Design Achievement 1**: I added more custom Hydra.js patterns to the "random" button in "hydra" mode.
 - **Design Achievement 2**: I designed all the audio visualizations as well as the d3 midi visualisers and reactive synth instrument.
-- **Design Achievement 3**: I tested my application on several people, making modifications to the UI/UX accordingly.
+- **Design Achievement 3**: I designed the interaction for switching the drum pad mode from synth to drumkit.
+- **Design Achievement 4**: I updated the edit mode capabilities, allowing users to move around more of the UI, like the button columns on the 
+left and right of the screen.
+- **Design Achievement 5**: I tested my application on several people, making modifications to the UI/UX accordingly.
