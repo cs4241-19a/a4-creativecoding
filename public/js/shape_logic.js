@@ -1,7 +1,7 @@
-import * as THREE from "three";
+import * as THREE from 'three';
 import { scene } from './app';
-import { random_range, random_choice, random_color } from "./utils";
-import { Vector2 } from "three";
+import { random_range, random_choice, random_color } from './utils';
+import { Vector2 } from 'three';
 
 /**
  * Data Definition:
@@ -13,7 +13,7 @@ import { Vector2 } from "three";
  *   on_tick: function,
  * }
  */
-const active_geometry = []
+const active_geometry = [];
 
 function generate_sin(min_x, max_x){
   const vect_2s = [];
@@ -60,7 +60,7 @@ export function mid_splash(){
     on_tick: function(){
       mesh.position.z -= .16;
     },
-  })
+  });
   scene.add(mesh);
 }
 
@@ -91,7 +91,7 @@ function sin_curve_create(right){
     on_tick: function(){
       this.mesh.position.x += direction;
     },
-  })
+  });
   scene.add(splineObject);
 }
 
@@ -116,7 +116,7 @@ export function screen_filter(){
     fade_rate: 0.003,
     on_tick: function(){
     },
-  })
+  });
   scene.add( plane );
 }
 

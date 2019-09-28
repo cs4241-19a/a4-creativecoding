@@ -1,6 +1,6 @@
-import * as THREE from "three";
+import * as THREE from 'three';
 
-import { active_geometry, create_box, mid_splash, sin_curve_right, sin_curve_left, screen_filter } from "./shape_logic";
+import { active_geometry, create_box, mid_splash, sin_curve_right, sin_curve_left, screen_filter } from './shape_logic';
 
 
 var camera, scene, renderer;
@@ -16,7 +16,7 @@ init();
 animate();
 
 document.getElementById('loop').addEventListener('click', event => {
-  console.log("playing");
+  console.log('playing');
   sound.play();
   const button = document.getElementById('loop');
   button.parentNode.removeChild(button);
@@ -32,7 +32,7 @@ document.getElementById('loop').addEventListener('click', event => {
  * S - spawn plane acting as a screen filter
  * D - cycle through camera rotation modes
  */
-document.addEventListener("keydown", event => {
+document.addEventListener('keydown', event => {
   switch (event.keyCode) {
   case 67:{
     create_box();
@@ -79,7 +79,7 @@ function init() {
   // Set up the looping sample
   const audioLoader = new THREE.AudioLoader();
   audioLoader.crossOrigin = '';
-  audioLoader.load("loop.mp3", function(buffer) {
+  audioLoader.load('loop.mp3', function(buffer) {
     sound.setBuffer(buffer);
     sound.setLoop(true);
     sound.setVolume(0.25);
@@ -102,8 +102,8 @@ function animate() {
       managed_object.material.dispose();
       managed_object.geometry.dispose();
     }
-  })
+  });
 
 }
 
-export {scene}
+export {scene};
