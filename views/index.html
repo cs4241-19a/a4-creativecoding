@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Global Co2 Emissions</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.5/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    
+    <script src="https://d3js.org/d3.v3.min.js"></script>
+    <script src="https://d3js.org/topojson.v1.min.js"></script>
+    
+    <script src="https://d3js.org/d3-queue.v3.min.js"></script>
+    <script type="text/javascript" src="/js/dat.gui.js"></script>
+  </head>
+  <body>
+    <section class="hero is-dark is-small is-bold">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title">
+              Visualizer for co2 emission data
+            </h1>
+            <h2 class="subtitle">
+              Shows data per country and allows you to customize the display
+            </h2>
+          </div>
+        </div>
+    </section>
+    <nav class="level">
+      <div class="level-item has-text-centered">
+        <div>
+          <p class="heading">Rotation</p>
+          <div class="field has-addons">
+            <div class="select">
+              <select id="rotationOption">
+                <option value="Free">Free Rotation</option>
+                <option value="Fixed">Fixed</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="level-item has-text-centered">
+        <div>
+          <p class="heading">Data Displayed</p>
+          <div class="field has-addons">
+            <div class="select">
+              <select id="dataOption">
+                <option value="total">Total Co2 emissions in metric tons</option>
+                <option value="perCapita">Co2 emissions in metric tons per capita</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <svg width="960" height="600"></svg>
+  </body>
+  <script src="js/main.js" type="module"></script>
+  <script src="js/globe.js" type="module"></script>
+  <script src="js/data.js" type="module"></script>
+</html>
