@@ -37,12 +37,14 @@ the hosting link e.g. http://a4-charlieroberts.glitch.me
 
 Zoo Adventure is an online and interactive board game that a user can play online and on the go. The user is able to move the piece with their keyboard and also interact with the buttons and instructions provided. They can play this game on the go as a mess-free way to relax before bedtime.
 
-- Goal of the Application: The user has to navigate through the game by rolling a die, moving the red block piece to the correct tile, and the executing the movement for the tile they have landed on by pressing the button. They have to make it to the end of the path to the picnic basket before their bed time. Time button is provided so the user can keep track of the time while using the application without exiting it.
+- Goal of the Application: 
+  - The user has to navigate through the game by rolling a die, moving the red block piece to the correct tile, and the executing the movement for the tile they have landed on by pressing the button. They have to make it to the end of the path to the picnic basket before their bed time. Time button is provided so the user can keep track of the time while using the application without exiting it.
 
 - Challenges:
-   - I was originally 
+   - My canvas(board game layout) disappeared each time I tried to implement ES6 modules. I have included the code in my files such as the import and export system, but that may be a bug with just canvas. Right now I have made sure that the interface allows the user to interact with it, but my ES6 code is present in my files.
+   - Other things to note: I originally had a visualization with dat.gui and three js, but that unexpectedly stopped working properly yesterday so I had to place a large part of my energy and soul into creating this new project in time.
 - Linter:
-   - I used ES Lint via Webstorm and it lined my starting and closing tags.
+   - I used ES Lint via Webstorm, and it alligns my starting and closing tags. It enforces the consistent use of either function declarations and expressions
 
 ## Technical Achievements
 - **Tech Achievement 1**: I wrote my own custom GLSL shaders to use as a material for my Three.js objects.
