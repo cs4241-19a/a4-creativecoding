@@ -14,50 +14,32 @@ My application implements the minimal requirements and functionalities:
    - Keyboard "down" button moves red block user south
    - Keyboard < button moves red block user west
    - Bedtime Button, when clicked, enables user to see the time to gauge their bedtime.
-   - Goal and How to Play Buttons show user how to
+   - Goal and How to Move Buttons display an alert that provide users with more instruction on how the game works.
+   - When the initial directions are clicked, they disappear to create more space. They are then replaced by a shorter and inspirational(positive) message.
+   - Enter Brick You Landed On button prompts users to type in what tile they are currently on after they have moved. It then gives the user a message back indicating another action before the user has to roll the die again.
+   - The yellow "HELP!!" field at the bottom of the page lets the user just hover their mouse to get easy directions.
    
-- A user interface for interaction with your project, which must expose at least six parameters for user control. [dat.gui](https://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage) is highly recommended for this. You might also explore interaction by tracking mouse movement via the `window.onmousemove` event handler in tandem with the `event.clientX` and `event.clientY` properties. Consider using the [Pointer Events API](https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events) to ensure that that mouse and touch events will both be supported in your app.
-- Your application should display basic documentation for the user interface when the application first loads. This documentation should be dismissable, however, users should be able to redisplay it via either a help buton (this could, for example, be inside a dat.gui interface) or via a keyboard shortcut (commonly the question mark).
-- Your application should feature at least two different ES6 modules that you write ([read about ES6 modules](https://www.sitepoint.com/understanding-es6-modules/)) and include into a main JavaScript file. This means that you will need to author *at least three JavaScript files* (a `app.js` or `main.js` file and two modules). We'll discuss modules in class on Monday 9/23; for this assignment modules should contain at least two functions.
-- You are required to use a linter for your JavaScript. There are plugins for most IDEs, however it will be difficult to run the linter directly in Glitch. If you haven't moved to developing on your personal laptop and then uploading to Glitch when your project is completed, this is the assignment to do so!
-- Your HTML and CSS should validate. There are options/plugins for most IDEs to check validation.
+4) My application initially displays basic documentation for the user interface when the application first loads.It can disappear once clicked on as explained in the user control parameters above^
 
-The interactive experience should possess a reasonable level of complexity. Some examples:
-### Three.js
-- A generative algorithm creates simple agents that move through a virtual world. Your interface controls the behavior / appearance of these agents.
-- A simple 3D game
-- An 3D audio visualization of a song of your choosing. User interaction should control aspects of the visualization. 
-### Canvas
-- Implement a generative algorithm such as [Conway's Game of Life](https://bitstorm.org/gameoflife/) (or 1D cellular automata) and provide interactive controls. Note that the Game of Life has been created by 100s of people using <canvas>; we'll be checking to ensure that your implementation is not a copy of these.
-- Design a 2D audio visualizer of a song of your choosing. User interaction should control visual aspects of the experience. 
-### Web Audio API
-- Create a screen-based musical instrument using the Web Audio API. You can use projects such as [Interface.js](http://charlie-roberts.com/interface/) or [Nexus UI](https://nexus-js.github.io/ui/api/#Piano) to provide common musical interface elements, or use dat.GUI in combination with mouse/touch events (use the Pointer Events API). Your GUI should enable users to control aspects of sound synthesis.
-### D3.js
-- Create visualizations using the datasets found at [Awesome JSON Datasets](https://github.com/jdorfman/Awesome-JSON-Datasets). Experiment with providing different visualizations of the same data set, and providing users interactive control over visualization parameters and/or data filtering. Alternatively, create a single visualization with using one of the more complicated techniques shown at [d3js.org](d3js.org) and provide meaningful points of interaction for users.
+5) My application has index.html, main.js, second.js, and third.js
 
-Deliverables
----
+6)  My application uses the ES Linter through Webstorm.
 
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
+7) My HTML and CSS validates through Webstorm.
+----------------------------------------------------------------------------------------
 4. Ensure that your project has the proper naming scheme `a4-yourname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. *NOTE: If you don't use Glitch for hosting (where we can see the files) then you must include all project files that you author in your repo for this assignment*.
+
 6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-gitname-firstname-lastname`.
 
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
+## Zoo Adventure
 
-## Your Web Application Title
+the hosting link e.g. http://a4-charlieroberts.glitch.me
 
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here. Images are encouraged, along with concise, high-level text. Be sure to include:
-
-- the goal of the application
-- challenges you faced in realizing the application
-- a brief description of the JS linter you used and what rules it follows (we'll be looking at your JS files for consistency)
+Zoo Adventure is a board game that people can play online.
+- Goal of the Application:
+- Challenges:
+- Linter:
+   - I used ES Lint via Webstorm and it lined my starting and closing tags.
 
 ## Technical Achievements
 - **Tech Achievement 1**: I wrote my own custom GLSL shaders to use as a material for my Three.js objects.
