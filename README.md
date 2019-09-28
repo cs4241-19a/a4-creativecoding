@@ -6,7 +6,7 @@ My application is a simple paint program which allows the user to draw using an 
 
 There are a few challenges I faced while developing, one of which is that I had trouble figuring out how to get it so the user can select an image from their computer to load into the canvas. Another challenged I face was making the modules in the first place and getting them interact with HTML elements in the way that I wanted. 
 
-The linter I used ESLint through Visual Studio Code. The rules my linter followed was adding semicolons at the end of all the line, correcting improper indentation using tabs, and deleting unnecessary spaces in parens and after semicolons.
+The linter I used was ESLint through Visual Studio Code. The rules my linter followed was adding semicolons at the end of all the line, correcting improper indentation using tabs, and deleting unnecessary spaces in parens and after semicolons.
 
 ## Technical Achievements
 - **Tech Achievement 1**: Implemented jQuery, jQuery UI and jQuery Confirm for manipulating HTML elements, handling the "Welcome!!" popup documentation and handling confirmation popups
