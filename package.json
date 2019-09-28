@@ -1,0 +1,25 @@
+{
+  "name": "amarkoski-a4",
+  "version": "0.0.1",
+  "description": "",
+  "main": "js/server.js",
+  "scripts": {
+    "start": "node js/server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "compression": "^1.7.4",
+    "dat.gui": "^0.7.6",
+    "express": "^4.17.1",
+    "helmet": "^3.21.1",
+    "path": "^0.12.7",
+    "standard": "^14.3.1"
+  },
+  "repository": {
+    "url": "https://github.com/amarkoski/a4-persistence"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": "8.x"
+  }
+}
