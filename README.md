@@ -31,13 +31,16 @@ My application implements the minimal requirements and functionalities:
 
 6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-gitname-firstname-lastname`.
 
-## Zoo Adventure
+## Application Name: Zoo Adventure
 
 the hosting link e.g. http://a4-charlieroberts.glitch.me
 
-Zoo Adventure is a board game that people can play online.
-- Goal of the Application:
+Zoo Adventure is an online and interactive board game that a user can play online and on the go. The user is able to move the piece with their keyboard and also interact with the buttons and instructions provided. They can play this game on the go as a mess-free way to relax before bedtime.
+
+- Goal of the Application: The user has to navigate through the game by rolling a die, moving the red block piece to the correct tile, and the executing the movement for the tile they have landed on by pressing the button. They have to make it to the end of the path to the picnic basket before their bed time. Time button is provided so the user can keep track of the time while using the application without exiting it.
+
 - Challenges:
+   - I was originally 
 - Linter:
    - I used ES Lint via Webstorm and it lined my starting and closing tags.
 
