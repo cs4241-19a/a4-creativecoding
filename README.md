@@ -11,4 +11,4 @@ I had a challenge implementing the rotation of the ball without it messing up th
 For HTML/CSS Validation I used https://validator.w3.org/ and https://jigsaw.w3.org/css-validator/ to result in 0 errors.
 
 ### Design/Evaluation Achievements
-- **Design Achievement 1**: I tested my application with n=5 users, finding that all of them had trouble with the rotation, so I took it out as a main part of the game. I also added a text notification when goals were scored, in addition to reseting the speed and direction of the ball when a goal was scored. To increase difficulty, one of my test users suggested starting the ball in random locations, which I then implemented.
+- **Design Achievement 1**: I tested my application with n=7 users, finding that all of them had trouble with the rotation, so I took it out as a main part of the game. I also added a text notification when goals were scored, in addition to reseting the speed and direction of the ball when a goal was scored. To increase difficulty, one of my test users suggested starting the ball in random locations, which I then implemented.
