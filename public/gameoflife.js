@@ -20,8 +20,12 @@ function getNeighbors (i, j) {
 }
 
 // Actual functions exposed by module
-module.exports = {
-  setupBoard: function (_gridSize) {
+module.exports = function () {
+  this.starvation = 2
+  this.overpopulation = 3
+  this.birth = 3
+
+  this.setupBoard = function (_gridSize) {
     gridSize = _gridSize
     board = []
     for (let j = 0; j < gridSize; j++) {
@@ -31,21 +35,21 @@ module.exports = {
         board[j][i] = cell
       }
     }
-  },
+  }
 
-  getCell: function (i, j) {
+  this.getCell = function (i, j) {
     return board[j][i]
-  },
+  }
 
-  setCell: function (i, j, alive, count) {
+  this.setCell = function (i, j, alive, count) {
     const cell = board[j][i]
     cell.alive = alive
     if (count !== undefined) {
       cell.count = count
     }
-  },
+  }
 
-  toggleCell: function (i, j) {
+  this.toggleCell = function (i, j) {
     const cell = board[j][i]
     cell.count = 0
     if (cell.alive) {
@@ -53,9 +57,9 @@ module.exports = {
     } else {
       cell.alive = true
     }
-  },
+  }
 
-  runIteration: function () {
+  this.runIteration = function () {
     const newBoard = []
     for (let j = 0; j < gridSize; j++) {
       newBoard[j] = []
@@ -63,13 +67,13 @@ module.exports = {
         let newCell
         const neighbors = getNeighbors(i, j)
         if (board[j][i].alive) {
-          if (neighbors < 2 || neighbors > 3) {
+          if (neighbors < this.starvation || neighbors > this.overpopulation) {
             newCell = { alive: false, count: 0 }
           } else {
             newCell = { alive: true, count: board[j][i].count + 1 }
           }
         } else {
-          if (neighbors === 3) {
+          if (neighbors === this.birth) {
             newCell = { alive: true, count: 1 }
           } else {
             newCell = { alive: false, count: 0 }
@@ -80,7 +84,5 @@ module.exports = {
     }
 
     board = newBoard
-  },
-
-  getNeighbors: getNeighbors
+  }
 }

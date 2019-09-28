@@ -4,8 +4,10 @@
  */
 
 const THREE = require('three')
-const dat = require('dat.gui')
-const golBoard = require('./gameoflife.js')
+const GameOfLifeModule = require('./gameoflife.js')
+const MyDatModule = require('./mydat.js')
+
+const golBoard = new GameOfLifeModule()
 
 // ########################
 // ## SETUP GAME OF LIFE ##
@@ -14,8 +16,10 @@ const golBoard = require('./gameoflife.js')
 const gridSize = 20
 
 function showHelp () {
-  const popup = document.getElementById('help-popup')
-  popup.classList.toggle('show')
+  const popups = document.getElementsByClassName('popup-text')
+  for (let i = 0; i < popups.length; i++) {
+    popups[i].classList.toggle('show')
+  }
 }
 
 const GameOfLifeClass = function () {
@@ -40,14 +44,7 @@ const gameOfLife = new GameOfLifeClass()
 // ###################
 
 window.onload = function () {
-  const gui = new dat.GUI()
-
-  gui.add(gameOfLife, 'running').name('Running')
-  gui.add(gameOfLife, 'singleStep').name('Single Step')
-  gui.add(gameOfLife, 'speed', 1, 20).name('Iterations/Sec').step(1)
-  gui.add(gameOfLife, 'rotSpeed', 0, 5).name('Rotation Speed')
-  gui.add(gameOfLife, 'editMode').name('Edit Mode')
-  gui.add(gameOfLife, 'showHelp').name('Toggle Help')
+  const myDat = new MyDatModule(gameOfLife, golBoard)
 
   // Show the help screen at the start
   showHelp()

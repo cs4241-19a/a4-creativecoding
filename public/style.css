@@ -57,6 +57,10 @@ canvas {
   left: 100px;
 }
 
+#popup-text-paragraph {
+  top: 150px;
+}
+
 .popup .popuptext::after {
   content: "";
   position: relative;
