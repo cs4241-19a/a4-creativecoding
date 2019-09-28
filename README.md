@@ -13,7 +13,7 @@ The user can control 6 things:
 
 The goal is to display this data in a way that is meaniningful and easily accsible for its users. Some issues I faced during this project was figuring out how to manipulate the data formats differently for a pie chart and for a bar chart. 
 
-For the modules I had two: charts.js and colors.js. My main js file is called index.js. Colors.js held the function that created shades of a given color as well as a specific implementation of that function that was used for the hover color in the bar chart. Chart.js imports the two functions from colors.js. It also holds the drawPieChart and drawBarChart functions which is the bulk of the application. These two functions are imported into the main index.js file.
+I had two modules: charts.js and colors.js. My main js file is called index.js. Colors.js held the function that created shades of a given color as well as a specific implementation of that function that was used for the hover color in the bar chart. Chart.js imports the two functions from colors.js. It also holds the drawPieChart and drawBarChart functions which is the bulk of the application. These two functions are imported into the main index.js file.
 
 Linter: I used the Standard for my linting
 
