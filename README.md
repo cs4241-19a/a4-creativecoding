@@ -15,11 +15,12 @@ Include a very brief summary of your project here. Images are encouraged, along 
  (the main page background and the WebGL Sound visualization), as well as visualizations I made from scratch 
  (the fractal and canvas sound visualization). In both cases, I made sure to understand every part of the code that I included.
 - I included the online snippets because they helped me understand the workings of these libraries in order for me to 
-more easily implement my own functionalities afterwards
+more easily implement my own functionality afterwards
 - The biggest challenge I faced was getting started using all the visualization libraries, as I did not have any prior experience with any of them
 
 - I used ESLinter through WebStorm to lint, using the automatic configuration. I used WebStorm's automatic validator for code validation
 
+** I added two sample songs to the Songs folder that you can download and try the audio visualizers with. 
 
 ## Technical Achievements
 - **Tech Achievement 1**: Used canvas, WebGL, D3, and Three.js on my visualizations
