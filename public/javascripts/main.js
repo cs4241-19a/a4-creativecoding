@@ -1,15 +1,12 @@
 import acolor from './color.js'
-import {min, max} from './distances.js'
-//import keyPress from './keyPress.js';
-//import keyPress from './keyPress.js';
-
+import { min, max } from './distances.js'
+// import keyPress from './keyPress.js';
+// import keyPress from './keyPress.js';
 
 // based on an example found here: https://codepen.io/programking/pen/MyOQpO
 const THREE = require('three')
 const dat = require('dat.gui')
 const OrbitControls = require('three-orbitcontrols')
-
-
 
 // need to declare these variables globally
 // creating a scene
@@ -19,9 +16,14 @@ var gui
 
 var controller, controls
 
+var instructions, showing
+
 var name, width, height, length, wireframe, color
 
 window.onload = function () {
+  showing = true
+  instructions = 'Press space to change background color\n click a cube to select it\nclick and drag to rotate the scene\n right click to slide\n scroll to zoom in and out'
+  document.getElementById('instructions').innerHTML = instructions
 
   scene = new THREE.Scene()
   gui = new dat.GUI()
@@ -69,8 +71,8 @@ window.onload = function () {
   controls.enableDamping = true // an animation loop is required when either damping or auto-rotation are enabled
   controls.dampingFactor = 0.05
   controls.screenSpacePanning = false
-  controls.minDistance = min//100
-  controls.maxDistance =  max//1200
+  controls.minDistance = min// 100
+  controls.maxDistance = max// 1200
 
   document.addEventListener('mousedown', onDocumentMouseDown)
   document.addEventListener('keydown', keyPress)
@@ -94,7 +96,6 @@ var createCubes = function () {
     object.castShadow = true
     object.receiveShadow = true
     object.name = 'cube_' + controller.objects.length
-    // console.log(object.name)
 
     controller.scene.add(object)
     controller.objects.push(object)
@@ -109,6 +110,14 @@ var keyPress = function (event) {
     case 32:
       scene.background = new THREE.Color(Math.random() * 0xffffff)
       break
+    case 191:
+      if (showing) {
+        showing = false
+        document.getElementById('instructions').innerHTML = ''
+      } else if (!showing) {
+        showing = true
+        document.getElementById('instructions').innerHTML = instructions
+      }
   }
 }
 

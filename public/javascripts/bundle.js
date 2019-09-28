@@ -52683,9 +52683,13 @@ var scene, camera, renderer; // gui stuff
 
 var gui;
 var controller, controls;
+var instructions, showing;
 var name, width, height, length, wireframe, color;
 
 window.onload = function () {
+  showing = true;
+  instructions = 'Press space to change background color\n click a cube to select it\nclick and drag to rotate the scene\n right click to slide\n scroll to zoom in and out';
+  document.getElementById('instructions').innerHTML = instructions;
   scene = new THREE.Scene();
   gui = new dat.GUI();
   controller = new THREE.Object3D();
@@ -52722,9 +52726,9 @@ window.onload = function () {
 
   controls.dampingFactor = 0.05;
   controls.screenSpacePanning = false;
-  controls.minDistance = _distances.min; //100
+  controls.minDistance = _distances.min; // 100
 
-  controls.maxDistance = _distances.max; //1200
+  controls.maxDistance = _distances.max; // 1200
 
   document.addEventListener('mousedown', onDocumentMouseDown);
   document.addEventListener('keydown', keyPress);
@@ -52749,8 +52753,7 @@ var createCubes = function createCubes() {
     object.scale.z = Math.random() * 2 + 1;
     object.castShadow = true;
     object.receiveShadow = true;
-    object.name = 'cube_' + controller.objects.length; // console.log(object.name)
-
+    object.name = 'cube_' + controller.objects.length;
     controller.scene.add(object);
     controller.objects.push(object);
     controller.number_of_objects = controller.objects.length;
@@ -52765,6 +52768,16 @@ var keyPress = function keyPress(event) {
     case 32:
       scene.background = new THREE.Color(Math.random() * 0xffffff);
       break;
+
+    case 191:
+      if (showing) {
+        showing = false;
+        document.getElementById('instructions').innerHTML = '';
+      } else if (!showing) {
+        showing = true;
+        document.getElementById('instructions').innerHTML = instructions;
+      }
+
   }
 };
 
