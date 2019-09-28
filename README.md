@@ -2,8 +2,6 @@
 
 http://a4-pjjankowski.glitch.me
 
-Include a very brief summary of your project here. Images are encouraged, along with concise, high-level text. Be sure to include:
-
 I implemented Conway's Game of Life on canvas. My implementation
 allows users to generate random configurations on an 80x80 grid based on a random number of starting cells,
 while also allowing for them to see several premade configurations that are available as preset options.
