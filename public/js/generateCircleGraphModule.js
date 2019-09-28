@@ -6,8 +6,7 @@ export function generateCircleGraph(svg, div, data, colors, innerRadius){
     let res = d3.chord()
         .padAngle(0.05)
         .sortGroups(d3.descending)
-        .sortSubgroups(d3.descending)
-        (data.matrix);
+        .sortSubgroups(d3.descending)(data.matrix);
 
 
 // Add the links between groups

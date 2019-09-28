@@ -121,7 +121,7 @@ function init() {
     //controls the interval of rotation of the object
     setInterval(function(){
             if (controls.radius < 80 && controls.tubularSegments > 12) {
-                controls.radius += 0.5
+                controls.radius += 0.5;
                 controls.tubularSegments -= 1
             }
                 // remove the old plane
@@ -147,7 +147,7 @@ function init() {
             blending: THREE.AdditiveBlending, //necessary for realistic points
             map: generateSprite()
         });
-        return new THREE.PointCloud(geom, material);;
+        return new THREE.PointCloud(geom, material);
     }
 
     //creating mesh and adding materials to it
@@ -155,8 +155,7 @@ function init() {
         // assign two materials
         let meshMaterial = new THREE.MeshNormalMaterial({});
         // creates object that is composed of a lot of other objects
-        let mesh = THREE.SceneUtils.createMultiMaterialObject(geom, [meshMaterial]);
-        return mesh;
+        return THREE.SceneUtils.createMultiMaterialObject(geom, [meshMaterial]);
     }
 
 
@@ -168,7 +167,7 @@ function init() {
         requestAnimationFrame(render);
         webGLRenderer.render(scene, camera);
     }
-};
+}
 
 
 function onWindowResize(){
@@ -185,7 +184,7 @@ function onMouseMove(event) {
     camera.position.y += (mouseY - camera.position.y) * 0.005;
     //set up camera position
     camera.lookAt(scene.position);
-};
+}
 
 
 
@@ -196,7 +195,7 @@ function typeIt(){
     let helpContainer = document.getElementById("helpContainer");
     helpContainer.innerText = "";
     helpContainer.innerHTML = "null";
-    helpContainer.innerHTML = "<span id='typed'></span>"
+    helpContainer.innerHTML = "<span id='typed'></span>";
     helpContainer.addEventListener("click", function(){
         if(canDismiss===false && blocked === false){ typeIt() }
     });
@@ -211,7 +210,7 @@ function typeIt(){
             "And click here again to read this again."
         ],
         typeSpeed: 1,
-        onComplete: (self) => { typeCompleted() }
+        onComplete: () => { typeCompleted() }
     })
 }
 

@@ -11,7 +11,7 @@ app.use(compression()); //will compress all responses
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static('public'));
+app.use(express.static("public"));
 app.set('view engine', 'html');
 
 app.get('/', function (req, res) {

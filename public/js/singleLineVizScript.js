@@ -2,10 +2,10 @@ import {prepAudio} from "./prepareAudioForAnalysis.js"
 
 window.onload = function () {
     vizInit()
-}
+};
 
 
-let file, fileLabel, mediaElement, gainNode;
+let file, fileLabel, mediaElement;
 
 //will get the submitted audio file, label it,
 // and assign it to a table for future use
@@ -30,14 +30,13 @@ let vizInit = function () {
         //call the function that generates the graphics
         spectogram()
     }
-}
+};
 
 function spectogram() {
     let analyser;
 
     let audioElements = prepAudio(mediaElement);
     analyser = audioElements.analyser;
-    gainNode = audioElements.gainNode;
 
     //generate waveform from frequency extracted from song by analyzer
     const waveform = new Float32Array(analyser.frequencyBinCount);
@@ -66,7 +65,7 @@ function spectogram() {
         for (let i = 0; i < waveform.length; i++) {
             const x = (window.innerWidth/2)-(waveform.length/2) + i; //x position - centering the waveform
             const y = (1 + waveform[i] / 3) * canvas.height/1.8; //y position
-            context.strokeStyle = getGreenToRed(Math.abs(waveform[i])*1500)
+            context.strokeStyle = getGreenToRed(Math.abs(waveform[i])*1500);
             context.lineWidth = 3;
             context.arc(x, y+Math.abs(waveform[i]*10), Math.abs(waveform[i]*30), Math.PI*Math.abs(waveform[i]*1000), Math.PI * 2, true);
 

@@ -1,6 +1,5 @@
 // 'use Strict'
 let c, ctx, canvCenterX, canvCenterY, theRadius;
-let circle;
 let isPaused = true;
 let willReset = false; //to use when controls get updated and we want to kill the remaining drawings waiting to be run
 
@@ -119,12 +118,6 @@ function drawCircleRecursive(centerX, centerY, radius, minRadius, color, blurRat
 
 
 
-function onResize() {
-    ctx.width = c.width;
-    ctx.height = c.height;
-}
-
-
 //function to check if canvas is blank
 function isCanvasBlank(c) {
     const blank = document.createElement('canvas');
@@ -149,7 +142,7 @@ function hexToRgb(hex) {
 }
 
 function playPause() {
-    let btnContainer = document.getElementById("tempText")
+    let btnContainer = document.getElementById("tempText");
     let btnPlayPause = document.getElementById("playPause");
     // let currentChild = document.children[0];
     // console.log("current child", currentChild);
@@ -160,14 +153,14 @@ function playPause() {
         //turn btn to pause
         curInnerHTML = "";
         btnPlayPause.innerHTML = '<i class="fas fa-pause fa-2x" onclick="playPause()"></i>';
-        btnContainer.innerText += 'Click here to continue!'
-        // btnContainer.getElementById("tempText").setAttribute("style", "color: ghostwhite")
+        btnContainer.innerText = ""
     } else {
         //want to pause
         isPaused = true;
         curInnerHTML = "";
         btnPlayPause.innerHTML = '<i class="fas fa-play fa-2x" onclick="playPause()"></i>';
-        btnContainer.innerText = ""
+        btnContainer.innerText += 'Click here to continue!'
+
 
     }
 
