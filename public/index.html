@@ -1,4 +1,4 @@
-<!doctype html>
+-<!doctype html>
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -26,30 +26,32 @@
   </head>
   <body>
     <!--top level container object, encompasses the entire page-->
-<!--     <div class="container-fluid snapCont"> -->
+    <div class="container-fluid snapCont">
 
       <!--navigation bar-->
-<!--       <nav class="navbar navbar-expand-lg navbar-light justify-content-between">
+      <nav class="navbar navbar-expand-lg navbar-light justify-content-between">
         <div class="container-fluid">
         <div class="nav">
-          <a class="navbar-brand" href="https://github.com/hcaouette/a3-persistence">
+          <a class="navbar-brand" href="https://github.com/hcaouette/a4-creativecoding">
             <img src="https://i.imgur.com/bfmHsdG.jpg" width="50" height="60" class="d-inline-block align-top" alt="small image of Hunter for navigation bar">
-            <span>Hunter Caouette</span>
+            <span>A4: Creative Coding</span>
           </a>
           <a class="nav-item nav-link active" href="/index.html">Home</a>
-          <a class="nav-item nav-link active" href="/cheeses.html">Cheeses</a>
-          <a class="nav-item nav-link active" href="/about.html">About</a>
         </div>
+
         <div class="nav">
-          <a class="nav-item nav-link active" href="/cart.html">Cart</a>
-          <a class="nav-item nav-link active" href="/auth/google">Log In</a>
+          <form class="video-input-form">
+            <input class="video-url-input" type="text" />
+            <button type="submit">Load Video</button>
+          </form>
+          <h1>Enter YouTube URL</h1>
         </div>
       </div>
-      </nav> -->
+      </nav>
 
       <script type="text/javascript">
 
-        var FizzyText = function(txt) {
+        let FizzyText = function(txt) {
           this.message = txt;
           this.speed = 0.8;
           this.displayOutline = false;
@@ -58,8 +60,10 @@
         };
 
         window.onload = function() {
-          var text = new FizzyText("Hunter Caouette");
-          var gui = new dat.GUI();
+          let text = new FizzyText("Hunter Caouette");
+          let gui = new dat.GUI();
+          // var gui = new dat.GUI( { autoPlace: false } );
+          // gui.domElement.id = 'gui';
           gui.add(text, 'message');
           gui.add(text, 'speed', -5, 5);
           gui.add(text, 'displayOutline');
@@ -69,27 +73,25 @@
       </script>
 
 
-<!--        <canvas id="canvas" width="512" height="256" ></canvas> -->
+
+      <div id="canvas-box">
+        <canvas id="canvas"></canvas>
+      </div>
+
 
 <!--        <p id="controls">
          <input type="button" id="start_button" value="Start">
-         &nbsp; &nbsp;
+          &nbsp;
          <input type="button" id="stop_button" value="Stop">
          <p id="msg"></p>
        </p> -->
 
-<!--       <h1>Enter YouTube Video URL</h1>
-      <form class="video-input-form">
-        <input class="video-url-input" type="text" />
-        <button type="submit">Load Video</button>
-      </form> -->
 
 
 
 
 
-
-<!--     </div> -->
+    </div>
       <!--end container-->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
