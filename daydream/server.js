@@ -2,10 +2,14 @@ const express = require('express'),
 	app = express(),
 	http = require('http').Server(app),
 	io = require('socket.io')(http),
-    port = 3001;
+        compression = require('compression'),
+  	helmet = require('helmet');
+        port = 3001;
 
 app.use(express.static('../daydream/public'));
 app.use(express.static('../daydream/public/libs'));
+app.use(compression());
+app.use(helmet());
 
 app.get('/',function(req, res) {
     res.sendFile(__dirname + '../daydream/public/index.html');
