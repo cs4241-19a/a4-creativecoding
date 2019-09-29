@@ -19,36 +19,17 @@
       <!-- <script type="text/javascript" src="/js/scripts.js"></script> -->
       <!-- <script type="text/javascript" src="/js/myGui.js"></script> -->
       <!-- <script type="text/javascript" src="/js/audio.js"></script> -->
-      <script type="text/javascript">
 
-var FizzyText = function() {
-  this.message = 'dat.gui';
-  this.speed = 0.8;
-  this.displayOutline = false;
-  this.explode = function() { ... };
-  // Define render logic ...
-};
-
-window.onload = function() {
-  var text = new FizzyText();
-  var gui = new dat.GUI();
-  gui.add(text, 'message');
-  gui.add(text, 'speed', -5, 5);
-  gui.add(text, 'displayOutline');
-  gui.add(text, 'explode');
-};
-
-</script>
 
 
     <title>creative coding -- a4-hcaouette -- CS4241 Assignment 4</title>
   </head>
   <body>
     <!--top level container object, encompasses the entire page-->
-    <div class="container-fluid snapCont">
+<!--     <div class="container-fluid snapCont"> -->
 
       <!--navigation bar-->
-      <nav class="navbar navbar-expand-lg navbar-light justify-content-between">
+<!--       <nav class="navbar navbar-expand-lg navbar-light justify-content-between">
         <div class="container-fluid">
         <div class="nav">
           <a class="navbar-brand" href="https://github.com/hcaouette/a3-persistence">
@@ -64,38 +45,52 @@ window.onload = function() {
           <a class="nav-item nav-link active" href="/auth/google">Log In</a>
         </div>
       </div>
-      </nav>
+      </nav> -->
+
+      <script type="text/javascript">
+
+        var FizzyText = function(txt) {
+          this.message = txt;
+          this.speed = 0.8;
+          this.displayOutline = false;
+          this.explode = function() { alert('Bang!'); };
+          // Define render logic ...
+        };
+
+        window.onload = function() {
+          var text = new FizzyText("Hunter Caouette");
+          var gui = new dat.GUI();
+          gui.add(text, 'message');
+          gui.add(text, 'speed', -5, 5);
+          gui.add(text, 'displayOutline');
+          gui.add(text, 'explode');
+        };
+
+      </script>
 
 
-      <!--main content-->
-      <!--row 1-->
-      <!-- <div class="row justify-content-center snapChil">
-        <div class="col centerBox">
-          <h1></h1>
-        </div>
-      </div> -->
+<!--        <canvas id="canvas" width="512" height="256" ></canvas> -->
 
-      <canvas id="canvas" width="512" height="256" ></canvas>
-
-       <p id="controls">
+<!--        <p id="controls">
          <input type="button" id="start_button" value="Start">
          &nbsp; &nbsp;
          <input type="button" id="stop_button" value="Stop">
          <p id="msg"></p>
-       </p>
+       </p> -->
 
-      <h1>Enter YouTube Video URL</h1>
+<!--       <h1>Enter YouTube Video URL</h1>
       <form class="video-input-form">
         <input class="video-url-input" type="text" />
         <button type="submit">Load Video</button>
-      </form>
+      </form> -->
 
 
 
 
 
 
-    </div><!--end container-->
+<!--     </div> -->
+      <!--end container-->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
