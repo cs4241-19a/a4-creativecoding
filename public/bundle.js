@@ -48928,22 +48928,22 @@
 }));
 
 },{}],2:[function(require,module,exports){
-"use strict";
-
-var THREE = require("three");
-
-var planets = require("./planets");
+const THREE = require("three");
+const planets = require("./planets.js");
+const modal = require("./modal.js");
 
 init();
 
 function init() {
-  var pressed = true;
-  var scene = new THREE.Scene();
-  var camera = new THREE.PerspectiveCamera();
-  camera.position.z = 50;
-  var renderer = new THREE.WebGLRenderer();
-  var length;
+  let pressed = true;
 
+  let scene = new THREE.Scene();
+
+  let camera = new THREE.PerspectiveCamera();
+  camera.position.z = 50;
+
+  let renderer = new THREE.WebGLRenderer();
+  let length;
   if (window.innerWidth >= window.innerHeight) {
     length = window.innerHeight - 100;
   } else {
@@ -48951,114 +48951,129 @@ function init() {
   }
 
   renderer.setSize(length, length);
+
   document.querySelector("#test").appendChild(renderer.domElement);
-  var pointLight = new THREE.PointLight(0xffffff);
+
+  const pointLight = new THREE.PointLight(0xffffff);
   pointLight.position.z = 1000;
+
   scene.add(pointLight);
-  planets.createPlanets(scene);
+
+  let all = planets.createPlanets(scene);
+  let sun = all[0];
+  let mercury = all[1];
+  let venus = all[2];
+  let earth = all[3];
+  let mars = all[4];
+  let jupiter = all[5];
+  let saturn = all[6];
+  let ring = all[7];
+  let uranus = all[8];
+  let neptune = all[9];
 
   function render() {
     if (pressed === true) {
       requestAnimationFrame(render);
     }
+    sun.rotation.x += 0.025;
+    var elapsed = Date.now() * 0.0005;
 
-    planets.sun.rotation.x += 0.025;
-    var elapsed = Date.now() * 0.0005; //mercury position
+    //mercury position
+    mercury.rotation.x += 0.025;
+    mercury.position.x = Math.sin(elapsed * 4.5) * 4;
+    mercury.position.y = Math.sin(elapsed * 4.5) * 2;
+    mercury.position.z = Math.cos(elapsed * 4.5) * 4;
 
-    planets.mercury.rotation.x += 0.025;
-    planets.mercury.position.x = Math.sin(elapsed * 4.5) * 4;
-    planets.mercury.position.y = Math.sin(elapsed * 4.5) * 2;
-    planets.mercury.position.z = Math.cos(elapsed * 4.5) * 4; //venus position
+    //venus position
+    venus.rotation.x += 0.025;
+    venus.position.x = Math.sin(elapsed * 2.5) * 7;
+    venus.position.y = Math.cos(elapsed * 2.5) * 2;
+    venus.position.z = Math.cos(elapsed * 2.5) * 7;
 
-    planets.venus.rotation.x += 0.025;
-    planets.venus.position.x = Math.sin(elapsed * 2.5) * 7;
-    planets.venus.position.y = Math.cos(elapsed * 2.5) * 2;
-    planets.venus.position.z = Math.cos(elapsed * 2.5) * 7; //earth position
+    //earth position
+    earth.rotation.x += 0.025;
+    earth.position.x = Math.sin(elapsed * 2) * 10;
+    earth.position.z = Math.cos(elapsed * 2) * 10;
 
-    planets.earth.rotation.x += 0.025;
-    planets.earth.position.x = Math.sin(elapsed * 2) * 10;
-    planets.earth.position.z = Math.cos(elapsed * 2) * 10; //mars position
+    //mars position
+    mars.rotation.x += 0.025;
+    mars.position.x = Math.sin(elapsed * 1.9) * 11;
+    mars.position.y = Math.sin(elapsed * 1.9) * 4;
+    mars.position.z = Math.cos(elapsed * 1.9) * 11;
 
-    planets.mars.rotation.x += 0.025;
-    planets.mars.position.x = Math.sin(elapsed * 1.9) * 11;
-    planets.mars.position.y = Math.sin(elapsed * 1.9) * 4;
-    planets.mars.position.z = Math.cos(elapsed * 1.9) * 11; //Jupiter position
+    //Jupiter position
+    jupiter.rotation.x += 0.025;
+    jupiter.position.x = Math.sin(elapsed * 1.75) * 13;
+    jupiter.position.y = Math.cos(elapsed * 1.75) * 5;
+    jupiter.position.z = Math.cos(elapsed * 1.75) * 13;
 
-    planets.jupiter.rotation.x += 0.025;
-    planets.jupiter.position.x = Math.sin(elapsed * 1.75) * 13;
-    planets.jupiter.position.y = Math.cos(elapsed * 1.75) * 5;
-    planets.jupiter.position.z = Math.cos(elapsed * 1.75) * 13; //Saturn position
+    //Saturn position
+    saturn.rotation.x += 0.025;
+    saturn.position.x = Math.sin(elapsed * 1.5) * 14;
+    saturn.position.y = Math.sin(elapsed * 1.5) * 3;
+    saturn.position.z = Math.cos(elapsed * 1.5) * 14;
+    //ring.rotation.y += 0.0025;
+    ring.position.x = Math.sin(elapsed * 1.5) * 14;
+    ring.position.y = Math.sin(elapsed * 1.5) * 3;
+    ring.position.z = Math.cos(elapsed * 1.5) * 14;
 
-    planets.saturn.rotation.x += 0.025;
-    planets.saturn.position.x = Math.sin(elapsed * 1.5) * 14;
-    planets.saturn.position.y = Math.sin(elapsed * 1.5) * 3;
-    planets.saturn.position.z = Math.cos(elapsed * 1.5) * 14; //ring.rotation.y += 0.0025;
+    //Uranus position
+    uranus.rotation.x += 0.025;
+    uranus.position.x = Math.sin(elapsed * 1) * 16;
+    uranus.position.y = Math.cos(elapsed * 1) * 3;
+    uranus.position.z = Math.cos(elapsed * 1) * 16;
 
-    planets.ring.position.x = Math.sin(elapsed * 1.5) * 14;
-    planets.ring.position.y = Math.sin(elapsed * 1.5) * 3;
-    planets.ring.position.z = Math.cos(elapsed * 1.5) * 14; //Uranus position
+    //Neptune position
+    neptune.rotation.x += 0.025;
+    neptune.position.x = Math.sin(elapsed * 0.75) * 20;
+    neptune.position.y = Math.sin(elapsed * 0.75) * 2;
+    neptune.position.z = Math.cos(elapsed * 0.75) * 20;
 
-    planets.uranus.rotation.x += 0.025;
-    planets.uranus.position.x = Math.sin(elapsed * 1) * 16;
-    planets.uranus.position.y = Math.cos(elapsed * 1) * 3;
-    planets.uranus.position.z = Math.cos(elapsed * 1) * 16; //Neptune position
-
-    planets.neptune.rotation.x += 0.025;
-    planets.neptune.position.x = Math.sin(elapsed * 0.75) * 20;
-    planets.neptune.position.y = Math.sin(elapsed * 0.75) * 2;
-    planets.neptune.position.z = Math.cos(elapsed * 0.75) * 20;
     renderer.render(scene, camera);
   }
 
   render();
-  $("document").keydown(function (e) {
-    if (e.which == 80) {
+
+  document.body.addEventListener("keypress", function(e) {
+    if (e.keyCode == 112) {
       pressed = !pressed;
-    } else if (e.which == 87) {
+    } else if (e.which == 119) {
       camera.position.y -= 1;
-    } else if (e.which == 65) {
+    } else if (e.which == 97) {
       camera.position.x += 1;
-    } else if (e.which == 83) {
+    } else if (e.which == 115) {
       camera.position.y += 1;
-    } else if (e.which == 68) {
+    } else if (e.which == 100) {
       camera.position.x -= 1;
-    } else if (e.which == 90) {
+    } else if (e.which == 122) {
       camera.position.z -= 1;
-    } else if (e.which == 66) {
+    } else if (e.which == 98) {
       camera.position.z += 1;
-    } else if (e.which == 70) {
+    } else if (e.which == 102) {
       pointLight.power += 2.5;
-    } else if (e.which == 71) {
+    } else if (e.which == 103) {
       pointLight.power -= 2.5;
-    } else if (e.which == 78) {
+    } else if (e.which == 110) {
       length += 10;
       renderer.setSize(length, length);
-    } else if (e.which == 77) {
+    } else if (e.which == 109) {
       length -= 10;
       renderer.setSize(length, length);
-    } else if (e.which == 73) {
-      modal.style.display = "block";
+    } else if (e.which == 105) {
+      modal.display();
     }
-
     render();
   });
-  var modal = document.getElementById("myModal");
-  var span = document.getElementsByClassName("close")[0];
-  modal.style.display = "block";
-
-  span.onclick = function () {
-    modal.style.display = "none";
-  };
 }
 
 function planetSelect(planet) {
-  var selected, selectedplanet;
+  let selected, selectedplanet;
   selected = document.getElementById("selected");
-  var facts = document.getElementById("facts");
+  let facts = document.getElementById("facts");
+
   selectedplanet = document.getElementById(planet);
   console.log(selectedplanet.id);
   selected.innerHTML = planet;
-
   if (selectedplanet.id === "Sun") {
     facts.innerHTML = "Diameter - 864,340 miles";
   } else if (selectedplanet.id === "Mercury") {
@@ -49078,90 +49093,118 @@ function planetSelect(planet) {
   } else if (selectedplanet.id === "Neptune") {
     facts.innerHTML = "Diameter - 30,779 miles";
   }
-
   selected.style.color = selectedplanet.style.backgroundColor;
   facts.style.color = selectedplanet.style.backgroundColor;
 }
 
 module.exports = {
-  init: init,
-  planetSelect: planetSelect
+  init,
+  planetSelect
 };
 
-},{"./planets":3,"three":1}],3:[function(require,module,exports){
-"use strict";
+},{"./modal.js":3,"./planets.js":4,"three":1}],3:[function(require,module,exports){
+var modal = document.getElementById("myModal");
+var span = document.getElementsByClassName("close")[0];
 
-var THREE = require("three");
+modal.style.display = "block";
 
-var sun, mercury, venus, mars, earth, jupiter, saturn, ring, uranus, neptune;
+span.onclick = function() {
+  modal.style.display = "none";
+};
+
+function display() {
+  modal.style.display = "block";
+}
+
+module.exports = {
+  modal,
+  display
+};
+
+},{}],4:[function(require,module,exports){
+const THREE = require("three");
+
+let sun, mercury, venus, mars, earth, jupiter, saturn, ring, uranus, neptune;
 
 function createPlanets(scene) {
   //create sun
-  var sunsize = 3.5;
-  var sungeo = new THREE.SphereGeometry(sunsize, 50, 50);
-  var sunmat = new THREE.MeshPhongMaterial({
+  let sunsize = 3.5;
+  //includes size variable so it can be altered easier
+  let sungeo = new THREE.SphereGeometry(sunsize, 50, 50);
+  let sunmat = new THREE.MeshPhongMaterial({
     color: 0xfcd925,
     shininess: 2000
   });
   sun = new THREE.Mesh(sungeo, sunmat);
-  scene.add(sun); //create mercury
 
-  var mersize = 0.5;
-  var mergeo = new THREE.SphereGeometry(mersize, 50, 50);
-  var mermat = new THREE.MeshPhongMaterial({
+  scene.add(sun);
+
+  //create mercury
+  let mersize = 0.5;
+  let mergeo = new THREE.SphereGeometry(mersize, 50, 50);
+  let mermat = new THREE.MeshPhongMaterial({
     color: 0x848984,
     shininess: 2000
   });
   mercury = new THREE.Mesh(mergeo, mermat);
   mercury.position.set(-10, 0, -10);
-  scene.add(mercury); //create venus
+  scene.add(mercury);
 
-  var vensize = 0.9;
-  var vengeo = new THREE.SphereGeometry(vensize, 50, 50);
-  var venmat = new THREE.MeshPhongMaterial({
+  //create venus
+  let vensize = 0.9;
+  let vengeo = new THREE.SphereGeometry(vensize, 50, 50);
+  let venmat = new THREE.MeshPhongMaterial({
     color: 0xfdf3c0,
     shininess: 2000
   });
   venus = new THREE.Mesh(vengeo, venmat);
   venus.position.set(12, 0, 12);
-  scene.add(venus); //create earth
+  scene.add(venus);
 
-  var earsize = 1;
-  var eargeo = new THREE.SphereGeometry(earsize, 50, 50);
-  var earmat = new THREE.MeshPhongMaterial({
+  //create earth
+  let earsize = 1;
+  let eargeo = new THREE.SphereGeometry(earsize, 50, 50);
+  let earmat = new THREE.MeshPhongMaterial({
     color: 0x0eaf04,
     shininess: 2000
   });
   earth = new THREE.Mesh(eargeo, earmat);
   earth.position.set(-12, 0, -12);
-  scene.add(earth); //create mars
+  scene.add(earth);
 
-  var margeo = new THREE.SphereGeometry(0.8, 50, 50);
-  var marmat = new THREE.MeshPhongMaterial({
+  //create mars
+  let marsize = 0.8;
+  const margeo = new THREE.SphereGeometry(marsize, 50, 50);
+  const marmat = new THREE.MeshPhongMaterial({
     color: 0xf92f09,
     shininess: 2000
   });
   mars = new THREE.Mesh(margeo, marmat);
   mars.position.set(13, 0, 13);
-  scene.add(mars); //create jupiter
+  scene.add(mars);
 
-  var jupgeo = new THREE.SphereGeometry(2.5, 50, 50);
-  var jupmat = new THREE.MeshPhongMaterial({
+  //create jupiter
+  let jupsize = 2.5;
+  const jupgeo = new THREE.SphereGeometry(jupsize, 50, 50);
+  const jupmat = new THREE.MeshPhongMaterial({
     color: 0xfc843e,
     shininess: 2000
   });
   jupiter = new THREE.Mesh(jupgeo, jupmat);
   jupiter.position.set(14, 0, 14);
-  scene.add(jupiter); //create saturn
+  scene.add(jupiter);
 
-  var satgeo = new THREE.SphereGeometry(1.75, 50, 50);
-  var satmat = new THREE.MeshPhongMaterial({
+  //create saturn
+  let satsize = 1.75;
+  const satgeo = new THREE.SphereGeometry(satsize, 50, 50);
+  const satmat = new THREE.MeshPhongMaterial({
     color: 0xfbc753,
     shininess: 2000
   });
   saturn = new THREE.Mesh(satgeo, satmat);
   saturn.position.set(15, 0, 15);
   scene.add(saturn);
+
   var ringgeo = new THREE.RingGeometry(1.8, 3, 50);
   var ringmat = new THREE.MeshBasicMaterial({
     color: 0xfbc753,
@@ -49170,29 +49213,50 @@ function createPlanets(scene) {
   ring = new THREE.Mesh(ringgeo, ringmat);
   ring.position.set(15, 0, 15);
   ring.rotation.x += 2;
-  scene.add(ring); //create uranus
+  scene.add(ring);
 
-  var urageo = new THREE.SphereGeometry(1.1, 50, 50);
-  var uramat = new THREE.MeshPhongMaterial({
+  //create uranus
+  let urasize = 1.1;
+  const urageo = new THREE.SphereGeometry(urasize, 50, 50);
+  const uramat = new THREE.MeshPhongMaterial({
     color: 0x94cafc,
     shininess: 2000
   });
   uranus = new THREE.Mesh(urageo, uramat);
   uranus.position.set(15, 0, 15);
-  scene.add(uranus); //create uranus
+  scene.add(uranus);
 
-  var nepgeo = new THREE.SphereGeometry(1.1, 50, 50);
-  var nepmat = new THREE.MeshPhongMaterial({
+  //create neptune
+  let nepsize = 0.8;
+  const nepgeo = new THREE.SphereGeometry(nepsize, 50, 50);
+  const nepmat = new THREE.MeshPhongMaterial({
     color: 0x3544fa,
     shininess: 2000
   });
   neptune = new THREE.Mesh(nepgeo, nepmat);
   neptune.position.set(16, 0, 16);
   scene.add(neptune);
+
+  console.log(sun);
+
+  var all = [
+    sun,
+    mercury,
+    venus,
+    earth,
+    mars,
+    jupiter,
+    saturn,
+    ring,
+    uranus,
+    neptune
+  ];
+
+  return all;
 }
 
-module.exports = function () {
-  createPlanets, sun, mercury, venus, earth, mars, jupiter, saturn, ring, uranus, neptune;
+module.exports = {
+  createPlanets
 };
 
-},{"three":1}]},{},[2,3]);
+},{"three":1}]},{},[4,2,3]);

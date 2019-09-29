@@ -5,6 +5,7 @@ let sun, mercury, venus, mars, earth, jupiter, saturn, ring, uranus, neptune;
 function createPlanets(scene) {
   //create sun
   let sunsize = 3.5;
+  //includes size variable so it can be altered easier
   let sungeo = new THREE.SphereGeometry(sunsize, 50, 50);
   let sunmat = new THREE.MeshPhongMaterial({
     color: 0xfcd925,
@@ -48,7 +49,8 @@ function createPlanets(scene) {
   scene.add(earth);
 
   //create mars
-  const margeo = new THREE.SphereGeometry(0.8, 50, 50);
+  let marsize = 0.8;
+  const margeo = new THREE.SphereGeometry(marsize, 50, 50);
   const marmat = new THREE.MeshPhongMaterial({
     color: 0xf92f09,
     shininess: 2000
@@ -58,7 +60,8 @@ function createPlanets(scene) {
   scene.add(mars);
 
   //create jupiter
-  const jupgeo = new THREE.SphereGeometry(2.5, 50, 50);
+  let jupsize = 2.5;
+  const jupgeo = new THREE.SphereGeometry(jupsize, 50, 50);
   const jupmat = new THREE.MeshPhongMaterial({
     color: 0xfc843e,
     shininess: 2000
@@ -68,7 +71,8 @@ function createPlanets(scene) {
   scene.add(jupiter);
 
   //create saturn
-  const satgeo = new THREE.SphereGeometry(1.75, 50, 50);
+  let satsize = 1.75;
+  const satgeo = new THREE.SphereGeometry(satsize, 50, 50);
   const satmat = new THREE.MeshPhongMaterial({
     color: 0xfbc753,
     shininess: 2000
@@ -88,7 +92,8 @@ function createPlanets(scene) {
   scene.add(ring);
 
   //create uranus
-  const urageo = new THREE.SphereGeometry(1.1, 50, 50);
+  let urasize = 1.1;
+  const urageo = new THREE.SphereGeometry(urasize, 50, 50);
   const uramat = new THREE.MeshPhongMaterial({
     color: 0x94cafc,
     shininess: 2000
@@ -97,8 +102,9 @@ function createPlanets(scene) {
   uranus.position.set(15, 0, 15);
   scene.add(uranus);
 
-  //create uranus
-  const nepgeo = new THREE.SphereGeometry(1.1, 50, 50);
+  //create neptune
+  let nepsize = 0.8;
+  const nepgeo = new THREE.SphereGeometry(nepsize, 50, 50);
   const nepmat = new THREE.MeshPhongMaterial({
     color: 0x3544fa,
     shininess: 2000
@@ -106,10 +112,10 @@ function createPlanets(scene) {
   neptune = new THREE.Mesh(nepgeo, nepmat);
   neptune.position.set(16, 0, 16);
   scene.add(neptune);
-}
 
-module.exports = function() {
-  createPlanets,
+  console.log(sun);
+
+  var all = [
     sun,
     mercury,
     venus,
@@ -119,5 +125,12 @@ module.exports = function() {
     saturn,
     ring,
     uranus,
-    neptune;
+    neptune
+  ];
+
+  return all;
+}
+
+module.exports = {
+  createPlanets
 };
