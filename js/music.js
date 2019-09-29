@@ -76,13 +76,8 @@ function init() {
         this.distance = 500;
         this.angle = 1.60;
         this.exponent = 2;
-        // this.shadowCamera.near = 2;
-        // this.shadowCamera.far = 434;
-        // this.shadowCamera.fov = 46;
         this.shadowMapWidth = 2056;
         this.shadowMapHeight = 2056;
-        // this.shadow.bias = 0.00;
-        // this.shadow.darkness = 0.5;
         this.target = cube;
     };
     // Add spotlight
@@ -93,11 +88,6 @@ function init() {
     spotLight.distance = guiControls.distance;
     spotLight.angle = guiControls.angle;
     spotLight.exponent = guiControls.exponent;
-    // spotLight.shadowCamera.near = guiControls.shadowCamera.near;
-    // spotLight.shadowCamera.far = guiControls.shadowCamera.far;
-    // spotLight.shadowCamera.fov = guiControls.shadowCamera.fov;
-    // spotLight.shadow.bias = guiControls.shadow.bias;
-    // spotLight.shadow.darkness = guiControls.shadow.darkness;
     scene.add(spotLight);
 
     datGUI = new dat.GUI();
@@ -128,26 +118,6 @@ function init() {
     datGUI.add(guiControls, 'exponent', 0, 50).onChange(function(value) {
         spotLight.exponent = value;
     });
-    // datGUI.add(guiControls, 'shadowCamera.near', 0, 100).name("Near").onChange(function(value) {
-    //     spotLight.shadowCamera.near = value;
-    //     spotLight.shadowCamera.updateProjectionMatrix();
-    // });
-    // datGUI.add(guiControls, 'shadowCamera.far', 0, 5000).name("Far").onChange(function(value) {
-    //     spotLight.shadowCamera.far = value;
-    //     spotLight.shadowCamera.updateProjectionMatrix();
-    // });
-    // datGUI.add(guiControls, 'shadowCamera.fov', 1, 180).name("Fov").onChange(function(value) {
-    //     spotLight.shadowCamera.fov = value;
-    //     spotLight.shadowCamera.updateProjectionMatrix();
-    // });
-    // datGUI.add(guiControls, 'shadow.bias', 0, 1).onChange(function(value) {
-    //     spotLight.shadow.bias = value;
-    //     spotLight.shadowCamera.updateProjectionMatrix();
-    // });
-    // datGUI.add(guiControls, 'shadow.darkness', 0, 1).onChange(function(value) {
-    //     spotLight.shadow.darkness = value;
-    //     spotLight.shadowCamera.updateProjectionMatrix();
-    // });
     datGUI.close();
 
     $("#webGL-container").append(renderer.domElement);
