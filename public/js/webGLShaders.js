@@ -3,7 +3,7 @@ let file, fileLabel, mediaElement, analyser, audioContext;
 
 window.onload = function () {
     vizInit()
-}
+};
 
 
 //will get the submitted audio file, label it,
@@ -67,6 +67,18 @@ function init(){
     const fragResolution = gl.getUniformLocation(fragShader, 'resolution');
     gl.uniform2f(fragResolution, fragCanvas.width, fragCanvas.height);
     const fragSpectrumArray = new Uint8Array(4 * spectrum.length);
+    const fragSpectrum = createTexture(gl);
+
+
+
+    function createTexture(gl) {
+        const texture = gl.createTexture();
+        gl.bindTexture(gl.TEXTURE_2D, texture);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+        gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+        return texture
+    }
 
 
 

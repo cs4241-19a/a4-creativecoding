@@ -78,7 +78,8 @@ function init(radius, minRadius, aStartColor, blurRate){
 
 //drawing circle recursively
 function drawCircleRecursive(centerX, centerY, radius, minRadius, color, blurRate){
-    if(isPaused === false) {
+    let circle;
+    if (isPaused === false) {
         console.log("NOT PAUSED");
         if (color === startColor && willReset === false) {
             ctx.beginPath();
@@ -92,27 +93,26 @@ function drawCircleRecursive(centerX, centerY, radius, minRadius, color, blurRat
             //if the color isnt the same that means it's an old process, the color has been updated so the process needs to be terminated
             //also checking if the pause parameter is on or off
             if (radius > minRadius) {
-                    setTimeout(function () {
-                        drawCircleRecursive(centerX + radius / 2, centerY, radius / 2, minRadius, color, blurRate);
-                    }, 0);
-                    setTimeout(function () {
-                        drawCircleRecursive(centerX - radius / 2, centerY, radius / 2, minRadius, color, blurRate);
-                    }, 0);
-                    setTimeout(function () {
-                        drawCircleRecursive(centerX, centerY + radius / 2, radius / 2, minRadius, color, blurRate);
-                    }, 0);
-                    setTimeout(function () {
-                        drawCircleRecursive(centerX, centerY - radius / 2, radius / 2, minRadius, color, blurRate);
-                    }, 0);
+                setTimeout(function () {
+                    drawCircleRecursive(centerX + radius / 2, centerY, radius / 2, minRadius, color, blurRate);
+                }, 0);
+                setTimeout(function () {
+                    drawCircleRecursive(centerX - radius / 2, centerY, radius / 2, minRadius, color, blurRate);
+                }, 0);
+                setTimeout(function () {
+                    drawCircleRecursive(centerX, centerY + radius / 2, radius / 2, minRadius, color, blurRate);
+                }, 0);
+                setTimeout(function () {
+                    drawCircleRecursive(centerX, centerY - radius / 2, radius / 2, minRadius, color, blurRate);
+                }, 0);
             }
         }
-    }
-    else {
-            console.log("PAUSED");
-            setTimeout(function () {
-                console.log(centerX, centerY, radius, minRadius, color, blurRate);
-                drawCircleRecursive(centerX, centerY, radius, minRadius, color, blurRate);
-            }, 50);
+    } else {
+        console.log("PAUSED");
+        setTimeout(function () {
+            console.log(centerX, centerY, radius, minRadius, color, blurRate);
+            drawCircleRecursive(centerX, centerY, radius, minRadius, color, blurRate);
+        }, 50);
     }
 }
 
