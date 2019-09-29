@@ -15,7 +15,7 @@ app.use(express.static("public"));
 app.set('view engine', 'html');
 
 app.get('/', function (req, res) {
-    res.sendFile('/index.html');
+    res.sendFile(__dirname + '/index.html');
 });
 
 
