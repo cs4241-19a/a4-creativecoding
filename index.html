@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>⚐︎♎︎♎︎ ♌︎●︎□︎♑︎ V2</title>
+    <meta name="description" content="Dan Duff's A4 Project">
+    <link id="favicon" rel="icon" href="https://cdn.glitch.com/831da1ea-1e50-4148-9a1d-b5e53a712f89%2Ffavicon.ico?v=1568600857386" type="image/x-icon">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="style.css">
+
+<!--   External stylesheet and scripts from the web     -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/css/bootstrap-slider.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    
+    
+<!--     The bundled, browserify'ed single js file. Uses modules startup.js and google.js -->
+    <script src ="/js/client.js"></script>   
+  </head>
+<body class="w3-light-grey wingdinger">
+
+<div id = "fadeback" class="w3-content" style="max-width:1400px">
+
+<!-- Header -->
+<header class="w3-container w3-center w3-padding-32 header-style">
+  <div id = "langSwitch">
+    <input id = "langSwitcher" type="checkbox" data-toggle="toggle" data-on="🕈︎♓︎■︎♑︎♎︎♓︎■︎♑︎⬧︎" data-off="To English" style= "color: white;">
+    <button id = "cloudSwitcher" class = "top-btn" type = "button">Cloudify</button>
+    <button class  = "logged-in top-btn" id = "new-post" type="button" >+ Post</button>
+  </div>
+  <div>
+    <h1 class = "wingdinger ob-color"><b>Odd Blog V2</b></h1>
+    <div class = "wingdinger" style = "color: white; min-height: 45px;"><b>The World's Second Version of the World's First Wingding Message Board</b></div>
+    <input id = "searchBar" type = "text" onkeyup = "searchPosts(this)">
+    <div id = "screenshotMenu" style="display: none">
+      The Odd Blog Wordcloud: A word cloud which grabs user data from the website and displays it in a cycling wordcloud. 
+      Feel free to play around, and use the Help(?) button for more info.
+    </div>
+  </div>
+  <div id = "top-btns">
+    <div class = "logged-in">
+      <img id= "profilePic">
+      <p id = "profileName"></p>
+      <button type = "button" onclick = "window.google.logout()" style = "background-color: pink">Logout</button>
+    </div>
+    <button id = "googleBtn" class = "btn btn-success" type = "button" onclick = "window.google.login()" style = "background-color: lightgreen">Sign in with Google</button>
+<!--     <a href = "https://a4-dandaman2.glitch.me/wordcloud.html">To WordCloud</a> -->
+  </div>
+  <br>
+  <div></div>
+</header>
+  
+<!-- Grid -->
+<div id  = "swapCont">
+  <div id = "post-tab" class="w3-row">
+
+  <!-- Blog entries -->
+  <div id = "post-list" class="w3-col l8 s12">
+
+  <!-- END BLOG ENTRIES -->
+  </div>
+
+    <!-- User Posts menu -->
+  <div class="w3-col l4">
+
+    <!-- Posts -->
+  <div class="w3-card w3-margin">
+      <div class="w3-container w3-padding">
+        <h4 class = "wingdinger" style="text-align: center; font-weight: bold">Your Posts</h4>
+      </div>
+      <ul id = "entry-section" class="w3-ul w3-hoverable w3-white"> 
+      </ul>
+    </div>
+    <hr> 
+  <!-- END User Posts Menu -->
+  </div>
+
+  <!-- END GRID -->
+  </div><br>
+  
+  <!-- WORDCLOUD IMBEDDING -->
+  <div id = "cloud-tab" style = "display: none">
+    <div>
+<!--       cloud div -->
+    <div id = "cloud" class  = "w3-col l8 s12"></div>
+<!--       controls menu -->
+    <div id = "controls" style = "text-align: center" >
+      <div class="w3-col l4">
+      <div class="w3-card w3-margin">
+        <div class="w3-container w3-padding control-menu">
+          <h4 class = "wingdinger" style="font-weight: bold">Controls</h4>
+        </div>
+        <ul id = "control-list" class="w3-ul w3-hoverable w3-white">
+          <li>
+            <h5 class = "control-header wingdinger">
+              Poster
+            </h5>
+            <select id = "poster-selector" class="browser-default custom-select">
+              <option value = "all" selected>All</option>
+            </select>
+          </li>
+          <li>
+            <h5 class = "control-header wingdinger">
+              d3 Color Category
+            </h5>
+            <select id = "color-selector" class="browser-default custom-select">
+              <option value = "cat10" >Category10</option>
+              <option value = "cat20" selected>Category20</option>
+              <option value = "cat20b" >Category20b</option>
+              <option value = "cat20c" >Category20c</option>
+              <option value = "colorless" >Colorless</option>
+            </select>
+          </li>
+          <li>
+              <h5 class = "control-header wingdinger">
+              Cycle Speed: <span id="speedSliderVal">[2]</span>
+            </h5>
+            <input id="speedSlider" data-slider-id="sSlider" type="text" data-slider-min="0" data-slider-max="8" data-slider-step="1" data-slider-value="4"/>
+          </li>
+          <li>
+            <h5 class = "control-header wingdinger">
+              Num Words: <span id="numWordSliderVal">[20]</span>
+            </h5>
+            <input id="numWordSlider" data-slider-id="nwSlider" type="text" data-slider-min="1" data-slider-max="80" data-slider-step="1" data-slider-value="20"/>
+          </li>
+          <button id = "screenshotBtn" class = "low-button" type = "button" onclick = "saveAsPNG()">Save Image</button>
+          <button id = "helpBtn" class = "low-button" type = "button" >Help (?)</button>
+        </ul>
+      </div>
+      <hr> 
+    </div>
+    </div>
+  </div>
+  <script src="https://d3js.org/d3.v3.min.js"></script>
+  <script src="https://rawgit.com/jasondavies/d3-cloud/master/build/d3.layout.cloud.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/10.0.0/bootstrap-slider.min.js"></script>+
+    
+  <script>
+
+  var fill = d3.scale.category20();
+  //control variables
+  var speed = 2;
+  var numWords = 20;
+  var words = ["Odd", "Blog", "Wordcloud"];
+  var posters = [];
+  getPostWords(true);   
+    
+  //Create a new instance of the word cloud visualisation.
+  var myWordCloud = wordCloud('#cloud');
+
+  //Start cycling through the demo data
+  showNewWords(myWordCloud);
+    
+  setControlWidgets();
+
+
+  function setControlWidgets(){
+    
+    //Speed Slider//////////////////////////////
+    $('#speedSlider').slider({
+      formatter: function(selValue) {
+        return 'Speed: ' + selValue;
+      }
+    }); 
+    
+    $('#speedSlider').slider().on('slideStop', function(ev){
+      let value = $('#speedSlider').data('slider').getValue();
+      let newVal = 4;
+        while(value > 0){
+          newVal -= 0.5   
+          value--;
+        }
+      
+      speed = (newVal == 0)? .1 : newVal;
+    });
+    
+    $("#speedSlider").on("slide", function(slideEvt) {
+      let spd = slideEvt.value;
+      if(spd == 8){
+        spd = "Wicked Fast";
+      }
+	    $("#speedSliderVal").text("["+spd+"]");
+    });
+    
+    
+    //Number of Words Slider///////////////////
+    $('#numWordSlider').slider({
+      formatter: function(selValue) {
+        return 'Min Words: ' + selValue;
+      }
+    }); 
+    
+    $('#numWordSlider').slider().on('slideStop', function(ev){
+      let value = $('#numWordSlider').data('slider').getValue();
+      numWords = value;
+    });
+    
+    $("#numWordSlider").on("slide", function(slideEvt) {
+	    $("#numWordSliderVal").text("["+slideEvt.value+"]");
+    });
+    
+    //Who's post////////////////////////////////////
+    $('#poster-selector').on('change', function(e){
+      words = [];
+      getPostWords();
+      console.log(words);
+    });
+  }
+    //color picker/////////////////////////////////
+    $('#color-selector').on('change', function(e){
+      console.log("color changes", d3.scale);
+      switch($("#color-selector :selected").val()){
+        case "cat10": 
+          fill = d3.scale.category10();
+          break;
+        case "cat20":
+          fill = d3.scale.category20();
+          break;
+        case "cat20b":
+          fill = d3.scale.category20b();
+          break;
+        case "cat20c":
+          fill = d3.scale.category20c();
+          break;
+        case "colorless":
+          fill = d3.scale.ordinal("");
+        break;
+      }
+      $('#cloud').empty();
+      showNewWords(wordCloud('#cloud'));
+    });
+    
+  
+
+  // Encapsulate the word cloud functionality
+  function wordCloud(selector) {
+
+      //Construct the word cloud's SVG element
+      var svg = d3.select(selector).append("svg")
+          .attr("width", 1000)
+          .attr("height", 600)
+          .attr("id", "wordCloud")
+          .append("g")
+          .attr("transform", "translate(450,250)");
+
+
+      //Draw the word cloud
+      function draw(words) {
+          var cloud = svg.selectAll("g text")
+                          .data(words, function(d) { return d.text; })
+
+          //Entering words
+          cloud.enter()
+              .append("text")
+              .style("fill", function(d, i) { return fill(i); })
+              .attr("text-anchor", "middle")
+              .attr('font-size', 1)
+              .text(function(d) { return d.text; });
+
+          //Entering and existing words
+          cloud
+              .transition()
+                  .duration(300)
+                  .style("font-size", function(d) { return d.size + "px"; })
+                  .attr("transform", function(d) {
+                      return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
+                  })
+                  .style("fill-opacity", 1);
+
+          //Exiting words
+          cloud.exit()
+              .transition()
+                  .duration(100)
+                  .style('fill-opacity', 1e-6)
+                  .attr('font-size', 1)
+                  .remove();
+      }
+
+
+      //Use the module pattern to encapsulate the visualisation code. We'll
+      // expose only the parts that need to be public.
+      return {
+
+          //Recompute the word cloud for a new set of words. This method will
+          // asycnhronously call draw when the layout has been computed.
+          //The outside world will need to call this function, so make it part
+          // of the wordCloud return value.
+          update: function(words) {
+              d3.layout.cloud().size([500, 500])
+                  .words(words)
+                  .padding(5)
+                  .rotate(function() { return ~~(Math.random() * 2) * 90; })
+                  .font("Impact")
+                  .fontSize(function(d) { return d.size; })
+                  .on("end", draw)
+                  .start();
+          }
+      }
+
+  }
+
+
+  //Prepare one of the sample sentences by removing punctuation,
+  // creating an array of words and computing a random size attribute.
+  function getWords(i) {
+      return words[i]
+              .replace(/[!\.,:;\?]/g, '')
+              .split(' ')
+              .map(function(d) {
+                  return {text: d, size: 10 + Math.random() * 60};
+              })
+  }
+
+  //This method tells the word cloud to redraw with a new set of words.
+  //In reality the new words would probably come from a server request,
+  // user input or some other source.
+  function showNewWords(vis) {
+    let i=0;
+    let tempWords = [...words];
+    let wordsToAdd = [];
+    let count = tempWords.length < numWords? tempWords.length : numWords;
+    while(count > 0){
+      i = Math.floor(Math.random()*tempWords.length);
+      wordsToAdd = wordsToAdd.concat(tempWords.splice(i, 1));    
+      count--;
+    }
+    wordsToAdd = wordsToAdd.map(function(d) {
+                  return {text: d, size: 10 + Math.random() * 60};
+              });
+
+    //getWords(Math.floor(Math.random()*words.length))
+    vis.update(wordsToAdd);
+    // vis.update(getWords(i ++ % words.length))
+    setTimeout(function() { showNewWords(vis)}, speed*1000);
+    //was 2000 by default
+  }
+
+
+
+  function getPostWords(first){
+    let who = $("#poster-selector :selected").val();
+    const databaseRequest = new XMLHttpRequest();
+    databaseRequest.onload = function(){
+      // parse our response to convert to JSON
+      let postData = JSON.parse(this.responseText);
+      let userData = postData.userData;
+
+      // iterate through every entry and add it to the page
+      postData.rows.forEach( function(row) {
+            //words.push(interpretPost(row))
+        interpretPosts(row, who, first);
+      });
+      
+      if(first){
+        constructPosterList();
+      }
+    };
+    databaseRequest.open('get', '/getPosts');
+    databaseRequest.withCredentials = true;
+    databaseRequest.send();
+  }
+    
+
+  function interpretPosts(post, who, first){
+    if(first){
+      if(!posters.includes(post.user)){
+        posters.push(post.user);
+      }
+    }
+    
+    if(who == "all" || who == post.user){
+      let freshWords = (post.title + " " + post.body).replace(/[!\.,:;\?]/g, '').replace(/(?:\r\n|\r|\n)/g, ' ').split(' ');
+      words = words.concat(freshWords);
+    }
+  }
+    
+  function constructPosterList(){
+    let ps = document.getElementById('poster-selector');
+    console.log(posters);
+    for(poster in posters){
+      let opt = document.createElement('option');
+      opt.setAttribute("value", posters[poster]);
+      opt.innerHTML = posters[poster];
+      ps.appendChild(opt);
+    }
+  }
+    
+</script>
+  </div>
+</div>
+
+<!-- END w3-content -->
+</div>
+  <form></form> 
+  <div id="myModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content overlayer" style = "width: 80%; padding-top: 0">
+    <div class = "modal-top">  
+      <span class="close">&times;</span>
+      <div class = "post-title-holder"></div>
+    </div>
+    <div class = "post-body-holder"></div>
+  </div>
+</div>    
+    <div id="editModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content overlayer" style = "width: 80%; padding-top: 0">
+    <div class = "modal-top">  
+      <div class = "post-title-holder"></div>
+    </div>
+    <div class = "post-body-holder"></div>
+    <div>
+      <button class = "edit-close edit-btn" style = "float: left; background-color: pink">Cancel</button>
+      <button id = "post-post" class = "edit-btn" style = "float: right; background-color: aquamarine">Post</button>
+    </div>
+  </div>
+</div>
+    
+</body>
+<script src="https://rawgit.com/exupero/saveSvgAsPng/gh-pages/src/saveSvgAsPng.js"></script>
+<script>
+  
+//filters results based on whats typed into the search bar
+function searchPosts(searchBar){
+  let allPosts = $('.clickable-post');
+  let searchVal = searchBar.value;
+  allPosts.each(function(index){
+    let selPost = $(this);
+    let combHTML = '';
+    $(this).find('.searchable-text').each(function(index){
+      combHTML += $(this).html().toLowerCase();
+    });
+    if(combHTML.includes(searchVal)){
+      selPost.show();
+    }else{
+      selPost.hide();
+    }
+  });
+}
+  
+function switchToCloud(){
+  $('#post-tab').hide();
+  $('#cloud-tab').show();
+  
+}
+  
+function saveAsPNG(){
+  saveSvgAsPng(document.getElementsByTagName("svg")[0], "cloud.png", {scale: 2, backgroundColor: "#FFFFFF"});
+}
+
+
+
+</script>
+</html>

@@ -1,72 +1,66 @@
-Assignment 4 - Creative Coding: Interactive Multimedia Experiences
-===
+## Odd Blog V2
 
-Due: September 27th, by 11:59 PM.
+Dan Duff
 
-For this assignment we will focus on client-side development using popular audio/graphics/visualization technologies; the server requirements are minimal. The goal of this assignment is to refine our JavaScript knowledge while exploring the multimedia capabilities of the browser.
+https://a4-dandaman2.glitch.me/
 
-Baseline Requirements
----
+## NOTE: Professor Roberts Allowed me (Dan Duff) an extension on this assignment until the end of the day Sunday (9/29), without late penalty. If there are any questions about this, ask him. 
 
-Your application is required to implement the following functionalities:
+My application for Assignment 4 is a continuation of my Assignment 3 "Odd Blog" (aptly-named Odd Blog v2) for a wingding message board. 
 
-- A server created using Express (you can also use an alternative server framework such as Koa) for basic file delivery and middleware. Your middleware stack should include the `compression` and `helmet` [middlewares]((https://expressjs.com/en/resources/middleware.html)) by default. You are not required to use Glitch for this assignment (but using Glitch is fine!); [Heroku](https://www.heroku.com) is another excellent option to explore. The course staff can't be resposible for helping with all other hosting options outside of Glitch, but some of us do have experience with other systems. It also never hurts to ask on Slack, as there's 99 other classmates who might have the experience you're looking for!
-- A client-side interactive experience using at least one of the web technologies frameworks we discussed in class over the past week.
-  - [Three.js](https://threejs.org/): A library for 3D graphics / VR experiences
-  - [D3.js](https://d3js.org): A library that is primarily used for interactive data visualizations
-  - [Canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API): A 2D raster drawing API included in all modern browsers
-  - [SVG](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API): A 2D vector drawing framework that enables shapes to be defined via XML.
-  - [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API): An API for audio synthesis, analysis, processing, and file playback.
-- A user interface for interaction with your project, which must expose at least six parameters for user control. [dat.gui](https://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage) is highly recommended for this. You might also explore interaction by tracking mouse movement via the `window.onmousemove` event handler in tandem with the `event.clientX` and `event.clientY` properties. Consider using the [Pointer Events API](https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events) to ensure that that mouse and touch events will both be supported in your app.
-- Your application should display basic documentation for the user interface when the application first loads. This documentation should be dismissable, however, users should be able to redisplay it via either a help buton (this could, for example, be inside a dat.gui interface) or via a keyboard shortcut (commonly the question mark).
-- Your application should feature at least two different ES6 modules that you write ([read about ES6 modules](https://www.sitepoint.com/understanding-es6-modules/)) and include into a main JavaScript file. This means that you will need to author *at least three JavaScript files* (a `app.js` or `main.js` file and two modules). We'll discuss modules in class on Monday 9/23; for this assignment modules should contain at least two functions.
-- You are required to use a linter for your JavaScript. There are plugins for most IDEs, however it will be difficult to run the linter directly in Glitch. If you haven't moved to developing on your personal laptop and then uploading to Glitch when your project is completed, this is the assignment to do so!
-- Your HTML and CSS should validate. There are options/plugins for most IDEs to check validation.
+Similar to my goal in A3, I've always been curious about the symbolic language of wingdings, and was wondering if the font type could be used for any kind of communication/messaging. 
+Odd Blog V2 is that curiosity come to life with an added wordlcoud feature. This wordcloud visualizes post words by accessing the Odd Blog V2 Persistent SQLite 3 database. 
+Because it uses the site's information, any words can be added to the wordlcoud by posting! (Additional context below).
+The app is meant to be used as a wingdings communication platform, with all text being translatable via the top-left language switch.
 
-The interactive experience should possess a reasonable level of complexity. Some examples:
-### Three.js
-- A generative algorithm creates simple agents that move through a virtual world. Your interface controls the behavior / appearance of these agents.
-- A simple 3D game
-- An 3D audio visualization of a song of your choosing. User interaction should control aspects of the visualization. 
-### Canvas
-- Implement a generative algorithm such as [Conway's Game of Life](https://bitstorm.org/gameoflife/) (or 1D cellular automata) and provide interactive controls. Note that the Game of Life has been created by 100s of people using <canvas>; we'll be checking to ensure that your implementation is not a copy of these.
-- Design a 2D audio visualizer of a song of your choosing. User interaction should control visual aspects of the experience. 
-### Web Audio API
-- Create a screen-based musical instrument using the Web Audio API. You can use projects such as [Interface.js](http://charlie-roberts.com/interface/) or [Nexus UI](https://nexus-js.github.io/ui/api/#Piano) to provide common musical interface elements, or use dat.GUI in combination with mouse/touch events (use the Pointer Events API). Your GUI should enable users to control aspects of sound synthesis.
-### D3.js
-- Create visualizations using the datasets found at [Awesome JSON Datasets](https://github.com/jdorfman/Awesome-JSON-Datasets). Experiment with providing different visualizations of the same data set, and providing users interactive control over visualization parameters and/or data filtering. Alternatively, create a single visualization with using one of the more complicated techniques shown at [d3js.org](d3js.org) and provide meaningful points of interaction for users.
+Similar to A3's iteration, Odd Blog uses a Google OAuth login system for post posting and reviewing posted messages. (Users can both create new posts, as well as delete their own old posts. )
+  
+  **(Sample Credentials for Testers)**:
+  
+  username: a32019Tester@gmail.com 
+  
+  password: giveaplease
+  
+In creating this site, I used the bootstrap CSS framework and w3 CSS stylesheets, in addition to adding my own styling in classes to change both the positioning and 
+displayed language/font of elements. The wordcloud is generated as a d3 visualiztion using database JSON data. 
 
-Deliverables
----
+## D3 Wordcloud (accessed via the 'cloudify' button)
+This wordcloud was generated by using D3 svg visualizations. The wordcloud can be maniuplated mulitple ways:
+ - **Adding to the Wordcloud:** Users can add to the wordcloud by posting on the blog!
+ - **Changing to/from Wingdings:** The top-left toggle switch changes the symbols on both the wordcloud, and the site at large! 
+     Because wingding's innate font size is so diverse, the wingding wordclouds can make some wacky designs! 
+ - **Filtering Posters:** You're able to select whose posts you'd like to include using a dropdown selector.
+ - **Changing Color Palette:** The user can change what standard d3 color category they'd like to use in showing the words. These palettes are scaled ordinal arrays of colors used in many, many d3 visualizaions.  
+ - **Changing Cycle Speed:** Because the word cloud is animated, and cycling through mulitple visualizations, 
+     the speed at which new clouds are made can be altered.
+ - **Changing Word Count (Num Words):** The number of words that appear in the cloud can be altered (however the cloud can only show as many words as are available among the blog posts).
+ - **Save Image**: Clicking this button will save an image of the current wordcloud, downloading it to the browser's specified download location. 
+ 
+ This information can also be found via the "Help (?)" button.
+ 
+ In addition, the compression and helmet middlewares are implemented
+ 
+ Two modules (startup.js and google.js) were used for local client-side javascript. 
+ 
+The main challenge I faced while making this project was the fact that certain browsers (such as FireFox) do not support any symbolistic non-unicode font styles/langues 
+in their browser standards. This means that on those browsers all text is displayed as english, with the translator switch only changing the font styling to default. 
 
-Do the following to complete this assignment:
+Due to the fact that much of my part-time work is with PHP, I decided to use PHPStorm's JSLint Linter for checking my client-side javascript files. 
+This helped with resolving scoping issues, and fixing quote semantics. 
 
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-yourname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. *NOTE: If you don't use Glitch for hosting (where we can see the files) then you must include all project files that you author in your repo for this assignment*.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-gitname-firstname-lastname`.
+## Although achievements cannot be credited if used from previous assignments, the following achievements remain implemented. 
+- **A3 Achievement**: I used OAuth authentication via the Google strategy to allow users to log in with their google accounts.
+- **A3 Achievement**: Implemented a search bar which searches all posts from the database, showing only posts with the matching text.
+- **A3 Achievement**: Implemented a toggle switch which translates all text (as well as typed text) to either Wingdings or english.
+- **A3 Achievement**: Added a warning alert to FireFox users specifying that FireFox does not support symbolic, non-unicode characters.
+- **A3 Achievement**: Manipulated and set custom favicon and allowed for cors-accessible resource-acquisition.
 
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
+## New Achievements (A4)
+- **Tech Achievement 1**: Used the SVG/PNG conversion lobrary for saving images.
+- **Tech Achievement 2**: Parsed JSON data from server database into D3 selectors.
+- **Tech Achievement 3**: Used Bootstrap input elements (sliders, buttonds and selectors) for controlling the visualization.
 
-## Your Web Application Title
+-------------------------------------
 
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here. Images are encouraged, along with concise, high-level text. Be sure to include:
-
-- the goal of the application
-- challenges you faced in realizing the application
-- a brief description of the JS linter you used and what rules it follows (we'll be looking at your JS files for consistency)
-
-## Technical Achievements
-- **Tech Achievement 1**: I wrote my own custom GLSL shaders to use as a material for my Three.js objects.
-- **Tech Achievement 2**: My audiovisualizer uses both FFT and amplitude analysis to drive visualization.
-- **Tech Achievement 3**: I optimized the efficiency of my reaction-diffusion algorithm by...
-- **Tech Achievement 4**: I visualized the dataset X using three different visualization technqiues provided by D3, andprovided
-
-### Design/Evaluation Achievements
-- **Design Achievement 1**: I ensured that my application would run on both desktops / mobile devices by changing X
-- **Design Achievement 2**: I followed best practices for accessibility, including providing alt attributes for images and using semantic HTML. There are no `<div>` or `<span>` elements in my document.
-- **Design Achievement 3**: We tested the application with n=X users, finding that...
+- **Design Achievement 1**: Propogated the d3 scaling ordinance colorscales accross all shown words in the wordcloud.
+- **Design Achievement 2**: Wordcloud and control positions adjust based on screen size.
