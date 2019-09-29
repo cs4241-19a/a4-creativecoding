@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>CS4241 Assignment 4 - Creative Coding</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/108/three.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+  </head>
+  <body>
+    <h1>Planetarium</h1>
+
+    <div id="myModal" class="modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>
+          Interactions: <br /><br />Press (P) to pause and unpause. <br />
+          Control camera with (WASD). <br />
+          Zoom in (Z) and out (B) for closer view. <br />
+          Increase (N) and decrease (M) size of canvas of the render. <br />
+          Increase (F) and decrease (G) brightness. <br />
+          Click on any planet's name to view that planet's diameter.<br /><br />
+          Press i to view this screen at any point.
+        </p>
+      </div>
+    </div>
+
+    <div id="name" class="flex-container">
+      <button
+        id="Sun"
+        style="background-color: #fcd925;"
+        onclick="planetSelect('Sun')"
+      >
+        Sun
+      </button>
+      <button
+        id="Mercury"
+        style="background-color: #848984;"
+        onclick="planetSelect('Mercury')"
+      >
+        Mercury
+      </button>
+      <button
+        id="Venus"
+        style="background-color: #fdf3c0;"
+        onclick="planetSelect('Venus')"
+      >
+        Venus
+      </button>
+      <button
+        id="Earth"
+        style="background-color: #0eaf04;"
+        onclick="planetSelect('Earth')"
+      >
+        Earth
+      </button>
+      <button
+        id="Mars"
+        style="background-color: #f92f09;"
+        onclick="planetSelect('Mars')"
+      >
+        Mars
+      </button>
+      <button
+        id="Jupiter"
+        style="background-color: #fc843e;"
+        onclick="planetSelect('Jupiter')"
+      >
+        Jupiter
+      </button>
+      <button
+        id="Saturn"
+        style="background-color: #fbc753;"
+        onclick="planetSelect('Saturn')"
+      >
+        Saturn
+      </button>
+      <button
+        id="Uranus"
+        style="background-color: #94cafc;"
+        onclick="planetSelect('Uranus')"
+      >
+        Uranus
+      </button>
+      <button
+        id="Neptune"
+        style="background-color: #3544fa;"
+        onclick="planetSelect('Neptune')"
+      >
+        Neptune
+      </button>
+    </div>
+    <div id="test"></div>
+    <div id="selected"></div>
+    <div id="facts"></div>
+    <div id="bottom" class="flex-container">
+      <button id="pause">Pause (P)</button>
+      <button id="Control">Control Camera (WASD)</button>
+      <button id="Zoom">Zoom in/out (Z/B)</button>
+      <button id="Zoom">Increase render size (N/M)</button>
+      <button id="Bright">Brightness +/- (F/G)</button>
+      <button id="Facts">Click planet name for diameter</button>
+    </div>
+    <script src="bundle.js"></script>
+  </body>
+</html>

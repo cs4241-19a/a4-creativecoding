@@ -1,0 +1,23 @@
+{
+  "name": "a4-creativecoding",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node app.js"
+  },
+  "dependencies": {
+    "@babel/core": "^7.6.2",
+    "babelify": "^10.0.0",
+    "common.js": "^1.1.1",
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
+    "helmet": "^3.21.1",
+    "require.js": "^1.0.0",
+    "three": "^0.108.0",
+    "uniq": "^1.0.1"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.6.2",
+    "eslint": "^6.4.0"
+  }
+}
