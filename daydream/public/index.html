@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Daydream — join your friends in a 3D World</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<meta property="og:title" content="Daydream - a multi-player game" />
+		<meta property="og:image:type" content="image/jpeg" />
+		<meta property="og:image:width" content="1265" />
+		<meta property="og:image:height" content="817" />
+		<meta property="og:image:alt" content="Daydream — join your friends in a 3D World" />
+		<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans|Kavivanar" rel="stylesheet">
+		<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="style.css">
+	</head>
+
+	<body>
+		<div class="container">
+			<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">DAYDREAM: A multi-character 3D World. Use joystick for motion. Tap anywhere near other character to trigger chatbox.</button>
+		</div>
+		<div id="message">
+			<p id="message_text"></p>
+			<button id="message_ok">OK</button>
+		</div>
+		<div id="chat">
+			<form id="msg-form" action="">
+      			<input id="m" autocomplete="off" /><button>Send</button>
+    		</form>
+		</div>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/92/three.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src= "inflate.min.js"></script>
+		<script src="FBXLoader.js"></script>
+		<script src="Detector.js"></script>
+		<script src="toon3d.js"></script>
+		<script src="js/main.js"></script>
+	    <!--<script>-->
+			<!--$(document).ready(function(){-->
+				<!--$('#myModal').modal('show');-->
+			<!--});-->
+		<!--</script>-->
+		<script>
+			var game;
+			document.addEventListener("DOMContentLoaded", function(){ game = new Game(); });
+		</script>
+	</body>
+</html>
+
+
