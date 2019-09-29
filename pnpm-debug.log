@@ -1,0 +1,69 @@
+---
+  0 debug pnpm:scope: 
+    selected: 1
+    workspacePrefix: null
+  1 info pnpm: 
+    message: "A store server is running. All store manipulations are delegated to it."
+    prefix: "/app"
+  2 debug pnpm:package-json: 
+    initial: 
+      //1: "describes your app and its dependencies"
+      //2: "https://docs.npmjs.com/files/package.json"
+      //3: "updating this file will download and update your packages"
+      name: "hello-sqlite"
+      version: "0.0.1"
+      description: "A simple Node app with SQLite as a database management system, instantly up and running."
+      main: "server.js"
+      scripts: 
+        start: "node server.js"
+      dependencies: 
+        body-parser: "^1.19.0"
+        bootstrap: "^4.3.1"
+        bootstrap-slider: "^10.6.2"
+        browserify: "^16.5.0"
+        browserify-middleware: "^8.1.1"
+        compression: "^1.7.4"
+        cors: "^2.8.5"
+        express: "^4.16.4"
+        express-session: "^1.16.2"
+        helmet: "^3.21.1"
+        jquery: "^3.4.1"
+        passport: "^0.4.0"
+        passport-google-oauth: "^2.0.0"
+        path: "^0.12.7"
+        popper: "^1.0.1"
+        serve-favicon: "^2.5.0"
+        session: "^0.1.0"
+        sqlite: "^3.0.3"
+        sqlite3: "^4.1.0"
+        uniq: "^1.0.1"
+        watchify: "^3.11.1"
+      engines: 
+        node: "8.x"
+      repository: 
+        url: "https://glitch.com/edit/#!/hello-sqlite"
+      license: "MIT"
+      keywords: 
+        - "node"
+        - "glitch"
+        - "express"
+      readme: "## Odd Blog\n\nhttps://a3-dandaman2.glitch.me/\n\n\nMy application for Assignment 3 is titled \"Odd Blog\" for a wingding message board. I've always been curious about the symbolic language of wingdings, and was wondering\nif the font type could be used for any kind of communication/messaging. Odd Blog is that curiosity come to life, as it's the world's first wingding messae board. Although\nthe app is meant to be used as a wingdings communication platoforms, any user can use the toggle switch at the top of the site to covert all text (even inputted text) to \nand from wingdings/english. All posts are stored in a SQLite3 database, which is persistent among sessions. \nOdd Blog uses a Google OAuth login system for post posting and reviewing posted messages. (Users can both create new posts, as well as delete their own old posts. )\n  (Sample Credentials for Testers): username: a32019Tester@gmail.com | password: giveaplease\nIn creating this site, I used the bootstrap CSS framework and w3 CSS stylesheets, in addition to adding my own styling in classes to change both the positioning and \ndisplayed language/font of elements. \n## The five middleware packages I used includes:\n - **body-parser:** For both sending and parsing JSON files as part of GET and POST requests.\n - **session:** For maintaining persistent login within user sessions (maintains even in reload).\n - **passport & OAuth:** For logging in/out of the site using Google's OAuth API.\n - **serve-favicon:** For changing the Favicon on the page tab, as well as maintaining it in the filesystem for browser lookup.\n - **cors:** For making the site CORS accessible. An example of this can be found via the path https://a3-dandaman2.glitch.me/cors-entry, \n         which retrieves a generated JSON file.\n \nThe main challenge I faced while making this project was the fact that certain browsers (such as FireFox) do not support any symbolistic non-unicode font styles/langues \nin their browser standards. This means that on those browsers all text is displayed as english, with the translator switch only changing the font styling to default. \n\n## Technical Achievements\n- **Tech Achievement 1**: I used OAuth authentication via the Google strategy to allow users to log in with their google accounts.\n- **Tech Achievement 2**: Implemented a search bar which searches all posts from the database, showing only posts with the matching text.\n- **Tech Achievement 3**: Implemented a toggle switch which translates all text (as well as typed text) to either Wingdings or english.\n- **Tech Achievement 4**: Added a warning alert to FireFox users specifying that FireFox does not support symbolic, non-unicode characters.\n- **Tech Achievement 5**: Manipulated and set custom favicon.\n- **Tech Achievement 6**: Allowed resources to be shared via CORS accessibility.\n\n### Design/Evaluation Achievements\n- **Design Achievement 1**: Implemented an interface which allowed all text on the page to be translateable. \n- **Design Achievement 2**: Created custom Odd Blog favicon.\n- **Design Achievement 3**: Allows users to directly click on post text to view it, clicking anywhere outside the post body to deselect it. \n- **Design Achievement 4**: Page is resizeable withing the browser, showing minimal text and reformatting element's positions. "
+      readmeFilename: "README.md"
+      gitHead: "e78ca2a6507e828d1a476ba853aabe26860a420f"
+      _id: "hello-sqlite@0.0.1"
+    prefix: "/app"
+  3 warn pnpm: 
+    message: "Moving body-parser that was installed by a different package manager to \"node_modules/.ignored"
+    prefix: "/app"
+  4 error pnpm: 
+    message: 
+      errno: -39
+      code: "ENOTEMPTY"
+      syscall: "rename"
+      path: "/rbd/pnpm-volume/f3a45786-a342-4cf8-a166-90f2660ed898/node_modules/body-parser"
+      dest: "/rbd/pnpm-volume/f3a45786-a342-4cf8-a166-90f2660ed898/node_modules/.ignored/body-parser"
+    err: 
+      name: "Error"
+      message: "ENOTEMPTY: directory not empty, rename '/rbd/pnpm-volume/f3a45786-a342-4cf8-a166-90f2660ed898/node_modules/body-parser' -> '/rbd/pnpm-volume/f3a45786-a342-4cf8-a166-90f2660ed898/node_modules/.ignored/body-parser'"
+      code: "ENOTEMPTY"
+      stack: "Error: ENOTEMPTY: directory not empty, rename '/rbd/pnpm-volume/f3a45786-a342-4cf8-a166-90f2660ed898/node_modules/body-parser' -> '/rbd/pnpm-volume/f3a45786-a342-4cf8-a166-90f2660ed898/node_modules/.ignored/body-parser'"
