@@ -1,72 +1,74 @@
-Assignment 4 - Creative Coding: Interactive Multimedia Experiences
+Data Visualization
 ===
+https://a4-eos7l.herokuapp.com/
 
-Due: September 27th, by 11:59 PM.
+This is a data visualization consists of 2 linked charts rendered using D3.js. 
 
-For this assignment we will focus on client-side development using popular audio/graphics/visualization technologies; the server requirements are minimal. The goal of this assignment is to refine our JavaScript knowledge while exploring the multimedia capabilities of the browser.
+To fulfill the requirements:
+---
+### Six user controls:
+- Tooltip: there might be a slight delay but it is there. 
+- Linked views on hover, also there is a caption being live-updated based on hovering.
+- Documentation tab can be triggered to be reopened.
+- A third visualization that allows zooming in, thanks to brushing.
+- A reset button to zoom out from the third visualization. 
+- A zoom in AND zoom out for the bubble chart via mouse scroll wheels.  (PS: I confirmed with Noelle that zoom in and zoom out count as 2 separate control parameters)
+- You can also double click to exit out of the zoom in the bubble chart.
 
-Baseline Requirements
+### Linter:
+
+- I used the built-in linter in Webstorm.
+- The JS Linter tolerates: for statement, multiple vars, single quote strings, this, whitespace mess, eval, bitwise operators 
+- It assumes: ES6, Node.js, in development, in a browser
+- Maximum line length: 100
+- Maximum number of error: 50
+- I could not figure out why the linter is not happy with me using d3 in area2.js and app.js while it is okay with me using d3 in area1.js. It claimed that I have never declared D3. While I literally did the same in both scripts. 
+- In main.js, I cannot get rid of the warning from using a global directive. However, if I do not use the global directive, the linter will complain that I used the window object without declaring it. 
+- I have discussed both two things mentioned above with Noelle and we were unable to find a way to get around it. 
+- I also couldn't resolve the problem with "exportDefault" because once I change "export" to "exportDefault" my "import" stops working.
+
+### General: 
+
+- I included both helmet and compression packages in my server.
+- I have two modules named mod1.js and mod2.js. 
+- My HTML and CSS files are validated.  
+- The redisplayable documentation can be triggered using the "Read Documentation" button.
+
+
+Goals:
+---
+- My goal was to create a highly interactive and responsive visualization for the most popular movie genres produced between 2000 and 2018. I think I was successful in doing that. I had multiple interactions and users could freely play around with them.
+
+
+Main Challenges:
+---
+- I had the most problems using dat.GUI (which is apparently hated by my linter). I ended up not using dat.GUI at all, also because I wanted to make some non-trivial user controls which is even more difficult to be done using dat.GUI.
+- I learned that integrating way too many interactions in the same visualization not only doesn't help users to understand the data, but also makes each interactive element kinda messed up. For instance, having hovering and clicking and dragging all in one viz is fancy but not practical for the mouse states.
+- I also tried to use Waypoint's infiniteScroll package and failed to make it work. This is probably the third time I tried to incorporate this package into my code but never succeeded...
+
+
+Implications:
+---
+- If brushing is malfunctioning, please refresh the page. 
+
+
+
+Achievements:
 ---
 
-Your application is required to implement the following functionalities:
 
-- A server created using Express (you can also use an alternative server framework such as Koa) for basic file delivery and middleware. Your middleware stack should include the `compression` and `helmet` [middlewares]((https://expressjs.com/en/resources/middleware.html)) by default. You are not required to use Glitch for this assignment (but using Glitch is fine!); [Heroku](https://www.heroku.com) is another excellent option to explore. The course staff can't be resposible for helping with all other hosting options outside of Glitch, but some of us do have experience with other systems. It also never hurts to ask on Slack, as there's 99 other classmates who might have the experience you're looking for!
-- A client-side interactive experience using at least one of the web technologies frameworks we discussed in class over the past week.
-  - [Three.js](https://threejs.org/): A library for 3D graphics / VR experiences
-  - [D3.js](https://d3js.org): A library that is primarily used for interactive data visualizations
-  - [Canvas](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API): A 2D raster drawing API included in all modern browsers
-  - [SVG](https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API): A 2D vector drawing framework that enables shapes to be defined via XML.
-  - [Web Audio API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Audio_API): An API for audio synthesis, analysis, processing, and file playback.
-- A user interface for interaction with your project, which must expose at least six parameters for user control. [dat.gui](https://workshop.chromeexperiments.com/examples/gui/#1--Basic-Usage) is highly recommended for this. You might also explore interaction by tracking mouse movement via the `window.onmousemove` event handler in tandem with the `event.clientX` and `event.clientY` properties. Consider using the [Pointer Events API](https://developer.mozilla.org/en-US/docs/Web/API/Pointer_events) to ensure that that mouse and touch events will both be supported in your app.
-- Your application should display basic documentation for the user interface when the application first loads. This documentation should be dismissable, however, users should be able to redisplay it via either a help buton (this could, for example, be inside a dat.gui interface) or via a keyboard shortcut (commonly the question mark).
-- Your application should feature at least two different ES6 modules that you write ([read about ES6 modules](https://www.sitepoint.com/understanding-es6-modules/)) and include into a main JavaScript file. This means that you will need to author *at least three JavaScript files* (a `app.js` or `main.js` file and two modules). We'll discuss modules in class on Monday 9/23; for this assignment modules should contain at least two functions.
-- You are required to use a linter for your JavaScript. There are plugins for most IDEs, however it will be difficult to run the linter directly in Glitch. If you haven't moved to developing on your personal laptop and then uploading to Glitch when your project is completed, this is the assignment to do so!
-- Your HTML and CSS should validate. There are options/plugins for most IDEs to check validation.
+### Technical:
+- There are many types of interactions involved in this visualization including linked views, zooming in and out with brushing and tooltip. There are more than 6 user controls and most of them are non-trivial. 
+- The axises are dynamically generated based on the data input.
+- It took me a while to clean up the data found from Professor's recommended website for jSON dataset. I mainly used the dplyr package in R, which was so much more efficient than Excel.
+- I have a total of four charts and each does something differently. 
 
-The interactive experience should possess a reasonable level of complexity. Some examples:
-### Three.js
-- A generative algorithm creates simple agents that move through a virtual world. Your interface controls the behavior / appearance of these agents.
-- A simple 3D game
-- An 3D audio visualization of a song of your choosing. User interaction should control aspects of the visualization. 
-### Canvas
-- Implement a generative algorithm such as [Conway's Game of Life](https://bitstorm.org/gameoflife/) (or 1D cellular automata) and provide interactive controls. Note that the Game of Life has been created by 100s of people using <canvas>; we'll be checking to ensure that your implementation is not a copy of these.
-- Design a 2D audio visualizer of a song of your choosing. User interaction should control visual aspects of the experience. 
-### Web Audio API
-- Create a screen-based musical instrument using the Web Audio API. You can use projects such as [Interface.js](http://charlie-roberts.com/interface/) or [Nexus UI](https://nexus-js.github.io/ui/api/#Piano) to provide common musical interface elements, or use dat.GUI in combination with mouse/touch events (use the Pointer Events API). Your GUI should enable users to control aspects of sound synthesis.
-### D3.js
-- Create visualizations using the datasets found at [Awesome JSON Datasets](https://github.com/jdorfman/Awesome-JSON-Datasets). Experiment with providing different visualizations of the same data set, and providing users interactive control over visualization parameters and/or data filtering. Alternatively, create a single visualization with using one of the more complicated techniques shown at [d3js.org](d3js.org) and provide meaningful points of interaction for users.
 
-Deliverables
----
+### Design:
+- I used the Type.js, AOS and ScrollReveal libraries for aesthetics. 
+- I hard coded all the styling. 
+- I used LOLColors to coordinate my color scheme. 
+- I used materialize.css to create the collapsible documentation tab. 
+- I did some user testing with my friend and they liked the visualization. They said they would prefer if there is a way to zoom in the line chart so they can see more details, hence why I added a third visualization to showcase how it can be done. Due to time constraint, I could not implement it so it could be updated to show other genres with a drop-down menu.
+- I used ColorBrewer2 to customize the colors used in the bubble chart. 
 
-Do the following to complete this assignment:
-
-1. Implement your project with the above requirements.
-3. Test your project to make sure that when someone goes to your main page on Glitch/Heroku/etc., it displays correctly.
-4. Ensure that your project has the proper naming scheme `a4-yourname` so we can find it.
-5. Fork this repository and modify the README to the specifications below. *NOTE: If you don't use Glitch for hosting (where we can see the files) then you must include all project files that you author in your repo for this assignment*.
-6. Create and submit a Pull Request to the original repo. Name the pull request using the following template: `a4-gitname-firstname-lastname`.
-
-Sample Readme (delete the above when you're ready to submit, and modify the below so with your links and descriptions)
----
-
-## Your Web Application Title
-
-your hosting link e.g. http://a4-charlieroberts.glitch.me
-
-Include a very brief summary of your project here. Images are encouraged, along with concise, high-level text. Be sure to include:
-
-- the goal of the application
-- challenges you faced in realizing the application
-- a brief description of the JS linter you used and what rules it follows (we'll be looking at your JS files for consistency)
-
-## Technical Achievements
-- **Tech Achievement 1**: I wrote my own custom GLSL shaders to use as a material for my Three.js objects.
-- **Tech Achievement 2**: My audiovisualizer uses both FFT and amplitude analysis to drive visualization.
-- **Tech Achievement 3**: I optimized the efficiency of my reaction-diffusion algorithm by...
-- **Tech Achievement 4**: I visualized the dataset X using three different visualization technqiues provided by D3, andprovided
-
-### Design/Evaluation Achievements
-- **Design Achievement 1**: I ensured that my application would run on both desktops / mobile devices by changing X
-- **Design Achievement 2**: I followed best practices for accessibility, including providing alt attributes for images and using semantic HTML. There are no `<div>` or `<span>` elements in my document.
-- **Design Achievement 3**: We tested the application with n=X users, finding that...
