@@ -4,10 +4,15 @@ body {
 }
 
 canvas {
-  padding-left: -50px;
+  margin-left: -50px;
+  padding-left: 0;
 }
 
-a {
-  color: #00B7FE;
+label {
+  padding: 10%;
 }
 
+div {
+  text-align: center;
+  margin-bottom: 10px;
+}
