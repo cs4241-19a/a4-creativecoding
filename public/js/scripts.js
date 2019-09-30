@@ -77,3 +77,6 @@ const submit = function( e ) {
       request.send()
     return false
 }
+
+
+modules.exports = { submit }

@@ -13,16 +13,18 @@
     <!--fontawesome import-->
       <script src="https://kit.fontawesome.com/1f29d09d72.js"></script>
 
-    <!--dat.gui import-->
-      <script type="text/javascript" src="/build/dat.gui.min.js" ></script>
-    <!--my js files-->
-      <script type="text/javascript" src="/js/scripts.js"></script>
-<!--       <script type="text/javascript" src="/js/myGui.js"></script> -->
+    <!--bundle import-->
+      <script type="module" src="bundle.js" ></script>
+      <script>
+        const myGui = require('myGui')
+        const loadScript = require('loadScript')
+      </script>
+
 
 
     <title>creative coding -- a4-hcaouette -- CS4241 Assignment 4</title>
   </head>
-  <body>
+  <body onload='myGui.loadGUI'>
     <!--top level container object, encompasses the entire page-->
     <div class="container-fluid snapCont">
 
@@ -40,7 +42,7 @@
         <div class="nav">
 <!--           <form class="video-input-form"> -->
             <input id="ytvid" class="video-url-input" type="text" />
-            <button type="submit" onclick="submit()">Load Video</button>
+            <button type="submit" onclick="loadScript.submit()">Load Video</button>
 <!--           </form> -->
           <h1>Enter YouTube URL</h1>
         </div>

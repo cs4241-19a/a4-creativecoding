@@ -1,6 +1,6 @@
 const dat = require('dat.gui');
 
-window.onload = function() {
+const loadGUI = function() {
   var text = new FizzyText();
   var gui = new dat.GUI({
     height : 5 * 32 - 1
@@ -11,10 +11,12 @@ window.onload = function() {
   gui.add(text, 'explode');
 }
 
-let FizzyText = function() {
-  this.message = 'dat.gui';
-  this.speed = 0.8;
-  this.displayOutline = false;
-  this.explode = function() { alert('Bang!'); };
-  // Define render logic ...
-}
+// let FizzyText = function() {
+//   this.message = 'dat.gui';
+//   this.speed = 0.8;
+//   this.displayOutline = false;
+//   this.explode = function() { alert('Bang!'); };
+//   // Define render logic ...
+// }
+
+modules.exports = { loadGUI };
