@@ -4,7 +4,7 @@ function loadGUI() {
   var text = new FizzyText();
   var gui = new dat.GUI({
     height : 5 * 32 - 1
-});
+  });
   gui.add(text, 'message');
   gui.add(text, 'speed', -5, 5);
   gui.add(text, 'displayOutline');
