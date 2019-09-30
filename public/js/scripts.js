@@ -4,7 +4,7 @@ console.log("Welcome to assignment 3!")
 
 let audioContext = null
 let audioIntervalId = null
-const bufferSource = null
+let bufferSource = null
 let fft = null //fft audio node
 let samples = 128
 let setup = false //indicate if audio is set up yet
