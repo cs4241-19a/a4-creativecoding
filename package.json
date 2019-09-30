@@ -1,0 +1,32 @@
+{
+  "name": "a4-creativecoding",
+  "version": "1.0.0",
+  "description": "Assignment 4",
+  "main": "server.js",
+  "dependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/preset-env": "^7.6.2",
+    "babelify": "^10.0.0",
+    "compression": "^1.7.4",
+    "dat.gui": "^0.7.6",
+    "express": "^4.17.1",
+    "helmet": "^3.21.1"
+  },
+  "devDependencies": {
+    "eslint": "^6.4.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jpcaltabiano/a4-creativecoding.git"
+  },
+  "author": "Joseph Caltabiano",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jpcaltabiano/a4-creativecoding/issues"
+  },
+  "homepage": "https://github.com/jpcaltabiano/a4-creativecoding#readme"
+}

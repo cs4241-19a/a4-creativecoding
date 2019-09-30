@@ -1,0 +1,14 @@
+div.tooltip { 
+    font-family: 'Nunito', sans-serif;
+    position: absolute;     
+    text-align: center;
+    min-width: 60px;     
+    width: auto;          
+    height: auto;         
+    padding: 2px;       
+    font-size: 85%;    
+    background: lightsteelblue; 
+    border: 0px;    
+    border-radius: 8px;     
+    pointer-events: none;     
+}

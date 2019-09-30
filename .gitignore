@@ -1,0 +1,11 @@
+node_modules
+package-lock.json
+src/js/bundle.js
+src/js/main.js
+src/js/tree.js
+src/js/dat.js
+src/globe.html
+foo.js
+foo.json
+src/data/life.*
+life.json
