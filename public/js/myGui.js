@@ -1,6 +1,6 @@
 const dat = require('dat.gui');
 
-const loadGUI = function() {
+function loadGUI() {
   var text = new FizzyText();
   var gui = new dat.GUI({
     height : 5 * 32 - 1

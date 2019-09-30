@@ -14,18 +14,17 @@
       <script src="https://kit.fontawesome.com/1f29d09d72.js"></script>
 
     <!--bundle import-->
-      <script src="./bundle.js" ></script>
-
+      <script src="../bundle.js" ></script>
+      <script>
+        const myGui = require('myGui')
+        const loadScript = require('loadScript')
+        window.onload=function(){myGui.loadGUI()}
+      </script>
 
 
     <title>creative coding -- a4-hcaouette -- CS4241 Assignment 4</title>
   </head>
   <body>
-    <script>
-        const myGui = require('./myGui')
-        const loadScript = require('./loadScript')
-        window.onload=function(){myGui.loadGUI()}
-      </script>
     <!--top level container object, encompasses the entire page-->
     <div class="container-fluid snapCont">
 

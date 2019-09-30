@@ -2,33 +2,7 @@
 
 console.log("Welcome to assignment 3!")
 
-// const submit = function( e ) {
-// // prevent default form action from being carried out
-// e.preventDefault()
-//
-// const video = document.querySelector( '#ytvid' ),
-//       json = { url: video.value },
-//       body = JSON.stringify( json )
-//
-//     fetch( '/submit', {
-//     method:'POST',
-//     body
-//   })
-//   .then( function( response ) {
-//     // do something with the reponse
-//     console.log( response )
-//     response.text().then(function(text){
-//       console.log(text)
-//       setCookie(inputName.value, text, 1);
-//       let jOBJ = JSON.parse(text)
-//       alert("congrats! you are a "+jOBJ['horoscope']+" in the year of the "+jOBJ['zodiac']+"!")
-//       //cookie is set to the table value stored in the temporary server, now cached for a day
-//     })
-//   })
-// }
-
-
-const submit = function( e ) {
+function submit( e ) {
 
   console.log('button pressed')
   let audioContext = null
