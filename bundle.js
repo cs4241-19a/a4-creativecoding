@@ -2610,9 +2610,8 @@ let gProps = {
   R: 255,
   G: 0,
   B: 0,
-  thiqness: 15,
-  height: 100,
-  spread: 4
+  thiqness: 3,
+  height: 5,
 }
 
 var gfx;
@@ -2670,20 +2669,35 @@ function sinDraw(){
 }
 
 
-function barDraw() {
-    window.requestAnimationFrame(update);
-    if(!setup) return;
-    gfx.clearRect(0,0,1000,800);
-    gfx.fillStyle = 'rgb(' + (255- gProps.R) + ', ' + (255- gProps.G) + ', '+ (255- gProps.B) + ')';
-    gfx.fillRect(0,0,1000,800);
+function barDraw(){
+  fft.fftSize = 256;
+  let bufferLength = fft.frequencyBinCount;
+  console.log(bufferLength);
+  let dataArray = new Uint8Array(bufferLength);
+  gfx.clearRect(0, 0, 800, 600);
+  function draw() {
+      drawVisual = requestAnimationFrame(draw);
 
-    var data = new Uint8Array(samples);
-    fft.getByteFrequencyData(data);
-    gfx.fillStyle = 'rgb(' + gProps.R + ', ' + gProps.G + ', '+gProps.B + ')';
-    for(var i=0; i<data.length; i++) {
-        // gfx.fillRect(100+i*(gProps.thiqness+1),100+256-data[i]*2,(gProps.thiqness),100);
-        gfx.fillRect(10+i*(gProps.thiqness+1),(100+356-data[i]*.5*(gProps.spread)),(gProps.thiqness),(gProps.height));
+      fft.getByteFrequencyData(dataArray);
+
+      gfx.fillStyle = 'rgb(' + (255- gProps.R) + ', ' + (255- gProps.G) + ', '+ (255- gProps.B) + ')'
+      gfx.fillRect(0, 0, 800, 600);
+      var barWidth = (800 / bufferLength) * gProps.thiqness;
+      var barHeight;
+      var x = 0;
+
+      for(var i = 0; i < bufferLength; i++) {
+        barHeight = (dataArray[i]/2)*gProps.height;
+
+        gfx.fillStyle = 'rgb(' + gProps.R + ', ' + gProps.G + ', '+gProps.B + ')'
+        gfx.fillRect(x,600-barHeight/2,barWidth,barHeight);
+
+        x += barWidth + 1;
+      }
     }
+
+    //start now
+    draw()
 }
 
 
@@ -2700,9 +2714,8 @@ function loadGUI(obj) {
   gui.add(props, 'R', 0, 255);
   gui.add(props, 'G', 0, 255);
   gui.add(props, 'B', 0, 255);
-  gui.add(props, 'thiqness', 0, 50);
-  gui.add(props, 'height', -150, 150);
-  gui.add(props, 'spread', 0, 10);
+  gui.add(props, 'thiqness', 0, 25);
+  gui.add(props, 'height', 0, 15);
 }
 
 // let FizzyText = function() {
