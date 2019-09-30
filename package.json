@@ -4,7 +4,7 @@
   "author": "Hunter Caouette",
   "scripts": {
     "start": "npm-run-all browserify startserver",
-    "browserify": "browserify -r dat.gui -r /public/js/myGui.js:myGui -r /public/js/scripts.js:loadScript -o bundle.js",
+    "browserify": "browserify -r dat.gui -r ./public/js/myGui.js:myGui -r ./public/js/scripts.js:loadScript -o ./bundle.js",
     "startserver": "node index.js"
   },
   "dependencies": {
