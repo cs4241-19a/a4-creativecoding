@@ -1,4 +1,4 @@
-const dat = require('dat.gui');
+const dat = require('dat');
 
 function loadGUI() {
   var text = new FizzyText();
@@ -11,12 +11,12 @@ function loadGUI() {
   gui.add(text, 'explode');
 }
 
-// let FizzyText = function() {
-//   this.message = 'dat.gui';
-//   this.speed = 0.8;
-//   this.displayOutline = false;
-//   this.explode = function() { alert('Bang!'); };
-//   // Define render logic ...
-// }
+let FizzyText = function() {
+  this.message = 'dat.gui';
+  this.speed = 0.8;
+  this.displayOutline = false;
+  this.explode = function() { alert('Bang!'); };
+  // Define render logic ...
+}
 
-modules.exports = { loadGUI };
+module.exports = { loadGUI };

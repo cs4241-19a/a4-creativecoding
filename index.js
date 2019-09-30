@@ -1,6 +1,7 @@
 const express   = require( 'express' ),
+      mime      = require('mime'),
       app       = express(),
-      morgan    = require( 'morgan' )
+      morgan    = require( 'morgan' ),
       // session   = require( 'express-session' ),
       // passport  = require( 'passport' ),
       // GoogleStrategy = require('passport-google-oauth').OAuth2Strategy,
@@ -14,7 +15,7 @@ const express   = require( 'express' ),
       // socketIO = require('socket.io'),
       // server = http.Server(app),
       // io = socketIO(server),
-      port      = 3000
+      port      = 3000;
 
 
 app.use(helmet())
@@ -26,8 +27,24 @@ app.use(favicon(path.join('public','res','favicon.ico')))
 // app.use(babel)
 app.use(morgan('dev'))
 
-app.get(('/' || '/index.html'), (req, res) => res.sendFile(public/index.html))
+const sendFile = function( response, filename ) {
+  const type = mime.getType( filename );
+  fs.readFile( filename, function( err, content ) {
+    if ( err === null ) {
+      response.writeHeader( 200, {'Content-Type': type});
+      response.end( content );
+    } else {
+      response.writeHeader( 404 );
+      response.end( '404 Error: File Not Found' );
+    }
+  });
+};
 
+app.get(('/' || '/index.html'), (req, res) => res.sendFile('public/index.html'))
+
+app.get('/bundle.js', function(req, res){
+  sendFile(res, "./bundle.js");
+})
 
 app.post('/stream/:videoId', (request, response) => {
   console.log("received video process request")

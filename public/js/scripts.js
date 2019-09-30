@@ -53,4 +53,4 @@ function submit( e ) {
 }
 
 
-modules.exports = { submit }
+module.exports = { submit }

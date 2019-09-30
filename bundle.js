@@ -1,4 +1,4 @@
-require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
+require=(function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({"dat":[function(require,module,exports){
 /**
  * dat-gui JavaScript Controller Library
  * http://code.google.com/p/dat-gui
@@ -2542,33 +2542,7 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 console.log("Welcome to assignment 3!")
 
-// const submit = function( e ) {
-// // prevent default form action from being carried out
-// e.preventDefault()
-//
-// const video = document.querySelector( '#ytvid' ),
-//       json = { url: video.value },
-//       body = JSON.stringify( json )
-//
-//     fetch( '/submit', {
-//     method:'POST',
-//     body
-//   })
-//   .then( function( response ) {
-//     // do something with the reponse
-//     console.log( response )
-//     response.text().then(function(text){
-//       console.log(text)
-//       setCookie(inputName.value, text, 1);
-//       let jOBJ = JSON.parse(text)
-//       alert("congrats! you are a "+jOBJ['horoscope']+" in the year of the "+jOBJ['zodiac']+"!")
-//       //cookie is set to the table value stored in the temporary server, now cached for a day
-//     })
-//   })
-// }
-
-
-const submit = function( e ) {
+function submit( e ) {
 
   console.log('button pressed')
   let audioContext = null
@@ -2619,12 +2593,12 @@ const submit = function( e ) {
 }
 
 
-modules.exports = { submit }
+module.exports = { submit }
 
 },{}],"myGui":[function(require,module,exports){
-const dat = require('dat.gui');
+const dat = require('dat');
 
-const loadGUI = function() {
+function loadGUI() {
   var text = new FizzyText();
   var gui = new dat.GUI({
     height : 5 * 32 - 1
@@ -2635,14 +2609,14 @@ const loadGUI = function() {
   gui.add(text, 'explode');
 }
 
-// let FizzyText = function() {
-//   this.message = 'dat.gui';
-//   this.speed = 0.8;
-//   this.displayOutline = false;
-//   this.explode = function() { alert('Bang!'); };
-//   // Define render logic ...
-// }
+let FizzyText = function() {
+  this.message = 'dat.gui';
+  this.speed = 0.8;
+  this.displayOutline = false;
+  this.explode = function() { alert('Bang!'); };
+  // Define render logic ...
+}
 
-modules.exports = { loadGUI };
+module.exports = { loadGUI };
 
-},{"dat.gui":1}]},{},[]);
+},{"dat":"dat"}]},{},[]);
