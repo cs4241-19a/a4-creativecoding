@@ -4,10 +4,10 @@ console.log("Welcome to assignment 3!")
 
 let audioContext = null
 let audioIntervalId = null
-const bufferSource
-var fft; //fft audio node
-var samples = 128;
-var setup = false; //indicate if audio is set up yet
+const bufferSource = null
+let fft = null //fft audio node
+let samples = 128
+let setup = false //indicate if audio is set up yet
 
 function submit( e ) {
   console.log('button pressed')
@@ -55,7 +55,7 @@ function submit( e ) {
 
 function play(){
   if (!audioContext) {
-    return 0;
+    return 0
   }
   // var analyser = audioContext.createAnalyser()
   // source = audioContext.createMediaStreamSource(stream);

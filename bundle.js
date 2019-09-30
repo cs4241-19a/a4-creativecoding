@@ -2538,24 +2538,27 @@ Object.defineProperty(exports, '__esModule', { value: true });
 
 
 },{}],"loadScript":[function(require,module,exports){
-// Add some Javascript code here, to run on the front end.
+const gui= require('myGui')
 
 console.log("Welcome to assignment 3!")
 
-function submit( e ) {
+let audioContext = null
+let audioIntervalId = null
+const bufferSource = null
+let fft = null //fft audio node
+let samples = 128
+let setup = false //indicate if audio is set up yet
 
+function submit( e ) {
   console.log('button pressed')
-  let audioContext = null
-  let audioIntervalId = null
+
       // Create an AudioContext for output
       if (audioContext) {
         audioContext.close()
         clearInterval(audioIntervalId)
       }
       audioContext = new AudioContext()
-      const bufferSource = audioContext.createBufferSource()
-      // const resonanceAudio = new ResonanceAudio(audioContext)
-      // resonanceAudio.output.connect(audioContext.destination)
+      bufferSource = audioContext.createBufferSource()
 
       // Open an XMLHttpRequest to stream audio data from YouTube
       const videoUrl = document.querySelector( '#ytvid' ).value;
@@ -2567,6 +2570,7 @@ function submit( e ) {
         console.log('failed to split video url. try again.')
         return
       }
+
       const request = new XMLHttpRequest()
       request.open('POST', `/stream/${videoId}`, true)
       request.responseType = 'arraybuffer'
@@ -2574,14 +2578,11 @@ function submit( e ) {
       request.onload = function() {
         console.log('starting audio decode')
         // Decode the arraybuffer from the XMLHttpRequest
-
         audioContext.decodeAudioData(request.response, buffer => {
           // Connect the audio buffer to the AudioContext for output
-          // console.log('about to start buffer')
           bufferSource.buffer = buffer
-          bufferSource.connect(audioContext.destination)
-          bufferSource.start(0)
-          // console.log('buffer started')
+          play()
+
         }, error => {
           alert('Unable to process audio stream')
           console.error(error)
@@ -2592,17 +2593,31 @@ function submit( e ) {
     return false
 }
 
+function play(){
+  if (!audioContext) {
+    return 0
+  }
+  // var analyser = audioContext.createAnalyser()
+  // source = audioContext.createMediaStreamSource(stream);
+  // source.connect(analyser);
+  // analyser.connect(distortion);
+  // distortion.connect(audioContext.destination);
 
-module.exports = { submit }
+  bufferSource.connect(audioContext.destination)
+  bufferSource.start(0)
+}
 
-},{}],"myGui":[function(require,module,exports){
+
+module.exports = { submit, play }
+
+},{"myGui":"myGui"}],"myGui":[function(require,module,exports){
 const dat = require('dat');
 
 function loadGUI() {
   var text = new FizzyText();
   var gui = new dat.GUI({
     height : 5 * 32 - 1
-});
+  });
   gui.add(text, 'message');
   gui.add(text, 'speed', -5, 5);
   gui.add(text, 'displayOutline');
