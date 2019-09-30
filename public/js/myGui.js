@@ -1,6 +1,8 @@
+const dat = require('dat.gui');
+
 window.onload = function() {
   var text = new FizzyText();
-  var gui = new DAT.GUI({
+  var gui = new dat.GUI({
     height : 5 * 32 - 1
 });
   gui.add(text, 'message');
