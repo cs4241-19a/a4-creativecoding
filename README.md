@@ -21,3 +21,4 @@ http://a4-hcaouette.glitch.me
 
 ### Design/Evaluation Achievements
 - **Design Achievement 1**: the backdrop of the graphs is the RGB inverse of the graph line/bar color, making for a high-contrast graph, at all times.
+- If you have any questions about the color palette, I really liked the shade of blue green, tried the 255-R,G,B values and found it too pale, and then recalled one of the great universal truths. https://imgur.com/gallery/ZsZ0j.

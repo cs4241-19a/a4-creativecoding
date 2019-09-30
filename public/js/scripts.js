@@ -67,9 +67,9 @@ function play(){
 
 let gProps = {
   style: 2,
-  R: 255,
-  G: 0,
-  B: 0,
+  R: 67,
+  G: 118,
+  B: 111,
   thiqness: 3,
   height: 5,
 }

@@ -1,6 +1,8 @@
 /*Style your own assignment! This is fun! */
 :root{
-  --textMain:#153147;
+  --textMain:rgb(245,137,144);
+  /*salmon is for desire
+  https://imgur.com/gallery/ZsZ0j*/
   --bgMain:rgb(67,118,111);
   --txtNav:32px;
 }
