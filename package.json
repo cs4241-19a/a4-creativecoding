@@ -1,6 +1,6 @@
 {
-  "name": "a3-persistence",
-  "description": "Assignment 3 - Persistence: Two-tier Web Application with Flat File Database, Express server, and CSS template\r ===",
+  "name": "a4-creativecoding",
+  "description": "assignment 4 creative coding",
   "author": "Hunter Caouette",
   "scripts": {
     "start": "npm-run-all browserify startserver",
@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "body-parser": "^1.19.0",
+    "browserify": "^16.5.0",
     "compression": "^1.7.4",
     "cookie-parser": "^1.4.4",
     "cookie-session": "^1.3.3",
