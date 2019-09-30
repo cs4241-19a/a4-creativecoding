@@ -2605,55 +2605,113 @@ function play(){
   setup = true
 }
 
-var gfx;
-function setupCanvas() {
-  console.log('called setup')
-    var canvas = document.getElementById('canvas');
-    gfx = canvas.getContext('2d');
-    window.RequestAnimationFrame(update);
+let gProps = {
+  style: 2,
+  R: 255,
+  G: 0,
+  B: 0,
+  thiqness: 15,
+  height: 100,
+  spread: 4
 }
 
-function update() {
-    console.log('called update')
-    window.RequestAnimationFrame(update);
+var gfx;
+function setupCanvas() {
+    var canvas = document.getElementById('canvas');
+    gfx = canvas.getContext('2d');
+    window.requestAnimationFrame(update);
+
+    gui.loadGUI(gProps)
+}
+
+
+function update(){
+  if(gProps.style === 1){
+    sinDraw()
+  }else{
+    barDraw()
+  }
+}
+
+function sinDraw(){
+  fft.fftSize = 2048
+  var bufferLength = fft.frequencyBinCount
+  var dataArray = new Uint8Array(bufferLength)
+  gfx.clearRect(0, 0, 800, 600)
+
+  function draw() {
+    let drawVisual = requestAnimationFrame(draw)
+    fft.getByteTimeDomainData(dataArray)
+    gfx.fillStyle = 'rgb(' + (255- gProps.R) + ', ' + (255- gProps.G) + ', '+ (255- gProps.B) + ')'
+    gfx.fillRect(0, 0, 800, 600)
+    gfx.lineWidth = 2
+    gfx.strokeStyle = 'rgb(' + gProps.R + ', ' + gProps.G + ', '+gProps.B + ')'
+    gfx.beginPath()
+    let sliceWidth = 800 * 1.0 / bufferLength;
+    let x = 0;
+    for(let i = 0; i < bufferLength; i++) {
+
+        let v = dataArray[i] / 128.0;
+        let y = v * 600/2;
+
+        if(i === 0) {
+          gfx.moveTo(x, y);
+        } else {
+          gfx.lineTo(x, y);
+        }
+
+        x += sliceWidth;
+      }
+      gfx.lineTo(canvas.width, canvas.height/2);
+      gfx.stroke();
+    }
+    //start
+    draw()
+}
+
+
+function barDraw() {
+    window.requestAnimationFrame(update);
     if(!setup) return;
-    gfx.clearRect(0,0,800,600);
-    gfx.fillStyle = 'gray';
-    gfx.fillRect(0,0,800,600);
+    gfx.clearRect(0,0,1000,800);
+    gfx.fillStyle = 'rgb(' + (255- gProps.R) + ', ' + (255- gProps.G) + ', '+ (255- gProps.B) + ')';
+    gfx.fillRect(0,0,1000,800);
 
     var data = new Uint8Array(samples);
     fft.getByteFrequencyData(data);
-    gfx.fillStyle = 'red';
+    gfx.fillStyle = 'rgb(' + gProps.R + ', ' + gProps.G + ', '+gProps.B + ')';
     for(var i=0; i<data.length; i++) {
-        gfx.fillRect(100+i*4,100+256-data[i]*2,3,100);
+        // gfx.fillRect(100+i*(gProps.thiqness+1),100+256-data[i]*2,(gProps.thiqness),100);
+        gfx.fillRect(10+i*(gProps.thiqness+1),(100+356-data[i]*.5*(gProps.spread)),(gProps.thiqness),(gProps.height));
     }
-
 }
 
 
-module.exports = { submit, play }
+
+module.exports = { submit, play, setupCanvas }
 
 },{"myGui":"myGui"}],"myGui":[function(require,module,exports){
 const dat = require('dat');
 
-function loadGUI() {
-  var text = new FizzyText();
-  var gui = new dat.GUI({
-    height : 5 * 32 - 1
-  });
-  gui.add(text, 'message');
-  gui.add(text, 'speed', -5, 5);
-  gui.add(text, 'displayOutline');
-  gui.add(text, 'explode');
+function loadGUI(obj) {
+  var props = obj;
+  var gui = new dat.GUI()
+  gui.add(props, 'style', 1, 2);
+  gui.add(props, 'R', 0, 255);
+  gui.add(props, 'G', 0, 255);
+  gui.add(props, 'B', 0, 255);
+  gui.add(props, 'thiqness', 0, 50);
+  gui.add(props, 'height', -150, 150);
+  gui.add(props, 'spread', 0, 10);
 }
 
-let FizzyText = function() {
-  this.message = 'dat.gui';
-  this.speed = 0.8;
-  this.displayOutline = false;
-  this.explode = function() { alert('Bang!'); };
-  // Define render logic ...
-}
+// let FizzyText = function() {
+//   this.message = 'dat.gui';
+//   this.speed = 0.8;
+//   this.displayOutline = false;
+//   this.explode = function() { alert('Bang!'); };
+//   // Define render logic ...
+// }
 
 module.exports = { loadGUI };
 

@@ -1,22 +1,23 @@
 const dat = require('dat');
 
-function loadGUI() {
-  var text = new FizzyText();
-  var gui = new dat.GUI({
-    height : 5 * 32 - 1
-  });
-  gui.add(text, 'message');
-  gui.add(text, 'speed', -5, 5);
-  gui.add(text, 'displayOutline');
-  gui.add(text, 'explode');
+function loadGUI(obj) {
+  var props = obj;
+  var gui = new dat.GUI()
+  gui.add(props, 'style', 1, 2);
+  gui.add(props, 'R', 0, 255);
+  gui.add(props, 'G', 0, 255);
+  gui.add(props, 'B', 0, 255);
+  gui.add(props, 'thiqness', 0, 50);
+  gui.add(props, 'height', -150, 150);
+  gui.add(props, 'spread', 0, 10);
 }
 
-let FizzyText = function() {
-  this.message = 'dat.gui';
-  this.speed = 0.8;
-  this.displayOutline = false;
-  this.explode = function() { alert('Bang!'); };
-  // Define render logic ...
-}
+// let FizzyText = function() {
+//   this.message = 'dat.gui';
+//   this.speed = 0.8;
+//   this.displayOutline = false;
+//   this.explode = function() { alert('Bang!'); };
+//   // Define render logic ...
+// }
 
 module.exports = { loadGUI };

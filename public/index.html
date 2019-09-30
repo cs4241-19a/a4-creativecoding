@@ -18,7 +18,9 @@
       <script>
         const myGui = require('myGui')
         const loadScript = require('loadScript')
-        window.onload=function(){myGui.loadGUI()}
+        //this will set up the canvas to refresh
+        //AND load the gui w/ the gProps obj in scripts.js
+        // window.onload=function(){loadScript.setupCanvas()}
       </script>
 
 
@@ -40,19 +42,14 @@
         </div>
 
         <div class="nav">
-<!--           <form class="video-input-form"> -->
             <input id="ytvid" class="video-url-input" type="text" />
             <button type="submit" onclick="loadScript.submit()">Load Video</button>
-<!--           </form> -->
           <h1>Enter YouTube URL</h1>
         </div>
       </div>
       </nav>
 
-
-      <div id="canvas-box">
-        <canvas id="canvas"></canvas>
-      </div>
+      <canvas id="canvas" width='800px' height='600px'></canvas>
 
 
     </div>
