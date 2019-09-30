@@ -30,13 +30,13 @@ app.get(('/' || '/index.html'), (req, res) => res.sendFile(public/index.html))
 
 
 app.post('/stream/:videoId', (request, response) => {
+  console.log("received video process request")
   const videoId = request.params.videoId
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`
   if (!ytdl.validateURL(videoUrl)) {
     response.send({ success: false })
   } else {
-    ytdl(videoUrl, { filter: format => format.container === 'mp4' })
-      .pipe(response)
+    ytdl(videoUrl, { filter: format => format.container === 'mp4' }).pipe(response)
   }
 })
 

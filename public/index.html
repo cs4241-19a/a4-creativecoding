@@ -16,10 +16,8 @@
     <!--dat.gui import-->
       <script type="text/javascript" src="/build/dat.gui.min.js" ></script>
     <!--my js files-->
-      <!-- <script type="text/javascript" src="/js/scripts.js"></script> -->
-      <!-- <script type="text/javascript" src="/js/myGui.js"></script> -->
-      <!-- <script type="text/javascript" src="/js/audio.js"></script> -->
-
+      <script type="text/javascript" src="/js/scripts.js"></script>
+<!--       <script type="text/javascript" src="/js/myGui.js"></script> -->
 
 
     <title>creative coding -- a4-hcaouette -- CS4241 Assignment 4</title>
@@ -40,10 +38,10 @@
         </div>
 
         <div class="nav">
-          <form class="video-input-form">
-            <input id='ytvid' class="video-url-input" type="text" />
-            <button type="submit">Load Video</button>
-          </form>
+<!--           <form class="video-input-form"> -->
+            <input id="ytvid" class="video-url-input" type="text" />
+            <button type="submit" onclick="submit()">Load Video</button>
+<!--           </form> -->
           <h1>Enter YouTube URL</h1>
         </div>
       </div>
@@ -76,18 +74,6 @@
       <div id="canvas-box">
         <canvas id="canvas"></canvas>
       </div>
-
-
-<!--        <p id="controls">
-         <input type="button" id="start_button" value="Start">
-          &nbsp;
-         <input type="button" id="stop_button" value="Stop">
-         <p id="msg"></p>
-       </p> -->
-
-
-
-
 
 
     </div>

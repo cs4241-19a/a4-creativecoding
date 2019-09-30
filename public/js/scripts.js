@@ -27,27 +27,24 @@ console.log("Welcome to assignment 3!")
 //   })
 // }
 
-window.onload = function() {
+
+const submit = function( e ) {
+
+  console.log('button pressed')
   let audioContext = null
   let audioIntervalId = null
-
-  const submit = function( e ) {
-
-    console.log('submitting video url')
-
       // Create an AudioContext for output
       if (audioContext) {
         audioContext.close()
         clearInterval(audioIntervalId)
       }
       audioContext = new AudioContext()
-      const audioContextTimestamp = Date.now()
       const bufferSource = audioContext.createBufferSource()
-      const resonanceAudio = new ResonanceAudio(audioContext)
-      resonanceAudio.output.connect(audioContext.destination)
+      // const resonanceAudio = new ResonanceAudio(audioContext)
+      // resonanceAudio.output.connect(audioContext.destination)
 
       // Open an XMLHttpRequest to stream audio data from YouTube
-      const videoUrl = document.querySelector( '#ytvid' ).value();
+      const videoUrl = document.querySelector( '#ytvid' ).value;
       let videoId = ''
       try {
         videoId = videoUrl.split('=')[1]
@@ -56,28 +53,27 @@ window.onload = function() {
         console.log('failed to split video url. try again.')
         return
       }
-      console.log(videoId)
       const request = new XMLHttpRequest()
       request.open('POST', `/stream/${videoId}`, true)
       request.responseType = 'arraybuffer'
+
       request.onload = function() {
-
+        console.log('starting audio decode')
         // Decode the arraybuffer from the XMLHttpRequest
+
         audioContext.decodeAudioData(request.response, buffer => {
-
           // Connect the audio buffer to the AudioContext for output
-          const source = resonanceAudio.createSource()
+          // console.log('about to start buffer')
           bufferSource.buffer = buffer
-          bufferSource.connect(source.input)
-          bufferSource.start()
-          const audioContextDelay = Date.now() - audioContextTimestamp
-
+          bufferSource.connect(audioContext.destination)
+          bufferSource.start(0)
+          // console.log('buffer started')
         }, error => {
           alert('Unable to process audio stream')
           console.error(error)
         })
       }
+
       request.send()
-    })
     return false
-})
+}
