@@ -8,7 +8,7 @@ Professor Roberts gave me, Hunter Caouette, a penalty-free extension for the wee
 
 ## creative coding -- a4-hcaouette -- CS4241 Assignment 4
 
-your hosting link e.g. http://a4-hcaouette.glitch.me
+http://a4-hcaouette.glitch.me
 
 -The goal of my application was to create a fun, interactive visual to accompany music, inspired by the deprecated smoke particles effect google music used to have for the browser application. (look it up, it was way cooler than just having album art).
 - I had a lot of challenges with implementing just about every part of this project. I only really just figured out the bulk of it towards the end; you can check out the commit history if you want. setting up modules was hard, getting dat.gui to work at all was hard, figuring out how to use the web audio api to process music was hard.
@@ -17,7 +17,7 @@ your hosting link e.g. http://a4-hcaouette.glitch.me
 ## Technical Achievements
 - **Tech Achievement 1**: I used the ytdl-core middleware to take a youtube video and pipe it to the client for processing.
 - **Tech Achievement 2**: My app uses html canvas and the web audio api to create an audiovisual experience that can be tweaked with dat.gui.
-- **Tech Achievement 3**: I implemented both a sine-wave visualization and a bar-graph type visualization, which can be selected in the dat.gui control
+- **Tech Achievement 3**: I implemented both a sine-wave visualization and a bar-graph type visualization, which can be selected in the dat.gui control.
 
 ### Design/Evaluation Achievements
 - **Design Achievement 1**: the backdrop of the graphs is the RGB inverse of the graph line/bar color, making for a high-contrast graph, at all times.
