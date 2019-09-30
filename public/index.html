@@ -41,7 +41,7 @@
 
         <div class="nav">
           <form class="video-input-form">
-            <input class="video-url-input" type="text" />
+            <input id='ytvid' class="video-url-input" type="text" />
             <button type="submit">Load Video</button>
           </form>
           <h1>Enter YouTube URL</h1>
@@ -56,7 +56,6 @@
           this.speed = 0.8;
           this.displayOutline = false;
           this.explode = function() { alert('Bang!'); };
-          // Define render logic ...
         };
 
         window.onload = function() {
