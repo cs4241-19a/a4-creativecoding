@@ -1,0 +1,126 @@
+/*Style your own assignment! This is fun! */
+:root{
+  --textMain:rgb(245,137,144);
+  /*salmon is for desire
+  https://imgur.com/gallery/ZsZ0j*/
+  --bgMain:rgb(67,118,111);
+  --txtNav:32px;
+}
+
+body{
+  background-color: var(--bgMain);
+  color: var(--textMain);
+  font-family: Abel;
+}
+nav{
+  color: var(--textMain);
+}
+/* .snapCont {
+  scroll-snap-type: y mandatory;
+}
+.snapChil {
+  scroll-snap-align: start;
+} */
+
+.contentBox{
+  border-color: var(--textMain);
+  border-radius: 5px;
+  border-style: solid;
+  border-width: 1px;
+}
+
+.imgFrame{
+  overflow: hidden;
+  padding: 0;
+}
+
+.centerBox{
+  text-align: center;
+}
+
+.navbar{
+  border-bottom: 1px solid var(--textMain);
+  color: var(--textMain);
+  margin-bottom: 15px;
+  padding-bottom: 0;
+}
+
+.navbar-brand{
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.navbar-brand span{
+  color: var(--textMain);
+  font-size: var(--txtNav);
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.nav-item.nav-link.active{
+  color: var(--textMain);
+  font-size: var(--txtNav);
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.nav-item.nav-link.active:hover{
+  color: white;
+  font-size: var(--txtNav);
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.navbar-toggle {
+    z-index:3;
+}
+
+.mainForm{
+  text-align: left;
+  /* margin-bottom: 15px; */
+}
+
+.btnRght{
+  float: right;
+}
+
+.padbtm{
+  margin-bottom: 15px;
+}
+
+.ft-mar-t-5{
+  margin-top:5rem;
+}
+
+.ft-bor-t{
+  border-top: 1.5px solid var(--textMain);
+}
+
+.pull-away-sides{
+  width: 96%/*!important */;
+}
+
+#canvas {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+    background-color: black;
+    /* width: 1000px;
+    height: 800px; */
+    align-self: center;
+}
+#controls {
+    text-align: center;
+}
+#start_button, #stop_button {
+    font-size: 16pt;
+}
+#msg {
+    text-align: center;
+}
+
+#gui {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+}
