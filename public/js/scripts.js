@@ -37,7 +37,9 @@ function submit( e ) {
         audioContext.decodeAudioData(request.response, buffer => {
           // Connect the audio buffer to the AudioContext for output
           bufferSource.buffer = buffer
+          setupCanvas()
           play()
+
         }, error => {
           alert('Unable to process audio stream')
           console.error(error)
@@ -65,13 +67,15 @@ function play(){
 
 var gfx;
 function setupCanvas() {
+  console.log('called setup')
     var canvas = document.getElementById('canvas');
     gfx = canvas.getContext('2d');
-    webkitRequestAnimationFrame(update);
+    window.RequestAnimationFrame(update);
 }
 
 function update() {
-    webkitRequestAnimationFrame(update);
+    console.log('called update')
+    window.RequestAnimationFrame(update);
     if(!setup) return;
     gfx.clearRect(0,0,800,600);
     gfx.fillStyle = 'gray';
