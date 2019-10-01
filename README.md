@@ -44,4 +44,5 @@ a solution that allowed me to be play the audio as well as process the frequency
 - **Design Achievement 1**: Bootstrap for styling buttons and formatting buttons + dropdown menu.
 - **Design Achievement 2**: Cross-browser utilization for popular browers like Chrome & Edge
 - **Design Achievement 3**: Play, Pause, and reset for music (with multiple music options) and gemoetry shading features.
+- **Design Achievement 4**: Application testing by two students (validation for Chrome & Edge, one each)
 
