@@ -6,7 +6,7 @@ Readme
 Link: https://a4-jchengz.glitch.me/
 
 The application I built is an audio visualizer. I was inspired to create the visualizer with two concentric rings of rotating cubes, where the rings are 
-rotating in opposite directions for effect. There are three songs included: techno, musician, and pop. There is a feature to upload an MP3 file. **For best quality, set the browser window to full screen and do not have the console open until after the page has loaded**
+rotating in opposite directions for effect. There are three songs included: techno, musician, and pop. There is a feature to upload an MP3 file. **For best quality, use Microsoft Edge or Chrome and set the browser window to full screen and do not have the console open until after the page has loaded**
 
 Controls for the user: 
 Menu: 
@@ -31,7 +31,8 @@ but the linter checked for presence of semicolons, double quotes, and flagged ex
 this linter also checked for unused resources, improper construction of objects, as well as flagging for ES versions. Camel Case was accounted for externally. 
 One of the most difficult technical challenges was getting the cubes to rotate and appear as they do, as well as figuring out how to get the camera to be properly placed
 with the correct field of view. It's not perfect but it does the job. Similarly, it took a lot of time to figure out how to properly read a mp3 file in. I found an implemented 
-a solution that allowed me to be play the audio as well as process the frequency to be used for the animations.
+a solution that allowed me to be play the audio as well as process the frequency to be used for the animations. 
+**As a headsup: After having two other students test the application, it has come to my attention that for one student it worked on Chrome (after not working initially) and for the other student it worked on Edge. Of course for me and only me, it worked on both. As such, if you (TA/Prof) are experiencing similar troubles, please check between browsers as I literally have no idea how to fix this.**
 
 ## Technical Achievements
 - **Tech Achievement 1**: Orbital Controls enable the use of clicking and dragging to change view.
@@ -43,4 +44,5 @@ a solution that allowed me to be play the audio as well as process the frequency
 - **Design Achievement 1**: Bootstrap for styling buttons and formatting buttons + dropdown menu.
 - **Design Achievement 2**: Cross-browser utilization for popular browers like Chrome & Edge
 - **Design Achievement 3**: Play, Pause, and reset for music (with multiple music options) and gemoetry shading features.
+- **Design Achievement 4**: Application testing by two students (validation for Chrome & Edge, one each)
 
