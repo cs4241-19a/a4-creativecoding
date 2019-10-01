@@ -6,7 +6,7 @@ Readme
 Link: https://a4-jchengz.glitch.me/
 
 The application I built is an audio visualizer. I was inspired to create the visualizer with two concentric rings of rotating cubes, where the rings are 
-rotating in opposite directions for effect. There are three songs included: techno, musician, and pop. There is a feature to upload an MP3 file. 
+rotating in opposite directions for effect. There are three songs included: techno, musician, and pop. There is a feature to upload an MP3 file. **For best quality, set the browser window to full screen and do not have the console open until after the page has loaded**
 
 Controls for the user: 
 Menu: 
