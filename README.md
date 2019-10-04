@@ -1,7 +1,7 @@
 **Jyxiao1**
 **JEFFREY XIAO**
 
-https://jyxiao1-a4-creativecoding.glitch.me/
+https://a4-jeffreyxiao.glitch.me
 
 In the a video game arcade, the rhythm game machine that reigned supreme would have to be Dance Dance Revolution. This
 phenomenon soon spread to homes through the Playstation consoles and as a child, I also had the pleasure of owning on of
