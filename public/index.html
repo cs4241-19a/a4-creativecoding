@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>CS4241 Assignment 4</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+    
+  </head>
+  <body>
+    <div id="canvasDiv">
+      <canvas id="drawArea"></canvas>
+    </div>
+
+    <div id="dialog" title="Welcome!!">
+      <p>Hello! Welcome to Brian's Paint Program.</p>
+      <p>With this program you can draw pictures using an array of colors and brush sizes.</p>
+      <p>To start drawing, simply hold down the left mouse button and move your mouse around the screen. This will make you draw with the currently selected color. Additionally, you can also select the eraser brush to erase parts of your drawing.</p>
+      <p>On the top right of the page you will find the options menu, with this you are able to choose your brush, your brush color, and your brush size. Additionlly, you can clear the current drawning or change the background color.</p>
+      <p>From this menu you can also save your current drawing or load a picture to draw on.</p>
+      <p>To bring this window back up, press the "Welcome" button at the bottom of the menu.</p>
+    </div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+  <script src="dat.gui.min.js"></script>
+  <script type="module" src="./js/main.js"></script>
+  <input hidden type="file" id="imageLoader" name="imageLoader">
+  <a id = "downloadIm" href="" download hidden></a>
+  </body>
+</html>
