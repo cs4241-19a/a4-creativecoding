@@ -1,0 +1,18 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+canvas {
+  margin-left: -50px;
+  padding-left: 0;
+}
+
+label {
+  padding: 10%;
+}
+
+div {
+  text-align: center;
+  margin-bottom: 10px;
+}
