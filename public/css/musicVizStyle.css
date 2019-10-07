@@ -1,0 +1,40 @@
+
+
+#out {
+    position: absolute;
+    /*z-index: 1;*/
+    top: 0;
+    left: 0;
+    width: 100%;
+    height:100%;
+    display: flex;
+    /*align-items: center;*/
+    /*justify-content: center;*/
+    opacity: 1;
+    background-color: #000000;
+    color: #ffffff;
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    /*z-index: -1;*/
+}
+
+/*#out > div {*/
+/*    text-align: center;*/
+/*}*/
+/*#out > div > button {*/
+/*    height: 20px;*/
+/*    width: 100px;*/
+/*    background: transparent;*/
+/*    color: #ffffff;*/
+/*    outline: 1px solid #ffffff;*/
+/*    border: 0px;*/
+/*    cursor: pointer;*/
+/*}*/
+/*#out > div > p {*/
+/*    color: #777777;*/
+/*    font-size: 12px;*/
+/*}*/

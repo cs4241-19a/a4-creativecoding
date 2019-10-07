@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>MusicViz</title>
+    <link rel="stylesheet" href="css/allStyles.css">
+    <link rel="stylesheet" href="css/3DVizStyle.css">
+
+</head>
+<body>
+<div id="content">
+    <audio id="audio" controls></audio>
+    <div id="out">
+        <label for="thefile" class="file"> Choose an audio file
+            <input type="file" id="thefile" accept="audio/*" />
+        </label>
+    </div>
+    <canvas id="oscillatingElement"></canvas>
+</div>
+
+<script src="http://threejs.org/build/three.min.js"></script>
+<script type="module" src="js/singleLineVizScript.js"></script>
+<!--<script type="text/javascript" src="js/musicVizScript.js"></script>-->
+
+</body>
+</html>

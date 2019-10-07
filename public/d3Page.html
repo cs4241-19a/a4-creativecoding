@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>D3Page</title>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="css/allStyles.css">
+    <link rel="stylesheet" href="css/d3Style.css">
+    <link rel="stylesheet" href="//rawgithub.com/Caged/d3-tip/master/examples/example-styles.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body style="background-color: #FFFFFF">
+<h1>Hover over the diagram to learn more about the data!</h1>
+<div class="card vizContainer">
+    <table class="vizTable">
+        <tr>
+            <td class="visTitle">
+                <div class="visTitle">
+                    <h3>Number of times every character in Thor has interacted with every other character</h3>
+                </div>
+            </td>
+            <td>
+                <div class="visContent">
+                    <svg id="my_dataviz">
+                    </svg>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="card vizContainer">
+    <table class="vizTable">
+<!--        <tr>-->
+<!--            <td>-->
+<!--                <div class="visContent">-->
+<!--                    <svg id="my_dataviz2">-->
+<!--                    </svg>-->
+<!--                </div>-->
+<!--            </td>-->
+<!--            <td class="visTitle blue">-->
+<!--                <div class="visTitle blue">-->
+<!--                    <h3>Something Something Something</h3>-->
+<!--                </div>-->
+<!--            </td>-->
+<!--        </tr>-->
+    </table>
+</div>
+
+<!-- Load d3.js -->
+<script src="https://d3js.org/d3.v5.js"></script>
+<script src="http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script type="module" src="js/d3.js"></script>
+</body>
+</html>

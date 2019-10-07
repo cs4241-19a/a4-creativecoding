@@ -1,0 +1,91 @@
+<!--ideas to add:
+https://codepen.io/NyX/pen/YPmVBb
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Digital Visualization Portfolio</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+          integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="public/css/titleStyle.css">
+    <link rel="stylesheet"  href="public/css/homeStyle.css">
+    <link rel="stylesheet" href="public/css/allStyles.css">
+</head>
+<body>
+<!--title-->
+<div id="statsOutput"></div>
+<div id="titleCanvas"></div>
+<section class="titleSection">
+    <div class="titleDiv">This is a</div>
+    <div class="titleDiv">
+        <span>Digital Visualization Portfolio</span>
+    </div>
+    <div id="helpContainer">
+        <span id="typed"></span>
+    </div>
+</section>
+<!--content-->
+<section class="homeContentSection">
+    <h2> Click on a Card to Learn More</h2>
+    <div class="row cgrid">
+        <div class="col-sm-6 px-0">
+            <div class="card">
+                <div class="card-body" onclick="document.location.href='public/d3Page.html';">
+                    <h3>Data Visualization With D3</h3>
+                    <!--  <h5 class="card-title">Special title treatment</h5>-->
+                    <!--                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>-->
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 px-0">
+            <div class="card">
+                <div class="card-body" onclick="document.location.href='public/2DVizPage.html';">
+                    <h3>Sound Visualization With Canvas</h3>
+                    <!--                <h5 class="card-title">Special title treatment</h5>-->
+                    <!--                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>-->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row cgrid">
+        <div class="col-sm-6 px-0">
+            <div class="card">
+                <div class="card-body" onclick="document.location.href='public/3DVizPage.html';">
+                    <h3>Sound Visualization With WebGL</h3>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6 px-0">
+            <div class="card">
+                <div class="card-body" onclick="document.location.href='public/fractalPage.html';">
+                    <h3>Generating Fractals With Canvas</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+</section>
+<script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
+<script src="https://threejs.org/build/three.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/three.js/r68/three.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/dat-gui/0.5/dat.gui.min.js"></script>
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/stats.js/r11/Stats.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="public/js/newHomePage.js"></script>
+</body>
+</html>
