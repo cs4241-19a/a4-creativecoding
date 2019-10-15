@@ -1,0 +1,28 @@
+{
+  "name": "a4-creativecoding",
+  "version": "1.0.0",
+  "description": "WPI CS4241 Assignment 4",
+  "author": "Rafael Pimentel",
+  "scripts": {
+    "lint": "eslint",
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "compression": "^1.7.4",
+    "express": "^4.17.1",
+    "helmet": "^3.21.1",
+    "three": "*",
+    "typed.js": "^2.0.11",
+    "webpack": "^4.35.0",
+    "webvr": "0.0.0",
+    "webvr-polyfill": "^0.10.10"
+  },
+  "devDependencies": {
+    "eslint": "^6.4.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1"
+  }
+}
