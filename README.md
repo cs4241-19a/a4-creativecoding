@@ -1,8 +1,3 @@
-Assignment 4 - Creative Coding: Interactive Multimedia Experiences
-===
-
-Due: September 27th, by 11:59 PM.
-
 ## Helix App
 
 https://alppiskin-a4-alppiskin-alp-piskin.glitch.me/
