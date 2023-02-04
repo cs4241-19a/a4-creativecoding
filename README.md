@@ -4,7 +4,7 @@
 https://a4-acnolan.glitch.me/
 
 This application is like microsoft paint. If paint was in the browser and made by a student in a week
-instead of a nearly billion dollar company and a team of professionals.
+instead of a nearly billion dollar company and a team of professionals (so the quality is about what you would expect).
 
 Within the app you can draw or edit images. Basic functionality includes clicking on a canvas and 
 moving the mouse to draw things. You can change the color, size, and shape of the brush. You can
